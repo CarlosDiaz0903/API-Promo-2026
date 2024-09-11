@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizador de tareas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 20px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #007bff;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .form-control,
+    .form-select {
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 15px;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .evento {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      border-left: 5px solid #007bff;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .evento:hover {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .evento h2 {
+      margin-top: 0;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .evento p {
+      margin: 5px 0;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #666;
+    }
+
+    .form-check-input {
+      width: 50px;
+      height: 25px;
+      background-color: #e9ecef;
+      border: 2px solid #ced4da;
+      border-radius: 25px;
+      position: relative;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    }
+
+    .form-check-input::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      top: 1.5px;
+      left: 3px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .form-check-input:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .form-check-input:checked::before {
+      transform: translateX(25px);
+    }
+
+    .form-check-label {
+      margin-left: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .form-check-input:checked+.form-check-label {
+      color: #007bff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Organizador de tareas</h1>
+    <form>
+      <div class="mb-3">
+        <label for="tipo" class="form-label">Tipo de evento:</label>
+        <select id="tipo" class="form-select" onchange="showFields()">
+          <option value="">Seleccione un tipo de evento</option>
+          <option value="tarea">Tarea</option>
+          <option value="examen">Examen</option>
+          <option value="actividad">Actividad</option>
+          <option value="presentacion">Presentación</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="curso" class="form-label">Curso:</label>
+        <select id="curso" class="form-select">
+          <option value="">Seleccione un curso</option>
+          <option value="Mate">Mate</option>
+          <option value="Comu">Comu</option>
+          <option value="CCSS">CCSS</option>
+          <option value="CTA">CTA</option>
+          <option value="Religión">Religión</option>
+          <option value="Alemán">Alemán</option>
+          <option value="Francés">Francés</option>
+          <option value="Ingles">Ingles</option>
+          <option value="Danza">Danza</option>
+          <option value="Info">Info</option>
+          <option value="Edu. F">Edu. F</option>
+          <option value="Musica">Musica</option>
+          <option value="Manu.">Manu.</option>
+          <option value="Teatro">Teatro</option>
+          <option value="DPCC">DPCC</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" id="nombre" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha:</label>
+        <input type="date" id="fecha" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="hora" class="form-label">Hora:</label>
+        <input type="time" id="hora" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="detalles" class="form-label">Detalles:</label>
+        <textarea id="detalles" class="form-control" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="resolucion" class="form-label">Resolución:</label>
+        <input type="text" id="resolucion" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="lugar" class="form-label">Lugar:</label>
+        <input type="text" id="lugar" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label for="imagen" class="form-label">Imagen:</label>
+        <input type="text" id="imagen" class="form-control" />
+      </div>
+      <button type="button" class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
+    </form>
+    <div id="eventos">
+      <!-- Aquí se mostrarán los eventos -->
+    </div>
+  </div>
+
+  <script>
+    function showFields() {
+      const tipo = document.getElementById('tipo').value;
+      const fields = ['nombre', 'curso', 'fecha', 'hora', 'detalles', 'resolucion', 'lugar', 'imagen'];
+      fields.forEach(id => {
+        document.getElementById(id).style.display = tipo ? 'block' : 'none';
+      });
+    }
+
+    async function saveEvent() {
+      const tipo = document.getElementById('tipo').value;
+      const curso = document.getElementById('curso').value;
+      const nombre = document.getElementById('nombre').value;
+      const fecha = document.getElementById('fecha').value;
+      const hora = document.getElementById('hora').value;
+      const detalles = document.getElementById('detalles').value;
+      const resolucion = document.getElementById('resolucion').value;
+      const lugar = document.getElementById('lugar').value;
+      const imagen = document.getElementById('imagen').value;
+
+      if (!tipo || !nombre || !fecha || !hora || !detalles || !resolucion || !lugar || !imagen) {
+        alert('Por favor, complete todos los campos.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/api/eventos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            tipo,
+            curso,
+            nombre,
+            fecha,
+            hora,
+            detalles,
+            resolucion,
+            lugar,
+            imagen
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al guardar el evento');
+        }
+
+        alert('Evento guardado correctamente');
+        loadEvents(); // Reload the events list
+      } catch (error) {
+        console.error('Error:', error);
+        alert('No se pudo guardar el evento');
+      }
+    }
+
+    async function loadEvents() {
+  try {
+    const response = await fetch('http://localhost:3000/api/eventos');
+    if (!response.ok) {
+      throw new Error('Error al cargar los eventos');
+    }
+    const events = await response.json();
+    displayEvents(events);
+  } catch (error) {
+    console.error('Error:', error);
+    document.getElementById('eventos').innerHTML = '<p>No se pudieron cargar los eventos.</p>';
+  }
+}
+
+function displayEvents(events) {
+  const eventosDiv = document.getElementById('eventos');
+  eventosDiv.innerHTML = '';
+
+  if (events.length === 0) {
+    eventosDiv.innerHTML = '<p>No hay eventos.</p>';
+    return;
+  }
+
+  events.forEach(event => {
+    const eventDiv = document.createElement('div');
+    eventDiv.className = 'evento';
+    eventDiv.innerHTML = `
+      <h2>${event.nombre}</h2>
+      <p><strong>Tipo:</strong> ${event.tipo}</p>
+      <p><strong>Curso:</strong> ${event.curso}</p>
+      <p><strong>Fecha:</strong> ${new Date(event.fecha).toLocaleDateString()}</p>
+      <p><strong>Hora:</strong> ${event.hora}</p>
+      <p><strong>Detalles:</strong> ${event.detalles}</p>
+      <p><strong>Resolución:</strong> ${event.resolucion}</p>
+      <p><strong>Lugar:</strong> ${event.lugar}</p>
+      <p><strong>Imagen:</strong> <img src="${event.imagen}" alt="${event.nombre}" style="max-width: 100%; height: auto;"></p>
+    `;
+    eventosDiv.appendChild(eventDiv);
+  });
+}
+
+    // Load events on page load
+    window.onload = loadEvents;
+  </script>
+</body>
+
+</html>
