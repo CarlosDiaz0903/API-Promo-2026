@@ -30,7 +30,7 @@ const Evento = mongoose.model('Evento', eventoSchema);
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // Servir archivos estáticos
 
 // Ruta para guardar eventos
 app.post('/api/eventos', async (req, res) => {
@@ -54,8 +54,8 @@ app.get('/api/eventos', async (req, res) => {
 });
 
 // Servir el archivo HTML de eventos
-app.get('/Formulario.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Formulario.html'));
+app.get('/eventos', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'Formulario.html')); // Ruta a Formulario.html
 });
 
 app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
