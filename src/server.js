@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Conectar a MongoDB
-mongoose.connect('mongodb+srv://C4rl_DB09:Ca74113504@cluster0.hvwzidh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://C4rl_DB09:Ca74113504@cluster0.hvwzidh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB...'))
   .catch(err => console.error('Error al conectarse a MongoDB:', err));
 
@@ -53,9 +53,9 @@ app.get('/api/eventos', async (req, res) => {
   }
 });
 
-// Servir el archivo HTML de eventos
+// Servir archivos estáticos (por ejemplo, Formulario.html)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Formulario.html')); // Ruta a Formulario.html
+  res.sendFile(path.join(__dirname, 'public', 'Formulario.html'));
 });
 
 app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
