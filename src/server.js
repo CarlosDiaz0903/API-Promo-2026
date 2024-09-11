@@ -7,8 +7,11 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Usar variable de entorno para MongoDB URI
+const MONGODB_URI = process.env.MONGODB_URI;
+
 // Conectar a MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB...'))
   .catch(err => console.error('Error al conectarse a MongoDB:', err));
 
