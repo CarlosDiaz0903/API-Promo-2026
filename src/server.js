@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Conectar a MongoDB
-mongoose.connect('mongodb+srv://C4rl_DB09:Ca74113504@cluster0.hvwzidh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB...'))
   .catch(err => console.error('Error al conectarse a MongoDB:', err));
 
