@@ -53,8 +53,8 @@ app.get('/api/eventos', async (req, res) => {
   }
 });
 
-// Servir archivos estáticos (por ejemplo, Formulario.html)
-app.get('/', (req, res) => {
+// Servir el archivo HTML de eventos
+app.get('/Formulario.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'Formulario.html'));
 });
 
