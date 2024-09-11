@@ -34,32 +34,27 @@ app.use(express.static(path.join(__dirname, 'public'))); // Servir archivos estÃ
 
 // Ruta para guardar eventos
 app.post('/api/eventos', async (req, res) => {
-  console.log('POST /api/eventos', req.body); // Log de la solicitud
   const evento = new Evento(req.body);
   try {
     await evento.save();
     res.send('Evento guardado con Ã©xito');
   } catch (error) {
-    console.error('Error al guardar el evento:', error);
     res.status(500).send('Error al guardar el evento');
   }
 });
 
 // Ruta para obtener eventos
 app.get('/api/eventos', async (req, res) => {
-  console.log('GET /api/eventos'); // Log de la solicitud
   try {
     const eventos = await Evento.find().sort('fecha');
     res.json(eventos);
   } catch (error) {
-    console.error('Error al obtener eventos:', error);
     res.status(500).send('Error al obtener eventos');
   }
 });
 
 // Servir el archivo HTML de eventos
 app.get('/eventos', (req, res) => {
-  console.log('GET /eventos'); // Log de la solicitud
   res.sendFile(path.join(__dirname, 'public', 'Formulario.html')); // Ruta a Formulario.html
 });
 
