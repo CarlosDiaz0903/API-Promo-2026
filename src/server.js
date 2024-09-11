@@ -7,11 +7,8 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Usar variable de entorno para MongoDB URI
-const MONGODB_URI = process.env.MONGODB_URI;
-
 // Conectar a MongoDB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB...'))
   .catch(err => console.error('Error al conectarse a MongoDB:', err));
 
@@ -57,8 +54,8 @@ app.get('/api/eventos', async (req, res) => {
 });
 
 // Servir el archivo HTML de eventos
-app.get('/eventos', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Formulario.html')); // Ruta a Formulario.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a index.html
 });
 
 app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));

@@ -12,8 +12,8 @@
         "dest": "/src/server.js"
       },
       {
-        "src": "/eventos",
-        "dest": "/src/public/Formulario.html"
+        "src": "/(.*)",
+        "dest": "/src/public/index.html"
       }
     ]
   }
