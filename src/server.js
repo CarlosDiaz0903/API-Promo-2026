@@ -6,7 +6,7 @@ const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+const MONGODB_URI = 'mongodb+srv://C4rl_DB09:Ca74113504@cluster0.hvwzidh.mongodb.net/?retryWrites=true&w=majority';
 // Conectar a MongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB...'))
