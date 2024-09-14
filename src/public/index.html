@@ -132,12 +132,25 @@
         <input type="text" id="nombre" class="form-control" placeholder="Ingresa el nombre del evento" required>
       </div>
 
-      <div class="mb-3" id="curso-field" class="hidden-field">
+      <div class="mb-3 hidden-field" id="curso-field">
         <label for="curso" class="form-label">Curso</label>
         <select id="curso" class="form-control">
-          <option value="">Seleccionar curso</option>
-          <option value="Presentación">Presentación</option>
-          <option value="Actividad">Actividad</option>
+          <option value="">Seleccione un curso</option>
+          <option value="Mate">Mate</option>
+          <option value="Comu">Comu</option>
+          <option value="CCSS">CCSS</option>
+          <option value="CTA">CTA</option>
+          <option value="Religión">Religión</option>
+          <option value="Alemán">Alemán</option>
+          <option value="Francés">Francés</option>
+          <option value="Ingles">Ingles</option>
+          <option value="Danza">Danza</option>
+          <option value="Info">Info</option>
+          <option value="Edu. F">Edu. F</option>
+          <option value="Musica">Musica</option>
+          <option value="Manu.">Manu.</option>
+          <option value="Teatro">Teatro</option>
+          <option value="DPCC">DPCC</option>
           <option value="Cole">Cole</option>
         </select>
       </div>
@@ -201,6 +214,7 @@
         case 'Examen':
           document.getElementById('resolucion-field').classList.remove('hidden-field');
           document.getElementById('resolucion-toggle-field').classList.remove('hidden-field');
+          document.getElementById('curso-field').classList.remove('hidden-field');
           break;
         case 'Presentación':
         case 'Actividad':
