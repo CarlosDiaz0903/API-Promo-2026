@@ -155,22 +155,7 @@
         </select>
       </div>
 
-      <div class="mb-3">
-        <label for="fecha" class="form-label">Fecha</label>
-        <input type="date" id="fecha" class="form-control" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="hora" class="form-label">Hora</label>
-        <input type="time" id="hora" class="form-control" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="detalles" class="form-label">Detalles</label>
-        <textarea id="detalles" class="form-control" rows="3" placeholder="Detalles adicionales" required></textarea>
-      </div>
-
-      <div class="mb-3 hidden-field" id="resolucion-toggle-field"></div>
+      <div class="mb-3 hidden-field" id="resolucion-toggle-field">
         <div class="toggle-switch">
           <input type="checkbox" id="toggleResolucion" onclick="toggleResolucionText()">
           <label for="toggleResolucion">¿Agregar resolución?</label>
@@ -185,6 +170,21 @@
       <div class="mb-3 hidden-field" id="lugar-field">
         <label for="lugar" class="form-label">Lugar</label>
         <input type="text" id="lugar" class="form-control" placeholder="Ingresa el lugar del evento">
+      </div>
+
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="date" id="fecha" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="hora" class="form-label">Hora</label>
+        <input type="time" id="hora" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="detalles" class="form-label">Detalles</label>
+        <textarea id="detalles" class="form-control" rows="3" placeholder="Detalles adicionales" required></textarea>
       </div>
 
       <div class="mb-3">
