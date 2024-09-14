@@ -249,10 +249,10 @@
       const resolucionField = document.getElementById('resolucion-field');
       const lugarField = document.getElementById('lugar-field');
 
-      cursoField.classList.toggle('hidden-field', tipo !== 'Tarea');
-      resolucionToggleField.classList.toggle('hidden-field', tipo !== 'Examen');
-      lugarField.classList.toggle('hidden-field', tipo === 'Actividad');
-      resolucionField.classList.toggle('hidden-field', tipo !== 'Examen' || !document.getElementById('toggleResolucion').checked);
+      cursoField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen');
+      resolucionToggleField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen');
+      resolucionField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen' || !document.getElementById('toggleResolucion').checked);
+      lugarField.classList.toggle('hidden-field', tipo !== 'Presentación' && tipo !== 'Actividad');
     }
 
     function toggleResolucionText() {
@@ -279,22 +279,26 @@
       try {
         if (id) {
           // Update existing event
-          await fetch(`${apiUrl}/${id}`, {
+          const response = await fetch(`${apiUrl}/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(event)
           });
+
+          if (!response.ok) throw new Error('Error al actualizar el evento');
         } else {
           // Create new event
-          await fetch(apiUrl, {
+          const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(event)
           });
+
+          if (!response.ok) throw new Error('Error al crear el evento');
         }
         resetForm();
         fetchEvents();
@@ -305,7 +309,10 @@
 
     function editEvent(id) {
       fetch(`${apiUrl}/${id}`)
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) throw new Error('Error al obtener el evento');
+          return response.json();
+        })
         .then(event => {
           document.getElementById('tipo').value = event.tipo;
           document.getElementById('nombre').value = event.nombre;
@@ -320,15 +327,18 @@
 
           showFields();
           toggleResolucionText();
-        });
+        })
+        .catch(error => console.error(error));
     }
 
     async function deleteEvent(id) {
       if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
         try {
-          await fetch(`${apiUrl}/${id}`, {
+          const response = await fetch(`${apiUrl}/${id}`, {
             method: 'DELETE'
           });
+
+          if (!response.ok) throw new Error('Error al eliminar el evento');
           fetchEvents();
         } catch (error) {
           console.error(error);
