@@ -38,9 +38,9 @@ app.post('/api/eventos', async (req, res) => {
   const evento = new Evento(req.body);
   try {
     await evento.save();
-    res.send('Evento guardado con éxito');
+    res.json({ message: 'Evento guardado con éxito' });
   } catch (error) {
-    res.status(500).send('Error al guardar el evento');
+    res.status(500).json({ error: 'Error al guardar el evento' });
   }
 });
 
@@ -50,7 +50,7 @@ app.get('/api/eventos', async (req, res) => {
     const eventos = await Evento.find().sort('fecha');
     res.json(eventos);
   } catch (error) {
-    res.status(500).send('Error al obtener eventos');
+    res.status(500).json({ error: 'Error al obtener eventos' });
   }
 });
 
@@ -58,19 +58,19 @@ app.get('/api/eventos', async (req, res) => {
 app.delete('/api/eventos/:id', async (req, res) => {
   try {
     await Evento.findByIdAndDelete(req.params.id);
-    res.send('Evento eliminado con éxito');
+    res.json({ message: 'Evento eliminado con éxito' });
   } catch (error) {
-    res.status(500).send('Error al eliminar el evento');
+    res.status(500).json({ error: 'Error al eliminar el evento' });
   }
 });
 
 // Ruta para editar un evento
 app.put('/api/eventos/:id', async (req, res) => {
   try {
-    await Evento.findByIdAndUpdate(req.params.id, req.body);
-    res.send('Evento actualizado con éxito');
+    await Evento.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json({ message: 'Evento actualizado con éxito' });
   } catch (error) {
-    res.status(500).send('Error al actualizar el evento');
+    res.status(500).json({ error: 'Error al actualizar el evento' });
   }
 });
 

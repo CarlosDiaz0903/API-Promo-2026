@@ -201,51 +201,29 @@
   </div>
 
   <script>
-    let eventos = JSON.parse(localStorage.getItem('eventos')) || [];
+    const apiUrl = '/api/eventos';
 
-    function showFields() {
-      const tipo = document.getElementById('tipo').value;
-
-      document.getElementById('resolucion-field').classList.add('hidden-field');
-      document.getElementById('resolucion-toggle-field').classList.add('hidden-field');
-      document.getElementById('lugar-field').classList.add('hidden-field');
-      document.getElementById('curso-field').classList.add('hidden-field');
-
-      switch(tipo) {
-        case 'Tarea':
-        case 'Examen':
-          document.getElementById('resolucion-field').classList.remove('hidden-field');
-          document.getElementById('resolucion-toggle-field').classList.remove('hidden-field');
-          document.getElementById('curso-field').classList.remove('hidden-field');
-          break;
-        case 'Presentación':
-        case 'Actividad':
-          document.getElementById('lugar-field').classList.remove('hidden-field');
-          document.getElementById('curso-field').classList.remove('hidden-field');
-          break;
-        default:
-          break;
+    async function fetchEvents() {
+      try {
+        const response = await fetch(apiUrl);
+        const eventos = await response.json();
+        renderEvents(eventos);
+      } catch (error) {
+        console.error('Error al obtener eventos:', error);
       }
     }
 
-    function toggleResolucionText() {
-      const checkbox = document.getElementById('toggleResolucion');
-      const resolucionField = document.getElementById('resolucion');
-      resolucionField.disabled = !checkbox.checked;
-      resolucionField.value = checkbox.checked ? '' : 'Sin Resolución';
-    }
-
-    function saveEvent() {
-      const tipo = document.getElementById('tipo') ? document.getElementById('tipo').value : '';
-      const curso = document.getElementById('curso') ? document.getElementById('curso').value : '';
-      const nombre = document.getElementById('nombre') ? document.getElementById('nombre').value : '';
-      const fecha = document.getElementById('fecha') ? document.getElementById('fecha').value : '';
-      const hora = document.getElementById('hora') ? document.getElementById('hora').value : '';
-      const detalles = document.getElementById('detalles') ? document.getElementById('detalles').value : '';
+    async function saveEvent() {
+      const tipo = document.getElementById('tipo').value;
+      const curso = document.getElementById('curso').value;
+      const nombre = document.getElementById('nombre').value;
+      const fecha = document.getElementById('fecha').value;
+      const hora = document.getElementById('hora').value;
+      const detalles = document.getElementById('detalles').value;
       const resolucion = document.getElementById('toggleResolucion').checked ? document.getElementById('resolucion').value : '';
-      const lugar = document.getElementById('lugar') ? document.getElementById('lugar').value : '';
-      const imagen = document.getElementById('imagen') ? document.getElementById('imagen').value : '';
-      const editIndex = document.getElementById('editIndex') ? document.getElementById('editIndex').value : '';
+      const lugar = document.getElementById('lugar').value;
+      const imagen = document.getElementById('imagen').value;
+      const editIndex = document.getElementById('editIndex').value;
 
       if (!tipo || !nombre || !fecha || !hora) {
         alert('Por favor, completa todos los campos obligatorios.');
@@ -264,22 +242,41 @@
         imagen
       };
 
-      if (editIndex === '') {
-        // Nuevo evento
-        eventos.push(evento);
-      } else {
-        // Editar evento existente
-        eventos[editIndex] = evento;
+      try {
+        if (editIndex === '') {
+          // Nuevo evento
+          await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(evento)
+          });
+        } else {
+          // Editar evento existente
+          await fetch(`${apiUrl}/${editIndex}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(evento)
+          });
+        }
+        fetchEvents();
+        document.getElementById('eventoForm').reset();
+        showFields();
+        document.getElementById('editIndex').value = '';
+      } catch (error) {
+        console.error('Error al guardar el evento:', error);
       }
-
-      localStorage.setItem('eventos', JSON.stringify(eventos));
-      renderEvents();
-      document.getElementById('eventoForm').reset();
-      showFields();
-      document.getElementById('editIndex').value = '';
     }
 
-    function renderEvents() {
+    async function deleteEvent(id) {
+      try {
+        await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
+        fetchEvents();
+      } catch (error) {
+        console.error('Error al eliminar el evento:', error);
+      }
+    }
+
+    function renderEvents(eventos) {
       const eventosContainer = document.getElementById('eventos');
       eventosContainer.innerHTML = '';
 
@@ -296,31 +293,62 @@
           ${evento.resolucion ? `<p><strong>Resolución:</strong> ${evento.resolucion}</p>` : ''}
           ${evento.lugar ? `<p><strong>Lugar:</strong> ${evento.lugar}</p>` : ''}
           ${evento.imagen ? `<p><strong>Imagen:</strong> <img src="${evento.imagen}" alt="Imagen del Evento" style="max-width: 100%; height: auto;"></p>` : ''}
-          <button class="btn btn-primary mt-2" onclick="editEvent(${index})">Editar</button>
+          <button class="btn btn-primary mt-2" onclick="editEvent('${evento._id}')">Editar</button>
+          <button class="btn btn-danger mt-2" onclick="deleteEvent('${evento._id}')">Eliminar</button>
         `;
         eventosContainer.appendChild(eventoElement);
       });
     }
 
-    function editEvent(index) {
-      const evento = eventos[index];
-      document.getElementById('tipo').value = evento.tipo;
-      document.getElementById('curso').value = evento.curso;
-      document.getElementById('nombre').value = evento.nombre;
-      document.getElementById('fecha').value = evento.fecha;
-      document.getElementById('hora').value = evento.hora;
-      document.getElementById('detalles').value = evento.detalles;
-      document.getElementById('resolucion').value = evento.resolucion;
-      document.getElementById('lugar').value = evento.lugar;
-      document.getElementById('imagen').value = evento.imagen;
-      document.getElementById('editIndex').value = index;
+    async function editEvent(id) {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`);
+        const evento = await response.json();
+        document.getElementById('tipo').value = evento.tipo;
+        document.getElementById('curso').value = evento.curso;
+        document.getElementById('nombre').value = evento.nombre;
+        document.getElementById('fecha').value = evento.fecha.split('T')[0];
+        document.getElementById('hora').value = evento.hora;
+        document.getElementById('detalles').value = evento.detalles;
+        document.getElementById('resolucion').value = evento.resolucion;
+        document.getElementById('lugar').value = evento.lugar;
+        document.getElementById('imagen').value = evento.imagen;
+        document.getElementById('editIndex').value = evento._id;
 
-      showFields();
-      toggleResolucionText();
+        showFields();
+        toggleResolucionText();
+      } catch (error) {
+        console.error('Error al obtener el evento:', error);
+      }
     }
 
-    // Cargar eventos al inicio
-    renderEvents();
+    function showFields() {
+      const tipo = document.getElementById('tipo').value;
+
+      document.getElementById('resolucion-field').classList.add('hidden-field');
+      document.getElementById('lugar-field').classList.add('hidden-field');
+      document.getElementById('imagen-field').classList.add('hidden-field');
+
+      if (tipo === 'Evento Académico') {
+        document.getElementById('lugar-field').classList.remove('hidden-field');
+      } else if (tipo === 'Evento Deportivo') {
+        document.getElementById('imagen-field').classList.remove('hidden-field');
+      } else if (tipo === 'Evento Cultural') {
+        document.getElementById('resolucion-field').classList.remove('hidden-field');
+      }
+    }
+
+    function toggleResolucionText() {
+      const checkbox = document.getElementById('toggleResolucion');
+      const resolucionField = document.getElementById('resolucion');
+      resolucionField.disabled = !checkbox.checked;
+    }
+
+    document.getElementById('toggleResolucion').addEventListener('change', toggleResolucionText);
+
+    // Inicializar la página
+    fetchEvents();
   </script>
+
 </body>
 </html>
