@@ -232,10 +232,11 @@
           <p><strong>Fecha:</strong> ${evento.fecha}</p>
           <p><strong>Hora:</strong> ${evento.hora}</p>
           <p><strong>Detalles:</strong> ${evento.detalles}</p>
+          <p><strong>Imagen:</strong> <a href="${evento.imagen}" target="_blank">Ver Imagen</a></p>
           <p><strong>Lugar:</strong> ${evento.lugar || 'No especificado'}</p>
-          ${evento.imagen ? `<img src="${evento.imagen}" alt="Imagen del evento" style="max-width: 100%; height: auto;">` : ''}
-          ${evento.resolucion ? `<p><strong>Resolución:</strong> ${evento.resolucion}</p>` : ''}
-          <button class="btn btn-primary mt-2" onclick="editEvent('${evento._id}')">Editar</button>
+          <p><strong>Resolución:</strong> ${evento.resolucion || 'No especificado'}</p>
+          <button class="btn btn-secondary btn-sm mt-2" onclick="editEvent('${evento._id}')">Editar</button>
+          <button class="btn btn-danger btn-sm mt-2" onclick="deleteEvent('${evento._id}')">Eliminar</button>
         `;
         eventosDiv.appendChild(eventoDiv);
       });
@@ -243,119 +244,105 @@
 
     function showFields() {
       const tipo = document.getElementById('tipo').value;
-      document.getElementById('curso-field').style.display = tipo === 'Actividad' ? 'block' : 'none';
-      document.getElementById('resolucion-toggle-field').style.display = tipo === 'Tarea' ? 'block' : 'none';
-      document.getElementById('lugar-field').style.display = tipo === 'Examen' || tipo === 'Presentación' ? 'block' : 'none';
+      const cursoField = document.getElementById('curso-field');
+      const resolucionToggleField = document.getElementById('resolucion-toggle-field');
+      const resolucionField = document.getElementById('resolucion-field');
+      const lugarField = document.getElementById('lugar-field');
+
+      cursoField.classList.toggle('hidden-field', tipo !== 'Tarea');
+      resolucionToggleField.classList.toggle('hidden-field', tipo !== 'Examen');
+      lugarField.classList.toggle('hidden-field', tipo === 'Actividad');
+      resolucionField.classList.toggle('hidden-field', tipo !== 'Examen' || !document.getElementById('toggleResolucion').checked);
     }
 
     function toggleResolucionText() {
+      const resolucionField = document.getElementById('resolucion-field');
       const resolucionInput = document.getElementById('resolucion');
+      resolucionField.classList.toggle('hidden-field', !document.getElementById('toggleResolucion').checked);
       resolucionInput.disabled = !document.getElementById('toggleResolucion').checked;
     }
 
     async function saveEvent() {
-      const tipo = document.getElementById('tipo').value;
-      const nombre = document.getElementById('nombre').value;
-      const curso = document.getElementById('curso').value || '';
-      const resolucion = document.getElementById('resolucion').value || '';
-      const lugar = document.getElementById('lugar').value || '';
-      const fecha = document.getElementById('fecha').value;
-      const hora = document.getElementById('hora').value;
-      const detalles = document.getElementById('detalles').value;
-      const imagen = document.getElementById('imagen').value || '';
-
-      const evento = { tipo, nombre, curso, resolucion, lugar, fecha, hora, detalles, imagen };
+      const id = document.getElementById('editIndex').value;
+      const event = {
+        tipo: document.getElementById('tipo').value,
+        nombre: document.getElementById('nombre').value,
+        curso: document.getElementById('curso').value || '',
+        resolucion: document.getElementById('resolucion').value || '',
+        lugar: document.getElementById('lugar').value || '',
+        fecha: document.getElementById('fecha').value,
+        hora: document.getElementById('hora').value,
+        detalles: document.getElementById('detalles').value,
+        imagen: document.getElementById('imagen').value || '',
+      };
 
       try {
-        const index = document.getElementById('editIndex').value;
-
-        if (index) {
+        if (id) {
           // Update existing event
-          const response = await fetch(`${apiUrl}/${index}`, {
+          await fetch(`${apiUrl}/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(evento)
+            body: JSON.stringify(event)
           });
-
-          if (!response.ok) {
-            throw new Error('Error al actualizar el evento');
-          }
         } else {
           // Create new event
-          const response = await fetch(apiUrl, {
+          await fetch(apiUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(evento)
+            body: JSON.stringify(event)
           });
-
-          if (!response.ok) {
-            throw new Error('Error al guardar el evento');
-          }
         }
-
-        document.getElementById('eventoForm').reset();
-        document.getElementById('editIndex').value = '';
+        resetForm();
         fetchEvents();
       } catch (error) {
         console.error(error);
       }
     }
 
-    async function editEvent(eventId) {
-      try {
-        const response = await fetch(`${apiUrl}/${eventId}`);
-        if (response.ok) {
-          const evento = await response.json();
-          document.getElementById('tipo').value = evento.tipo;
-          document.getElementById('nombre').value = evento.nombre;
-          document.getElementById('curso').value = evento.curso || '';
-          document.getElementById('resolucion').value = evento.resolucion || '';
-          document.getElementById('lugar').value = evento.lugar || '';
-          document.getElementById('fecha').value = evento.fecha;
-          document.getElementById('hora').value = evento.hora;
-          document.getElementById('detalles').value = evento.detalles;
-          document.getElementById('imagen').value = evento.imagen || '';
-          document.getElementById('editIndex').value = evento._id;
+    function editEvent(id) {
+      fetch(`${apiUrl}/${id}`)
+        .then(response => response.json())
+        .then(event => {
+          document.getElementById('tipo').value = event.tipo;
+          document.getElementById('nombre').value = event.nombre;
+          document.getElementById('curso').value = event.curso || '';
+          document.getElementById('resolucion').value = event.resolucion || '';
+          document.getElementById('lugar').value = event.lugar || '';
+          document.getElementById('fecha').value = event.fecha;
+          document.getElementById('hora').value = event.hora;
+          document.getElementById('detalles').value = event.detalles;
+          document.getElementById('imagen').value = event.imagen || '';
+          document.getElementById('editIndex').value = id;
 
           showFields();
           toggleResolucionText();
-        } else {
-          // If not found by ID, search by name
-          const response = await fetch(apiUrl + `?nombre=${encodeURIComponent(eventId)}`);
-          if (response.ok) {
-            const eventos = await response.json();
-            if (eventos.length > 0) {
-              const evento = eventos[0];
-              document.getElementById('tipo').value = evento.tipo;
-              document.getElementById('nombre').value = evento.nombre;
-              document.getElementById('curso').value = evento.curso || '';
-              document.getElementById('resolucion').value = evento.resolucion || '';
-              document.getElementById('lugar').value = evento.lugar || '';
-              document.getElementById('fecha').value = evento.fecha;
-              document.getElementById('hora').value = evento.hora;
-              document.getElementById('detalles').value = evento.detalles;
-              document.getElementById('imagen').value = evento.imagen || '';
-              document.getElementById('editIndex').value = evento._id;
+        });
+    }
 
-              showFields();
-              toggleResolucionText();
-            } else {
-              throw new Error('Evento no encontrado');
-            }
-          } else {
-            throw new Error('Error al buscar el evento por nombre');
-          }
+    async function deleteEvent(id) {
+      if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
+        try {
+          await fetch(`${apiUrl}/${id}`, {
+            method: 'DELETE'
+          });
+          fetchEvents();
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
       }
     }
 
-    // Fetch events when the page loads
+    function resetForm() {
+      document.getElementById('eventoForm').reset();
+      document.getElementById('editIndex').value = '';
+      showFields();
+      toggleResolucionText();
+    }
+
     document.addEventListener('DOMContentLoaded', fetchEvents);
   </script>
 
