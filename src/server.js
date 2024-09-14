@@ -7,8 +7,9 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 const MONGODB_URI = 'mongodb+srv://C4rl_DB09:Ca74113504@cluster0.hvwzidh.mongodb.net/?retryWrites=true&w=majority';
+
 // Conectar a MongoDB
-mongoose.connect('mongodb+srv://C4rl_DB09:Ca74113504@cluster0.hvwzidh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Conectado a MongoDB...'))
   .catch(err => console.error('Error al conectarse a MongoDB:', err));
 
@@ -50,6 +51,26 @@ app.get('/api/eventos', async (req, res) => {
     res.json(eventos);
   } catch (error) {
     res.status(500).send('Error al obtener eventos');
+  }
+});
+
+// Ruta para eliminar un evento
+app.delete('/api/eventos/:id', async (req, res) => {
+  try {
+    await Evento.findByIdAndDelete(req.params.id);
+    res.send('Evento eliminado con éxito');
+  } catch (error) {
+    res.status(500).send('Error al eliminar el evento');
+  }
+});
+
+// Ruta para editar un evento
+app.put('/api/eventos/:id', async (req, res) => {
+  try {
+    await Evento.findByIdAndUpdate(req.params.id, req.body);
+    res.send('Evento actualizado con éxito');
+  } catch (error) {
+    res.status(500).send('Error al actualizar el evento');
   }
 });
 
