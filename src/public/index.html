@@ -162,9 +162,9 @@
         </div>
       </div>
 
-      <div class="mb-3" id="resolucion-field">
+      <div class="mb-3 hidden-field" id="resolucion-field">
         <label for="resolucion" class="form-label">Resolución</label>
-        <input type="text" id="resolucion" class="form-control" placeholder="Ingresa la resolución">
+        <input type="text" id="resolucion" class="form-control" placeholder="Ingresa la resolución" disabled>
       </div>
 
       <div class="mb-3 hidden-field" id="lugar-field">
@@ -224,22 +224,33 @@
       eventos.forEach((evento) => {
         const eventoDiv = document.createElement('div');
         eventoDiv.className = 'evento';
-        eventoDiv.dataset.id = evento._id; // Guarda el ID en un atributo de datos
+        eventoDiv.dataset.id = evento._id; // Agregando el id al elemento
         eventoDiv.innerHTML = `
           <h2>${evento.nombre}</h2>
           <p><strong>Tipo:</strong> ${evento.tipo}</p>
           <p><strong>Curso:</strong> ${evento.curso || 'No especificado'}</p>
-          <p><strong>Resolución:</strong> ${evento.resolucion || 'No especificada'}</p>
-          <p><strong>Lugar:</strong> ${evento.lugar || 'No especificado'}</p>
           <p><strong>Fecha:</strong> ${evento.fecha}</p>
           <p><strong>Hora:</strong> ${evento.hora}</p>
           <p><strong>Detalles:</strong> ${evento.detalles}</p>
-          <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; height: auto;">
-          <button class="btn btn-warning mt-2" onclick="editEvent('${evento._id}')">Editar</button>
-          <button class="btn btn-danger mt-2" onclick="deleteEvent('${evento._id}')">Eliminar</button>
+          <p><strong>Lugar:</strong> ${evento.lugar || 'No especificado'}</p>
+          ${evento.imagen ? `<img src="${evento.imagen}" alt="Imagen del evento" style="max-width: 100%; height: auto;">` : ''}
+          ${evento.resolucion ? `<p><strong>Resolución:</strong> ${evento.resolucion}</p>` : ''}
+          <button class="btn btn-primary mt-2" onclick="editEvent('${evento._id}')">Editar</button>
         `;
         eventosDiv.appendChild(eventoDiv);
       });
+    }
+
+    function showFields() {
+      const tipo = document.getElementById('tipo').value;
+      document.getElementById('curso-field').style.display = tipo === 'Actividad' ? 'block' : 'none';
+      document.getElementById('resolucion-toggle-field').style.display = tipo === 'Tarea' ? 'block' : 'none';
+      document.getElementById('lugar-field').style.display = tipo === 'Examen' || tipo === 'Presentación' ? 'block' : 'none';
+    }
+
+    function toggleResolucionText() {
+      const resolucionInput = document.getElementById('resolucion');
+      resolucionInput.disabled = !document.getElementById('toggleResolucion').checked;
     }
 
     async function saveEvent() {
@@ -252,116 +263,101 @@
       const hora = document.getElementById('hora').value;
       const detalles = document.getElementById('detalles').value;
       const imagen = document.getElementById('imagen').value || '';
-      const id = document.getElementById('editIndex').value;
 
-      const data = {
-        tipo, nombre, curso, resolucion, lugar, fecha, hora, detalles, imagen
-      };
+      const evento = { tipo, nombre, curso, resolucion, lugar, fecha, hora, detalles, imagen };
 
       try {
-        let response;
-        if (id) {
-          response = await fetch(`${apiUrl}/${id}`, {
+        const index = document.getElementById('editIndex').value;
+
+        if (index) {
+          // Update existing event
+          const response = await fetch(`${apiUrl}/${index}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(evento)
           });
+
+          if (!response.ok) {
+            throw new Error('Error al actualizar el evento');
+          }
         } else {
-          response = await fetch(apiUrl, {
+          // Create new event
+          const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(evento)
           });
+
+          if (!response.ok) {
+            throw new Error('Error al guardar el evento');
+          }
         }
 
+        document.getElementById('eventoForm').reset();
+        document.getElementById('editIndex').value = '';
+        fetchEvents();
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function editEvent(eventId) {
+      try {
+        const response = await fetch(`${apiUrl}/${eventId}`);
         if (response.ok) {
-          await fetchEvents();
-          clearForm();
+          const evento = await response.json();
+          document.getElementById('tipo').value = evento.tipo;
+          document.getElementById('nombre').value = evento.nombre;
+          document.getElementById('curso').value = evento.curso || '';
+          document.getElementById('resolucion').value = evento.resolucion || '';
+          document.getElementById('lugar').value = evento.lugar || '';
+          document.getElementById('fecha').value = evento.fecha;
+          document.getElementById('hora').value = evento.hora;
+          document.getElementById('detalles').value = evento.detalles;
+          document.getElementById('imagen').value = evento.imagen || '';
+          document.getElementById('editIndex').value = evento._id;
+
+          showFields();
+          toggleResolucionText();
         } else {
-          throw new Error('Error al guardar el evento');
+          // If not found by ID, search by name
+          const response = await fetch(apiUrl + `?nombre=${encodeURIComponent(eventId)}`);
+          if (response.ok) {
+            const eventos = await response.json();
+            if (eventos.length > 0) {
+              const evento = eventos[0];
+              document.getElementById('tipo').value = evento.tipo;
+              document.getElementById('nombre').value = evento.nombre;
+              document.getElementById('curso').value = evento.curso || '';
+              document.getElementById('resolucion').value = evento.resolucion || '';
+              document.getElementById('lugar').value = evento.lugar || '';
+              document.getElementById('fecha').value = evento.fecha;
+              document.getElementById('hora').value = evento.hora;
+              document.getElementById('detalles').value = evento.detalles;
+              document.getElementById('imagen').value = evento.imagen || '';
+              document.getElementById('editIndex').value = evento._id;
+
+              showFields();
+              toggleResolucionText();
+            } else {
+              throw new Error('Evento no encontrado');
+            }
+          } else {
+            throw new Error('Error al buscar el evento por nombre');
+          }
         }
       } catch (error) {
         console.error(error);
       }
     }
 
-    async function deleteEvent(id) {
-      if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
-        try {
-          const response = await fetch(`${apiUrl}/${id}`, {
-            method: 'DELETE'
-          });
-
-          if (response.ok) {
-            await fetchEvents();
-          } else {
-            throw new Error('Error al eliminar el evento');
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    }
-
-    function editEvent(id) {
-      const eventoDiv = document.querySelector(`.evento[data-id='${id}']`);
-      const evento = {
-        tipo: eventoDiv.querySelector('p:nth-child(2)').textContent.replace('Tipo: ', ''),
-        nombre: eventoDiv.querySelector('h2').textContent,
-        curso: eventoDiv.querySelector('p:nth-child(3)').textContent.replace('Curso: ', '') || '',
-        resolucion: eventoDiv.querySelector('p:nth-child(4)').textContent.replace('Resolución: ', '') || '',
-        lugar: eventoDiv.querySelector('p:nth-child(5)').textContent.replace('Lugar: ', '') || '',
-        fecha: eventoDiv.querySelector('p:nth-child(6)').textContent.replace('Fecha: ', ''),
-        hora: eventoDiv.querySelector('p:nth-child(7)').textContent.replace('Hora: ', ''),
-        detalles: eventoDiv.querySelector('p:nth-child(8)').textContent.replace('Detalles: ', ''),
-        imagen: eventoDiv.querySelector('img').src
-      };
-
-      document.getElementById('tipo').value = evento.tipo;
-      document.getElementById('nombre').value = evento.nombre;
-      document.getElementById('curso').value = evento.curso;
-      document.getElementById('resolucion').value = evento.resolucion;
-      document.getElementById('lugar').value = evento.lugar;
-      document.getElementById('fecha').value = evento.fecha;
-      document.getElementById('hora').value = evento.hora;
-      document.getElementById('detalles').value = evento.detalles;
-      document.getElementById('imagen').value = evento.imagen;
-
-      document.getElementById('editIndex').value = id;
-      showFields(); // Actualiza la visibilidad de los campos según el tipo de evento
-    }
-
-    function clearForm() {
-      document.getElementById('eventoForm').reset();
-      document.getElementById('editIndex').value = '';
-      showFields(); // Oculta los campos adicionales
-    }
-
-    function showFields() {
-      const tipo = document.getElementById('tipo').value;
-      const cursoField = document.getElementById('curso-field');
-      const resolucionToggleField = document.getElementById('resolucion-toggle-field');
-      const resolucionField = document.getElementById('resolucion-field');
-      const lugarField = document.getElementById('lugar-field');
-
-      cursoField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Actividad');
-      resolucionToggleField.classList.toggle('hidden-field', tipo !== 'Examen');
-      resolucionField.classList.toggle('hidden-field', tipo !== 'Examen' || !document.getElementById('toggleResolucion').checked);
-      lugarField.classList.toggle('hidden-field', tipo !== 'Presentación');
-    }
-
-    function toggleResolucionText() {
-      const resolucionField = document.getElementById('resolucion-field');
-      resolucionField.classList.toggle('hidden-field', !document.getElementById('toggleResolucion').checked);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      fetchEvents();
-    });
+    // Fetch events when the page loads
+    document.addEventListener('DOMContentLoaded', fetchEvents);
   </script>
+
 </body>
 </html>
