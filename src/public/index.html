@@ -170,17 +170,17 @@
         <textarea id="detalles" class="form-control" rows="4" placeholder="Descripción o detalles adicionales"></textarea>
       </div>
 
-      <div class="mb-3 toggle-switch" id="resolucion-toggle-field" class="hidden-field">
+      <div class="mb-3 toggle-switch hidden-field" id="resolucion-toggle-field">
         <input type="checkbox" id="toggleResolucion" onclick="toggleResolucionText()">
         <label for="toggleResolucion">¿Agregar Resolución?</label>
       </div>
 
-      <div class="mb-3" id="resolucion-field" class="hidden-field">
+      <div class="mb-3 hidden-field" id="resolucion-field">
         <label for="resolucion" class="form-label">Resolución</label>
         <input type="text" id="resolucion" class="form-control" placeholder="Número de Resolución" disabled>
       </div>
 
-      <div class="mb-3" id="lugar-field" class="hidden-field">
+      <div class="mb-3 hidden-field" id="lugar-field">
         <label for="lugar" class="form-label">Lugar</label>
         <input type="text" id="lugar" class="form-control" placeholder="Ubicación del evento">
       </div>
@@ -189,6 +189,8 @@
         <label for="imagen" class="form-label">Imagen (URL)</label>
         <input type="url" id="imagen" class="form-control" placeholder="Link de la imagen">
       </div>
+
+      <input type="hidden" id="editIndex" value="">
 
       <div class="text-center">
         <button type="button" class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
@@ -232,21 +234,21 @@
       } else {
         resolucionInput.disabled = true;
         resolucionInput.value = '';
-        resolucionInput.placeholder = "Sin Resolución";
+        resolucionInput.placeholder = "";
       }
     }
 
     function saveEvent() {
-      const tipo = document.getElementById('tipo').value;
-      const curso = document.getElementById('curso').value;
-      const nombre = document.getElementById('nombre').value;
-      const fecha = document.getElementById('fecha').value;
-      const hora = document.getElementById('hora').value;
-      const detalles = document.getElementById('detalles').value;
-      const resolucion = document.getElementById('resolucion').value;
-      const lugar = document.getElementById('lugar').value;
-      const imagen = document.getElementById('imagen').value;
-      const editIndex = document.getElementById('editIndex').value;
+      const tipo = document.getElementById('tipo') ? document.getElementById('tipo').value : '';
+      const curso = document.getElementById('curso') ? document.getElementById('curso').value : '';
+      const nombre = document.getElementById('nombre') ? document.getElementById('nombre').value : '';
+      const fecha = document.getElementById('fecha') ? document.getElementById('fecha').value : '';
+      const hora = document.getElementById('hora') ? document.getElementById('hora').value : '';
+      const detalles = document.getElementById('detalles') ? document.getElementById('detalles').value : '';
+      const resolucion = document.getElementById('resolucion') ? document.getElementById('resolucion').value : '';
+      const lugar = document.getElementById('lugar') ? document.getElementById('lugar').value : '';
+      const imagen = document.getElementById('imagen') ? document.getElementById('imagen').value : '';
+      const editIndex = document.getElementById('editIndex') ? document.getElementById('editIndex').value : '';
 
       if (!tipo || !nombre || !fecha || !hora) {
         alert('Por favor, completa todos los campos obligatorios.');
@@ -280,54 +282,44 @@
     }
 
     function renderEvents() {
-      const eventosDiv = document.getElementById('eventos');
-      eventosDiv.innerHTML = '';
+      const eventosContainer = document.getElementById('eventos');
+      eventosContainer.innerHTML = '';
 
       eventos.forEach((evento, index) => {
-        const eventoDiv = document.createElement('div');
-        eventoDiv.classList.add('evento');
-        eventoDiv.innerHTML = `
+        const eventoElement = document.createElement('div');
+        eventoElement.classList.add('evento');
+        eventoElement.innerHTML = `
           <h2>${evento.nombre}</h2>
           <p><strong>Tipo:</strong> ${evento.tipo}</p>
-          ${evento.curso ? `<p><strong>Curso:</strong> ${evento.curso}</p>` : ''}
+          <p><strong>Curso:</strong> ${evento.curso}</p>
           <p><strong>Fecha:</strong> ${evento.fecha}</p>
           <p><strong>Hora:</strong> ${evento.hora}</p>
           <p><strong>Detalles:</strong> ${evento.detalles}</p>
           ${evento.resolucion ? `<p><strong>Resolución:</strong> ${evento.resolucion}</p>` : ''}
           ${evento.lugar ? `<p><strong>Lugar:</strong> ${evento.lugar}</p>` : ''}
-          ${evento.imagen ? `<p><strong>Imagen:</strong> <a href="${evento.imagen}" target="_blank">Ver Imagen</a></p>` : ''}
-          <button class="btn btn-edit" onclick="editEvent(${index})">Editar</button>
-          <button class="btn btn-delete" onclick="deleteEvent(${index})">Eliminar</button>
+          ${evento.imagen ? `<p><strong>Imagen:</strong> <img src="${evento.imagen}" alt="Imagen del Evento" style="max-width: 100%; height: auto;"></p>` : ''}
+          <button class="btn btn-primary mt-2" onclick="editEvent(${index})">Editar</button>
         `;
-
-        eventosDiv.appendChild(eventoDiv);
+        eventosContainer.appendChild(eventoElement);
       });
     }
 
     function editEvent(index) {
       const evento = eventos[index];
       document.getElementById('tipo').value = evento.tipo;
+      document.getElementById('curso').value = evento.curso;
       document.getElementById('nombre').value = evento.nombre;
       document.getElementById('fecha').value = evento.fecha;
       document.getElementById('hora').value = evento.hora;
       document.getElementById('detalles').value = evento.detalles;
-      document.getElementById('curso').value = evento.curso;
       document.getElementById('resolucion').value = evento.resolucion;
       document.getElementById('lugar').value = evento.lugar;
       document.getElementById('imagen').value = evento.imagen;
-      document.getElementById('toggleResolucion').checked = !!evento.resolucion;
-      toggleResolucionText();
       document.getElementById('editIndex').value = index;
-      showFields();
-    }
 
-    function deleteEvent(index) {
-      if (confirm('¿Estás seguro de que quieres eliminar este evento?')) {
-        eventos.splice(index, 1);
-        renderEvents();
-      }
+      showFields();
+      toggleResolucionText();
     }
   </script>
-
 </body>
 </html>
