@@ -1,19 +1,19 @@
 FROM node:18
 
-# Establece el directorio de trabajo en el contenedor dentro de /app
+# Establece el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copia los archivos de dependencias desde src
-COPY package*.json ./
+# Copia los archivos de dependencias
+COPY src/package*.json ./
 
 # Instala las dependencias
 RUN npm install
 
 # Copia el resto de los archivos desde src
-COPY . .
+COPY src/ .
 
 # Expone el puerto que usará la aplicación
 EXPOSE 3000
 
-# Inicia la aplicación apuntando a server.js dentro de /app
+# Inicia la aplicación apuntando a server.js en la raíz del directorio de trabajo
 CMD ["node", "server.js"]
