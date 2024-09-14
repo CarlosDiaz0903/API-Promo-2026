@@ -307,29 +307,56 @@
       }
     }
 
-    function editEvent(id) {
-      fetch(`${apiUrl}/${id}`)
-        .then(response => {
-          if (!response.ok) throw new Error('Error al obtener el evento: ' + response.status);
-          return response.json();
-        })
-        .then(event => {
-          document.getElementById('tipo').value = event.tipo;
-          document.getElementById('nombre').value = event.nombre;
-          document.getElementById('curso').value = event.curso || '';
-          document.getElementById('resolucion').value = event.resolucion || '';
-          document.getElementById('lugar').value = event.lugar || '';
-          document.getElementById('fecha').value = event.fecha;
-          document.getElementById('hora').value = event.hora;
-          document.getElementById('detalles').value = event.detalles;
-          document.getElementById('imagen').value = event.imagen || '';
-          document.getElementById('editIndex').value = id;
+    async function editEvent(eventId) {
+  try {
+    const response = await fetch(`${apiUrl}/${eventId}`);
+    if (response.ok) {
+      const evento = await response.json();
+      document.getElementById('tipo').value = evento.tipo;
+      document.getElementById('nombre').value = evento.nombre;
+      document.getElementById('curso').value = evento.curso || '';
+      document.getElementById('resolucion').value = evento.resolucion || '';
+      document.getElementById('lugar').value = evento.lugar || '';
+      document.getElementById('fecha').value = evento.fecha;
+      document.getElementById('hora').value = evento.hora;
+      document.getElementById('detalles').value = evento.detalles;
+      document.getElementById('imagen').value = evento.imagen || '';
+      document.getElementById('editIndex').value = evento._id;
+
+      showFields();
+      toggleResolucionText();
+    } else {
+      // Si no se encuentra por ID, buscar por nombre
+      const response = await fetch(apiUrl + `?nombre=${encodeURIComponent(eventId)}`);
+      if (response.ok) {
+        const eventos = await response.json();
+        if (eventos.length > 0) {
+          const evento = eventos[0];
+          document.getElementById('tipo').value = evento.tipo;
+          document.getElementById('nombre').value = evento.nombre;
+          document.getElementById('curso').value = evento.curso || '';
+          document.getElementById('resolucion').value = evento.resolucion || '';
+          document.getElementById('lugar').value = evento.lugar || '';
+          document.getElementById('fecha').value = evento.fecha;
+          document.getElementById('hora').value = evento.hora;
+          document.getElementById('detalles').value = evento.detalles;
+          document.getElementById('imagen').value = evento.imagen || '';
+          document.getElementById('editIndex').value = evento._id;
 
           showFields();
           toggleResolucionText();
-        })
-        .catch(error => console.error('Error al editar el evento:', error));
+        } else {
+          throw new Error('Evento no encontrado');
+        }
+      } else {
+        throw new Error('Error al buscar el evento por nombre');
+      }
     }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 
     async function deleteEvent(id) {
       if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
