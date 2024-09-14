@@ -210,10 +210,10 @@
           const eventos = await response.json();
           renderEvents(eventos);
         } else {
-          throw new Error('Error al obtener los eventos');
+          throw new Error('Error al obtener los eventos: ' + response.status);
         }
       } catch (error) {
-        console.error(error);
+        console.error('Error al obtener los eventos:', error);
       }
     }
 
@@ -287,7 +287,7 @@
             body: JSON.stringify(event)
           });
 
-          if (!response.ok) throw new Error('Error al actualizar el evento');
+          if (!response.ok) throw new Error('Error al actualizar el evento: ' + response.status);
         } else {
           // Create new event
           const response = await fetch(apiUrl, {
@@ -298,19 +298,19 @@
             body: JSON.stringify(event)
           });
 
-          if (!response.ok) throw new Error('Error al crear el evento');
+          if (!response.ok) throw new Error('Error al crear el evento: ' + response.status);
         }
         resetForm();
         fetchEvents();
       } catch (error) {
-        console.error(error);
+        console.error('Error al guardar el evento:', error);
       }
     }
 
     function editEvent(id) {
       fetch(`${apiUrl}/${id}`)
         .then(response => {
-          if (!response.ok) throw new Error('Error al obtener el evento');
+          if (!response.ok) throw new Error('Error al obtener el evento: ' + response.status);
           return response.json();
         })
         .then(event => {
@@ -328,7 +328,7 @@
           showFields();
           toggleResolucionText();
         })
-        .catch(error => console.error(error));
+        .catch(error => console.error('Error al editar el evento:', error));
     }
 
     async function deleteEvent(id) {
@@ -338,10 +338,10 @@
             method: 'DELETE'
           });
 
-          if (!response.ok) throw new Error('Error al eliminar el evento');
+          if (!response.ok) throw new Error('Error al eliminar el evento: ' + response.status);
           fetchEvents();
         } catch (error) {
-          console.error(error);
+          console.error('Error al eliminar el evento:', error);
         }
       }
     }
