@@ -116,7 +116,7 @@ function showEvents(events, containerId) {
         eventCard.innerHTML = `
             <h2>${evento.nombre}</h2>
             <p>Fecha: ${eventDateTime.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
-            <p>Hora: ${eventDateTime.toLocaleTimeString})}</p>
+            <p>Hora: ${evento.hora})}</p>
             <p>${evento.detalles}</p>
             <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
         `;
