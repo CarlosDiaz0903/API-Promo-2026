@@ -40,10 +40,12 @@
             background-color: #c1370d;
         }
 
-        #events-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .section {
+            display: none;
+        }
+
+        .selected {
+            display: block;
         }
 
         .event-card {
@@ -60,71 +62,86 @@
     <header class="event-header">
         <h1>Eventos</h1>
         <div class="tabs">
-            <div class="tab" id="past">Pasado</div>
-            <div class="tab" id="future">Futuro</div>
+            <div class="tab" onclick="selectSection(0)">Pasado</div>
+            <div class="tab" onclick="selectSection(1)">Futuro</div>
         </div>
     </header>
     
-    <section id="events-container">
-        <!-- Aquí se mostrarán los eventos -->
+    <section id="eventos-pasados" class="section">
+        <!-- Eventos pasados se mostrarán aquí -->
+    </section>
+    
+    <section id="eventos-futuros" class="section">
+        <!-- Eventos futuros se mostrarán aquí -->
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const pastTab = document.getElementById("past");
-            const futureTab = document.getElementById("future");
-            const eventsContainer = document.getElementById("events-container");
+        const apiUrl = '/api/eventos';
 
-            const fetchEvents = async () => {
-                const response = await fetch('/api/eventos');
+        async function fetchEvents() {
+            try {
+                const response = await fetch(apiUrl);
                 const eventos = await response.json();
-                const userDate = new Date(); // Fecha y hora local del usuario
+                const currentTime = new Date();
 
-                const pastEvents = [];
-                const futureEvents = [];
-
-                eventos.forEach(evento => {
+                const pastEvents = eventos.filter(evento => {
                     if (evento.fecha) {
                         const eventDate = new Date(evento.fecha);
                         const [hora, minutos] = evento.hora.split(':').map(Number);
-                        eventDate.setHours(hora, minutos, 0); // Establecer horas y minutos
-
-                        // Clasificar el evento como pasado o futuro
-                        if (eventDate < userDate) {
-                            pastEvents.push(evento);
-                        } else {
-                            futureEvents.push(evento);
-                        }
+                        eventDate.setHours(hora, minutos, 0);
+                        return eventDate < currentTime; // Pasado
                     }
+                    return false;
                 });
 
-                // Función para mostrar eventos
-                const showEvents = (events) => {
-                    eventsContainer.innerHTML = ''; // Limpiar contenedor
-                    events.forEach(evento => {
-                        const eventCard = document.createElement("div");
-                        eventCard.className = "event-card";
-                        eventCard.innerHTML = `
-                            <h2>${evento.nombre}</h2>
-                            <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toLocaleDateString() : 'Sin fecha'}</p>
-                            <p>Hora: ${evento.hora}</p>
-                            <p>${evento.detalles}</p>
-                            <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
-                        `;
-                        eventsContainer.appendChild(eventCard);
-                    });
-                };
+                const futureEvents = eventos.filter(evento => {
+                    if (evento.fecha) {
+                        const eventDate = new Date(evento.fecha);
+                        const [hora, minutos] = evento.hora.split(':').map(Number);
+                        eventDate.setHours(hora, minutos, 0);
+                        return eventDate >= currentTime; // Futuro
+                    }
+                    return false;
+                });
 
-                // Mostrar eventos pasados por defecto
-                showEvents(pastEvents);
+                showEvents(pastEvents, 'eventos-pasados');
+                showEvents(futureEvents, 'eventos-futuros');
+            } catch (error) {
+                console.error("Error fetching events:", error);
+            }
+        }
 
-                // Manejar clics en las pestañas
-                pastTab.addEventListener("click", () => showEvents(pastEvents));
-                futureTab.addEventListener("click", () => showEvents(futureEvents));
-            };
+        function showEvents(events, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Limpiar contenedor
+            events.forEach(evento => {
+                const eventCard = document.createElement("div");
+                eventCard.className = "event-card";
+                eventCard.innerHTML = `
+                    <h2>${evento.nombre}</h2>
+                    <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toLocaleDateString() : 'Sin fecha'}</p>
+                    <p>Hora: ${evento.hora}</p>
+                    <p>${evento.detalles}</p>
+                    <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
+                `;
+                container.appendChild(eventCard);
+            });
+        }
 
+        function selectSection(section) {
+            const eventosPasados = document.getElementById('eventos-pasados');
+            const eventosFuturos = document.getElementById('eventos-futuros');
+            const sections = [eventosPasados, eventosFuturos];
+            
+            sections.forEach((sec, index) => {
+                sec.classList.toggle('selected', index === section);
+            });
+        }
+
+        window.onload = function() {
             fetchEvents();
-        });
+            selectSection(0); // Seleccionar por defecto la sección de pasados
+        };
     </script>
 </body>
 </html>
