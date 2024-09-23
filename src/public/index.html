@@ -84,8 +84,8 @@
                 const futureEvents = [];
 
                 eventos.forEach(evento => {
-                    const eventDate = evento.fecha ? new Date(evento.fecha) : null;
-                    if (eventDate) {
+                    if (evento.fecha) {
+                        const eventDate = new Date(evento.fecha);
                         const [hora, minutos] = evento.hora.split(':').map(Number);
                         eventDate.setHours(hora, minutos, 0); // Establecer horas y minutos
 
