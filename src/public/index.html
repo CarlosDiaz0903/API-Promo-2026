@@ -10,6 +10,10 @@
             background-color: #f9f9f9;
             margin: 0;
             padding: 20px;
+            transition: background-color 0.3s;
+        }
+        body.modal-open {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro cuando el modal está abierto */
         }
         .event-header {
             text-align: center;
@@ -41,6 +45,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
             gap: 15px;
+            padding: 0; /* Eliminar padding del contenedor */
+            margin: 0; /* Eliminar márgenes del contenedor */
         }
         @media (max-width: 1024px) {
             .selected {
@@ -63,11 +69,11 @@
         .event {
             border-radius: 25px;
             padding: 5px;
-            margin: 0px;
             width: 425px;
             height: 631px;
             position: relative;
             text-align: center;
+            margin: 0px !important;
             color: white;
             font-family: 'Nexa Heavy';
             font-size: 25px;
@@ -81,19 +87,63 @@
             justify-content: flex-end;
             padding-bottom: 2pt;
             transform: translate(0);
+            cursor: pointer;
         }
+
         .event p {
             margin: 0;
         }
 
-        .event img {
-            display: none; /* Ocultamos la imagen porque la usaremos como fondo */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
         }
+
+        .modal-content {
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            background-color: transparent;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 1500px;
+            max-height: 770px;
+            overflow-y: scroll;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            color: white;
+            font-family: 'Nexa Heavy';
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                height: auto;
+                max-height: 90%;
+            }
+        }
+
     </style>
 </head>
 <body>
     <header class="event-header">
-        <h1>Eventos</h1>
+        <h1>EVENTOS</h1>
         <div class="tabs">
             <div class="tab" onclick="selectSection(0)">Pasado</div>
             <div class="tab" onclick="selectSection(1)">Futuro</div>
@@ -107,6 +157,14 @@
     <section id="eventos-futuros" class="section">
         <!-- Eventos futuros se mostrarán aquí -->
     </section>
+
+    <!-- Modal -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-details"></div>
+        </div>
+    </div>
 
     <script>
         const apiUrl = 'https://api-promo-2026-production.up.railway.app/api/eventos';
@@ -157,33 +215,61 @@
                 // Establecemos el fondo dinámico con la imagen y el degradado
                 eventCard.style.backgroundImage = `url(${evento.imagen}), linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(4, 3, 8, 0.8))`;
 
-                const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
-
                 eventCard.innerHTML = `
                     <h2>${evento.nombre}</h2>
-                    <p>Fecha: ${eventDateTime.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+                    <p>Fecha: ${getEventDateTime(evento.fecha, evento.hora).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
                     <p>Hora: ${evento.hora}</p>
-                    <p>${evento.detalles}</p>
                 `;
 
+                // Agregar listener para abrir el modal al hacer clic en el evento
+                eventCard.onclick = () => openModal(evento);
                 container.appendChild(eventCard);
             });
         }
 
-        function selectSection(section) {
-            const eventosPasados = document.getElementById('eventos-pasados');
-            const eventosFuturos = document.getElementById('eventos-futuros');
-            const sections = [eventosPasados, eventosFuturos];
-            
-            sections.forEach((sec, index) => {
-                sec.classList.toggle('selected', index === section);
+        function openModal(evento) {
+            const modal = document.getElementById('event-modal');
+            const modalDetails = document.getElementById('modal-details');
+
+            modalDetails.innerHTML = `
+                <h2>${evento.nombre}</h2>
+                <p><strong>Fecha:</strong> ${getEventDateTime(evento.fecha, evento.hora).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+                <p><strong>Hora:</strong> ${evento.hora}</p>
+                <p>${evento.detalles}</p>
+            `;
+
+            // Cambiar el fondo dinámicamente
+            document.querySelector('.modal-content').style.backgroundImage = `url(${evento.imagen}), linear-gradient(to right, rgba(0, 0, 0, 0), rgba(4, 3, 8, 0.8))`;
+
+            // Mostrar el modal
+            modal.style.display = 'block';
+            document.body.classList.add('modal-open'); // Agregar fondo oscuro al body
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('event-modal');
+            modal.style.display = 'none'; // Ocultar el modal
+            document.body.classList.remove('modal-open'); // Quitar fondo oscuro del body
+        }
+
+        function selectSection(index) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, i) => {
+                if (i === index) {
+                    section.classList.add('selected');
+                    section.style.display = 'grid';
+                } else {
+                    section.classList.remove('selected');
+                    section.style.display = 'none';
+                }
             });
         }
 
-        window.onload = function() {
+        // Inicializar la sección predeterminada y cargar los eventos
+        document.addEventListener('DOMContentLoaded', function () {
+            selectSection(1); // Por defecto mostrar eventos futuros
             fetchEvents();
-            selectSection(0); // Seleccionar por defecto la sección de pasados
-        };
+        });
     </script>
 </body>
 </html>
