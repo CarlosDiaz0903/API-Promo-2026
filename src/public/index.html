@@ -91,7 +91,7 @@
                         eventDateTime.setHours(hora, minutos);
 
                         // Clasificar el evento como pasado o futuro
-                        if (eventDateTime <= userLocalDate) {
+                        if (eventDateTime < userLocalDate) {
                             pastEvents.push(evento);
                         } else {
                             futureEvents.push(evento);
