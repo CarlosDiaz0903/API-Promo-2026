@@ -74,7 +74,7 @@
     try {
         const response = await fetch(apiUrl);
         const eventos = await response.json();
-        
+
         // Obtener la hora actual en UTC
         const currentTimeUTC = new Date();
 
@@ -101,9 +101,7 @@
     }
 }
 
-
-
-        function showEvents(events, containerId) {
+function showEvents(events, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = ''; // Limpiar contenedor
     events.forEach(evento => {
@@ -111,7 +109,7 @@
         eventCard.className = "event-card";
         eventCard.innerHTML = `
             <h2>${evento.nombre}</h2>
-            <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toUTCString().split(' ').slice(0, 4).join(' ') : 'Sin fecha'}</p>
+            <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toLocaleString('es-PE', { timeZone: 'America/Lima' }) : 'Sin fecha'}</p>
             <p>Hora: ${evento.hora}</p>
             <p>${evento.detalles}</p>
             <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
@@ -119,6 +117,7 @@
         container.appendChild(eventCard);
     });
 }
+
 
         function selectSection(section) {
             const eventosPasados = document.getElementById('eventos-pasados');
