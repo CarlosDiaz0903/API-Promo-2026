@@ -80,7 +80,7 @@ app.get('/formulario', (req, res) => {
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
-app.get('/', (req, res) => {
+app.get('/eventos', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'eventos.html')); // Ruta a eventos.html
 });
 
