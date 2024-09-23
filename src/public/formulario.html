@@ -263,49 +263,58 @@
     }
 
     async function saveEvent() {
-      const id = document.getElementById('editIndex').value;
-      const event = {
-        tipo: document.getElementById('tipo').value,
-        nombre: document.getElementById('nombre').value,
-        curso: document.getElementById('curso').value || '',
-        resolucion: document.getElementById('resolucion').value || '',
-        lugar: document.getElementById('lugar').value || '',
-        fecha: document.getElementById('fecha').value,
-        hora: document.getElementById('hora').value,
-        detalles: document.getElementById('detalles').value,
-        imagen: document.getElementById('imagen').value || '',
-      };
+  const id = document.getElementById('editIndex').value;
+  const fecha = new Date(document.getElementById('fecha').value);
+  const hora = document.getElementById('hora').value.split(':');
+  fecha.setHours(hora[0], hora[1], 0); // Establece las horas y minutos
 
-      try {
-        if (id) {
-          // Update existing event
-          const response = await fetch(`${apiUrl}/${id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(event)
-          });
+  // Convertir a UTC-5
+  const utcOffset = -5; // UTC-5
+  const utcDate = new Date(fecha.getTime() + utcOffset * 60 * 60 * 1000);
 
-          if (!response.ok) throw new Error('Error al actualizar el evento: ' + response.status);
-        } else {
-          // Create new event
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(event)
-          });
+  const event = {
+    tipo: document.getElementById('tipo').value,
+    nombre: document.getElementById('nombre').value,
+    curso: document.getElementById('curso').value || '',
+    resolucion: document.getElementById('resolucion').value || '',
+    lugar: document.getElementById('lugar').value || '',
+    fecha: utcDate, // Usa la fecha convertida
+    hora: document.getElementById('hora').value,
+    detalles: document.getElementById('detalles').value,
+    imagen: document.getElementById('imagen').value || '',
+  };
 
-          if (!response.ok) throw new Error('Error al crear el evento: ' + response.status);
-        }
-        resetForm();
-        fetchEvents();
-      } catch (error) {
-        console.error('Error al guardar el evento:', error);
-      }
+  try {
+    if (id) {
+      // Update existing event
+      const response = await fetch(`${apiUrl}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(event)
+      });
+
+      if (!response.ok) throw new Error('Error al actualizar el evento: ' + response.status);
+    } else {
+      // Create new event
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(event)
+      });
+
+      if (!response.ok) throw new Error('Error al crear el evento: ' + response.status);
     }
+    resetForm();
+    fetchEvents();
+  } catch (error) {
+    console.error('Error al guardar el evento:', error);
+  }
+}
+
 
     async function editEvent(eventId) {
   try {
