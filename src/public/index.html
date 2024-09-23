@@ -120,18 +120,30 @@ function showEvents(events, containerId) {
         const eventCard = document.createElement("div");
         eventCard.className = "event-card";
 
-        // Combinar fecha y hora para mostrar
-        const eventDateUTC = evento.hora 
-            ? new Date(`${evento.fecha}T${evento.hora}Z`) 
-            : new Date(evento.fecha);
+        // Crear fecha de evento
+        let eventDateUTC;
+        if (evento.fecha) {
+            eventDateUTC = new Date(evento.fecha); // Usa la fecha ISO directamente
+            if (evento.hora) {
+                const [hours, minutes] = evento.hora.split(':');
+                eventDateUTC.setHours(hours, minutes); // Ajustar la hora
+            }
+        }
+
+        // Verificar si la fecha es válida
+        if (isNaN(eventDateUTC)) {
+            console.error("Fecha no válida:", evento.fecha, evento.hora);
+            eventCard.innerHTML = `<h2>${evento.nombre}</h2><p>Fecha no válida</p>`;
+        } else {
+            eventCard.innerHTML = `
+                <h2>${evento.nombre}</h2>
+                <p>Fecha: ${eventDateUTC.toLocaleDateString('es-PE')}</p>
+                <p>Hora: ${eventDateUTC.toLocaleTimeString('es-PE')}</p>
+                <p>${evento.detalles}</p>
+                <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
+            `;
+        }
         
-        eventCard.innerHTML = `
-            <h2>${evento.nombre}</h2>
-            <p>Fecha: ${eventDateUTC.toLocaleDateString('es-PE')}</p>
-            <p>Hora: ${eventDateUTC.toLocaleTimeString('es-PE')}</p>
-            <p>${evento.detalles}</p>
-            <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
-        `;
         container.appendChild(eventCard);
     });
 }
