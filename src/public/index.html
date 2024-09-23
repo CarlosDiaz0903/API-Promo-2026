@@ -80,47 +80,47 @@
                 const eventos = await response.json();
                 const userLocalDate = new Date(); // Fecha y hora local del usuario
 
-                eventsContainer.innerHTML = ''; // Limpiar contenedor
+                const pastEvents = [];
+                const futureEvents = [];
 
-                const showEvents = (isFuture) => {
-                    eventos.forEach(evento => {
-                        const eventDate = evento.fecha ? new Date(evento.fecha) : null; // Obtener fecha si existe
-                        if (eventDate instanceof Date && !isNaN(eventDate)) {
-                            // Obtener la hora del evento
-                            const [hora, minutos] = evento.hora.split(':').map(Number);
-                            const eventDateTime = new Date(eventDate);
-                            eventDateTime.setHours(hora, minutos); // Establecer la hora del evento
+                eventos.forEach(evento => {
+                    const eventDate = evento.fecha ? new Date(evento.fecha) : null;
+                    if (eventDate instanceof Date && !isNaN(eventDate)) {
+                        const [hora, minutos] = evento.hora.split(':').map(Number);
+                        const eventDateTime = new Date(eventDate);
+                        eventDateTime.setHours(hora, minutos);
 
-                            // Clasificar el evento como pasado o futuro
-                            if ((isFuture && eventDateTime > userLocalDate) || (!isFuture && eventDateTime <= userLocalDate)) {
-                                const eventCard = document.createElement("div");
-                                eventCard.className = "event-card";
-                                eventCard.innerHTML = `
-                                    <h2>${evento.nombre}</h2>
-                                    <p>Fecha: ${eventDate.toLocaleDateString()}</p>
-                                    <p>Hora: ${evento.hora}</p>
-                                    <p>${evento.detalles}</p>
-                                    <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
-                                `;
-                                eventsContainer.appendChild(eventCard);
-                            }
+                        // Clasificar el evento como pasado o futuro
+                        if (eventDateTime <= userLocalDate) {
+                            pastEvents.push(evento);
+                        } else {
+                            futureEvents.push(evento);
                         }
+                    }
+                });
+
+                const showEvents = (events) => {
+                    eventsContainer.innerHTML = ''; // Limpiar contenedor
+                    events.forEach(evento => {
+                        const eventCard = document.createElement("div");
+                        eventCard.className = "event-card";
+                        eventCard.innerHTML = `
+                            <h2>${evento.nombre}</h2>
+                            <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toLocaleDateString() : 'Sin fecha'}</p>
+                            <p>Hora: ${evento.hora}</p>
+                            <p>${evento.detalles}</p>
+                            <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
+                        `;
+                        eventsContainer.appendChild(eventCard);
                     });
                 };
 
-                // Mostrar eventos por defecto
-                showEvents(false); // Mostrar eventos pasados por defecto
+                // Mostrar eventos pasados por defecto
+                showEvents(pastEvents);
 
                 // Manejar clics en las pestañas
-                pastTab.addEventListener("click", () => {
-                    eventsContainer.innerHTML = ''; // Limpiar contenedor
-                    showEvents(false); // Mostrar eventos pasados
-                });
-
-                futureTab.addEventListener("click", () => {
-                    eventsContainer.innerHTML = ''; // Limpiar contenedor
-                    showEvents(true); // Mostrar eventos futuros
-                });
+                pastTab.addEventListener("click", () => showEvents(pastEvents));
+                futureTab.addEventListener("click", () => showEvents(futureEvents));
             };
 
             fetchEvents();
