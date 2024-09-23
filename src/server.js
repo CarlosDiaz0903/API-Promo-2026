@@ -76,12 +76,12 @@ app.put('/api/eventos/:id', async (req, res) => {
 
 // Servir el archivo HTML del formulario en la ruta /formulario
 app.get('/formulario', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a index.html (formulario)
+  res.sendFile(path.join(__dirname, 'public', 'eventos.html')); // Ruta a index.html (formulario)
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
 app.get('', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'eventos.html')); // Ruta a eventos.html
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a eventos.html
 });
 
 app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
