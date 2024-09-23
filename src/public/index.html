@@ -11,21 +11,17 @@
             margin: 0;
             padding: 20px;
         }
-
         .event-header {
             text-align: center;
         }
-
         h1 {
             color: #333;
         }
-
         .tabs {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
         }
-
         .tab {
             padding: 15px 30px;
             margin: 0 10px;
@@ -35,19 +31,15 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .tab:hover {
             background-color: #c1370d;
         }
-
         .section {
             display: none;
         }
-
         .selected {
             display: block;
         }
-
         .event-card {
             background-color: white;
             border-radius: 10px;
@@ -87,8 +79,6 @@
                 const pastEvents = eventos.filter(evento => {
                     if (evento.fecha) {
                         const eventDate = new Date(evento.fecha);
-                        const [hora, minutos] = evento.hora.split(':').map(Number);
-                        eventDate.setHours(hora, minutos, 0);
                         return eventDate < currentTime; // Pasado
                     }
                     return false;
@@ -97,8 +87,6 @@
                 const futureEvents = eventos.filter(evento => {
                     if (evento.fecha) {
                         const eventDate = new Date(evento.fecha);
-                        const [hora, minutos] = evento.hora.split(':').map(Number);
-                        eventDate.setHours(hora, minutos, 0);
                         return eventDate >= currentTime; // Futuro
                     }
                     return false;
@@ -112,28 +100,21 @@
         }
 
         function showEvents(events, containerId) {
-           const container = document.getElementById(containerId);
-           container.innerHTML = ''; // Limpiar contenedor
-           events.forEach(evento => {
-               const eventCard = document.createElement("div");
-               eventCard.className = "event-card";
-
-               // Convertir la fecha a UTC-5
-               const eventDate = new Date(evento.fecha);
-               const options = { timeZone: 'America/Lima', year: 'numeric', month: '2-digit', day: '2-digit' };
-               const formattedDate = eventDate.toLocaleDateString('es-PE', options);
-
-               eventCard.innerHTML = `
-                   <h2>${evento.nombre}</h2>
-                   <p>Fecha: ${formattedDate}</p>
-                   <p>Hora: ${evento.hora}</p>
-                   <p>${evento.detalles}</p>
-                   <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
-               `;
-               container.appendChild(eventCard);
-           });
-       }
-
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Limpiar contenedor
+            events.forEach(evento => {
+                const eventCard = document.createElement("div");
+                eventCard.className = "event-card";
+                eventCard.innerHTML = `
+                    <h2>${evento.nombre}</h2>
+                    <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toLocaleDateString() : 'Sin fecha'}</p>
+                    <p>Hora: ${evento.hora}</p>
+                    <p>${evento.detalles}</p>
+                    <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
+                `;
+                container.appendChild(eventCard);
+            });
+        }
 
         function selectSection(section) {
             const eventosPasados = document.getElementById('eventos-pasados');
