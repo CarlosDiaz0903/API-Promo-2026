@@ -78,7 +78,7 @@
             const fetchEvents = async () => {
                 const response = await fetch('/api/eventos');
                 const eventos = await response.json();
-                const now = new Date();
+                const userLocalDate = new Date(); // Fecha y hora local del usuario
 
                 eventsContainer.innerHTML = ''; // Limpiar contenedor
 
@@ -87,7 +87,7 @@
                         const eventDate = new Date(evento.fecha);
                         // Asegúrate de que eventDate sea una fecha válida
                         if (eventDate instanceof Date && !isNaN(eventDate)) {
-                            if ((isFuture && eventDate > now) || (!isFuture && eventDate <= now)) {
+                            if ((isFuture && eventDate > userLocalDate) || (!isFuture && eventDate <= userLocalDate)) {
                                 const eventCard = document.createElement("div");
                                 eventCard.className = "event-card";
                                 eventCard.innerHTML = `
