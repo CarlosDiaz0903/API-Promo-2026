@@ -71,50 +71,57 @@
         const apiUrl = '/api/eventos';
 
         async function fetchEvents() {
-            try {
-                const response = await fetch(apiUrl);
-                const eventos = await response.json();
-                const currentTime = new Date();
+    try {
+        const response = await fetch(apiUrl);
+        const eventos = await response.json();
+        const currentTime = new Date();
 
-                const pastEvents = eventos.filter(evento => {
-                    if (evento.fecha) {
-                        const eventDate = new Date(evento.fecha);
-                        return eventDate < currentTime; // Pasado
-                    }
-                    return false;
-                });
-
-                const futureEvents = eventos.filter(evento => {
-                    if (evento.fecha) {
-                        const eventDate = new Date(evento.fecha);
-                        return eventDate >= currentTime; // Futuro
-                    }
-                    return false;
-                });
-
-                showEvents(pastEvents, 'eventos-pasados');
-                showEvents(futureEvents, 'eventos-futuros');
-            } catch (error) {
-                console.error("Error fetching events:", error);
+        const pastEvents = eventos.filter(evento => {
+            if (evento.fecha && evento.hora) {
+                const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
+                return eventDateTime < currentTime; // Pasado
             }
-        }
+            return false;
+        });
 
-        function showEvents(events, containerId) {
+        const futureEvents = eventos.filter(evento => {
+            if (evento.fecha && evento.hora) {
+                const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
+                return eventDateTime >= currentTime; // Futuro
+            }
+            return false;
+        });
+
+        showEvents(pastEvents, 'eventos-pasados');
+        showEvents(futureEvents, 'eventos-futuros');
+    } catch (error) {
+        console.error("Error fetching events:", error);
+    }
+}
+
+function getEventDateTime(fecha, hora) {
+    const [hours, minutes] = hora.split(':');
+    const eventDateTime = new Date(fecha); // Crear un objeto Date basado en la fecha
+    eventDateTime.setUTCHours(hours, minutes); // Ajustar la hora (UTC)
+    return eventDateTime;
+}
+
+function showEvents(events, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = ''; // Limpiar contenedor
     events.forEach(evento => {
-        const eventCard = document.createElement("div");
-        eventCard.className = "event-card";
+        const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
         eventCard.innerHTML = `
             <h2>${evento.nombre}</h2>
-            <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toUTCString().split(' ').slice(0, 4).join(' ') : 'Sin fecha'}</p>
-            <p>Hora: ${evento.hora}</p>
+            <p>Fecha: ${eventDateTime.toLocaleDateString('es-PE')}</p>
+            <p>Hora: ${eventDateTime.toLocaleTimeString('es-PE')}</p>
             <p>${evento.detalles}</p>
             <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
         `;
         container.appendChild(eventCard);
     });
 }
+
 
         function selectSection(section) {
             const eventosPasados = document.getElementById('eventos-pasados');
