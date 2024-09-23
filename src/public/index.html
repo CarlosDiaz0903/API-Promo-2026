@@ -75,7 +75,6 @@
             const futureTab = document.getElementById("future");
             const eventsContainer = document.getElementById("events-container");
 
-            // Función para obtener y mostrar eventos
             const fetchEvents = async () => {
                 const response = await fetch('/api/eventos');
                 const eventos = await response.json();
@@ -83,20 +82,22 @@
 
                 eventsContainer.innerHTML = ''; // Limpiar contenedor
 
-                // Mostrar eventos según la pestaña seleccionada
                 const showEvents = (isFuture) => {
                     eventos.forEach(evento => {
                         const eventDate = new Date(evento.fecha);
-                        if ((isFuture && eventDate > now) || (!isFuture && eventDate <= now)) {
-                            const eventCard = document.createElement("div");
-                            eventCard.className = "event-card";
-                            eventCard.innerHTML = `
-                                <h2>${evento.nombre}</h2>
-                                <p>Fecha: ${eventDate.toLocaleDateString()}</p>
-                                <p>Hora: ${evento.hora}</p>
-                                <p>${evento.detalles}</p>
-                            `;
-                            eventsContainer.appendChild(eventCard);
+                        // Asegúrate de que eventDate sea una fecha válida
+                        if (eventDate instanceof Date && !isNaN(eventDate)) {
+                            if ((isFuture && eventDate > now) || (!isFuture && eventDate <= now)) {
+                                const eventCard = document.createElement("div");
+                                eventCard.className = "event-card";
+                                eventCard.innerHTML = `
+                                    <h2>${evento.nombre}</h2>
+                                    <p>Fecha: ${eventDate.toLocaleDateString()}</p>
+                                    <p>Hora: ${evento.hora}</p>
+                                    <p>${evento.detalles}</p>
+                                `;
+                                eventsContainer.appendChild(eventCard);
+                            }
                         }
                     });
                 };
