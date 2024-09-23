@@ -78,20 +78,19 @@
             const fetchEvents = async () => {
                 const response = await fetch('/api/eventos');
                 const eventos = await response.json();
-                const userLocalDate = new Date(); // Fecha y hora local del usuario
+                const userDate = new Date(); // Fecha y hora local del usuario
 
                 const pastEvents = [];
                 const futureEvents = [];
 
                 eventos.forEach(evento => {
                     const eventDate = evento.fecha ? new Date(evento.fecha) : null;
-                    if (eventDate instanceof Date && !isNaN(eventDate)) {
+                    if (eventDate) {
                         const [hora, minutos] = evento.hora.split(':').map(Number);
-                        const eventDateTime = new Date(eventDate);
-                        eventDateTime.setHours(hora, minutos);
+                        eventDate.setHours(hora, minutos, 0); // Establecer horas y minutos
 
                         // Clasificar el evento como pasado o futuro
-                        if (eventDateTime < userLocalDate) {
+                        if (eventDate < userDate) {
                             pastEvents.push(evento);
                         } else {
                             futureEvents.push(evento);
@@ -99,6 +98,7 @@
                     }
                 });
 
+                // Función para mostrar eventos
                 const showEvents = (events) => {
                     eventsContainer.innerHTML = ''; // Limpiar contenedor
                     events.forEach(evento => {
