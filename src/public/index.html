@@ -109,17 +109,17 @@ function showEvents(events, containerId) {
     events.forEach(evento => {
         const eventCard = document.createElement("div");
         eventCard.className = "event-card";
-        const eventDateUTC = new Date(evento.fecha); // Evento en UTC
-        const eventHourUTC = evento.hora ? new Date(`${evento.fecha}T${evento.hora}Z`) : eventDateUTC; // Combinar fecha y hora si existe
         eventCard.innerHTML = `
             <h2>${evento.nombre}</h2>
-            <p>Fecha: ${eventHourUTC.toLocaleDateString('es-PE')} ${eventHourUTC.toLocaleTimeString('es-PE')}</p>
+            <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toLocaleString('es-PE', { timeZone: 'America/Lima' }) : 'Sin fecha'}</p>
+            <p>Hora: ${evento.hora}</p>
             <p>${evento.detalles}</p>
             <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
         `;
         container.appendChild(eventCard);
     });
 }
+
 
         function selectSection(section) {
             const eventosPasados = document.getElementById('eventos-pasados');
