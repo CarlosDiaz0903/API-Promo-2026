@@ -74,14 +74,18 @@
     try {
         const response = await fetch(apiUrl);
         const eventos = await response.json();
+        
+        // Log para ver la respuesta de la API
+        console.log("Eventos obtenidos:", eventos);
+        
         const currentTimeUTC = new Date(); // Hora actual en UTC
 
         const pastEvents = eventos.filter(evento => {
             if (evento.fecha) {
-                // Combinar fecha y hora si existe
                 const eventDateUTC = evento.hora 
                     ? new Date(`${evento.fecha}T${evento.hora}Z`) 
                     : new Date(evento.fecha); // UTC
+                console.log("Evento pasado:", evento, "Fecha UTC:", eventDateUTC, "Hora actual UTC:", currentTimeUTC);
                 return eventDateUTC <= currentTimeUTC; // Comparar eventos pasados
             }
             return false;
@@ -92,10 +96,14 @@
                 const eventDateUTC = evento.hora 
                     ? new Date(`${evento.fecha}T${evento.hora}Z`) 
                     : new Date(evento.fecha);
+                console.log("Evento futuro:", evento, "Fecha UTC:", eventDateUTC, "Hora actual UTC:", currentTimeUTC);
                 return eventDateUTC > currentTimeUTC; // Comparar eventos futuros
             }
             return false;
         });
+
+        console.log("Eventos pasados:", pastEvents);
+        console.log("Eventos futuros:", futureEvents);
 
         showEvents(pastEvents, 'eventos-pasados');
         showEvents(futureEvents, 'eventos-futuros');
@@ -104,28 +112,7 @@
     }
 }
 
-function showEvents(events, containerId) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = ''; // Limpiar contenedor
-    events.forEach(evento => {
-        const eventCard = document.createElement("div");
-        eventCard.className = "event-card";
 
-        // Combinar fecha y hora para mostrar
-        const eventDateUTC = evento.hora 
-            ? new Date(`${evento.fecha}T${evento.hora}Z`) 
-            : new Date(evento.fecha);
-        
-        eventCard.innerHTML = `
-            <h2>${evento.nombre}</h2>
-            <p>Fecha: ${eventDateUTC.toLocaleDateString('es-PE')}</p>
-            <p>Hora: ${eventDateUTC.toLocaleTimeString('es-PE')}</p>
-            <p>${evento.detalles}</p>
-            <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
-        `;
-        container.appendChild(eventCard);
-    });
-}
 
 
         function selectSection(section) {
