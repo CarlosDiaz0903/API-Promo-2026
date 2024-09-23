@@ -87,7 +87,7 @@
                 const showEvents = (isFuture) => {
                     eventos.forEach(evento => {
                         const eventDate = new Date(evento.fecha);
-                        if ((isFuture && eventDate >= now) || (!isFuture && eventDate < now)) {
+                        if ((isFuture && eventDate > now) || (!isFuture && eventDate <= now)) {
                             const eventCard = document.createElement("div");
                             eventCard.className = "event-card";
                             eventCard.innerHTML = `
