@@ -35,16 +35,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Servir archivos estÃ
 
 // Ruta para guardar eventos
 app.post('/api/eventos', async (req, res) => {
-  const { fecha, hora, ...resto } = req.body;
-  
-  // Combina fecha y hora y convierte a UTC-5
-  const fechaHoraUTC = new Date(`${fecha}T${hora}:00-05:00`); // UTC-5
-  
-  const evento = new Evento({
-    ...resto,
-    fecha: fechaHoraUTC, // Guardar la fecha ajustada
-  });
-
+  const evento = new Evento(req.body);
   try {
     await evento.save();
     res.json({ message: 'Evento guardado con Ã©xito' });
@@ -52,6 +43,7 @@ app.post('/api/eventos', async (req, res) => {
     res.status(500).json({ error: 'Error al guardar el evento' });
   }
 });
+
 // Ruta para obtener eventos
 app.get('/api/eventos', async (req, res) => {
   try {
