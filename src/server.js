@@ -76,7 +76,7 @@ app.put('/api/eventos/:id', async (req, res) => {
 
 // Servir el archivo HTML del formulario en la ruta /formulario
 app.get('/formulario', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'eventos.html')); // Ruta a index.html (formulario)
+  res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a index.html (formulario)
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
