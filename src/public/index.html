@@ -84,7 +84,7 @@
 
                 const showEvents = (isFuture) => {
                     eventos.forEach(evento => {
-                        const eventDate = new Date(evento.fecha);
+                        const eventDate = evento.fecha ? new Date(evento.fecha) : null; // Obtener fecha si existe
                         // Asegúrate de que eventDate sea una fecha válida
                         if (eventDate instanceof Date && !isNaN(eventDate)) {
                             if ((isFuture && eventDate > userLocalDate) || (!isFuture && eventDate <= userLocalDate)) {
