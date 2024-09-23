@@ -34,16 +34,16 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public'))); // Servir archivos estáticos
 
 // Ruta para guardar eventos
-// Ruta para guardar eventos
 app.post('/api/eventos', async (req, res) => {
   const { fecha, hora, ...resto } = req.body;
-
-  // Crear un objeto de fecha y ajustar según la zona horaria
-  const fechaEvento = new Date(`${fecha}T${hora}:00`);
   
-  // Convertir a UTC-5
-  const fechaHoraUTC = new Date(fechaEvento.getTime() - (5 * 60 * 60 * 1000)); // Restar 5 horas para ajustar a UTC-5
-
+  // Crear un objeto de fecha y sumar un día
+  const fechaEvento = new Date(fecha);
+  fechaEvento.setDate(fechaEvento.getDate() + 1);
+  
+  // Combina fecha y hora y convierte a UTC-5
+  const fechaHoraUTC = new Date(`${fechaEvento.toISOString().split('T')[0]}T${hora}:00-05:00`); // UTC-5
+  
   const evento = new Evento({
     ...resto,
     fecha: fechaHoraUTC, // Guardar la fecha ajustada
