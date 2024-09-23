@@ -74,20 +74,22 @@
     try {
         const response = await fetch(apiUrl);
         const eventos = await response.json();
-        const currentTime = new Date();
+        
+        // Obtener la hora actual en UTC
+        const currentTimeUTC = new Date();
 
         const pastEvents = eventos.filter(evento => {
             if (evento.fecha) {
-                const eventDate = new Date(evento.fecha); // Evento en UTC
-                return eventDate < currentTime; // Comparar directamente
+                const eventDateUTC = new Date(evento.fecha); // Evento en UTC
+                return eventDateUTC < currentTimeUTC; // Comparar directamente
             }
             return false;
         });
 
         const futureEvents = eventos.filter(evento => {
             if (evento.fecha) {
-                const eventDate = new Date(evento.fecha); // Evento en UTC
-                return eventDate >= currentTime; // Comparar directamente
+                const eventDateUTC = new Date(evento.fecha); // Evento en UTC
+                return eventDateUTC >= currentTimeUTC; // Comparar directamente
             }
             return false;
         });
@@ -98,6 +100,7 @@
         console.error("Error fetching events:", error);
     }
 }
+
 
 
         function showEvents(events, containerId) {
