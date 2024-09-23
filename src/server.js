@@ -37,8 +37,12 @@ app.use(express.static(path.join(__dirname, 'public'))); // Servir archivos est�
 app.post('/api/eventos', async (req, res) => {
   const { fecha, hora, ...resto } = req.body;
   
+  // Crear un objeto de fecha y sumar un día
+  const fechaEvento = new Date(fecha);
+  fechaEvento.setDate(fechaEvento.getDate() + 1);
+  
   // Combina fecha y hora y convierte a UTC-5
-  const fechaHoraUTC = new Date(`${fecha}T${hora}:00-05:00`); // UTC-5
+  const fechaHoraUTC = new Date(`${fechaEvento.toISOString().split('T')[0]}T${hora}:00-05:00`); // UTC-5
   
   const evento = new Evento({
     ...resto,
@@ -52,6 +56,7 @@ app.post('/api/eventos', async (req, res) => {
     res.status(500).json({ error: 'Error al guardar el evento' });
   }
 });
+
 // Ruta para obtener eventos
 app.get('/api/eventos', async (req, res) => {
   try {
@@ -84,7 +89,7 @@ app.put('/api/eventos/:id', async (req, res) => {
 
 // Servir el archivo HTML del formulario en la ruta /formulario
 app.get('/formulario', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a index.html (formulario)
+  res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a formulario.html
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
