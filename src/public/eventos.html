@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .event-list {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .event {
+            margin-bottom: 20px;
+        }
+        .event h2 {
+            margin: 0 0 10px 0;
+        }
+        .event p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Eventos</h1>
+    <div class="event-list" id="event-list">
+        <!-- Aquí se mostrarán los eventos desde el backend -->
+    </div>
+    <script>
+        // Código JavaScript para obtener y mostrar eventos
+        fetch('/api/eventos')
+            .then(response => response.json())
+            .then(data => {
+                const eventList = document.getElementById('event-list');
+                data.forEach(event => {
+                    const eventElement = document.createElement('div');
+                    eventElement.classList.add('event');
+                    eventElement.innerHTML = `
+                        <h2>${event.nombre}</h2>
+                        <p><strong>Fecha:</strong> ${new Date(event.fecha).toLocaleDateString()}</p>
+                        <p><strong>Hora:</strong> ${event.hora}</p>
+                        <p><strong>Lugar:</strong> ${event.lugar}</p>
+                        <p>${event.detalles}</p>
+                    `;
+                    eventList.appendChild(eventElement);
+                });
+            })
+            .catch(error => console.error('Error al cargar los eventos:', error));
+    </script>
+</body>
+</html>
