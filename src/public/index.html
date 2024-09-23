@@ -100,21 +100,21 @@
         }
 
         function showEvents(events, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = ''; // Limpiar contenedor
-            events.forEach(evento => {
-                const eventCard = document.createElement("div");
-                eventCard.className = "event-card";
-                eventCard.innerHTML = `
-                    <h2>${evento.nombre}</h2>
-                    <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toLocaleDateString() : 'Sin fecha'}</p>
-                    <p>Hora: ${evento.hora}</p>
-                    <p>${evento.detalles}</p>
-                    <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
-                `;
-                container.appendChild(eventCard);
-            });
-        }
+    const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Limpiar contenedor
+    events.forEach(evento => {
+        const eventCard = document.createElement("div");
+        eventCard.className = "event-card";
+        eventCard.innerHTML = `
+            <h2>${evento.nombre}</h2>
+            <p>Fecha: ${evento.fecha ? new Date(evento.fecha).toUTCString().split(' ').slice(0, 4).join(' ') : 'Sin fecha'}</p>
+            <p>Hora: ${evento.hora}</p>
+            <p>${evento.detalles}</p>
+            <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
+        `;
+        container.appendChild(eventCard);
+    });
+}
 
         function selectSection(section) {
             const eventosPasados = document.getElementById('eventos-pasados');
