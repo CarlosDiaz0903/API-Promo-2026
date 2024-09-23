@@ -110,11 +110,13 @@ function showEvents(events, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = ''; // Limpiar contenedor
     events.forEach(evento => {
+        const eventCard = document.createElement("div");
+        eventCard.className = "event-card";
         const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
         eventCard.innerHTML = `
             <h2>${evento.nombre}</h2>
-            <p>Fecha: ${eventDateTime.toLocaleDateString('es-PE')}</p>
-            <p>Hora: ${eventDateTime.toLocaleTimeString('es-PE')}</p>
+            <p>Fecha: ${eventDateTime.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+            <p>Hora: ${eventDateTime.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}</p>
             <p>${evento.detalles}</p>
             <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
         `;
