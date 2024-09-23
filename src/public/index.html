@@ -6,57 +6,118 @@
     <title>Eventos</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
             padding: 20px;
         }
-        h1 {
+
+        .event-header {
             text-align: center;
         }
-        .event-list {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+        h1 {
+            color: #333;
         }
-        .event {
+
+        .tabs {
+            display: flex;
+            justify-content: center;
             margin-bottom: 20px;
         }
-        .event h2 {
-            margin: 0 0 10px 0;
+
+        .tab {
+            padding: 15px 30px;
+            margin: 0 10px;
+            background-color: #e1480f;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .event p {
-            margin: 5px 0;
+
+        .tab:hover {
+            background-color: #c1370d;
+        }
+
+        #events-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 80%;
         }
     </style>
 </head>
 <body>
-    <h1>Listado de Eventos</h1>
-    <div class="event-list" id="event-list">
-        <!-- Aquí se mostrarán los eventos desde el backend -->
-    </div>
+    <header class="event-header">
+        <h1>Eventos</h1>
+        <div class="tabs">
+            <div class="tab" id="past">Pasado</div>
+            <div class="tab" id="future">Futuro</div>
+        </div>
+    </header>
+    
+    <section id="events-container">
+        <!-- Aquí se mostrarán los eventos -->
+    </section>
+
     <script>
-        // Código JavaScript para obtener y mostrar eventos
-        fetch('/api/eventos')
-            .then(response => response.json())
-            .then(data => {
-                const eventList = document.getElementById('event-list');
-                data.forEach(event => {
-                    const eventElement = document.createElement('div');
-                    eventElement.classList.add('event');
-                    eventElement.innerHTML = `
-                        <h2>${event.nombre}</h2>
-                        <p><strong>Fecha:</strong> ${new Date(event.fecha).toLocaleDateString()}</p>
-                        <p><strong>Hora:</strong> ${event.hora}</p>
-                        <p><strong>Lugar:</strong> ${event.lugar}</p>
-                        <p>${event.detalles}</p>
-                    `;
-                    eventList.appendChild(eventElement);
+        document.addEventListener("DOMContentLoaded", () => {
+            const pastTab = document.getElementById("past");
+            const futureTab = document.getElementById("future");
+            const eventsContainer = document.getElementById("events-container");
+
+            // Función para obtener y mostrar eventos
+            const fetchEvents = async () => {
+                const response = await fetch('/api/eventos');
+                const eventos = await response.json();
+                const now = new Date();
+
+                eventsContainer.innerHTML = ''; // Limpiar contenedor
+
+                // Mostrar eventos según la pestaña seleccionada
+                const showEvents = (isFuture) => {
+                    eventos.forEach(evento => {
+                        const eventDate = new Date(evento.fecha);
+                        if ((isFuture && eventDate >= now) || (!isFuture && eventDate < now)) {
+                            const eventCard = document.createElement("div");
+                            eventCard.className = "event-card";
+                            eventCard.innerHTML = `
+                                <h2>${evento.nombre}</h2>
+                                <p>Fecha: ${eventDate.toLocaleDateString()}</p>
+                                <p>Hora: ${evento.hora}</p>
+                                <p>${evento.detalles}</p>
+                            `;
+                            eventsContainer.appendChild(eventCard);
+                        }
+                    });
+                };
+
+                // Mostrar eventos por defecto
+                showEvents(false); // Mostrar eventos pasados por defecto
+
+                // Manejar clics en las pestañas
+                pastTab.addEventListener("click", () => {
+                    eventsContainer.innerHTML = ''; // Limpiar contenedor
+                    showEvents(false); // Mostrar eventos pasados
                 });
-            })
-            .catch(error => console.error('Error al cargar los eventos:', error));
+
+                futureTab.addEventListener("click", () => {
+                    eventsContainer.innerHTML = ''; // Limpiar contenedor
+                    showEvents(true); // Mostrar eventos futuros
+                });
+            };
+
+            fetchEvents();
+        });
     </script>
 </body>
 </html>
