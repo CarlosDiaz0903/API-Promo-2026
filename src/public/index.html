@@ -112,11 +112,14 @@ function showEvents(events, containerId) {
     events.forEach(evento => {
         const eventCard = document.createElement("div");
         eventCard.className = "event-card";
-        const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
+
+        // Convertimos solo la fecha, pero dejamos la hora tal cual
+        const eventDate = new Date(evento.fecha);
+
         eventCard.innerHTML = `
             <h2>${evento.nombre}</h2>
-            <p>Fecha: ${eventDateTime.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
-            <p>Hora: ${evento.hora}</p> <!-- No se convierte la hora -->
+            <p>Fecha: ${eventDate.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+            <p>Hora: ${evento.hora}</p> <!-- La hora se muestra tal como está en los datos -->
             <p>${evento.detalles}</p>
             <img src="${evento.imagen}" alt="${evento.nombre}" style="max-width: 100%; border-radius: 10px;">
         `;
@@ -124,10 +127,6 @@ function showEvents(events, containerId) {
     });
 }
 
-function getEventDateTime(fecha) {
-    const eventDateTime = new Date(fecha); // Crear un objeto Date basado en la fecha, sin modificar la hora
-    return eventDateTime;
-}
 
 
         function selectSection(section) {
