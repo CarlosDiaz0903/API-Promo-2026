@@ -310,72 +310,80 @@
 
     async function editEvent(eventId) {
   try {
-    const response = await fetch(`${apiUrl}/${eventId}`);
+    // Obtener todos los eventos del database
+    const response = await fetch(apiUrl);
     if (response.ok) {
-      const evento = await response.json();
-      console.log('Evento encontrado:', evento);
-      // Rellenar los campos del formulario con los datos del evento
-      document.getElementById('tipo').value = evento.tipo;
-      document.getElementById('nombre').value = evento.nombre;
-      document.getElementById('curso').value = evento.curso || '';
-      document.getElementById('resolucion').value = evento.resolucion || '';
-      document.getElementById('lugar').value = evento.lugar || '';
-      document.getElementById('fecha').value = evento.fecha;
-      document.getElementById('hora').value = evento.hora;
-      document.getElementById('detalles').value = evento.detalles;
-      document.getElementById('imagen').value = evento.imagen || '';
+      const eventos = await response.json();
 
-      // Mostrar los campos ocultos según el tipo de evento
-      showFields();
+      // Filtrar el evento que se quiere editar
+      const evento = eventos.find((evento) => evento._id === eventId);
 
-      // Mostrar el botón de guardar cambios
-      document.getElementById('saveChanges').style.display = 'block';
+      if (evento) {
+        // Rellenar los campos del formulario con los datos del evento
+        document.getElementById('tipo').value = evento.tipo;
+        document.getElementById('nombre').value = evento.nombre;
+        document.getElementById('curso').value = evento.curso || '';
+        document.getElementById('resolucion').value = evento.resolucion || '';
+        document.getElementById('lugar').value = evento.lugar || '';
+        document.getElementById('fecha').value = evento.fecha;
+        document.getElementById('hora').value = evento.hora;
+        document.getElementById('detalles').value = evento.detalles;
+        document.getElementById('imagen').value = evento.imagen || '';
 
-      // Agregar evento al botón de guardar cambios
-      document.getElementById('saveChanges').addEventListener('click', async () => {
-        try {
-          // Obtener los datos del formulario
-          const evento = {
-            tipo: document.getElementById('tipo').value,
-            nombre: document.getElementById('nombre').value,
-            curso: document.getElementById('curso').value || '',
-            resolucion: document.getElementById('resolucion').value || '',
-            lugar: document.getElementById('lugar').value || '',
-            fecha: document.getElementById('fecha').value,
-            hora: document.getElementById('hora').value,
-            detalles: document.getElementById('detalles').value,
-            imagen: document.getElementById('imagen').value || '',
-          };
+        // Mostrar los campos ocultos según el tipo de evento
+        showFields();
 
-          // Enviar la solicitud de actualización al servidor
-          const response = await fetch(`${apiUrl}/${eventId}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(evento),
-          });
+        // Mostrar el botón de guardar cambios
+        document.getElementById('saveChanges').style.display = 'block';
 
-          if (response.ok) {
-            // Mostrar mensaje de éxito
-            alert('Evento actualizado con éxito');
+        // Agregar evento al botón de guardar cambios
+        document.getElementById('saveChanges').addEventListener('click', async () => {
+          try {
+            // Obtener los datos del formulario
+            const evento = {
+              tipo: document.getElementById('tipo').value,
+              nombre: document.getElementById('nombre').value,
+              curso: document.getElementById('curso').value || '',
+              resolucion: document.getElementById('resolucion').value || '',
+              lugar: document.getElementById('lugar').value || '',
+              fecha: document.getElementById('fecha').value,
+              hora: document.getElementById('hora').value,
+              detalles: document.getElementById('detalles').value,
+              imagen: document.getElementById('imagen').value || '',
+            };
 
-            // Ocultar el botón de guardar cambios
-            document.getElementById('saveChanges').style.display = 'none';
+            // Enviar la solicitud de actualización al servidor
+            const response = await fetch(`${apiUrl}/${eventId}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(evento),
+            });
 
-            // Refrescar la lista de eventos
-            fetchEvents();
-          } else {
-            // Mostrar mensaje de error
-            alert('Error al actualizar el evento');
+            if (response.ok) {
+              // Mostrar mensaje de éxito
+              alert('Evento actualizado con éxito');
+
+              // Ocultar el botón de guardar cambios
+              document.getElementById('saveChanges').style.display = 'none';
+
+              // Refrescar la lista de eventos
+              fetchEvents();
+            } else {
+              // Mostrar mensaje de error
+              alert('Error al actualizar el evento');
+            }
+          } catch (error) {
+            console.error(error);
           }
-        } catch (error) {
-          console.error(error);
-        }
-      });
+        });
+      } else {
+        console.log('Evento no encontrado:', eventId);
+        throw new Error('Evento no encontrado');
+      }
     } else {
-      console.log('Evento no encontrado:', eventId);
-      throw new Error('Evento no encontrado');
+      throw new Error('Error al obtener los eventos');
     }
   } catch (error) {
     console.error(error);
