@@ -407,7 +407,7 @@
 
     const examenes = events.filter(evento => evento.tipo === "Examen");
     if (examenes.length > 0) {
-        text += "*📚 Exámenes📚*\n";
+        text += "*📚 Exámenes📚*\n\n";
         const cursosExamenes = {};
         examenes.forEach(evento => {
             if (!cursosExamenes[evento.curso]) {
@@ -431,7 +431,7 @@
 
     const presentaciones = events.filter(evento => evento.tipo === "Presentación");
     if (presentaciones.length > 0) {
-        text += "*📌 Presentaciones📌*\n";
+        text += "*📌 Presentaciones📌*\n\n";
         const cursosPresentaciones = {};
         presentaciones.forEach(evento => {
             if (!cursosPresentaciones[evento.curso]) {
@@ -455,7 +455,7 @@
 
     const actividades = events.filter(evento => evento.tipo === "Actividad");
     if (actividades.length > 0) {
-        text += "*🎉 ACTIVIDADES🎉*\n";
+        text += "*🎉 ACTIVIDADES🎉*\n\n";
         const cursosActividades = {};
         actividades.forEach(evento => {
             if (!cursosActividades[evento.curso]) {
