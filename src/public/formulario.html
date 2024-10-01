@@ -223,6 +223,7 @@
   eventosDiv.innerHTML = '';
 
   eventos.forEach((evento) => {
+    console.log('ID del evento:', evento._id);
     const eventoDiv = document.createElement('div');
     eventoDiv.className = 'evento';
     eventoDiv.innerHTML = `
@@ -310,6 +311,7 @@
     async function editEvent(eventId) {
   try {
     // Obtener el evento por ID
+    console.log('ID del evento:', eventId);
     const response = await fetch(`${apiUrl}/${eventId}`);
     if (response.ok) {
       const evento = await response.json();
