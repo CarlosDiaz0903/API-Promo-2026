@@ -310,12 +310,10 @@
 
     async function editEvent(eventId) {
   try {
-    // Obtener el evento por ID
-    console.log('ID del evento:', eventId);
     const response = await fetch(`${apiUrl}/${eventId}`);
     if (response.ok) {
       const evento = await response.json();
-
+      console.log('Evento encontrado:', evento);
       // Rellenar los campos del formulario con los datos del evento
       document.getElementById('tipo').value = evento.tipo;
       document.getElementById('nombre').value = evento.nombre;
@@ -376,14 +374,13 @@
         }
       });
     } else {
-      // Mostrar mensaje de error
-      alert('Evento no encontrado');
+      console.log('Evento no encontrado:', eventId);
+      throw new Error('Evento no encontrado');
     }
   } catch (error) {
     console.error(error);
   }
 }
-
     async function deleteEvent(id) {
       if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
         try {
