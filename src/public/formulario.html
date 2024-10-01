@@ -224,7 +224,6 @@
   eventos.forEach((evento) => {
     const eventoDiv = document.createElement('div');
     eventoDiv.className = 'evento';
-    eventoDiv.dataset.id = evento._id; // Agregando el id al elemento
     eventoDiv.innerHTML = `
       <h2>${evento.nombre}</h2>
       <p><strong>Tipo:</strong> ${evento.tipo}</p>
@@ -326,31 +325,7 @@
       showFields();
       toggleResolucionText();
     } else {
-      // Si no se encuentra por ID, buscar por nombre
-      const response = await fetch(apiUrl + `?nombre=${encodeURIComponent(eventId)}`);
-      if (response.ok) {
-        const eventos = await response.json();
-        if (eventos.length > 0) {
-          const evento = eventos[0];
-          document.getElementById('tipo').value = evento.tipo;
-          document.getElementById('nombre').value = evento.nombre;
-          document.getElementById('curso').value = evento.curso || '';
-          document.getElementById('resolucion').value = evento.resolucion || '';
-          document.getElementById('lugar').value = evento.lugar || '';
-          document.getElementById('fecha').value = evento.fecha;
-          document.getElementById('hora').value = evento.hora;
-          document.getElementById('detalles').value = evento.detalles;
-          document.getElementById('imagen').value = evento.imagen || '';
-          document.getElementById('editIndex').value = evento._id;
-
-          showFields();
-          toggleResolucionText();
-        } else {
-          throw new Error('Evento no encontrado');
-        }
-      } else {
-        throw new Error('Error al buscar el evento por nombre');
-      }
+      throw new Error('Evento no encontrado');
     }
   } catch (error) {
     console.error(error);
