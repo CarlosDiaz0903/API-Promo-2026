@@ -194,6 +194,7 @@
 
       <input type="hidden" id="editIndex">
       <button type="button" class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
+      <button id="saveChanges" style="display: none;">Guardar cambios</button>
     </form>
 
     <h2 class="mt-4">Eventos Registrados</h2>
@@ -308,9 +309,12 @@
 
     async function editEvent(eventId) {
   try {
+    // Obtener el evento por ID
     const response = await fetch(`${apiUrl}/${eventId}`);
     if (response.ok) {
       const evento = await response.json();
+
+      // Rellenar los campos del formulario con los datos del evento
       document.getElementById('tipo').value = evento.tipo;
       document.getElementById('nombre').value = evento.nombre;
       document.getElementById('curso').value = evento.curso || '';
@@ -320,18 +324,63 @@
       document.getElementById('hora').value = evento.hora;
       document.getElementById('detalles').value = evento.detalles;
       document.getElementById('imagen').value = evento.imagen || '';
-      document.getElementById('editIndex').value = evento._id;
 
+      // Mostrar los campos ocultos según el tipo de evento
       showFields();
-      toggleResolucionText();
+
+      // Mostrar el botón de guardar cambios
+      document.getElementById('saveChanges').style.display = 'block';
+
+      // Agregar evento al botón de guardar cambios
+      document.getElementById('saveChanges').addEventListener('click', async () => {
+        try {
+          // Obtener los datos del formulario
+          const evento = {
+            tipo: document.getElementById('tipo').value,
+            nombre: document.getElementById('nombre').value,
+            curso: document.getElementById('curso').value || '',
+            resolucion: document.getElementById('resolucion').value || '',
+            lugar: document.getElementById('lugar').value || '',
+            fecha: document.getElementById('fecha').value,
+            hora: document.getElementById('hora').value,
+            detalles: document.getElementById('detalles').value,
+            imagen: document.getElementById('imagen').value || '',
+          };
+
+          // Enviar la solicitud de actualización al servidor
+          const response = await fetch(`${apiUrl}/${eventId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(evento),
+          });
+
+          if (response.ok) {
+            // Mostrar mensaje de éxito
+            alert('Evento actualizado con éxito');
+
+            // Ocultar el botón de guardar cambios
+            document.getElementById('saveChanges').style.display = 'none';
+
+            // Refrescar la lista de eventos
+            fetchEvents();
+          } else {
+            // Mostrar mensaje de error
+            alert('Error al actualizar el evento');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
     } else {
-      throw new Error('Evento no encontrado');
+      // Mostrar mensaje de error
+      alert('Evento no encontrado');
     }
   } catch (error) {
     console.error(error);
   }
 }
-
 
     async function deleteEvent(id) {
       if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
