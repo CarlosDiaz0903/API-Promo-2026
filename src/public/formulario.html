@@ -218,29 +218,29 @@
     }
 
     function renderEvents(eventos) {
-      const eventosDiv = document.getElementById('eventos');
-      eventosDiv.innerHTML = '';
+  const eventosDiv = document.getElementById('eventos');
+  eventosDiv.innerHTML = '';
 
-      eventos.forEach((evento) => {
-        const eventoDiv = document.createElement('div');
-        eventoDiv.className = 'evento';
-        eventoDiv.dataset.id = evento._id; // Agregando el id al elemento
-        eventoDiv.innerHTML = `
-          <h2>${evento.nombre}</h2>
-          <p><strong>Tipo:</strong> ${evento.tipo}</p>
-          <p><strong>Curso:</strong> ${evento.curso || 'No especificado'}</p>
-          <p><strong>Fecha:</strong> ${evento.fecha}</p>
-          <p><strong>Hora:</strong> ${evento.hora}</p>
-          <p><strong>Detalles:</strong> ${evento.detalles}</p>
-          <p><strong>Imagen:</strong> <a href="${evento.imagen}" target="_blank">Ver Imagen</a></p>
-          <p><strong>Lugar:</strong> ${evento.lugar || 'No especificado'}</p>
-          <p><strong>Resolución:</strong> ${evento.resolucion || 'No especificado'}</p>
-          <button class="btn btn-secondary btn-sm mt-2" onclick="editEvent('${evento._id}')">Editar</button>
-          <button class="btn btn-danger btn-sm mt-2" onclick="deleteEvent('${evento._id}')">Eliminar</button>
-        `;
-        eventosDiv.appendChild(eventoDiv);
-      });
-    }
+  eventos.forEach((evento) => {
+    const eventoDiv = document.createElement('div');
+    eventoDiv.className = 'evento';
+    eventoDiv.dataset.id = evento._id; // Agregando el id al elemento
+    eventoDiv.innerHTML = `
+      <h2>${evento.nombre}</h2>
+      <p><strong>Tipo:</strong> ${evento.tipo}</p>
+      <p><strong>Curso:</strong> ${evento.curso || 'No especificado'}</p>
+      <p><strong>Fecha:</strong> ${evento.fecha}</p>
+      <p><strong>Hora:</strong> ${evento.hora}</p>
+      <p><strong>Detalles:</strong> ${evento.detalles}</p>
+      <p><strong>Imagen:</strong> <a href="${evento.imagen}" target="_blank">Ver Imagen</a></p>
+      <p><strong>Lugar:</strong> ${evento.lugar || 'No especificado'}</p>
+      <p><strong>Resolución:</strong> ${evento.resolucion || 'No especificado'}</p>
+      <button class="btn btn-secondary btn-sm mt-2" onclick="editEvent('${evento._id}')">Editar</button>
+      <button class="btn btn-danger btn-sm mt-2" onclick="deleteEvent('${evento._id}')">Eliminar</button>
+    `;
+    eventosDiv.appendChild(eventoDiv);
+  });
+}
 
     function showFields() {
       const tipo = document.getElementById('tipo').value;
