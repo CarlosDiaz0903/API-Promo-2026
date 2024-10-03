@@ -79,8 +79,24 @@ app.get('/formulario', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a index.html (formulario)
 });
 
-app.get('/olimpiadas', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a index.html (formulario)
+const visitasSchema = new mongoose.Schema({
+  contador: { type: Number, default: 0 }
+});
+
+const Visitas = mongoose.model('Visitas', visitasSchema);
+
+app.get('/olimpiadas', async (req, res) => {
+  const visita = await Visitas.findOne();
+  if (!visita) {
+    const nuevaVisita = new Visitas();
+    await nuevaVisita.save();
+    console.log(`Visitas: 1`);
+  } else {
+    visita.contador++;
+    await visita.save();
+    console.log(`Visitas: ${visita.contador}`);
+  }
+  res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
