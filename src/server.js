@@ -87,7 +87,7 @@ let visitas = 0;
 
 app.get('/olimpiadas', (req, res) => {
   visitas++;
-  console.log(`Visitas: ${visitas}`);
+  console.log(`Visitas Olimpiadas: ${visitas}`);
   res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
