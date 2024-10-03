@@ -93,6 +93,8 @@ app.get('/olimpiadas', (req, res) => {
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
 app.get('', (req, res) => {
+  visitas++;
+  console.log(`Visitas Index: ${visitas}`);
   res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a eventos.html
 });
 
