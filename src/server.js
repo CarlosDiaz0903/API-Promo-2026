@@ -83,19 +83,11 @@ const visitasSchema = new mongoose.Schema({
   contador: { type: Number, default: 0 }
 });
 
-const Visitas = mongoose.model('Visitas', visitasSchema);
+let visitas = 0;
 
-app.get('/olimpiadas', async (req, res) => {
-  const visita = await Visitas.findOne();
-  if (!visita) {
-    const nuevaVisita = new Visitas();
-    await nuevaVisita.save();
-    console.log(`Visitas: 1`);
-  } else {
-    visita.contador++;
-    await visita.save();
-    console.log(`Visitas: ${visita.contador}`);
-  }
+app.get('/olimpiadas', (req, res) => {
+  visitas++;
+  console.log(`Visitas: ${visitas}`);
   res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
