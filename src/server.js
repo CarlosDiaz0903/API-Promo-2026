@@ -83,18 +83,19 @@ const visitasSchema = new mongoose.Schema({
   contador: { type: Number, default: 0 }
 });
 
-let visitas = 0;
+let visitasOlimpiadas = 0;
+let visitasIndex = 0;
 
 app.get('/olimpiadas', (req, res) => {
-  visitas++;
-  console.log(`Visitas Olimpiadas: ${visitas}`);
+  visitasOlimpiadas++;
+  console.log(`Visitas Olimpiadas: ${visitasOlimpiadas}`);
   res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
 app.get('', (req, res) => {
-  visitas++;
-  console.log(`Visitas Index: ${visitas}`);
+  visitasIndex++;
+  console.log(`Visitas Index: ${visitasIndex}`);
   res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a eventos.html
 });
 
