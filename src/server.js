@@ -79,6 +79,10 @@ app.get('/formulario', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a index.html (formulario)
 });
 
+app.get('/olimpiadas', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a index.html (formulario)
+});
+
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
 app.get('', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a eventos.html
