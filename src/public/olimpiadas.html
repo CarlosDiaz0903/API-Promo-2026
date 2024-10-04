@@ -3,162 +3,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLIMPIADAS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>OLIMPIADAS 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #a7c5e0, #f0f4f8);
+        /* General Styles */
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
         }
-        h1 {
-            text-align: center;
-            color: #003366;
-            margin-bottom: 30px;
-            font-size: 2.8em;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-        }
+
         .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        .day {
-            margin-bottom: 30px;
-            border-bottom: 3px solid #003366;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #0056b3;
-            margin-bottom: 10px;
-            font-size: 2em;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 5px;
-            background-color: #e7f3ff;
-            border-radius: 5px;
-            padding: 10px;
-        }
-        .event {
-            background: #ffffff;
-            border-left: 5px solid #007BFF;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            transition: transform 0.3s, background 0.3s;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .event:hover {
-            transform: translateY(-2px);
-            background: #d0e8ff;
-        }
-        .time {
-            font-weight: bold;
-            font-size: 1.2em;
-            color: #003366;
-        }
-        footer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  height: 96px;
+  width: 96px;
+  animation: rotate_3922 1.2s linear infinite;
+  background-color: #9b59b6;
+  background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+}
+
+.container span {
+  position: absolute;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  background-color: #9b59b6;
+  background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+}
+
+.container span:nth-of-type(1) {
+  filter: blur(5px);
+}
+
+.container span:nth-of-type(2) {
+  filter: blur(10px);
+}
+
+.container span:nth-of-type(3) {
+  filter: blur(25px);
+}
+
+.container span:nth-of-type(4) {
+  filter: blur(50px);
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: #fff;
+  border: solid 5px #ffffff;
+  border-radius: 50%;
+}
+
+@keyframes rotate_3922 {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+        h1 {
+            background: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            font-size: 6rem;
+            margin: 30px;
             text-align: center;
-            margin-top: 40px;
-            font-size: 1em;
-            color: #666;
+            letter-spacing: 1.5px;
         }
-        @media (max-width: 600px) {
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .tabs button {
+  align-items: center;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  border: 0;
+  margin: 5px;
+  border-radius: 50px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 50px;
+  padding: 6px 6px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tabs button span {
+  background-color: rgb(5, 6, 45);
+  padding: 12px 12px;
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.tabs button:hover span {
+  background: none;
+}
+
+.tabs button:active {
+  transform: scale(0.9);
+}
+
+.tabs button.active {
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  border: 8px solid linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+}
+
+        .content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+            color: #fff;
+            padding: 12px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .section p {
+            margin-top: 15px;
+            line-height: 1.8;
+            text-align: center;
+            color: #555;
+        }
+
+        .sport-time {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 12px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
             h1 {
-                font-size: 2.2em;
+                font-size: 3.2rem;
             }
-            h2 {
-                font-size: 1.6em;
+
+            .section h2 {
+                font-size: 1.4rem;
             }
-            .time {
-                font-size: 1em;
+
+            .sport-time {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-
-    <h1>Olimpiadas</h1>
-
     <div class="container">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    <h1>OLIMPIADAS 2024</h1>
 
-        <div class="day">
-            <h2>Fecha 1 (04 de octubre)</h2>
-            <div class="event"><span class="time">08:30</span> Balonmano: Alemania A – Italia A</div>
-            <div class="event"><span class="time">09:00</span> Balonmano: Argentina A – Alemania B</div>
-            <div class="event"><span class="time">10:30</span> Vóley: Alemania A – Italia A</div>
-            <div class="event"><span class="time">11:00</span> Vóley: Argentina A – Alemania B</div>
-            <div class="event"><span class="time">11:30</span> Ajedrez: Alemania A – Italia A</div>
-            <div class="event"><span class="time">12:00</span> Ajedrez: Argentina A – Alemania B</div>
-            <div class="event"><span class="time">12:00</span> Fútbol: Alemania A – Italia A</div>
-            <div class="event"><span class="time">12:30</span> Fútbol: Argentina A – Alemania B</div>
-            <div class="event"><span class="time">13:30</span> Basket: Argentina A – Alemania B</div>
-            <div class="event"><span class="time">14:00</span> Basket: Alemania A – Italia A</div>
-        </div>
-
-        <div class="day">
-            <h2>Fecha 2 (07 de octubre)</h2>
-            <div class="event"><span class="time">08:00</span> Vóley: Italia – Alemania (varones)</div>
-            <div class="event"><span class="time">09:30</span> Vóley: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">10:30</span> Vóley: Italia B – Alemania A</div>
-            <div class="event"><span class="time">11:00</span> Balonmano: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">12:00</span> Balonmano: Italia B – Alemania A</div>
-            <div class="event"><span class="time">12:00</span> Fútbol: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">14:30</span> Fútbol: Italia B – Alemania A</div>
-            <div class="event"><span class="time">11:30</span> Ajedrez: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">14:00</span> Ajedrez: Italia B – Alemania A</div>
-            <div class="event"><span class="time">08:00</span> Basket: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">09:00</span> Basket: Italia B – Alemania A</div>
-        </div>
-        
-        <div class="day">
-            <h2>Fecha 3 (09 de octubre)</h2>
-            <div class="event"><span class="time">13:30</span> Fútbol: Argentina B – Alemania A</div>
-            <div class="event"><span class="time">14:30</span> Fútbol: Alemania B – Italia A</div>
-            <div class="event"><span class="time">12:00</span> Balonmano: Argentina B – Alemania A</div>
-            <div class="event"><span class="time">13:00</span> Balonmano: Alemania B – Italia A</div>
-            <div class="event"><span class="time">13:30</span> Vóley: Argentina B – Alemania A</div>
-            <div class="event"><span class="time">14:30</span> Vóley: Alemania B – Italia A</div>
-            <div class="event"><span class="time">09:30</span> Ajedrez: Argentina B – Alemania A</div>
-            <div class="event"><span class="time">10:30</span> Ajedrez: Alemania B – Italia A</div>
-        </div>
-        
-        <div class="day">
-            <h2>Fecha 4 (10 de octubre)</h2>
-            <div class="event"><span class="time">10:00</span> Fútbol: Italia B – Alemania B</div>
-            <div class="event"><span class="time">10:30</span> Fútbol: Alemania A – Argentina A</div>
-            <div class="event"><span class="time">12:30</span> Balonmano: Italia B – Alemania B</div>
-            <div class="event"><span class="time">12:30</span> Balonmano: Alemania A – Argentina A</div>
-            <div class="event"><span class="time">10:00</span> Vóley: Italia B – Alemania B</div>
-            <div class="event"><span class="time">13:30</span> Vóley: Alemania A – Argentina A</div>
-            <div class="event"><span class="time">11:30</span> Ajedrez: Italia B – Alemania B</div>
-            <div class="event"><span class="time">12:00</span> Ajedrez: Alemania A – Argentina A</div>
-            <div class="event"><span class="time">08:30</span> Basket: Italia B – Alemania B</div>
-            <div class="event"><span class="time">09:00</span> Basket: Alemania A – Argentina A</div>
-        </div>
-
-        <div class="day">
-            <h2>Fecha 5 (11 de octubre)</h2>
-            <div class="event"><span class="time">09:30</span> Vóley: Alemania – Argentina (varones)</div>
-            <div class="event"><span class="time">11:30</span> Balonmano: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">12:00</span> Balonmano: Italia B – Alemania A</div>
-            <div class="event"><span class="time">12:00</span> Fútbol: Alemania A – Argentina A</div>
-            <div class="event"><span class="time">14:30</span> Fútbol: Alemania B – Italia A</div>
-            <div class="event"><span class="time">11:30</span> Ajedrez: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">14:00</span> Ajedrez: Italia B – Alemania A</div>
-            <div class="event"><span class="time">08:00</span> Basket: Alemania B – Argentina B</div>
-            <div class="event"><span class="time">09:00</span> Basket: Italia B – Alemania A</div>
-        </div>
-        
+    <div class="tabs">
+        <button class="active" onclick="showContent('date1')"><span>06 Oct</span></button>
+        <button onclick="showContent('date2')"><span>07 Oct</span></button>
+        <button onclick="showContent('date3')"><span>09 Oct</span></button>
+        <button onclick="showContent('date4')"><span>10 Oct</span></button>
+        <button onclick="showContent('date5')"><span>11 Oct</span></button>
     </div>
 
-    <footer>
-        Todos los derechos reservados por Carlos Díaz. © 2024
-    </footer>
+    <!-- Fecha 1 -->
+    <div id="date1" class="content active">
+        <div class="section">
+            <h2>Balonmano (Patio Central)</h2>
+            <div class="sport-time"><span>08:30</span> <span>Alemania A vs Italia A</span></div>
+            <div class="sport-time"><span>09:00</span> <span>Argentina A vs Alemania B</span></div>
+        </div>
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>10:30</span> <span>Alemania A vs Italia A</span></div>
+            <div class="sport-time"><span>11:00</span> <span>Argentina A vs Alemania B</span></div>
+        </div>
+        <div class="section">
+            <h2>Ajedrez (Biblioteca)</h2>
+            <div class="sport-time"><span>11:30</span> <span>Alemania A vs Italia A</span></div>
+            <div class="sport-time"><span>12:00</span> <span>Argentina A vs Alemania B</span></div>
+        </div>
+        <div class="section">
+            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
+            <div class="sport-time"><span>12:00</span> <span>Alemania A vs Italia A</span></div>
+            <div class="sport-time"><span>12:30</span> <span>Argentina A vs Alemania B</span></div>
+        </div>
+        <div class="section">
+            <h2>Básquet (Campo de Básquet)</h2>
+            <div class="sport-time"><span>13:30</span> <span>Argentina A vs Alemania B</span></div>
+            <div class="sport-time"><span>14:00</span> <span>Alemania A vs Italia A</span></div>
+        </div>
+    </div>
 
+    <!-- Fecha 2 -->
+    <div id="date2" class="content">
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>08:00</span> <span>Italia vs Alemania (Varones)</span></div>
+        </div>
+        <div class="section">
+            <h2>Básquet (Campo de Básquet)</h2>
+            <div class="sport-time"><span>08:00</span> <span>Alemania B vs Argentina B</span></div>
+            <div class="sport-time"><span>09:00</span> <span>Italia B vs Alemania A</span></div>
+        </div>
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>09:30</span> <span>Alemania B vs Argentina B</span></div>
+            <div class="sport-time"><span>10:30</span> <span>Italia B vs Alemania A</span></div>
+        </div>
+        <div class="section">
+            <h2>Balonmano (Patio Central)</h2>
+            <div class="sport-time"><span>11:00</span> <span>Alemania B vs Argentina B</span></div>
+            <div class="sport-time"><span>12:00</span> <span>Italia B vs Alemania A</span></div>
+        </div>
+        <div class="section">
+            <h2>Ajedrez (Biblioteca)</h2>
+            <div class="sport-time"><span>12:30</span> <span>Alemania B vs Argentina B</span></div>
+        </div>
+        <div class="section">
+            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
+            <div class="sport-time"><span>13:30</span> <span>Alemania B vs Argentina B</span></div>
+        </div>
+        <div class="section">
+            <h2>Ajedrez (Biblioteca)</h2>
+            <div class="sport-time"><span>14:00</span> <span>Italia B vs Alemania A</span></div>
+        </div>
+        <div class="section">
+            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
+            <div class="sport-time"><span>14:30</span> <span>Italia B vs Alemania A</span></div>
+        </div>
+    </div>
+
+    <!-- Fecha 3 -->
+    <div id="date3" class="content">
+        <div class="section">
+            <h2>Atletismo Sec. (Campo de Fútbol)</h2>
+            <div class="sport-time"><span>08:00 - 09:30</span></div>
+        </div>
+        <div class="section">
+            <h2>Ajedrez (Biblioteca)</h2>
+            <div class="sport-time"><span>09:30</span> <span>Argentina B vs Alemania A</span></div>
+            <div class="sport-time"><span>10:30</span> <span>Alemania B vs Italia A</span></div>
+        </div>
+        <div class="section">
+            <h2>Balonmano (Patio Central)</h2>
+            <div class="sport-time"><span>12:00</span> <span>Argentina B vs Alemania A</span></div>
+            <div class="sport-time"><span>13:00</span> <span>Alemania B vs Italia A</span></div>
+        </div>
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>13:30</span> <span>Argentina B vs Alemania A</span></div>
+        </div>
+        <div class="section">
+            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
+            <div class="sport-time"><span>13:30</span> <span>Argentina B vs Alemania A</span></div>
+        </div>
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>14:30</span> <span>Alemania B vs Italia A</span></div>
+        </div>
+        <div class="section">
+            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
+            <div class="sport-time"><span>14:30</span> <span>Alemania B vs Italia A</span></div>
+        </div>
+    </div>
+
+    <!-- Fecha 4 -->
+    <div id="date4" class="content">
+        <div class="section">
+            <h2>Básquet (Campo de Básquet)</h2>
+            <div class="sport-time"><span>08:30</span> <span>Italia B vs Alemania B</span></div>
+            <div class="sport-time"><span>09:00</span> <span>Alemania A vs Argentina A</span></div>
+        </div>
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>10:00</span> <span>Italia B vs Alemania B</span></div>
+        </div>
+        <div class="section">
+            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
+            <div class="sport-time"><span>10:00</span> <span>Italia B vs Alemania B</span></div>
+            <div class="sport-time"><span>10:30</span> <span>Alemania A vs Argentina A</span></div>
+        </div>
+        <div class="section">
+            <h2>Ajedrez (Biblioteca)</h2>
+            <div class="sport-time"><span>11:30</span> <span>Italia B vs Alemania B</span></div>
+            <div class="sport-time"><span>12:00</span> <span>Alemania A vs Argentina A</span></div>
+        </div>
+        <div class="section">
+            <h2>Balonmano (Patio Central)</h2>
+            <div class="sport-time"><span>12:00</span> <span>Italia B vs Alemania B</span></div>
+            <div class="sport-time"><span>12:30</span> <span>Alemania A vs Argentina A</span></div>
+        </div>
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>13:30</span> <span>Alemania A vs Argentina A</span></div>
+        </div>
+        <div class="section"></div>
+            <h2>Bailetón Sec. (Patio Central)</h2>
+            <div class="sport-time"><span>14:00 - 14:30</span></div>
+        </div>
+    </div>
+
+    <!-- Fecha 5 -->
+    <div id="date5" class="content">
+        <div class="section">
+            <h2>Ajedrez (Biblioteca)</h2>
+            <div class="sport-time"><span>09:00</span> <span>Alemania A vs Alemania B</span></div>
+        </div>
+        <div class="section">
+            <h2>Vóley (Patio Secundaria)</h2>
+            <div class="sport-time"><span>09:30</span> <span>Alemania vs Argentina (varones)</span></div>
+        </div>
+        <div class="section">
+            <h2>Juegos Recreativos (Secundaria)</h2>
+            <div class="sport-time"><span>14:00 - 14:30</span></div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(dateId) {
+            const contents = document.querySelectorAll('.content');
+            const tabs = document.querySelectorAll('.button');
+
+            contents.forEach(content => content.classList.remove('active'));
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            document.getElementById(dateId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        window.addEventListener('load', function() {
+  document.querySelector('.container').style.display = 'none';
+});
+    </script>
 </body>
 </html>
