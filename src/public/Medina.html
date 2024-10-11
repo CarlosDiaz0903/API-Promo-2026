@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medina - Soluciones Tecnológicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fondo con círculos degradados */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -50px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,138,0,0.3), rgba(255,61,0,0.1));
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,138,0,0.3), rgba(255,61,0,0.1));
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom right, #FF8A00, #FF3D00);
+            position: relative;
+            border-bottom-left-radius: 150px;
+            border-bottom-right-radius: 150px;
+        }
+
+        header h1 {
+            font-size: 4.5rem;
+            color: white;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            color: white;
+            margin-top: 10px;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #FF8A00;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .info {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .product {
+            margin-bottom: 100px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .product h3 {
+            font-size: 2.2rem;
+            color: #FF3D00;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .product-video,
+        .product-gallery {
+            flex: 1 1 60%;
+            display: flex;
+            justify-content: center;
+            margin-right: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .product-video video {
+            max-width: 100%;
+            height: auto; /* Ajustado para mantener la proporción */
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-gallery {
+            flex-direction: column; /* Para permitir más flexibilidad */
+            align-items: center;
+        }
+
+        .product-gallery img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 10px; /* Espaciado entre imágenes */
+        }
+
+        .product-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .features {
+            flex: 1 1 35%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .feature {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        footer {
+            background-color: #FF8A00;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <h1>Medina</h1>
+        <p>Soluciones tecnológicas que evolucionan contigo</p>
+    </header>
+
+    <!-- Sección Principal -->
+    <section>
+        <h2>Misión y Visión</h2>
+        <p class="info">Nos enfocamos en brindar soluciones tecnológicas que siempre están mejorando. Nuestro objetivo es mantener a nuestros clientes actualizados con ideas nuevas y prácticas que se adapten a los cambios y necesidades.</p>
+    </section>
+
+    <!-- Productos -->
+    <section>
+        <!-- Producto 1 -->
+        <div class="product">
+            <h3>Robot Inteligente</h3>
+            <p class="product-description">Este pequeño amigo podría facilitarte la vida. Se activa con un simple botón y recoge el polvo mientras se mueve solo.</p>
+            <div class="product-video">
+                <video src="fonts/Video.mp4" autoplay muted loop></video>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <p>Compartimento para basura</p>
+                </div>
+                <div class="feature">
+                    <p>Sensores integrados</p>
+                </div>
+                <div class="feature">
+                    <p>Carga vía cable</p>
+                </div>
+                <div class="feature">
+                    <p>Succión mejorada</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product">
+            <h3>Termo Digital</h3>
+            <p class="product-description">Termos diseñados para mostrar la temperatura de tu bebida favorita, manteniéndola caliente o fresca.</p>
+            <!-- Galería de imágenes -->
+            <div class="product-gallery">
+                <img src="https://cdn.discordapp.com/attachments/1037495618278539334/1294113471528702012/427d4cec-8c59-4078-93ef-360b6355cecb.png?ex=6709d497&is=67088317&hm=81fea99f5e52ada83ee1e2fd207b23c43f9da458f920d7d86e6f532997189200&" alt="Termo 1">
+                <img src="https://cdn.discordapp.com/attachments/1037495618278539334/1294113500641099888/35a10a48-9baa-4853-b275-13d7c20b4097.png?ex=6709d49e&is=6708831e&hm=4d184d48014377fabd25a0065143e90e040c0916bd5fdfd42c2fcb0af93ee846&" alt="Termo 2">
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <p>Acero inoxidable</p>
+                    </div>
+                    <div class="feature">
+                        <p>Retiene la temperatura</p>
+                    </div>
+                    <div class="feature">
+                        <p>Fácil de limpiar</p>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Producto 3 -->
+        <div class="product">
+            <h3>Botella Tipo Caja de Leche</h3>
+            <p class="product-description">Botella moderna, transparente y práctica para llevar tus bebidas favoritas con estilo.</p>
+            <!-- Galería de imágenes -->
+            <div class="product-gallery">
+                <img src="https://cdn.discordapp.com/attachments/1037495618278539334/1294113283069972531/bca23f13-3ed0-412f-ad53-d7efe3662e18.png?ex=6709d46a&is=670882ea&hm=451cf6546deb4d13d4576d62d3fe088b512f21a64817e3d862651e985cb8018a&" alt="Botella 1">
+                <img src="https://cdn.discordapp.com/attachments/1037495618278539334/1294113305392316529/dcfd38b6-6425-4f10-bd3d-dbc7bc5d208b.png?ex=6709d46f&is=670882ef&hm=43c52bea7ccfec1f9387f8fac4b7adb3896b068f6fada8b5aea829bb1e037010&" alt="Botella 2">
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <p>Material duradero</p>
+                </div>
+                <div class="feature">
+                    <p>100% reciclable</p>
+                </div>
+                <div class="feature">
+                    <p>Tapa hermética</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="product">
+            <h3>Conjunto Lonchera</h3>
+            <p class="product-description">Lonchera de dos pisos con diseño de oso, incluye cantimplora, taza y cubiertos integrados.</p>
+            <!-- Galería de imágenes -->
+            <div class="product-gallery">
+                <img src="https://cdn.discordapp.com/attachments/1037495618278539334/1294113335754625035/a51df8ac-1897-44d6-8f1b-3a1bd898306a.png?ex=6709d476&is=670882f6&hm=fbefb2610738536c8edbb8e57847525906c0a5aa7ff0aecf84e7560485ad3100&" alt="Lonchera 1">
+                <img src="https://cdn.discordapp.com/attachments/1037495618278539334/1294113443976183820/1128e0b9-3342-4b7a-9742-475983b7a567.png?ex=6709d490&is=67088310&hm=a9f441ed5d38bdcb3ceceab36ee46ad439c8370f99e954a47f63751b607f6aca&" alt="Lonchera 2">
+                <img src="https://cdn.discordapp.com/attachments/1037495618278539334/1294113405065625650/68545f8d-ffab-42db-84c4-27b3c74b42ca.png?ex=6709d487&is=67088307&hm=6ac568a15dc0a0de50132e3541f451697c09a17cb8e3b7d3d5071888c1fef725&" alt="Lonchera 3">
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <p>Material resistente</p>
+                </div>
+                <div class="feature">
+                    <p>Cubiertos incluidos</p>
+                </div>
+                <div class="feature">
+                    <p>Divisiones para alimentos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>© 2024 Medina. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
