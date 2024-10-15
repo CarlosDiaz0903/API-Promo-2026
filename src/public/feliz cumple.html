@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Camila</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-container {
+    width: 100%;
+    position: relative;
+}
+
+p {
+    font-family: 'Afacad Flux', sans-serif;
+    font-size: 12px;
+    margin: 10px 0;
+    line-height: 18px;
+}
+
+.desktop-image {
+    display: none;
+    width: 100%;
+}
+
+.mobile-image {
+    display: none;
+    width: 100%;
+}
+
+.message-container {
+    display: none;
+    width: 88%;
+    margin: 20px 0;
+    background-color: rgba(27, 253, 156, 0.0);
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 20px;
+    text-align: left;
+    font-size: 1.2rem;
+    box-shadow: 
+        0 0 10px rgba(27, 253, 156, 0.6), /* Resplandor exterior */
+        inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);;
+}
+
+button {
+  --green: #1BFD9C;
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+}
+
+button:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+}
+
+button:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform .4s ease-in-out;
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
+}
+
+button:hover:before {
+  transform: translateX(15em);
+}
+
+/* Media queries para cambiar la imagen en función del dispositivo */
+@media (min-width: 769px) {
+    .desktop-image {
+        display: block;
+    }
+
+
+}
+
+@media (max-width: 768px) {
+    .mobile-image {
+        display: block;
+    }
+
+    p {
+        font-size: 18px;
+        margin: 20px 0;
+        line-height: 27px;
+}
+}
+
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="fonts/FELIZ-CUMPLE.png" alt="Feliz Cumpleaños Camila" class="desktop-image">
+        <img src="fonts/Feliz-cumple-Movil.png" alt="Feliz Cumpleaños Camila" class="mobile-image">
+    </div>
+
+    <button id="play-button" style="margin-bottom:20px;">DESPLEGAR MENSAJE</button>
+
+    <div class="message-container" id="message-container">
+        <p>Camila,</p>
+        <p>Hoy es un día especial, 15 años de vida son irremplazables, son importantes y quería darme un tiempo para hablarte. En este día tan especial, quiero que sepas que todos los que tienes cerca, los que consideras amigos y tu familia, seremos siempre tu apoyo incondicional. Eres como esa estrella que brilla en el firmamento, única y especial, y iluminas a todos con aquella luz. Tenes la capacidad de entender los corazones de las personas de una forma en que yo jamás he podido y tampoco he comprendido. Tu manera de ver el mundo es tan distinta, mucho mejor que la mía. Siempre he tenido la tendencia de pensar con lógica, me ha jugado malas pasadas, pero tú no, tenes algo que va más allá de la razón. Hay cosas en ti que aspiro a tener en mí. De todo lo que soy, quisiera ser más como tú.</p>
+
+        <p>Mateo está ahí, en esa maravillosa vida, alguien especial para ti, y me alegra profundamente saber que te hace feliz, porque sé que tú también lo haces feliz a él. Hay algo en ti que te distingue de todos, algo que no puedo explicar del todo. Sos única, y esa rareza es lo que te hace tan maravillosa. Es algo que trasciende el tiempo y las circunstancias, y eso es algo tan bonito.</p>
+
+        <p>Quiero que recuerdes siempre que mereces todo lo que sueñas. Eres mucho más valiosa de lo que piensas, más de lo que la gente ve. Eres más valiosa que el oro, y más hermosa que el paisaje más soñado. No sigues los moldes, no te ajustas a los esquemas de la gente. Eres lo que eres, sin artificios ni disimulos, despojada de todo lo que el mundo marchita. Tu belleza es un arte en sí mismo, algo único que solo tú tienes.</p>
+
+        <p>Me entiendes, me comprendes de una forma en la que nadie más lo ha hecho. Has estado ahí en el momento en el que más sufrí, es algo que valoro muchísimo. Has logrado hacer algo que yo creía imposible, has cambiado mi vida de una manera que nunca habría imaginado, y eso me ha hecho bien. Me has alejado de preocupaciones innecesarias, y me has enseñado a no ser tan escéptico, a dejar que el futuro venga sin estar tan obsesionado con controlarlo. Porque a veces lo mejor es no tener todo planeado, y eso me lo has mostrado tú, porque tú haces bien. No solo a mí, sino a todos los que te rodean.</p>
+
+        <p>Sos pura, y eso es algo que vale más que cualquier cosa. Quiero que siempre recuerdes que, si alguna vez hay algo que te preocupe, podes decírmelo, a nosotros a tus amigos, siempre estaremos aquí para escucharte. Tal vez yo no tenga la solución, pero siempre estaré dispuesto a ayudarte. Pase lo que pase, nunca pierdas tu esencia. Esa esencia es tu mayor tesoro, es lo que te hace única en este mundo. Nadie jamás podrá igualarte, cuida de tu personalidad y nunca te pierdas a ti misma.</p>
+
+        <p>Espero de todo corazón que este día sea maravilloso para ti. Sabes que me encantaría estar ahí, pero, como siempre, las circunstancias no me lo permiten. Aun así, tenes a tus amigos contigo, y siempre me tendrás a mí, aunque sea un poco a la distancia. Basta con recordar todos los momentos para darnos cuenta de todo lo bueno que ha sido. Me haces bien, y haces bien a todos los que te rodean, incluso de formas que no te imaginas. Y entre todos, hay alguien que te ama profundamente. Ese amor es para siempre, y siempre es hoy.</p>
+
+        <p>Haber tenido la oportunidad de conocerte, que Dios me haya brindado a amigos como tu ha sido un sueño cumplido.</p>
+
+        <p>Que todos tus sueños se hagan realidad. Te deseo lo mejor, y que las fuerzas del cielo siempre te acompañen.</p>
+
+        <p>Con cariño y todo mi aprecio,<br>Carlos Díaz<br>15/10/2024 02:25pm</p>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="fonts/Cerati.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+
+    <script>
+        // Función para desplegar el mensaje y reproducir música
+        document.getElementById("play-button").onclick = function() {
+            var audio = document.getElementById("background-music");
+            audio.volume = 0.3;  // Ajusta el volumen al 30%
+            audio.play();
+            
+            // Desplegar el mensaje
+            var messageContainer = document.getElementById("message-container");
+            messageContainer.style.display = 'block'; // Mostrar el mensaje
+            this.style.display = 'none'; // Esconde el botón después de hacer clic
+        };
+    </script>
+</body>
+</html>
