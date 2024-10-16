@@ -96,10 +96,6 @@ app.get('/Medina', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'Medina.html')); // Ruta a olimpiadas.html
 });
 
-app.get('/FELIZCUMPLE', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'feliz cumple.html'));
-});
-
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
 app.get('', (req, res) => {
   visitasIndex++;
