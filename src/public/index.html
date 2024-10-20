@@ -676,7 +676,7 @@
 
     const actividades = events.filter(evento => evento.tipo === "Actividad");
     if (actividades.length > 0) {
-        text += "*🎉 ACTIVIDADES🎉*\n\n";
+        text += "*🎉 ACTIVIDADES🎉*\n";
         const cursosActividades = {};
         actividades.forEach(evento => {
             if (!cursosActividades[evento.curso]) {
