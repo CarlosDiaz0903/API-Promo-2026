@@ -243,18 +243,23 @@
   });
 }
 
-    function showFields() {
-      const tipo = document.getElementById('tipo').value;
-      const cursoField = document.getElementById('curso-field');
-      const resolucionToggleField = document.getElementById('resolucion-toggle-field');
-      const resolucionField = document.getElementById('resolucion-field');
-      const lugarField = document.getElementById('lugar-field');
+function showFields() {
+  const tipo = document.getElementById('tipo').value;
+  const cursoField = document.getElementById('curso-field');
+  const resolucionToggleField = document.getElementById('resolucion-toggle-field');
+  const resolucionField = document.getElementById('resolucion-field');
+  const lugarField = document.getElementById('lugar-field');
 
-      cursoField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen');
-      resolucionToggleField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen');
-      resolucionField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen' || !document.getElementById('toggleResolucion').checked);
-      lugarField.classList.toggle('hidden-field', tipo !== 'Presentación' && tipo !== 'Actividad');
-    }
+  // Mostrar el campo de curso para todos los tipos de evento
+  cursoField.classList.toggle('hidden-field', false); // Siempre mostrar el campo de curso
+
+  // Mostrar el campo de resolución solo para Tarea y Examen
+  resolucionToggleField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen');
+  resolucionField.classList.toggle('hidden-field', tipo !== 'Tarea' && tipo !== 'Examen' || !document.getElementById('toggleResolucion').checked);
+  
+  // Mostrar el campo de lugar solo para Presentación y Actividad
+  lugarField.classList.toggle('hidden-field', tipo !== 'Presentación' && tipo !== 'Actividad');
+}
 
     function toggleResolucionText() {
       const resolucionField = document.getElementById('resolucion-field');

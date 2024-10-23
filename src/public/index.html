@@ -514,26 +514,28 @@
         }
 
         function generateEventoInfo(evento) {
-         const curso = evento.curso;
-          const tipo = evento.tipo;
-          const justify = tipo === "Actividad" ? "center" : "space-between";
-          const eventoinfo = `
-            <div class="evento-info" style="justify-content: ${justify}">
-              <span>${curso}</span>
-              <span>${tipo}</span>
-            </div>
-          `;
+    const curso = evento.curso;
+    const tipo = evento.tipo;
+    console.log(`Curso: ${curso}, Tipo: ${tipo}`);
+    const justify = (tipo === "Actividad" || tipo === "Presentación") && curso === "Cole" ? "center" : "space-between";
 
-          const fecha = getEventDateTime(evento.fecha, evento.hora).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-          const hora = evento.hora;
-          const fechayhora = `
-            <div class="fechayhora">
-              NET ${fecha} • ${hora}
-            </div>
-          `;
+    const eventoinfo = `
+        <div class="evento-info" style="justify-content: ${justify}">
+            ${curso === "Cole" && (tipo === "Actividad" || tipo === "Presentación") ? '' : `<span>${curso}</span>`}
+            <span>${tipo}</span>
+        </div>
+    `;
 
-          return { eventoinfo, fechayhora };
-        }
+    const fecha = getEventDateTime(evento.fecha, evento.hora).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const hora = evento.hora;
+    const fechayhora = `
+        <div class="fechayhora">
+            NET ${fecha} • ${hora}
+        </div>
+    `;
+
+    return { eventoinfo, fechayhora };
+}
 
         function showEvents(events, containerId) {
             const container = document.getElementById(containerId);
@@ -621,6 +623,8 @@
             const fecha = getEventDateTime(evento.fecha, evento.hora);
             const dia = fecha.getDate().toString().padStart(2, '0');
             const mes = fecha.toLocaleString('es-ES', { month: 'long' });
+
+            // Condición para mostrar el curso
             text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
         });
         text += "\n";
@@ -666,7 +670,13 @@
                 const fecha = getEventDateTime(evento.fecha, evento.hora);
                 const dia = fecha.getDate().toString().padStart(2, '0');
                 const mes = fecha.toLocaleString('es-ES', { month: 'long' });
-                text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
+                
+                // Condición para mostrar el curso
+                if (curso === "Cole") {
+                    text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
+                } else {
+                    text += `- ${evento.nombre} - ${evento.curso} ( ${dia} de ${mes} )\n`;
+                }
             });
             text += "\n";
         });
@@ -675,27 +685,34 @@
     }
 
     const actividades = events.filter(evento => evento.tipo === "Actividad");
-    if (actividades.length > 0) {
-        text += "*🎉 ACTIVIDADES🎉*\n";
-        const cursosActividades = {};
-        actividades.forEach(evento => {
-            if (!cursosActividades[evento.curso]) {
-                cursosActividades[evento.curso] = [];
-            }
-            cursosActividades[evento.curso].push(evento);
-        });
-        Object.keys(cursosActividades).forEach(curso => {
-            cursosActividades[curso].forEach(evento => {
-                const fecha = getEventDateTime(evento.fecha, evento.hora);
-                const dia = fecha.getDate().toString().padStart(2, '0');
-                const mes = fecha.toLocaleString('es-ES', { month: 'long' });
+if (actividades.length > 0) {
+    text += "*🎉 ACTIVIDADES🎉*\n\n";
+    const cursosActividades = {};
+    actividades.forEach(evento => {
+        if (!cursosActividades[evento.curso]) {
+            cursosActividades[evento.curso] = [];
+        }
+        cursosActividades[evento.curso].push(evento);
+    });
+    Object.keys(cursosActividades).forEach(curso => {
+        text += `${curso}\n`;
+        cursosActividades[curso].forEach(evento => {
+            const fecha = getEventDateTime(evento.fecha, evento.hora);
+            const dia = fecha.getDate().toString().padStart(2, '0');
+            const mes = fecha.toLocaleString('es-ES', { month: 'long' });
+
+            // Condición para mostrar el curso
+            if (curso === "Cole") {
                 text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
-            });
-            text += "\n";
+            } else {
+                text += `- ${evento.nombre} - ${evento.curso} ( ${dia} de ${mes} )\n`;
+            }
         });
-    } else {
-        text += "*🎉 ACTIVIDADES🎉*\n- - NINGUNA -\n\n";
-    }
+        text += "\n";
+    });
+} else {
+    text += "*🎉 ACTIVIDADES🎉*\n- - NINGUNA -\n\n";
+}
 
     const now = new Date();
     const hora = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
