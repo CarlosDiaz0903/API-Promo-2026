@@ -159,7 +159,7 @@
         .Initial-Info {
             height: auto;
             margin-top: 80px;
-            margin-bottom: 50px;
+            margin-bottom: 80px;
             padding:  0 24px;
             text-align: center;
             justify-content: center;
@@ -179,6 +179,53 @@
             line-height: 27px;
             padding: 0 530px;
             color: #453E3E;
+        }
+
+        .widget {
+            max-width: 1200px;
+            margin: 0 auto;
+            }
+          
+        .column {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
+        }
+          
+        .box {
+            text-align: left;
+            padding: 40px;
+            margin-right: 16px;
+            background-color: #ffffff;
+            box-shadow: 0 0px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            margin-bottom: 30px;
+        }
+          
+        .widget h5 {
+            color: #1ba9ad;
+            margin-bottom: 8px;
+            font-size: 21px;
+            font-weight: 600;
+            font-family: "Work Sans", sans-serif;
+        }
+          
+        .widget p {
+            color: #453E3E;
+            margin-top: 8px;
+            font-size: 16px;
+            font-family: "Work Sans", sans-serif;
+        }
+          
+        .icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: #f7f3f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         /*DROPDOWN MENU*/
@@ -255,6 +302,24 @@
             }
         }
 
+        @media (max-width: 768px) {
+              .column {
+                flex-direction: column;
+                align-items: center;
+              }
+          
+              .box {
+                text-align: center;
+                width: 100%;
+                max-width: 400px;
+                margin-right: 0px;
+              }
+          
+              .icon {
+                margin-bottom: 20px;
+              }
+            }
+
         .textos-header h1 {
             font-size: 60px;
             color: white;
@@ -306,6 +371,35 @@
         <div class="Initial-Info">
             <h2>Toda la información espacial en un mismo lugar</h2>
             <h3>¡Bienvenidos a la página oficial de la PROMO 2026! Soy Carlos Díaz, de 3° A, y he desarrollado este sitio para nuestra promoción. Aquí podrán encontrar toda la información importante sobre eventos, anuncios y actividades de nuestra querida promoción, además de un calendario actualizado para que no se pierdan ningún detalle. Si estás tan emocionado como nosotros por todo lo que nos espera, ¡únete y sé parte de cada momento especial en este camino hacia el 2026!</h3>
+        </div>
+        <div class="widget">
+          <div class="column">
+
+              <div class="box">
+                <div class="icon">
+                  <img src="https://cdn.discordapp.com/attachments/959552420780847204/1115491105010618490/reloj-de-pared.png" alt="Icono 1" style="width: 30px; height: 30px;">
+                </div>
+                <h5>Cobertura 24/7</h5>
+                <p>Artículos actuales publicados rápidamente</p>
+              </div>
+          
+              <div class="box">
+                <div class="icon">
+                  <img src="https://cdn.discordapp.com/attachments/959552420780847204/1115491105669120000/contrato.png" alt="Icono 2" style="width: 30px; height: 30px;">
+                </div>
+                <h5>Más data</h5>
+                <p>Más datos que nunca, artículos verificados</p>
+              </div>
+          
+              <div class="box">
+                <div class="icon">
+                  <img src="https://cdn.discordapp.com/attachments/959552420780847204/1115491105451024534/grafico_1.png" alt="Icono 3" style="width: 30px; height: 30px;">
+                </div>
+                <h5>Gráficos Interactivos</h5>
+                <p>Gráficos con animación en Adobe Ilustrator</p>
+              </div>
+
+          </div>
         </div>
     </main>
     <script>
