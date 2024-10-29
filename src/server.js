@@ -88,18 +88,17 @@ let visitasIndex = 0;
 
 app.get('/olimpiadas', (req, res) => {
   visitasOlimpiadas++;
-  console.log(`Visitas Olimpiadas: ${visitasOlimpiadas}`);
   res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
-app.get('/Medina', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Medina.html')); // Ruta a olimpiadas.html
+app.get('/calendario', (req, res) => {
+  visitasOlimpiadas++;
+  res.sendFile(path.join(__dirname, 'public', 'calendario.html')); // Ruta a olimpiadas.html
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
 app.get('', (req, res) => {
   visitasIndex++;
-  console.log(`Visitas Index: ${visitasIndex}`);
   res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a eventos.html
 });
 

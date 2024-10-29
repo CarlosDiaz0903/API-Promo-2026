@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALENDARIO 3RO "A"</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s;
+        }
+
+        body.modal-open {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro cuando el modal está abierto */
+        }
+
+        @font-face {
+          font-family: 'Nexa Heavy';
+          src: url('fonts/Nexa-Heavy.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
+
+        .event-header {
+            text-align: center;
+        }
+
+        .MainTittle {
+            margin: 30px;
+            font-family: 'Nexa Heavy';
+            font-size: 60px;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 16px;
+            margin-bottom: 50px;
+        }
+
+        .tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .title {
+            font-family: 'Nexa Heavy';
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tab .line {
+            width: 48px;
+            height: 4px;
+            background-color: grey;
+        }
+
+        .tab.selected .line {
+            background-color: rgb(0, 0, 0);
+        }
+        
+        .section {
+            max-width: 88.3%;
+            margin: 0 auto;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-direction: column;
+            display: flex;
+        }
+        .selected {
+            align-self: center;
+            width: 85%;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
+        @media (max-width: 1441px) {
+            .selected {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+            }
+        }
+        @media (max-width: 999px) {
+            .selected {
+                grid-template-columns: repeat(1, 1fr); /* 1 columna en móviles */
+            }
+
+            .MainTittle {
+            font-size: 50px;
+           }
+
+           .event {
+               margin: 20px auto;
+               width: 90%;
+           }
+        }
+
+        .event {
+            border-radius: 25px;
+            padding: 5px;
+            width: 425px;
+            height: 631px;
+            position: relative;
+            text-align: center;
+            margin: 0px !important;
+            color: white;
+            font-family: 'Nexa Heavy';
+            font-size: 25px;
+            transition: transform 0.2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 2pt;
+            transform: translate(0);
+            cursor: pointer;
+        }
+
+        .event p {
+            margin: 0;
+        }
+
+        .Name {
+           font-size: 34pt;
+           font-family: 'Nexa Heavy';
+           font-weight: bold;
+           text-align: center;
+           text-transform: uppercase;
+           letter-spacing: 0;
+           line-height: 30pt;
+           max-width: 90%;
+           display: flex;
+           flex-direction: column-reverse;
+           align-items: center; 
+
+        }
+
+        .evento-info {
+           display: flex;
+           justify-content: space-between;
+           font-family: 'Nexa Heavy';
+           font-size: 21px;
+           align-items: center;
+           padding: 19.11px;
+           border-radius: 60px;
+           background-color: rgba(0, 0, 56, 0.7);
+           height: 8pt;
+           width: 270pt;
+           margin: 10px;
+           margin-top: 20px;
+           text-align: center;
+        }
+
+        .fechayhora {
+            font-size: 22px;
+            font-family: 'Nexa Heavy';
+            text-transform: uppercase;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .button {
+          width: 191px;
+          height: 40px;
+          display: flex;
+          margin: 0 auto;
+          align-items: center !important;
+          font-family: 'Nexa Heavy';
+          gap: 10px;
+          background-color: rgb(161, 255, 20);
+          border-radius: 30px;
+          color: rgb(19, 19, 19);
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          transition-duration: .2s;
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
+          padding-left: 8px;
+          transition-duration: .5s;
+        }
+
+        .svgIcon {
+          height: 25px;
+          transition-duration: 1.5s;
+        }
+
+        .bell path {
+          fill: rgb(19, 19, 19);
+        }
+
+        .button:hover {
+          background-color: rgb(192, 255, 20);
+          transition-duration: .5s;
+        }
+
+        .button:active {
+          transform: scale(0.97);
+          transition-duration: .2s;
+        }
+
+        .button:hover .svgIcon {
+          transform: rotate(250deg);
+         transition-duration: 1.5s;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+        }
+
+        .modal-content {
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            background-color: transparent;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 1500px;
+            max-height: 770px;
+            overflow-y: scroll;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            color: white;
+            font-family: 'Nexa Heavy';
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                height: auto;
+                max-height: 90%;
+            }
+        }
+
+
+        .e-card {
+          margin: 100px auto;
+          background: transparent;
+          box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
+          position: relative;
+          width: 240px;
+          height: 330px;
+          border-radius: 16px;
+          overflow: hidden;
+        }
+
+        @font-face {
+          font-family: 'Nexa Heavy';
+          src: url('fonts/Nexa-Heavy.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
+
+        .wave {
+          position: absolute;
+          width: 540px;
+          height: 700px;
+          opacity: 0.6;
+          left: 0;
+          top: 0;
+          margin-left: -50%;
+          margin-top: -70%;
+          background: linear-gradient(744deg,#4046ff,#46ffca 60%,#00eeff);
+        }
+
+        .icon {
+          width: 5.6em;
+          margin-top: -2em;
+          padding-bottom: 1em;
+        }
+
+        .infotop {
+          text-align: center;
+          font-size: 20px;
+          position: absolute;
+          top: 5.6em;
+          left: 0;
+          right: 0;
+          color: rgb(255, 255, 255);
+          font-weight: 600;
+          font-family: 'Nexa Heavy';
+        }
+
+        .infotop .name {
+          font-size: 14px;
+          font-weight: 100;
+          position: relative;
+          top: 1em;
+          text-transform: uppercase;
+        }
+
+        .wave:nth-child(2),
+        .wave:nth-child(3) {
+          top: 210px;
+        }
+
+        .playing .wave {
+          border-radius: 40%;
+          animation: wave 3000ms infinite linear;
+        }
+
+        .wave {
+          border-radius: 40%;
+          animation: wave 55s infinite linear;
+        }
+
+                .playing .wave:nth-child(2) {
+          animation-duration: 4000ms;
+        }
+
+        .wave:nth-child(2) {
+          animation-duration: 50s;
+        }
+
+        .playing .wave:nth-child(3) {
+          animation-duration: 5000ms;
+        }
+
+        .wave:nth-child(3) {
+          animation-duration: 45s;
+        }
+
+        @keyframes wave {
+          0% {
+            transform: rotate(0deg);
+          }
+        
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="event-header">
+        <div class="MainTittle">CALENDARIO 3RO "A"</div>
+        <button id="copy-btn" class="button">
+            <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
+           📝 COPIAR TAREAS
+         </button>         
+        <div class="tabs">
+         <div class="tab" onclick="selectSection(0)">
+            <div class="title">Pasados</div>
+            <div class="line"></div>
+         </div>
+         <div class="tab" onclick="selectSection(1)">
+            <div class="title">Futuros</div>
+            <div class="line"></div>
+         </div>
+        </div>
+    </div>
+    
+    <section id="eventos-pasados" class="section">
+        <!-- Eventos pasados se mostrarán aquí -->
+    </section>
+    
+    <section id="eventos-futuros" class="section">
+        <!-- Eventos futuros se mostrarán aquí -->
+    </section>
+
+    <!-- Modal -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-details"></div>
+        </div>
+    </div>
+
+    <div class="e-card playing">
+        <div class="image"></div>
+        
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        
+      
+            <div class="infotop">
+      
+          </svg>
+         <svg version="1.1" class="icon" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="0 0 601.22 677.71" style="enable-background:new 0 0 601.22 677.71;" xml:space="preserve">
+       <style type="text/css">
+        .st0{fill:#FFFFFF;}
+      </style>
+    <g>
+        <g>
+            <g>
+                <g>
+                    <circle class="st0" cx="302.13" cy="42.54" r="42.54"/>
+                    <circle class="st0" cx="257.43" cy="126.19" r="35.33"/>
+                    <circle class="st0" cx="245.17" cy="194.69" r="24.52"/>
+                    <circle class="st0" cx="255.26" cy="248.05" r="18.75"/>
+                    <circle class="st0" cx="269.68" cy="286.99" r="11.54"/>
+                </g>
+                <g>
+                    <circle class="st0" cx="298.69" cy="635.17" r="42.54"/>
+                    <circle class="st0" cx="343.83" cy="551.76" r="35.33"/>
+                    <circle class="st0" cx="356.45" cy="483.32" r="24.52"/>
+                    <circle class="st0" cx="346.64" cy="429.91" r="18.75"/>
+                    <circle class="st0" cx="332.42" cy="390.89" r="11.54"/>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <circle class="st0" cx="47.25" cy="186.5" r="42.54"/>
+                    <circle class="st0" cx="96.82" cy="267.35" r="35.33"/>
+                    <circle class="st0" cx="149.74" cy="312.56" r="24.52"/>
+                    <circle class="st0" cx="200.88" cy="330.82" r="18.75"/>
+                    <circle class="st0" cx="241.77" cy="338.05" r="11.54"/>
+                </g>
+                <g>
+                    <circle class="st0" cx="556.85" cy="489.01" r="42.54"/>
+                    <circle class="st0" cx="507.7" cy="407.9" r="35.33"/>
+                    <circle class="st0" cx="455.03" cy="362.42" r="24.52"/>
+                    <circle class="st0" cx="403.98" cy="343.89" r="18.75"/>
+                    <circle class="st0" cx="363.13" cy="336.44" r="11.54"/>
+                </g>
+            </g>
+            <g>
+                <g>
+                    <circle class="st0" cx="42.55" cy="483.39" r="42.54"/>
+                    <circle class="st0" cx="137.35" cy="480.66" r="35.33"/>
+                    <circle class="st0" cx="202.9" cy="457.29" r="24.52"/>
+                    <circle class="st0" cx="244.21" cy="422.03" r="18.75"/>
+                    <circle class="st0" cx="270.84" cy="390.18" r="11.54"/>
+                </g>
+                <g>
+                    <circle class="st0" cx="558.67" cy="192.12" r="42.54"/>
+                    <circle class="st0" cx="463.85" cy="194.35" r="35.33"/>
+                    <circle class="st0" cx="398.18" cy="217.38" r="24.52"/>
+                    <circle class="st0" cx="356.69" cy="252.42" r="18.75"/>
+                    <circle class="st0" cx="329.89" cy="284.13" r="11.54"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    </svg><br class="boss">      
+        SINGULARITY_DV
+      <br>
+      <div class="name">Carlos Díaz</div>
+        </div>
+      </div>
+
+    <script>
+        const apiUrl = 'https://api-promo-2026-production.up.railway.app/api/eventos';
+
+        async function fetchEvents() {
+            try {
+                const response = await fetch(apiUrl);
+                const eventos = await response.json();
+                const currentTime = new Date();
+
+                const pastEvents = eventos.filter(evento => {
+                    if (evento.fecha && evento.hora) {
+                        const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
+                        return eventDateTime < currentTime; // Pasado
+                    }
+                    return false;
+                });
+
+                const futureEvents = eventos.filter(evento => {
+                    if (evento.fecha && evento.hora) {
+                        const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
+                        return eventDateTime >= currentTime; // Futuro
+                    }
+                    return false;
+                });
+
+                showEvents(pastEvents, 'eventos-pasados');
+                showEvents(futureEvents, 'eventos-futuros');
+            } catch (error) {
+                console.error("Error fetching events:", error);
+            }
+        }
+
+        function getEventDateTime(fecha, hora) {
+            const [hours, minutes] = hora.split(':');
+            const eventDateTime = new Date(fecha); // Crear un objeto Date basado en la fecha
+            eventDateTime.setUTCHours(hours, minutes); // Ajustar la hora (UTC)
+            return eventDateTime;
+        }
+
+        function generateEventoInfo(evento) {
+    const curso = evento.curso;
+    const tipo = evento.tipo;
+    console.log(`Curso: ${curso}, Tipo: ${tipo}`);
+    const justify = (tipo === "Actividad" || tipo === "Presentación") && curso === "Cole" ? "center" : "space-between";
+
+    const eventoinfo = `
+        <div class="evento-info" style="justify-content: ${justify}">
+            ${curso === "Cole" && (tipo === "Actividad" || tipo === "Presentación") ? '' : `<span>${curso}</span>`}
+            <span>${tipo}</span>
+        </div>
+    `;
+
+    const fecha = getEventDateTime(evento.fecha, evento.hora).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const hora = evento.hora;
+    const fechayhora = `
+        <div class="fechayhora">
+            NET ${fecha} • ${hora}
+        </div>
+    `;
+
+    return { eventoinfo, fechayhora };
+}
+
+        function showEvents(events, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Limpiar contenedor
+            events.forEach(evento => {
+                const eventCard = document.createElement("div");
+                eventCard.className = "event";
+
+                eventCard.style.backgroundImage = `url(${evento.imagen}), linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(4, 3, 8, 0.8))`;
+
+                const { eventoinfo, fechayhora } = generateEventoInfo(evento);
+
+                eventCard.innerHTML = `
+                    <div class="Name">${evento.nombre}</div>
+                    <div>${eventoinfo}</div>
+                    <div>${fechayhora}</div>
+                `;
+
+                // Agregar listener para abrir el modal al hacer clic en el evento
+                eventCard.onclick = () => openModal(evento);
+                container.appendChild(eventCard);
+            });
+        }
+
+        function openModal(evento) {
+            const modal = document.getElementById('event-modal');
+            const modalDetails = document.getElementById('modal-details');
+            const { eventoinfo, fechayhora } = generateEventoInfo(evento);
+
+            modalDetails.innerHTML = `
+                <div class="Name" style="margin: 10px;">${evento.nombre}</div>
+                <p>${evento.detalles}</p>
+                <div>${fechayhora}</div>
+            `;
+
+            // Cambiar el fondo dinámicamente
+            document.querySelector('.modal-content').style.backgroundImage = `url(${evento.imagen}), linear-gradient(to right, rgba(0, 0, 0, 0), rgba(4, 3, 8, 0.8))`;
+
+            // Mostrar el modal
+            modal.style.display = 'block';
+            document.body.classList.add('modal-open'); // Agregar fondo oscuro al body
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('event-modal');
+            modal.style.display = 'none'; // Ocultar el modal
+            document.body.classList.remove('modal-open'); // Quitar fondo oscuro del body
+        }
+
+        function selectSection(index) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, i) => {
+                if (i === index) {
+                    section.classList.add('selected');
+                    section.style.display = 'grid';
+                } else {
+                    section.classList.remove('selected');
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Inicializar la sección predeterminada y cargar los eventos
+        document.addEventListener('DOMContentLoaded', function () {
+            selectSection(1); // Por defecto mostrar eventos futuros
+            fetchEvents();
+        });
+
+        function generateText(events) {
+    let text = "*🚨 TAREAS PENDIENTES DE LA SEMANA!!🚨*\n\n";
+
+    const cursos = {};
+    events.forEach(evento => {
+        if (evento.tipo === "Tarea") {
+            if (!cursos[evento.curso]) {
+                cursos[evento.curso] = [];
+            }
+            cursos[evento.curso].push(evento);
+        }
+    });
+
+    Object.keys(cursos).forEach(curso => {
+        text += `${curso}\n`;
+        cursos[curso].forEach(evento => {
+            const fecha = getEventDateTime(evento.fecha, evento.hora);
+            const dia = fecha.getDate().toString().padStart(2, '0');
+            const mes = fecha.toLocaleString('es-ES', { month: 'long' });
+
+            // Condición para mostrar el curso
+            text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
+        });
+        text += "\n";
+    });
+
+    const examenes = events.filter(evento => evento.tipo === "Examen");
+    if (examenes.length > 0) {
+        text += "*📚 Exámenes📚*\n\n";
+        const cursosExamenes = {};
+        examenes.forEach(evento => {
+            if (!cursosExamenes[evento.curso]) {
+                cursosExamenes[evento.curso] = [];
+            }
+            cursosExamenes[evento.curso].push(evento);
+        });
+        Object.keys(cursosExamenes).forEach(curso => {
+            text += `${curso}\n`;
+            cursosExamenes[curso].forEach(evento => {
+                const fecha = getEventDateTime(evento.fecha, evento.hora);
+                const dia = fecha.getDate().toString().padStart(2, '0');
+                const mes = fecha.toLocaleString('es-ES', { month: 'long' });
+                text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
+            });
+            text += "\n";
+        });
+    } else {
+        text += "*📚 Exámenes📚*\n- - Ninguno -\n\n";
+    }
+
+    const presentaciones = events.filter(evento => evento.tipo === "Presentación");
+    if (presentaciones.length > 0) {
+        text += "*📌 Presentaciones📌*\n\n";
+        const cursosPresentaciones = {};
+        presentaciones.forEach(evento => {
+            if (!cursosPresentaciones[evento.curso]) {
+                cursosPresentaciones[evento.curso] = [];
+            }
+            cursosPresentaciones[evento.curso].push(evento);
+        });
+        Object.keys(cursosPresentaciones).forEach(curso => {
+            text += `${curso}\n`;
+            cursosPresentaciones[curso].forEach(evento => {
+                const fecha = getEventDateTime(evento.fecha, evento.hora);
+                const dia = fecha.getDate().toString().padStart(2, '0');
+                const mes = fecha.toLocaleString('es-ES', { month: 'long' });
+                
+                // Condición para mostrar el curso
+                if (curso === "Cole") {
+                    text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
+                } else {
+                    text += `- ${evento.nombre} - ${evento.curso} ( ${dia} de ${mes} )\n`;
+                }
+            });
+            text += "\n";
+        });
+    } else {
+        text += "*📌 Presentaciones📌*\n- - Ninguna -\n\n";
+    }
+
+    const actividades = events.filter(evento => evento.tipo === "Actividad");
+if (actividades.length > 0) {
+    text += "*🎉 ACTIVIDADES🎉*\n\n";
+    const cursosActividades = {};
+    actividades.forEach(evento => {
+        if (!cursosActividades[evento.curso]) {
+            cursosActividades[evento.curso] = [];
+        }
+        cursosActividades[evento.curso].push(evento);
+    });
+    Object.keys(cursosActividades).forEach(curso => {
+        text += `${curso}\n`;
+        cursosActividades[curso].forEach(evento => {
+            const fecha = getEventDateTime(evento.fecha, evento.hora);
+            const dia = fecha.getDate().toString().padStart(2, '0');
+            const mes = fecha.toLocaleString('es-ES', { month: 'long' });
+
+            // Condición para mostrar el curso
+            if (curso === "Cole") {
+                text += `- ${evento.nombre} ( ${dia} de ${mes} )\n`;
+            } else {
+                text += `- ${evento.nombre} - ${evento.curso} ( ${dia} de ${mes} )\n`;
+            }
+        });
+        text += "\n";
+    });
+} else {
+    text += "*🎉 ACTIVIDADES🎉*\n- - NINGUNA -\n\n";
+}
+
+    const now = new Date();
+    const hora = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    const dia = now.getDate().toString().padStart(2, '0');
+    const mes = now.toLocaleString('es-ES', { month: 'long' });
+    const anio = now.getFullYear();
+    text += "*ÚLTIMA ACTUALIZACIÓN:*\n";
+    text += `${hora} - ${dia} de ${mes} del ${anio}\n`;
+    text += "https://api-promo-2026-production.up.railway.app/";
+
+    return text;
+}
+
+    // Función para copiar el texto al portapapeles
+    function copyTextToClipboard(text) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+    }
+
+    // Agregamos un listener al botón para copiar el texto
+    document.getElementById("copy-btn").addEventListener("click", async () => {
+        const response = await fetch('https://api-promo-2026-production.up.railway.app/api/eventos');
+        const eventos = await response.json();
+        const currentTime = new Date();
+
+        const futureEvents = eventos.filter(evento => {
+            if (evento.fecha && evento.hora) {
+                const eventDateTime = getEventDateTime(evento.fecha, evento.hora);
+                return eventDateTime >= currentTime; // Futuro
+            }
+            return false;
+        });
+
+        const text = generateText(futureEvents);
+        copyTextToClipboard(text);
+    });
+
+    // Inicializar la sección predeterminada y cargar los eventos
+    document.addEventListener("DOMContentLoaded", function () {
+        selectSection(1); // Por defecto mostrar eventos futuros
+        fetchEvents();
+    });
+    </script>
+</body>
+</html>
