@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>PROMO 2026</title>
-    <style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><style>
+
         @font-face {
           font-family: 'Nexa Heavy';
           src: url('fonts/Nexa-Heavy.ttf') format('truetype');
@@ -33,7 +36,7 @@
 
         .titulo{
             color: #2a6473;
-            font-size: 30px;
+            font-size: 40px;
             text-align: center;
             margin-bottom: 60px;
         }
@@ -153,6 +156,30 @@
             color: #4eb8bc; /* Cambia a rosado cuando haces scroll */
         }
 
+        .Initial-Info {
+            height: auto;
+            margin-top: 80px;
+            margin-bottom: 50px;
+            padding:  0 24px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .Initial-Info h2 {
+            color:#1ba9ad;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 38px;
+        }
+
+        .Initial-Info h3 {
+            margin-top: 18px;
+            font-family: "Work Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 450;
+            line-height: 27px;
+            padding: 0 530px;
+            color: #453E3E;
+        }
 
         /*DROPDOWN MENU*/
         .dropdown_menu {
@@ -217,10 +244,21 @@
             }
         }
 
-        .textos-header h1 {
-            font-size: 50px;
-            color: white;
+        @media(max-width: 1600px) {
+            .Initial-Info h2 {
+                font-size: 28px;
+            }
+            .Initial-Info h3{
+                padding: 0 0;
+                font-size: 15px;
+                line-height: 27px;
+            }
+        }
 
+        .textos-header h1 {
+            font-size: 60px;
+            color: white;
+            line-height: 60px;
         }
 
         .textos-header h2{
@@ -265,7 +303,10 @@
         <div class='wave' style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C288.09,158.39 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path></svg></div>
     </header>
     <main>
-        <div class="coso" style="height: 8000px;"></div>
+        <div class="Initial-Info">
+            <h2>Toda la información espacial en un mismo lugar</h2>
+            <h3>¡Bienvenidos a la página oficial de la PROMO 2026! Soy Carlos Díaz, de 3° A, y he desarrollado este sitio para nuestra promoción. Aquí podrán encontrar toda la información importante sobre eventos, anuncios y actividades de nuestra querida promoción, además de un calendario actualizado para que no se pierdan ningún detalle. Si estás tan emocionado como nosotros por todo lo que nos espera, ¡únete y sé parte de cada momento especial en este camino hacia el 2026!</h3>
+        </div>
     </main>
     <script>
         const navbar = document.querySelector('.navbar');
