@@ -78,7 +78,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
 // Servir el archivo HTML del formulario en la ruta /formulario
-app.get('/formulario', (req, res) => {
+app.get('/calendario/formulario', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a index.html (formulario)
 });
 
