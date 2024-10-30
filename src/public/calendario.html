@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CALENDARIO 3RO "A"</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
@@ -24,21 +25,11 @@
         
         body {
             font-family: 'Nexa Heavy';
+            width: auto;
         }
 
         body.modal-open {
             background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro cuando el modal está abierto */
-        }
-
-        header {
-            padding-top: 90px; /* Espacio suficiente para que el navbar fijo no solape el contenido */
-            width: 100%;
-            height: 600px;
-            background: linear-gradient(to right, hsla(214, 95%, 50%, 0.4), hsla(187, 45%, 52%, 0.4)), url(https://cdn.discordapp.com/attachments/1037495618278539334/1300678111788273745/40aeed3d-7e29-411e-93ad-5cd93e694f3a.png?ex=6721b663&is=672064e3&hm=724eb83ef17636bb00cdfe527adb21223da0a1462d0abc58007504494b51790b&);
-            background-size: cover;
-            background-position-y: -90px;
-            background-attachment: fixed;
-            position: relative; 
         }
 
         .event-header {
@@ -379,6 +370,17 @@
           }
         }
 
+        header {
+            padding-top: 100px; /* Espacio suficiente para que el navbar fijo no solape el contenido */
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(to right, hsla(214, 95%, 50%, 0.4), hsla(187, 45%, 52%, 0.4)), url(https://cdn.discordapp.com/attachments/1037495618278539334/1300678111788273745/40aeed3d-7e29-411e-93ad-5cd93e694f3a.png?ex=6721b663&is=672064e3&hm=724eb83ef17636bb00cdfe527adb21223da0a1462d0abc58007504494b51790b&);
+            background-size: cover;
+            background-position-y: -90px;
+            background-attachment: fixed;
+            position: relative; 
+        }
+
         li {
             font-weight: 300;
             list-style: none;
@@ -423,7 +425,7 @@
         .navbar .toggle_btn {
             color: white;
             font-size: 1.5em;
-            display: none;
+            display: none; /* Este estilo oculta el botón en pantallas grandes */
             cursor: pointer;
         }
 
@@ -481,6 +483,68 @@
 
         .navbar.scrolled .toggle_btn i {
             color: #4eb8bc; /* Cambia a rosado cuando haces scroll */
+        }
+
+        .Initial-Info {
+            height: auto;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            padding:  0 24px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .Initial-Info h2 {
+            color:#1ba9ad;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 38px;
+        }
+
+        .Initial-Info h3 {
+            margin-top: 18px;
+            font-family: "Work Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 450;
+            line-height: 27px;
+            padding: 0 530px;
+            color: #453E3E;
+        }
+
+        .widget {
+            max-width: 1200px;
+            margin: 0 auto;
+            }
+          
+        .column {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
+        }
+          
+        .box {
+            text-align: left;
+            padding: 40px;
+            margin-right: 16px;
+            background-color: #ffffff;
+            box-shadow: 0 0px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            margin-bottom: 30px;
+        }
+          
+        .widget h5 {
+            color: #1ba9ad;
+            margin-bottom: 8px;
+            font-size: 21px;
+            font-weight: 600;
+            font-family: "Work Sans", sans-serif;
+        }
+          
+        .widget p {
+            color: #453E3E;
+            margin-top: 8px;
+            font-size: 16px;
+            font-family: "Work Sans", sans-serif;
         }
           
         .icon {
@@ -556,11 +620,41 @@
             }
         }
 
+        @media(max-width: 1600px) {
+            .Initial-Info h2 {
+                font-size: 28px;
+            }
+            .Initial-Info h3{
+                padding: 0 0;
+                font-size: 15px;
+                line-height: 27px;
+            }
+        }
+
         @media (max-width: 768px) {
+              .column {
+                flex-direction: column;
+                align-items: center;
+              }
+          
+              .box {
+                text-align: center;
+                width: 100%;
+                max-width: 400px;
+                margin-right: 0px;
+              }
+          
               .icon {
                 margin-bottom: 20px;
               }
             }
+
+        @media (max-width: 489px) {
+            .textos-header h1 {
+            font-size: 48px !important;
+            line-height: 50px !important;
+        }
+        }
 
         .textos-header h1 {
             font-size: 60px;
@@ -596,6 +690,7 @@
             <div class="toggle_btn">
                 <i class="fa-solid fa-bars"></i>
             </div>
+        
         </div>
         <div class="dropdown_menu">
             <li><a href="">Home</a></li>
@@ -608,9 +703,9 @@
             <h1>CALENDARIO 3°"A"</h1>
             <h2>Todas las tareas actualizadas hasta la fecha...</h2>
         </section>
-        <div class='wave' style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C288.09,158.39 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path></svg></div>
-    
-        </header>
+        <div class='wave' style="height: 130px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C288.09,158.39 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path></svg></div>
+    </header>
+
     <main class="event-header">
         <button id="copy-btn" class="button" style="margin-top: 100px;">
             <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
@@ -1004,6 +1099,38 @@ if (actividades.length > 0) {
         selectSection(1); // Por defecto mostrar eventos futuros
         fetchEvents();
     });
+
+    const navbar = document.querySelector('.navbar');
+        const dropDownMenu = document.querySelector('.dropdown_menu');
+    
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 420) {
+                navbar.classList.add('scrolled');
+                dropDownMenu.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+                dropDownMenu.classList.remove('scrolled');
+            }
+
+            // Mantiene el dropdown-menu en sincronía con el navbar
+            if (window.scrollY > 0) {
+                dropDownMenu.style.top = `${120 + window.scrollY}px`;
+            } else {
+                dropDownMenu.style.top = `120px`;
+            }
+        });
+    
+        const toggleBtn = document.querySelector('.toggle_btn');
+        const toggleBtnIcon = document.querySelector('.toggle_btn i');
+    
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+    
+            toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        }
     </script>
     </main>
 </body>
