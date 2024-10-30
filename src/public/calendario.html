@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CALENDARIO 3RO "A"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
     <style>
+        @font-face {
+          font-family: 'Nexa Heavy';
+          src: url('fonts/Nexa-Heavy.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
-            transition: background-color 0.3s;
+            font-family: 'Nexa Heavy';
         }
 
         body.modal-open {
             background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro cuando el modal está abierto */
         }
 
-        @font-face {
-          font-family: 'Nexa Heavy';
-          src: url('fonts/Nexa-Heavy.ttf') format('truetype');
-          font-weight: normal;
-          font-style: normal;
+        header {
+            padding-top: 90px; /* Espacio suficiente para que el navbar fijo no solape el contenido */
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(to right, hsla(214, 95%, 50%, 0.4), hsla(187, 45%, 52%, 0.4)), url(https://cdn.discordapp.com/attachments/1037495618278539334/1300678111788273745/40aeed3d-7e29-411e-93ad-5cd93e694f3a.png?ex=6721b663&is=672064e3&hm=724eb83ef17636bb00cdfe527adb21223da0a1462d0abc58007504494b51790b&);
+            background-size: cover;
+            background-position-y: -90px;
+            background-attachment: fixed;
+            position: relative; 
         }
 
         .event-header {
@@ -283,7 +300,7 @@
           font-style: normal;
         }
 
-        .wave {
+        .ola {
           position: absolute;
           width: 540px;
           height: 700px;
@@ -295,7 +312,7 @@
           background: linear-gradient(744deg,#4046ff,#46ffca 60%,#00eeff);
         }
 
-        .icon {
+        .icono {
           width: 5.6em;
           margin-top: -2em;
           padding-bottom: 1em;
@@ -321,38 +338,38 @@
           text-transform: uppercase;
         }
 
-        .wave:nth-child(2),
-        .wave:nth-child(3) {
+        .ola:nth-child(2),
+        .ola:nth-child(3) {
           top: 210px;
         }
 
-        .playing .wave {
+        .playing .ola {
           border-radius: 40%;
-          animation: wave 3000ms infinite linear;
+          animation: ola 3000ms infinite linear;
         }
 
-        .wave {
+        .ola {
           border-radius: 40%;
-          animation: wave 55s infinite linear;
+          animation: ola 55s infinite linear;
         }
 
-                .playing .wave:nth-child(2) {
+                .playing .ola:nth-child(2) {
           animation-duration: 4000ms;
         }
 
-        .wave:nth-child(2) {
+        .ola:nth-child(2) {
           animation-duration: 50s;
         }
 
-        .playing .wave:nth-child(3) {
+        .playing .ola:nth-child(3) {
           animation-duration: 5000ms;
         }
 
-        .wave:nth-child(3) {
+        .ola:nth-child(3) {
           animation-duration: 45s;
         }
 
-        @keyframes wave {
+        @keyframes ola {
           0% {
             transform: rotate(0deg);
           }
@@ -362,12 +379,240 @@
           }
         }
 
+        li {
+            font-weight: 300;
+            list-style: none;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 60px;
+            margin: 0 auto;
+            display: flex;
+            text-align: center;
+            padding: 40px 50px;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000; /* Se asegura de que el navbar esté por encima de otros elementos */
+            background: transparent;
+            backdrop-filter: blur(20px); /* Solo aplica el desenfoque sin fondo */
+            transition: background 0.3s, color 0.3s; /* Transiciones suaves para cambios de color y fondo */
+        }
+
+        .navbar a {
+            color: white; /* Color blanco por defecto */
+            transition: color 0.3s;
+        }
+
+        .navbar.scrolled a {
+            color: #4eb8bc; /* Cambia a rosadito cuando haces scroll */
+        }
+
+        .navbar.scrolled .action-btn {
+            color: white; /* Mantiene el color blanco para el botón al hacer scroll */
+        }
+
+        .navbar .logo a{
+            font-size: 20px;
+        }
+
+        .navbar .toggle_btn {
+            color: white;
+            font-size: 1.5em;
+            display: none;
+            cursor: pointer;
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 2em;   
+        }
+
+        .action-btn {
+            background-color: #399ab8;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            overflow: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .action-btn:hover{
+            scale: 1.05;
+            color: #fff;
+        }
+
+        .action-btn:active {
+            scale: 0.95;
+        }
+
+        a {
+            color: white;
+            font-weight: 300;
+            text-decoration: none;
+        }
+
+        a:hover{
+            color: #207679;
+        }
+
+        header .textos-header{
+            display: flex;
+            height: 430px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .navbar .toggle_btn i {
+            color: white; /* Color blanco por defecto */
+            transition: color 0.3s; /* Transición suave */
+        }
+
+        .navbar.scrolled .toggle_btn i {
+            color: #4eb8bc; /* Cambia a rosado cuando haces scroll */
+        }
+          
+        .icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: #f7f3f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /*DROPDOWN MENU*/
+        .dropdown_menu {
+            display: none;
+            position: absolute;
+            right: 2rem;
+            top:90px;
+            height: 0;
+            width: 300px;
+            background: #ffffff49;
+            backdrop-filter: blur(15px);
+            border-radius: 26px;
+            overflow: hidden;
+            transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dropdown_menu li {
+            padding: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dropdown_menu .action-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dropdown_menu.open {
+            height: 254px;
+        }
+
+        .dropdown_menu.scrolled a {
+            color: #4eb8bc; /* Cambia a rosado cuando haces scroll */
+        }
+
+        .dropdown_menu.scrolled .action-btn {
+            color: white; /* El botón de acción mantiene su color */
+        }
+
+        /* Modo Celular */
+        @media(max-width: 990px) {
+            .navbar .links,
+            .navbar .action-btn{
+                display: none;
+            }
+            
+            .navbar .toggle_btn {
+                display: block;
+            }
+
+            .dropdown_menu {
+                display: block;
+            }
+        }
+
+        @media(max-width: 990px) {
+            .dropdown_menu {
+                left: 2rem;
+                width: unset;
+            }
+        }
+
+        @media (max-width: 768px) {
+              .icon {
+                margin-bottom: 20px;
+              }
+            }
+
+        .textos-header h1 {
+            font-size: 60px;
+            color: white;
+            line-height: 60px;
+        }
+
+        .textos-header h2{
+            font-size: 30px;
+            color: white;
+            font-weight: 300;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: -0.01;
+            width: 100%;
+        }
+
     </style>
 </head>
 <body>
-    <header class="event-header">
-        <div class="MainTittle">CALENDARIO 3RO "A"</div>
-        <button id="copy-btn" class="button">
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="#">PROMO 2026</a></div>
+            <ul class="links">
+                <li><a href="">Home</a></li>
+                <li><a href="calendario">Calendario</a></li>
+                <li><a href="sobre-mi">Sobre Mi</a></li>
+                <li><a href="anuncios">Anuncios</a></li>
+            </ul>
+            <a href="#" class="action-btn">Iniciar Sesión</a>
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="dropdown_menu">
+            <li><a href="">Home</a></li>
+            <li><a href="calendario">Calendario</a></li>
+            <li><a href="sobre-mi">Sobre-Mi</a></li>
+            <li><a href="anuncios">Anuncios</a></li>
+            <li><a href="#" class="action-btn">Iniciar Sesión</a></li>
+        </div>
+        <section class="textos-header">
+            <h1>CALENDARIO 3°"A"</h1>
+            <h2>Todas las tareas actualizadas hasta la fecha...</h2>
+        </section>
+        <div class='wave' style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C288.09,158.39 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path></svg></div>
+    
+        </header>
+    <main class="event-header">
+        <button id="copy-btn" class="button" style="margin-top: 100px;">
             <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
            📝 COPIAR TAREAS
          </button>         
@@ -402,15 +647,15 @@
     <div class="e-card playing">
         <div class="image"></div>
         
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
+        <div class="ola"></div>
+        <div class="ola"></div>
+        <div class="ola"></div>
         
       
             <div class="infotop">
       
           </svg>
-         <svg version="1.1" class="icon" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         <svg version="1.1" class="icono" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
          viewBox="0 0 601.22 677.71" style="enable-background:new 0 0 601.22 677.71;" xml:space="preserve">
        <style type="text/css">
         .st0{fill:#FFFFFF;}
@@ -760,5 +1005,6 @@ if (actividades.length > 0) {
         fetchEvents();
     });
     </script>
+    </main>
 </body>
 </html>
