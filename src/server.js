@@ -31,7 +31,7 @@ const Evento = mongoose.model('Evento', eventoSchema);
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'views'))); // Servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'public'))); // Servir archivos estáticos
 
 // Ruta para guardar eventos
 app.post('/api/eventos', async (req, res) => {
@@ -75,11 +75,11 @@ app.put('/api/eventos/:id', async (req, res) => {
 });
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 
 // Servir el archivo HTML del formulario en la ruta /formulario
 app.get('/formulario', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'formulario.html')); // Ruta a index.html (formulario)
+  res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a index.html (formulario)
 });
 
 const visitasSchema = new mongoose.Schema({
@@ -91,18 +91,18 @@ let visitasIndex = 0;
 
 app.get('/olimpiadas', (req, res) => {
   visitasOlimpiadas++;
-  res.sendFile(path.join(__dirname, 'views', 'olimpiadas.html')); // Ruta a olimpiadas.html
+  res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
 app.get('/calendario', (req, res) => {
   visitasOlimpiadas++;
-  res.sendFile(path.join(__dirname, 'views', 'calendario.html')); // Ruta a olimpiadas.html
+  res.sendFile(path.join(__dirname, 'public', 'calendario.html')); // Ruta a olimpiadas.html
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /
 app.get('', (req, res) => {
   visitasIndex++;
-  res.sendFile(path.join(__dirname, 'views', 'index.html')); // Ruta a eventos.html
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ruta a eventos.html
 });
 
 app.listen(port, () => console.log(`Escuchando en el puerto ${port}...`));
