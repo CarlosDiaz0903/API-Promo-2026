@@ -50,32 +50,48 @@
 
         .tabs {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center; /* Centrar las pestañas */
             padding: 16px;
             margin-bottom: 50px;
+            margin-top: 20px;
         }
 
         .tab {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: column; /* Asegúrate de que la línea esté debajo del título */
+            align-items: center; /* Centrar los elementos dentro de la pestaña */
             cursor: pointer;
+            margin: 0 80px !important;
+            width: auto;
+        }
+
+        .tab.selected{
+            width: auto;
+            display: flex;
+            flex-direction: column; /* Asegúrate de que la línea esté debajo del título */
+            align-items: center; /* Centrar los elementos dentro de la pestaña */
+            cursor: pointer;
+            margin: 0 80px !important; /* Espaciado entre las pestañas */
+            gap: 0;
         }
 
         .title {
             font-family: 'Nexa Heavy';
             font-size: 18px;
             font-weight: bold;
+            margin: 0; /* Eliminar el margen para que no haya espacio */
         }
 
-        .tab .line {
+        .line {
             width: 48px;
             height: 4px;
-            background-color: grey;
+            border-radius: 30px;
+            background-color: grey; /* Color de la línea por defecto */
+            transition: background-color 0.3s ease; /* Transición suave */
         }
 
         .tab.selected .line {
-            background-color: rgb(0, 0, 0);
+            background-color: black; /* Color de la línea activa */
         }
         
         .section {
@@ -255,6 +271,15 @@
             font-family: 'Nexa Heavy';
         }
 
+        .detalles {
+            background-color: rgba(1, 93, 105, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0px;
+            font-size: 20px;
+            color: white;
+        }
+
         .close-btn {
             position: absolute;
             top: 10px;
@@ -374,7 +399,7 @@
             padding-top: 100px; /* Espacio suficiente para que el navbar fijo no solape el contenido */
             width: 100%;
             height: 600px;
-            background: linear-gradient(to right, hsla(214, 95%, 50%, 0.4), hsla(187, 45%, 52%, 0.4)), url(https://cdn.discordapp.com/attachments/1037495618278539334/1300678111788273745/40aeed3d-7e29-411e-93ad-5cd93e694f3a.png?ex=6721b663&is=672064e3&hm=724eb83ef17636bb00cdfe527adb21223da0a1462d0abc58007504494b51790b&);
+            background: linear-gradient(to right, hsla(214, 95%, 50%, 0.4), hsla(187, 45%, 52%, 0.4)), url(fonts/3Aprincipal.png);
             background-size: cover;
             background-position-y: -90px;
             background-attachment: fixed;
@@ -829,6 +854,10 @@
                         return eventDateTime < currentTime; // Pasado
                     }
                     return false;
+                }).sort((a, b) => {
+                    const dateA = getEventDateTime(a.fecha, a.hora);
+                    const dateB = getEventDateTime(b.fecha, b.hora);
+                    return dateB - dateA; // Ordenar de más reciente a más antiguo
                 });
 
                 const futureEvents = eventos.filter(evento => {
@@ -844,7 +873,7 @@
             } catch (error) {
                 console.error("Error fetching events:", error);
             }
-        }
+}
 
         function getEventDateTime(fecha, hora) {
             const [hours, minutes] = hora.split(':');
@@ -907,7 +936,8 @@
 
             modalDetails.innerHTML = `
                 <div class="Name" style="margin: 10px;">${evento.nombre}</div>
-                <p>${evento.detalles}</p>
+                <div class="detalles">
+                ${evento.detalles}</div>
                 <div>${fechayhora}</div>
             `;
 
@@ -924,20 +954,37 @@
             modal.style.display = 'none'; // Ocultar el modal
             document.body.classList.remove('modal-open'); // Quitar fondo oscuro del body
         }
+        
 
         function selectSection(index) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach((section, i) => {
-                if (i === index) {
-                    section.classList.add('selected');
-                    section.style.display = 'grid';
-                } else {
-                    section.classList.remove('selected');
-                    section.style.display = 'none';
-                }
-            });
-        }
+    const sections = document.querySelectorAll('.section');
+    const tabs = document.querySelectorAll('.tab');
 
+    // Iterar sobre las secciones
+    sections.forEach((section, i) => {
+        if (i === index) {
+            section.classList.add('selected'); // Agregar clase 'selected' a la sección activa
+            section.style.display = 'grid'; // Mostrar la sección activa
+        } else {
+            section.classList.remove('selected'); // Quitar clase 'selected' de las secciones inactivas
+            section.style.display = 'none'; // Ocultar las secciones no seleccionadas
+        }
+    });
+
+    // Iterar sobre las pestañas
+    tabs.forEach((tab, i) => {
+        const line = tab.querySelector('.line'); // Seleccionar la línea dentro de la pestaña
+        if (i === index) {
+            tab.classList.add('selected'); // Agregar clase 'selected' a la pestaña activa
+            line.style.backgroundColor = 'black'; // Cambiar el color de la línea a negro
+            tab.style.flexDirection = 'column'; // Asegurarse de que la dirección sea columna
+        } else {
+            tab.classList.remove('selected'); // Quitar clase 'selected' de las pestañas inactivas
+            line.style.backgroundColor = 'grey'; // Restablecer el color de la línea a gris
+            tab.style.flexDirection = 'column'; // Asegurarse de que la dirección sea columna
+        }
+    });
+}
         // Inicializar la sección predeterminada y cargar los eventos
         document.addEventListener('DOMContentLoaded', function () {
             selectSection(1); // Por defecto mostrar eventos futuros
