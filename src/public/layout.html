@@ -4,11 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title><%= title %></title>
+    <title>PROMO 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+          font-family: 'Nexa Heavy';
+          src: url('fonts/Nexa-Heavy.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nexa Heavy';
+        }
+
+        .contenedor {
+            padding: 60px 0;
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .titulo{
+            color: #2a6473;
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        header {
+            padding-top: 90px; /* Espacio suficiente para que el navbar fijo no solape el contenido */
+            width: 100%;
+            height: 600px;
+            /*IMAGEN HEADER - CONFIGURAR POR PÁGINA*/
+            background: linear-gradient(to right, #052c7f66, #21eed366), url(fonts/3Aprincipal.png);
+            background-size: cover;
+            background-position-y: -90px;
+            background-attachment: fixed;
+            position: relative; 
+        }
 
         li {
             font-weight: 300;
@@ -113,12 +156,92 @@
         .navbar.scrolled .toggle_btn i {
             color: #4eb8bc; /* Cambia a rosado cuando haces scroll */
         }
+
+        .Initial-Info {
+            height: auto;
+            margin-top: 133px;
+            margin-bottom: 80px;
+            padding:  0 24px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .Initial-Info h2 {
+            color:#138da2;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 38px;
+        }
+
+        .Initial-Info h3 {
+            margin-top: 18px;
+            font-family: "Work Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 450;
+            line-height: 27px;
+            padding: 0 530px;
+            color: #453E3E;
+        }
+
+        /* 3 Cuadros */
+        .widget {
+            max-width: 1200px;
+            margin: 0 auto;
+            }
+          
+        .column {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
+        }
+          
+        .box {
+            position: relative;
+            text-align: left;
+            padding: 40px;
+            margin-right: 16px;
+            box-shadow: 0 24px 40px rgba(65, 238, 229, 0.658);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            color: white;
+            overflow: hidden;
+            background: linear-gradient(to right,#6ef7ee,#a6eaee);
+        }
+
+        .box::before {
+            width: 150px;
+            height: 150px;
+            content: "";
+            background: linear-gradient(to right,#6ef7ee,#a6eaee);
+            position: absolute;
+            z-index: 1;
+            border-radius: 50%;
+            right: -25%;
+            top: -25%;
+        }
+        
+
+        .widget h5 {
+            color: #ffffff;
+            margin-bottom: 8px;
+            margin-top: 16px;
+            font-size: 21px;
+            font-weight: 600;
+            font-family: "Work Sans", sans-serif;
+        }
+          
+        .widget p {
+            color: #ffffff;
+            margin-top: 8px;
+            font-size: 16px;
+            font-family: "Work Sans", sans-serif;
+        }
           
         .icon {
             width: 55px;
             height: 55px;
             border-radius: 50%;
-            background-color: #f7f3f5;
+            background-color: #ffffff48;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -187,7 +310,30 @@
             }
         }
 
+        @media(max-width: 1600px) {
+            .Initial-Info h2 {
+                font-size: 28px;
+            }
+            .Initial-Info h3{
+                padding: 0 0;
+                font-size: 15px;
+                line-height: 27px;
+            }
+        }
+
         @media (max-width: 768px) {
+              .column {
+                flex-direction: column;
+                align-items: center;
+              }
+          
+              .box {
+                text-align: center;
+                width: 100%;
+                max-width: 400px;
+                margin-right: 0px;
+              }
+          
               .icon {
                 margin-bottom: 20px;
               }
@@ -217,7 +363,7 @@
         <div class="navbar">
             <div class="logo"><a href="#">PROMO 2026</a></div>
             <ul class="links">
-                <li><a href="">Home</a></li>
+                <li><a href="https://api-promo-2026-production.up.railway.app/">Home</a></li>
                 <li><a href="calendario">Calendario</a></li>
                 <li><a href="sobre-mi">Sobre Mi</a></li>
                 <li><a href="anuncios">Anuncios</a></li>
@@ -228,16 +374,47 @@
             </div>
         </div>
         <div class="dropdown_menu">
-            <li><a href="">Home</a></li>
+            <li><a href="https://api-promo-2026-production.up.railway.app/">Home</a></li>
             <li><a href="calendario">Calendario</a></li>
             <li><a href="sobre-mi">Sobre-Mi</a></li>
             <li><a href="anuncios">Anuncios</a></li>
             <li><a href="#" class="action-btn">Iniciar Sesión</a></li>
         </div>
-        </header>
-    <main>
-        <%- body %>
+    </header>
+    <main>    
     </main>
+    <script>
+        const navbar = document.querySelector('.navbar');
+        const dropDownMenu = document.querySelector('.dropdown_menu');
+    
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 420) {
+                navbar.classList.add('scrolled');
+                dropDownMenu.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+                dropDownMenu.classList.remove('scrolled');
+            }
 
+            // Mantiene el dropdown-menu en sincronía con el navbar
+            if (window.scrollY > 0) {
+                dropDownMenu.style.top = `${120 + window.scrollY}px`;
+            } else {
+                dropDownMenu.style.top = `120px`;
+            }
+        });
+    
+        const toggleBtn = document.querySelector('.toggle_btn');
+        const toggleBtnIcon = document.querySelector('.toggle_btn i');
+    
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+    
+            toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        }
+    </script>    
 </body>
 </html>
