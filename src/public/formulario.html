@@ -93,6 +93,12 @@
       color: #495057;
     }
 
+    .saveChanges  {
+      display: none;
+      color: aqua;
+      padding: 15px;
+    }
+
     .hidden-field {
       display: none;
     }
@@ -195,7 +201,7 @@
 
       <input type="hidden" id="editIndex">
       <button type="button" class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
-      <button id="saveChanges" style="display: none;">Guardar cambios</button>
+      <button id="saveChanges" class="saveChanges">Guardar cambios</button>
     </form>
 
     <h2 class="mt-4">Eventos Registrados</h2>

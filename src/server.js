@@ -87,7 +87,7 @@ const visitasSchema = new mongoose.Schema({
 });
 
 let visitasOlimpiadas = 0;
-let visitasIndex = 0;
+let visitasIndex = 0; 
 
 app.get('/olimpiadas', (req, res) => {
   visitasOlimpiadas++;
