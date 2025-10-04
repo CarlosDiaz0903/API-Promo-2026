@@ -79,7 +79,7 @@ app.set('views', path.join(__dirname, 'public'));
 
 // Servir el archivo HTML del formulario en la ruta /formulario
 app.get('/calendario/formulario', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'formulario.html')); // Ruta a index.html (formulario)
+  res.sendFile(path.join(__dirname, 'public', 'calendario', 'formulario.html')); // Ruta a index.html (formulario)
 });
 
 const visitasSchema = new mongoose.Schema({
@@ -90,12 +90,12 @@ let visitasOlimpiadas = 0;
 let visitasIndex = 0; 
 
 app.get('/olimpiadas', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
+  res.sendFile(path.join(__dirname, 'public', 'olimpiadas', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
 app.get('/calendario', (req, res) => {
   visitasOlimpiadas++;
-  res.sendFile(path.join(__dirname, 'public', 'calendario.html')); // Ruta a olimpiadas.html
+  res.sendFile(path.join(__dirname, 'public', 'calendario','calendario.html')); // Ruta a olimpiadas.html
 });
 
 // Servir el archivo HTML para visualizar eventos en la ruta raíz /

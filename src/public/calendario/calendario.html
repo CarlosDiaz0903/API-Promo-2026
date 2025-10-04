@@ -718,7 +718,7 @@
         
         </div>
         <div class="dropdown_menu">
-            <li><a href="https://api-promo-2026.onrender.com/">Home</a></li>
+            <li><a href="https://promo-2026.netlify.app/">Home</a></li>
             <li><a href="calendario">Calendario</a></li>
             <li><a href="olimpiadas">Olimpiadas</a></li>
             <li><a href="anuncios">Anuncios</a></li>
@@ -840,7 +840,7 @@
       </div>
 
     <script>
-        const apiUrl = 'https://api-promo-2026.onrender.com/api/eventos';
+        const apiUrl = 'https://promo-2026.netlify.app/api/eventos';
 
         async function fetchEvents() {
             try {
@@ -1108,7 +1108,7 @@ if (actividades.length > 0) {
     const anio = now.getFullYear();
     text += "*ÚLTIMA ACTUALIZACIÓN:*\n";
     text += `${hora} - ${dia} de ${mes} del ${anio}\n`;
-    text += "https://api-promo-2026.onrender.com/calendario";
+    text += "https://promo-2026.netlify.app/calendario";
 
     return text;
 }
@@ -1125,7 +1125,7 @@ if (actividades.length > 0) {
 
     // Agregamos un listener al botón para copiar el texto
     document.getElementById("copy-btn").addEventListener("click", async () => {
-        const response = await fetch('https://api-promo-2026.onrender.com/api/eventos');
+        const response = await fetch('https://promo-2026.netlify.app/api/eventos');
         const eventos = await response.json();
         const currentTime = new Date();
 

@@ -74,7 +74,7 @@ function getClaseEquipo(nombre) {
     return "";
 }
 
-fetch("database/olimpiadas.json")
+fetch("olimpiadas.json")
     .then(r => r.json())
     .then(data => {
         // Agrupar eventos por día
