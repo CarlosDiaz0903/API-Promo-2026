@@ -1,0 +1,45 @@
+.tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dia {
+  flex: 1;
+  max-width: 200px;
+  height: 45px;
+
+  border-radius: 18px;
+  border: #313969 solid 0.1px;
+  background: linear-gradient(to bottom, #27324C, #181C31);
+
+  font-family: D-DIN;
+  color: #E6EEFC;
+  font-size: 24px;
+  font-weight: 690;
+  letter-spacing: 0.3px;
+
+  transition: background 3s, border 0.3s;
+}
+
+.dia:hover {
+  background: linear-gradient(to bottom, #99753350, #59441663);
+  border: #695031 solid 0.1px;
+}
+
+.dia.active {
+  background: linear-gradient(to bottom, #997533, #594416);
+  border: #695031 solid 0.1px;
+}
+
+@media (max-width:700px) {
+  .tabs {
+    gap: 12px;
+  }
+
+  .dia {
+    font-size: 18px;
+    height: 36px;
+  }
+}

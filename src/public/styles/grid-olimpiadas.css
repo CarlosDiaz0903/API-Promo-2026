@@ -1,0 +1,121 @@
+.grid-event {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.event {
+  background: linear-gradient(to bottom, #131B2E, #070914);
+
+  border: #313969 solid 0.2px;
+  border-radius: 25px;
+  padding: 40px 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  text-transform: uppercase;
+
+  transition: box-shadow 0.5s;
+}
+
+.event:hover {
+  box-shadow: 0px 0px 10px #0e8d9b;
+}
+
+
+.deporte, .hora {
+  font-family: D-DIN, Arial;
+  font-weight: 1000;
+  letter-spacing: 2px;
+  font-size: 60px;
+  color: #E6EEFC;
+}
+
+.deporte{
+  font-size: 60px;
+}
+
+.hora {
+  font-size: 65px;
+}
+
+.partidos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 351px;
+  row-gap: 16px;
+}
+
+.dataplace {
+  display: flex;
+  flex-direction: column;
+}
+
+.lugar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 49px;
+
+  font-family: Publica Play, Arial;
+  color: #9DB2D1;
+  font-size: 23px;
+}
+
+.partidos p {
+  font-family: Publica Play, Arial;
+  color: White;
+  font-size: 16px;
+}
+
+.equipo {
+  color: white;
+  padding: 6px 28px;
+  border-radius: 30px;
+
+  font-family: Publica Play, Arial;
+}
+
+.alemania {
+  background-color: rgb(209, 96, 96, 0.68);
+}
+
+.francia {
+  background-color: rgba(96, 117, 209, 0.68);
+}
+
+.italia {
+  background-color: rgba(96, 209, 124, 0.68);
+}
+
+@media (max-width: 1200px) {
+  .event {
+    padding: 40px 10px 30px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .dataplace {
+    background-color: #14204285;
+    border-radius: 12px;
+    padding: 0px 24px;
+    flex-direction: row;
+    align-items: center;
+    gap: 22px;
+    height: auto;
+  }
+
+  .hora {
+    font-size: 25px;
+  }
+
+  .lugar {
+    font-size: 20px;
+  }
+}

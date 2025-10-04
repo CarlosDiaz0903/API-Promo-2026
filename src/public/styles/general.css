@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'D-DIN';
+  src: url('fonts/D-DINExp-Bold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+          font-family: 'Nexa Heavy';
+          src: url('/fonts/Nexa-Heavy.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
+
+@font-face {
+  font-family: 'Publica Play';
+  src: url('fonts/Publica-Play.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0px 25%;
+  margin-bottom: 100px;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #071530, #010208);
+  background-attachment: fixed; 
+
+  font-family: 'D-DIN';
+}
+
+@media (max-width: 1365px){
+  body {
+    margin: 0px 18%;
+  }
+}
+
+@media (max-width: 900px){
+  body {
+    margin: 0px 12%;
+  }
+}
+
+@media (max-width: 900px){
+  body {
+    margin: 0px 8%;
+  }
+}

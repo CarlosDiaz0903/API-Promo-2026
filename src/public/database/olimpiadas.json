@@ -1,0 +1,365 @@
+[
+  
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Alemania A",
+    "equipo2": "Alemania B",
+    "hora": "11:30",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-03"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Alemania A",
+    "equipo2": "Alemania B",
+    "hora": "08:00",
+    "lugar": "Patio Central",
+    "dia": "2025-10-03"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Alemania A",
+    "equipo2": "Alemania B",
+    "hora": "10:00",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-03"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Alemania A",
+    "equipo2": "Alemania B",
+    "hora": "13:00",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-03"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Alemania A",
+    "equipo2": "Alemania B",
+    "hora": "08:30",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-03"
+  },
+
+
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Italia B",
+    "equipo2": "Alemania B",
+    "hora": "11:00",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Francia A",
+    "equipo2": "Alemania A",
+    "hora": "11:30",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Italia B",
+    "equipo2": "Alemania B",
+    "hora": "09:30",
+    "lugar": "Patio Central",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Francia A",
+    "equipo2": "Alemania A",
+    "hora": "10:00",
+    "lugar": "Patio Central",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Italia B",
+    "equipo2": "Alemania B",
+    "hora": "08:00",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Francia A",
+    "equipo2": "Alemania A",
+    "hora": "08:30",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Italia B",
+    "equipo2": "Alemania B",
+    "hora": "09:00",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Francia A",
+    "equipo2": "Alemania A",
+    "hora": "09:30",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-06"
+  },
+
+
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia A",
+    "hora": "14:00",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia A",
+    "hora": "14:30",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia A",
+    "hora": "12:00",
+    "lugar": "Patio Central",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia A",
+    "hora": "12:30",
+    "lugar": "Patio Central",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia A",
+    "hora": "10:00",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia A",
+    "hora": "13:00",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia A",
+    "hora": "08:30",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia A",
+    "hora": "09:00",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia A",
+    "hora": "09:30",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-07"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia A",
+    "hora": "10:00",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-07"
+  },
+
+
+
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Italia A",
+    "equipo2": "Alemania B",
+    "hora": "13:00",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Francia B",
+    "equipo2": "Alemania A",
+    "hora": "13:30",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Italia A",
+    "equipo2": "Alemania B",
+    "hora": "11:30",
+    "lugar": "Patio Central",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Francia B",
+    "equipo2": "Alemania A",
+    "hora": "12:00",
+    "lugar": "Patio Central",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Italia A",
+    "equipo2": "Alemania B",
+    "hora": "10:00",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Francia B",
+    "equipo2": "Alemania A",
+    "hora": "10:30",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Italia A",
+    "equipo2": "Alemania B",
+    "hora": "08:30",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Francia B",
+    "equipo2": "Alemania A",
+    "hora": "09:00",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Italia A",
+    "equipo2": "Alemania B",
+    "hora": "10:30",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-09"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Francia B",
+    "equipo2": "Alemania A",
+    "hora": "11:00",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-09"
+  },
+
+  {
+    "deporte": "Baileton",
+    "equipo1": "TODOS",
+    "equipo2": "tODOS",
+    "hora": "14:00",
+    "lugar": "Patio Central",
+    "dia": "2025-10-09"
+  },
+
+
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia B",
+    "hora": "09:30",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Fútbol",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia B",
+    "hora": "10:00",
+    "lugar": "Campo de Fútbol",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia B",
+    "hora": "08:00",
+    "lugar": "Patio Central",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Balonmano",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia B",
+    "hora": "08:30",
+    "lugar": "Patio Central",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia B",
+    "hora": "11:00",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Voley",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia B",
+    "hora": "11:30",
+    "lugar": "Patio Secundaria",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia B",
+    "hora": "13:00",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia B",
+    "hora": "13:30",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Alemania A",
+    "equipo2": "Italia B",
+    "hora": "11:30",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-10"
+  },
+  {
+    "deporte": "Ajedrez",
+    "equipo1": "Alemania B",
+    "equipo2": "Francia B",
+    "hora": "12:00",
+    "lugar": "Biblioteca",
+    "dia": "2025-10-10"
+  }
+]

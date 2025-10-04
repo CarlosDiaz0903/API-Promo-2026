@@ -3,411 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLIMPIADAS 2024</title>
+    <title>OLIMPIADAS 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* General Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0px;
-        }
-
-        .container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  height: 96px;
-  width: 96px;
-  animation: rotate_3922 1.2s linear infinite;
-  background-color: #9b59b6;
-  background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
-}
-
-.container span {
-  position: absolute;
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-  background-color: #9b59b6;
-  background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
-}
-
-.container span:nth-of-type(1) {
-  filter: blur(5px);
-}
-
-.container span:nth-of-type(2) {
-  filter: blur(10px);
-}
-
-.container span:nth-of-type(3) {
-  filter: blur(25px);
-}
-
-.container span:nth-of-type(4) {
-  filter: blur(50px);
-}
-
-.container::after {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  background-color: #fff;
-  border: solid 5px #ffffff;
-  border-radius: 50%;
-}
-
-@keyframes rotate_3922 {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-        h1 {
-            background: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            font-size: 6rem;
-            margin: 30px;
-            text-align: center;
-            letter-spacing: 1.5px;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .tabs button {
-  align-items: center;
-  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-  border: 0;
-  margin: 5px;
-  border-radius: 50px;
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #ffffff;
-  display: flex;
-  font-size: 18px;
-  justify-content: center;
-  line-height: 1em;
-  max-width: 100%;
-  min-width: 50px;
-  padding: 6px 6px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.tabs button span {
-  background-color: rgb(5, 6, 45);
-  padding: 12px 12px;
-  border-radius: 50px;
-  width: 100%;
-  height: 100%;
-  transition: 300ms;
-}
-
-.tabs button:hover span {
-  background: none;
-}
-
-.tabs button:active {
-  transform: scale(0.9);
-}
-
-.tabs button.active {
-  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-  border: 8px solid linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-}
-
-        .content {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .content.active {
-            display: block;
-        }
-
-        .section {
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-        }
-
-        .section h2 {
-            background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-            color: #fff;
-            padding: 12px;
-            text-align: center;
-            border-radius: 10px;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .section p {
-            margin-top: 15px;
-            line-height: 1.8;
-            text-align: center;
-            color: #555;
-        }
-
-        .sport-time {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding: 12px;
-            background-color: #ecf0f1;
-            border-radius: 10px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 3.2rem;
-            }
-
-            .section h2 {
-                font-size: 1.4rem;
-            }
-
-            .sport-time {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/olimpiadas.css">
+    <link rel="stylesheet" href="styles/tabs.css">
+    <link rel="stylesheet" href="styles/grid-olimpiadas.css">
+    <link rel="shortcut icon" href="icons/LOGO-P1.png" type="image/x-icon">
 </head>
 <body>
-    <div class="container">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    <h1>OLIMPIADAS 2024</h1>
+    <div class="title">OLIMPIADAS 2025</div>
+
+    <div class="especificaciones">
+        <div class="text1">
+            <div class="circulo"></div>
+            <div class="fixure">Basado en los Fixure Oficiales</div>
+        </div>
+        <div class="lastupdate">Última actualización <span id="lastupdate"></span></div>
+    </div>
 
     <div class="tabs">
-        <button class="active" onclick="showContent('date1')"><span>04 Oct</span></button>
-        <button onclick="showContent('date2')"><span>07 Oct</span></button>
-        <button onclick="showContent('date3')"><span>09 Oct</span></button>
-        <button onclick="showContent('date4')"><span>24 Oct</span></button>
-        <button onclick="showContent('date5')"><span>25 Oct</span></button>
+        <button class="dia" onclick="showContent('date1', this)"><span>03 OCT</span></button>
+        <button class="dia" onclick="showContent('date2', this)"><span>06 OCT</span></button>
+        <button class="dia" onclick="showContent('date3', this)"><span>07 OCT</span></button>
+        <button class="dia" onclick="showContent('date4', this)"><span>09 OCT</span></button>
+        <button class="dia" onclick="showContent('date5', this)"><span>10 OCT</span></button>
     </div>
 
-    <!-- Fecha 1 -->
-    <div id="date1" class="content active">
-        <div class="section">
-            <h2>Balonmano (Patio Central)</h2>
-            <div class="sport-time"><span>08:30</span> <span>Alemania A vs Italia A</span></div>
-            <div class="sport-time"><span>09:00</span> <span>Argentina A vs Alemania B</span></div>
-        </div>
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>10:30</span> <span>Alemania A vs Italia A</span></div>
-            <div class="sport-time"><span>11:00</span> <span>Argentina A vs Alemania B</span></div>
-        </div>
-        <div class="section">
-            <h2>Ajedrez (Biblioteca)</h2>
-            <div class="sport-time"><span>11:30</span> <span>Alemania A vs Italia A</span></div>
-            <div class="sport-time"><span>12:00</span> <span>Argentina A vs Alemania B</span></div>
-        </div>
-        <div class="section">
-            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
-            <div class="sport-time"><span>12:00</span> <span>Alemania A vs Italia A</span></div>
-            <div class="sport-time"><span>12:30</span> <span>Argentina A vs Alemania B</span></div>
-        </div>
-        <div class="section">
-            <h2>Básquet (Campo de Básquet)</h2>
-            <div class="sport-time"><span>13:30</span> <span>Argentina A vs Alemania B</span></div>
-            <div class="sport-time"><span>14:00</span> <span>Alemania A vs Italia A</span></div>
-        </div>
-    </div>
 
-    <!-- Fecha 2 -->
-    <div id="date2" class="content">
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>08:00</span> <span>Italia vs Alemania (Varones)</span></div>
-        </div>
-        <div class="section">
-            <h2>Básquet (Campo de Básquet)</h2>
-            <div class="sport-time"><span>08:00</span> <span>Alemania B vs Argentina B</span></div>
-            <div class="sport-time"><span>09:00</span> <span>Italia B vs Alemania A</span></div>
-        </div>
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>09:30</span> <span>Alemania B vs Argentina B</span></div>
-            <div class="sport-time"><span>10:30</span> <span>Italia B vs Alemania A</span></div>
-        </div>
-        <div class="section">
-            <h2>Balonmano (Patio Central)</h2>
-            <div class="sport-time"><span>11:00</span> <span>Alemania B vs Argentina B</span></div>
-            <div class="sport-time"><span>12:00</span> <span>Italia B vs Alemania A</span></div>
-        </div>
-        <div class="section">
-            <h2>Ajedrez (Biblioteca)</h2>
-            <div class="sport-time"><span>12:30</span> <span>Alemania B vs Argentina B</span></div>
-        </div>
-        <div class="section">
-            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
-            <div class="sport-time"><span>13:30</span> <span>Alemania B vs Argentina B</span></div>
-        </div>
-        <div class="section">
-            <h2>Ajedrez (Biblioteca)</h2>
-            <div class="sport-time"><span>14:00</span> <span>Italia B vs Alemania A</span></div>
-        </div>
-        <div class="section">
-            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
-            <div class="sport-time"><span>14:30</span> <span>Italia B vs Alemania A</span></div>
-        </div>
-    </div>
+    <div id="date1" class="grid-event"></div>
+    <div id="date2" class="grid-event" style="display:none;"></div>
+    <div id="date3" class="grid-event" style="display:none;"></div>
+    <div id="date4" class="grid-event" style="display:none;"></div>
+    <div id="date5" class="grid-event" style="display:none;"></div>
 
-    <!-- Fecha 3 -->
-    <div id="date3" class="content">
-        <div class="section">
-            <h2>Atletismo Sec. (Campo de Fútbol)</h2>
-            <div class="sport-time"><span>08:00 - 09:30</span></div>
-        </div>
-        <div class="section">
-            <h2>Ajedrez (Biblioteca)</h2>
-            <div class="sport-time"><span>09:30</span> <span>Argentina B vs Alemania A</span></div>
-            <div class="sport-time"><span>10:30</span> <span>Alemania B vs Italia A</span></div>
-        </div>
-        <div class="section">
-            <h2>Balonmano (Patio Central)</h2>
-            <div class="sport-time"><span>12:00</span> <span>Argentina B vs Alemania A</span></div>
-            <div class="sport-time"><span>13:00</span> <span>Alemania B vs Italia A</span></div>
-        </div>
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>13:30</span> <span>Argentina B vs Alemania A</span></div>
-        </div>
-        <div class="section">
-            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
-            <div class="sport-time"><span>13:30</span> <span>Argentina B vs Alemania A</span></div>
-        </div>
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>14:30</span> <span>Alemania B vs Italia A</span></div>
-        </div>
-        <div class="section">
-            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
-            <div class="sport-time"><span>14:30</span> <span>Alemania B vs Italia A</span></div>
-        </div>
-    </div>
-
-    <!-- Fecha 4 -->
-    <div id="date4" class="content">
-        <div class="section">
-            <h2>Básquet (Campo de Básquet)</h2>
-            <div class="sport-time"><span>08:30</span> <span>Italia B vs Alemania B</span></div>
-            <div class="sport-time"><span>09:00</span> <span>Alemania A vs Argentina A</span></div>
-        </div>
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>10:00</span> <span>Italia B vs Alemania B</span></div>
-        </div>
-        <div class="section">
-            <h2>Fútbol (Campo de Fútbol N° 1)</h2>
-            <div class="sport-time"><span>10:00</span> <span>Italia B vs Alemania B</span></div>
-            <div class="sport-time"><span>10:30</span> <span>Alemania A vs Argentina A</span></div>
-        </div>
-        <div class="section">
-            <h2>Ajedrez (Biblioteca)</h2>
-            <div class="sport-time"><span>11:30</span> <span>Italia B vs Alemania B</span></div>
-            <div class="sport-time"><span>12:00</span> <span>Alemania A vs Argentina A</span></div>
-        </div>
-        <div class="section">
-            <h2>Balonmano (Patio Central)</h2>
-            <div class="sport-time"><span>12:00</span> <span>Italia B vs Alemania B</span></div>
-            <div class="sport-time"><span>12:30</span> <span>Alemania A vs Argentina A</span></div>
-        </div>
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>13:30</span> <span>Alemania A vs Argentina A</span></div>
-        </div>
-        <div class="section">
-            <h2>Bailetón Sec. (Patio Central)</h2>
-            <div class="sport-time"><span>14:00 - 14:30</span></div>
-        </div>
-    </div>
-
-    <!-- Fecha 5 -->
-    <div id="date5" class="content">
-        <div class="section">
-            <h2>Ajedrez (Biblioteca)</h2>
-            <div class="sport-time"><span>09:00</span> <span>Alemania A vs Alemania B</span></div>
-        </div>
-        <div class="section">
-            <h2>Vóley (Patio Secundaria)</h2>
-            <div class="sport-time"><span>09:30</span> <span>Alemania vs Argentina (varones)</span></div>
-        </div>
-        <div class="section">
-            <h2>Juegos Recreativos (Secundaria)</h2>
-            <div class="sport-time"><span>14:00 - 14:30</span></div>
-        </div>
-    </div>
 
     <script>
-        function showContent(dateId) {
-            const contents = document.querySelectorAll('.content');
-            const tabs = document.querySelectorAll('.button');
+        function showContent(dateId, button) {
+  // Ocultar todos los contenedores
+  document.querySelectorAll(".grid-event").forEach(div => div.style.display = "none");
 
-            contents.forEach(content => content.classList.remove('active'));
-            tabs.forEach(tab => tab.classList.remove('active'));
+  // Mostrar solo el correspondiente
+  document.getElementById(dateId).style.display = "grid";
 
-            document.getElementById(dateId).classList.add('active');
-            event.target.classList.add('active');
-        }
+  // Quitar 'active' a todos los botones
+  document.querySelectorAll(".dia").forEach(btn => btn.classList.remove("active"));
 
-        window.addEventListener('load', function() {
-  document.querySelector('.container').style.display = 'none';
-});
+  // Añadir 'active' al botón actual
+  button.classList.add("active");
+}
+    function formatHora(hora24) {
+    const [h, m] = hora24.split(":");
+    const date = new Date();
+    date.setHours(h, m);
+
+    let hora = date.toLocaleTimeString("en-PE", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    });
+
+    return hora.replace(" ", ""); // elimina el espacio entre la hora y AM/PM
+}
+
+// Función para asignar clase según país
+function getClaseEquipo(nombre) {
+    if (/alemania/i.test(nombre)) return "alemania";
+    if (/italia/i.test(nombre)) return "italia";
+    if (/francia/i.test(nombre)) return "francia";
+    return "";
+}
+
+fetch("database/olimpiadas.json")
+    .then(r => r.json())
+    .then(data => {
+        // Agrupar eventos por día
+        const eventosPorDia = {};
+
+        data.forEach(evento => {
+            if (!eventosPorDia[evento.dia]) {
+                eventosPorDia[evento.dia] = [];
+            }
+            eventosPorDia[evento.dia].push(evento);
+        });
+
+        // Recorrer cada día
+        Object.keys(eventosPorDia).forEach(dia => {
+            // Ordenar cronológicamente por hora (HH:mm en 24h)
+            eventosPorDia[dia].sort((a, b) => {
+                return a.hora.localeCompare(b.hora);
+            });
+
+            eventosPorDia[dia].forEach(evento => {
+                const hora12 = formatHora(evento.hora);
+
+                // Determinar clases dinámicamente
+                const clase1 = getClaseEquipo(evento.equipo1);
+                const clase2 = getClaseEquipo(evento.equipo2);
+
+                const html = `
+                <div class="event">
+                    <div class="Data1">
+                        <div class="deporte">${evento.deporte}</div>
+                        <div class="partidos">
+                            <div class="equipo ${clase1}">${evento.equipo1}</div>
+                            <p>VS</p>
+                            <div class="equipo ${clase2}">${evento.equipo2}</div>
+                        </div>
+                    </div>
+                    <div class="dataplace">
+                        <div class="hora">${hora12}</div>
+                        <div class="lugar">${evento.lugar}</div>
+                    </div>
+                </div>
+                `;
+
+                // Mapear fecha a contenedor
+                let diaId = "";
+                switch (dia) {
+                    case "2025-10-03": diaId = "date1"; break;
+                    case "2025-10-06": diaId = "date2"; break;
+                    case "2025-10-07": diaId = "date3"; break;
+                    case "2025-10-09": diaId = "date4"; break;
+                    case "2025-10-10": diaId = "date5"; break;
+                }
+
+                if (diaId) {
+                    document.getElementById(diaId).innerHTML += html;
+                }
+            });
+        });
+    });
+
+    const lastModified = new Date(document.lastModified);
+        const opciones = { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" };
+        document.getElementById("lastupdate").textContent = lastModified.toLocaleString("es-PE", opciones);
     </script>
 </body>
 </html>
