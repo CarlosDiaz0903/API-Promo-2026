@@ -90,7 +90,6 @@ let visitasOlimpiadas = 0;
 let visitasIndex = 0; 
 
 app.get('/olimpiadas', (req, res) => {
-  visitasOlimpiadas++;
   res.sendFile(path.join(__dirname, 'public', 'olimpiadas.html')); // Ruta a olimpiadas.html
 });
 
