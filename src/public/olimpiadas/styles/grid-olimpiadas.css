@@ -19,16 +19,19 @@
 
   text-transform: uppercase;
 
-  transition: box-shadow 0.5s;
+  transition: all 0.5s;
 }
 
 .event:hover {
-  box-shadow: 0px 0px 10px #0e8d9b;
+  box-shadow: 0px 0px 10px #1390b6b2;
+  transform: translateY(-4px);
+  transform: rotate(0.6deg);
 }
 
 
 .deporte, .hora {
   font-family: D-DIN, Arial;
+  font-weight: 700;
   letter-spacing: 2px;
   font-size: 60px;
   color: #E6EEFC;
@@ -74,48 +77,54 @@
 }
 
 .equipo {
+  padding: 8px 0px;
+  border-radius: 40px;
+  font-family: 'Publica Play', Arial;
   color: white;
-  padding: 6px 28px;
-  border-radius: 30px;
 
-  font-family: Publica Play, Arial;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  width: 144.55px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .alemania {
-  background-color: rgb(209, 96, 96, 0.68);
+  background: linear-gradient(135deg, rgba(255, 91, 91, 0.6), rgba(190, 50, 50, 0.8));
 }
 
 .francia {
-  background-color: rgba(96, 117, 209, 0.68);
+  background: linear-gradient(135deg, rgba(91, 125, 255, 0.6), rgba(60, 90, 210, 0.8));
 }
 
 .italia {
-  background-color: rgba(96, 209, 124, 0.68);
-}
+  background: linear-gradient(135deg, rgba(91, 255, 158, 0.6), rgba(40, 180, 120, 0.8));}
 
 @media (max-width: 1200px) {
   .event {
-    padding: 40px 10px 30px;
+    padding: 30px 10px 20px 10px;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
   }
 
   .dataplace {
-    background-color: #14204285;
+    background-color: #1a284e85;
     border-radius: 12px;
     padding: 0px 24px;
     flex-direction: row;
     align-items: center;
     gap: 22px;
-    height: auto;
+    height: 44px;
   }
 
   .hora {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   .lugar {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .deporte {
@@ -125,11 +134,11 @@
 }
 
 @media (max-width: 440px) {
-  .event {
-    padding: 30px 10px 30px;
-  }
+
 
   .deporte {
     font-size: 56px;
   }
 }
+
+

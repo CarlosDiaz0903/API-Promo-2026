@@ -38,5 +38,6 @@ body {
 @media (max-width: 900px){
   body {
     margin: 0px 0%;
+    margin-bottom: 40px;
   }
 }
