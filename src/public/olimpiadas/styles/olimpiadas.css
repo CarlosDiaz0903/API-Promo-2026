@@ -52,6 +52,7 @@
   .title {
     font-size: 44px;
     line-height: 44px;
+    margin: 120px 0px;
   }
 
   .especificaciones {
@@ -67,11 +68,11 @@
 
   .circulo {
     width: 6px;
-    height: 4px;
+    height: 6px;
   }
 
   .fixure {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .lastupdate{
