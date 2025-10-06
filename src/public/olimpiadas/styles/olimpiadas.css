@@ -47,3 +47,34 @@
   color: #9DB2D1;
   font-size: 14px;
 }
+
+@media (max-width:440px) {
+  .title {
+    font-size: 44px;
+    line-height: 44px;
+  }
+
+  .especificaciones {
+    margin-left: 12px;
+    gap: 18px;
+  }
+
+  .text-lastupdate {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+  }
+
+  .circulo {
+    width: 6px;
+    height: 4px;
+  }
+
+  .fixure {
+    font-size: 15px;
+  }
+
+  .lastupdate{
+    font-size: 12px;
+  }
+}

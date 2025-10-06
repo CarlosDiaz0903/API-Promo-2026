@@ -118,4 +118,19 @@
   .lugar {
     font-size: 20px;
   }
+
+  .deporte {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 440px) {
+  .event {
+    padding: 30px 10px 30px;
+  }
+
+  .deporte {
+    font-size: 56px;
+  }
 }
