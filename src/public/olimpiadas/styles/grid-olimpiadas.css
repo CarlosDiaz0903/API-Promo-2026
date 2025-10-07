@@ -6,9 +6,8 @@
 }
 
 .event {
-  background: linear-gradient(to bottom, #131B2E, #070914);
-
-  border: #313969 solid 0.2px;
+  background: linear-gradient(145deg, rgba(13, 26, 44, 0.9), rgba(13, 26, 44, 0.575));
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 25px;
   padding: 40px 50px;
 
@@ -16,6 +15,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.03), 0 4px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: outset 0 0 26px rgb(7, 12, 24);
+  backdrop-filter: blur(12px);
 
   text-transform: uppercase;
 
@@ -23,7 +25,7 @@
 }
 
 .event:hover {
-  box-shadow: 0px 0px 10px #1390b6b2;
+  box-shadow: 0px 0px 10px #97fff69c;
   transform: translateY(-4px);
   transform: rotate(0.6deg);
 }
@@ -110,7 +112,7 @@
   }
 
   .dataplace {
-    background-color: #1a284e85;
+    background-color: #070b0f85;
     border-radius: 12px;
     padding: 0px 24px;
     flex-direction: row;
@@ -134,7 +136,6 @@
 }
 
 @media (max-width: 440px) {
-
 
   .deporte {
     font-size: 56px;
