@@ -9,7 +9,7 @@
   align-items: center;
 
   background: linear-gradient(180deg, #fff0cb 0%, #ffec97 50%, #ffd980 100%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 
   text-shadow:
