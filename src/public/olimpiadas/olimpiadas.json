@@ -106,6 +106,22 @@
     "lugar": "Biblioteca",
     "dia": "2025-10-06"
   },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Francia A",
+    "equipo2": "Alemania A",
+    "hora": "08:00",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-06"
+  },
+  {
+    "deporte": "Basquet",
+    "equipo1": "Italia B",
+    "equipo2": "Alemania B",
+    "hora": "08:30",
+    "lugar": "Campo de Basquet",
+    "dia": "2025-10-06"
+  },
 
 
   {
