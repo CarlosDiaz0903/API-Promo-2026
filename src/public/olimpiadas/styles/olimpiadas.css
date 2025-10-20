@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 160px 0px;
 
   background: linear-gradient(180deg, #fff0cb 0%, #ffec97 50%, #ffd980 100%);
   background-clip: text;
@@ -17,7 +18,7 @@
     0 0 60px rgba(217, 201, 165, 0.2),
     0 2px 12px rgba(0, 0, 0, 0.5);
 
-  margin: 130px 0 100px 0;
+
   letter-spacing: 3px;
   animation: fadeInTitle 1.2s ease forwards;
 }
