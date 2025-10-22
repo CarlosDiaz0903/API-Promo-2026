@@ -7,6 +7,9 @@ header {
   left: 0;
   right: 0;
   z-index: 1000;
+
+  user-select: none;
+  -webkit-user-drag: none;
   transition: opacity 400ms cubic-bezier(.22,.9,.32,1);
 }
 
@@ -27,6 +30,7 @@ header.hidden { opacity: 0; }
   width: 180px;
   padding-top: 12px;
   filter: blur(6px);
+  -webkit-user-drag: none;
   transition: transform 180ms ease;
 }
 .logo img:hover { transform: scale(1.01); }

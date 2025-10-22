@@ -11,7 +11,7 @@
 
 .promo-main::before {
   content: "";
-  position: absolute;
+  position: absolute;           
   inset: 0;
   background-image: url("../pictures/Main.png");
   background-size: cover;
@@ -35,6 +35,7 @@
   font-weight: 600;
   color: white;
   font-size: 135px;
+  user-select: none;
 }
 
 .ad-astra-es {
