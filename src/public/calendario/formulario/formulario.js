@@ -1,6 +1,6 @@
 const apiUrl = 'https://api-promo-2026.onrender.com/api/eventos'; // Cambia a la URL correcta si no es localhost
 
-    async function fetchEvents() {///
+    async function fetchEvents() {
       try {
         const response = await fetch(apiUrl);
         if (response.ok) {
