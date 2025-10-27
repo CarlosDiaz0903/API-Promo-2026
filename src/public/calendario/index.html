@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CALENDARIO 4TO "A"</title>
+    <link rel="stylesheet" href="/src/public/styles/fonts.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
- 
+    <link rel="stylesheet" href="/src/public/styles/header.css">
+
     <style>
         @font-face {
           font-family: 'Nexa Heavy';
@@ -703,34 +705,34 @@
 </head>
 <body>
     <header>
-        <div class="navbar">
-            <div class="logo"><a href="#">PROMO 2026</a></div>
-            <ul class="links">
-                <li><a href="https://promo-2026.netlify.app/">Home</a></li>
-                <li><a href="/calendario">Calendario</a></li>
-                <li><a href="/olimpiadas">Olimpiadas</a></li>
-                <li><a href="/anuncios">Anuncios</a></li>
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <a href="#" class="logo" aria-label="Inicio">
+            <img src="/src/public/icons/promo.png" alt="Logo del sitio">
+            </a>
+
+            <ul class="nav-menu">
+            <li class="nav-item dropdown">
+                <button class="dropdown-toggle">
+                CALENDARIO
+                <span class="caret" aria-hidden="true">▾</span>
+                </button>
+
+                <ul id="calendario-menu" class="dropdown-menu">
+                <li role="none"><a role="menuitem" href="#">CALENDARIO 4TO A</a></li>
+                <li role="none"><a role="menuitem" href="#">CALENDARIO 4TO B</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item"><a href="#" class="nav-link">OLIMPIADAS</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">EVENTOS</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">NOSOTROS</a></li>
             </ul>
-            <a href="#" class="action-btn">Iniciar Sesión</a>
-            <div class="toggle_btn">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        
-        </div>
-        <div class="dropdown_menu">
-            <li><a href="https://promo-2026.netlify.app/">Home</a></li>
-            <li><a href="/calendario">Calendario</a></li>
-            <li><a href="/olimpiadas">Olimpiadas</a></li>
-            <li><a href="/anuncios">Anuncios</a></li>
-            <li><a href="#" class="action-btn">Iniciar Sesión</a></li>
-        </div>
-        <section class="textos-header">
-            <h1>CALENDARIO 4°"A"</h1>
-            <h2>Todas las tareas actualizadas hasta la fecha...</h2>
-        </section>
-        <div class='wave' style="height: 130px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C288.09,158.39 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path></svg></div>
+        </nav>
+
+        <script src="/src/public/header.js" defer></script>
     </header>
 
+    
     <main class="event-header">
         <button id="copy-btn" class="button" style="margin-top: 100px;">
             <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
@@ -764,80 +766,6 @@
         </div>
     </div>
 
-    <div class="e-card playing">
-        <div class="image"></div>
-        
-        <div class="ola"></div>
-        <div class="ola"></div>
-        <div class="ola"></div>
-        
-      
-            <div class="infotop">
-      
-          </svg>
-         <svg version="1.1" class="icono" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-         viewBox="0 0 601.22 677.71" style="enable-background:new 0 0 601.22 677.71;" xml:space="preserve">
-       <style type="text/css">
-        .st0{fill:#FFFFFF;}
-      </style>
-    <g>
-        <g>
-            <g>
-                <g>
-                    <circle class="st0" cx="302.13" cy="42.54" r="42.54"/>
-                    <circle class="st0" cx="257.43" cy="126.19" r="35.33"/>
-                    <circle class="st0" cx="245.17" cy="194.69" r="24.52"/>
-                    <circle class="st0" cx="255.26" cy="248.05" r="18.75"/>
-                    <circle class="st0" cx="269.68" cy="286.99" r="11.54"/>
-                </g>
-                <g>
-                    <circle class="st0" cx="298.69" cy="635.17" r="42.54"/>
-                    <circle class="st0" cx="343.83" cy="551.76" r="35.33"/>
-                    <circle class="st0" cx="356.45" cy="483.32" r="24.52"/>
-                    <circle class="st0" cx="346.64" cy="429.91" r="18.75"/>
-                    <circle class="st0" cx="332.42" cy="390.89" r="11.54"/>
-                </g>
-            </g>
-            <g>
-                <g>
-                    <circle class="st0" cx="47.25" cy="186.5" r="42.54"/>
-                    <circle class="st0" cx="96.82" cy="267.35" r="35.33"/>
-                    <circle class="st0" cx="149.74" cy="312.56" r="24.52"/>
-                    <circle class="st0" cx="200.88" cy="330.82" r="18.75"/>
-                    <circle class="st0" cx="241.77" cy="338.05" r="11.54"/>
-                </g>
-                <g>
-                    <circle class="st0" cx="556.85" cy="489.01" r="42.54"/>
-                    <circle class="st0" cx="507.7" cy="407.9" r="35.33"/>
-                    <circle class="st0" cx="455.03" cy="362.42" r="24.52"/>
-                    <circle class="st0" cx="403.98" cy="343.89" r="18.75"/>
-                    <circle class="st0" cx="363.13" cy="336.44" r="11.54"/>
-                </g>
-            </g>
-            <g>
-                <g>
-                    <circle class="st0" cx="42.55" cy="483.39" r="42.54"/>
-                    <circle class="st0" cx="137.35" cy="480.66" r="35.33"/>
-                    <circle class="st0" cx="202.9" cy="457.29" r="24.52"/>
-                    <circle class="st0" cx="244.21" cy="422.03" r="18.75"/>
-                    <circle class="st0" cx="270.84" cy="390.18" r="11.54"/>
-                </g>
-                <g>
-                    <circle class="st0" cx="558.67" cy="192.12" r="42.54"/>
-                    <circle class="st0" cx="463.85" cy="194.35" r="35.33"/>
-                    <circle class="st0" cx="398.18" cy="217.38" r="24.52"/>
-                    <circle class="st0" cx="356.69" cy="252.42" r="18.75"/>
-                    <circle class="st0" cx="329.89" cy="284.13" r="11.54"/>
-                </g>
-            </g>
-        </g>
-    </g>
-    </svg><br class="boss">      
-        SINGULARITY_DV
-      <br>
-      <div class="name">Carlos Díaz</div>
-        </div>
-      </div>
 
     <script>
         const apiUrl = 'https://api-promo-2026.onrender.com/api/eventos';
