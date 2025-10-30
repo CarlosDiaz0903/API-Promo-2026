@@ -5,36 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OLIMPIADAS 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/general.css">
-    <link rel="stylesheet" href="styles/olimpiadas.css">
-    <link rel="stylesheet" href="styles/tabs.css">
-    <link rel="stylesheet" href="styles/grid-olimpiadas.css">
-    <link rel="shortcut icon" href="../icons/LOGO-P1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/general.css">
     <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../styles/main.css">
+
+    <link rel="shortcut icon" href="../icons/LOGO-P1.png" type="image/x-icon">
 </head>
 <body>
     <header>
-    <nav class="navbar">
-      <a class="logo">
-        <img src="../icons/promo.png" alt="">
-      </a>
-      <ul class="nav-menu">
-        <li class="nav-item">
-          <a href="#" class="CALENDARIO">CALENDARIO</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="OLIMPIADAS">OLIMPIADAS</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="EVENTOS">EVENTOS</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="NOSOTROS">NOSOTROS</a>
-        </li>
-      </ul>
-    </nav>
-    <script src="header.js"></script>
-  </header>
+        <nav class="navbar" role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo" aria-label="Inicio">
+            <img src="../icons/promo.png" alt="Logo del sitio">
+            </a>
+
+            <ul class="nav-menu">
+            <li class="nav-item dropdown">
+                <button class="dropdown-toggle">
+                CALENDARIO
+                <span class="caret" aria-hidden="true">▾</span>
+                </button>
+
+                <ul id="calendario-menu" class="dropdown-menu">
+                <li role="none"><a role="menuitem" href="/calendario/">CALENDARIO 4TO A</a></li>
+                <li role="none"><a role="menuitem" href="/calendario-4to-b/">CALENDARIO 4TO B</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item"><a href="/olimpiadas/" class="nav-link">OLIMPIADAS</a></li>
+            <li class="nav-item"><a href="/eventos/" class="nav-link">EVENTOS</a></li>
+            <li class="nav-item"><a href="/nosotros/" class="nav-link">NOSOTROS</a></li>
+            </ul>
+        </nav>
+
+        <script src="../header.js" defer></script>
+    </header>
 
     <div class="title">OLIMPIADAS 2025</div>
 
