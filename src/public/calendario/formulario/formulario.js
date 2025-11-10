@@ -1,4 +1,4 @@
-const apiUrl = 'https://api-promo-2026.onrender.com/api/eventos'; // Cambia a la URL correcta si no es localhost
+const apiUrl = 'https://api-promo-2026-6vci.onrender.com/api/eventos'; // Cambia a la URL correcta si no es localhost
 
     async function fetchEvents() {
       try {
