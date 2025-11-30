@@ -704,38 +704,6 @@ if (actividades.length > 0) {
         selectSection(1); // Por defecto mostrar eventos futuros
         fetchEvents();
     });
-
-    const navbar = document.querySelector('.navbar');
-        const dropDownMenu = document.querySelector('.dropdown_menu');
-    
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 420) {
-                navbar.classList.add('scrolled');
-                dropDownMenu.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-                dropDownMenu.classList.remove('scrolled');
-            }
-
-            // Mantiene el dropdown-menu en sincronía con el navbar
-            if (window.scrollY > 0) {
-                dropDownMenu.style.top = `${120 + window.scrollY}px`;
-            } else {
-                dropDownMenu.style.top = `120px`;
-            }
-        });
-    
-        const toggleBtn = document.querySelector('.toggle_btn');
-        const toggleBtnIcon = document.querySelector('.toggle_btn i');
-    
-        toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-    
-            toggleBtnIcon.classList = isOpen
-                ? 'fa-solid fa-xmark'
-                : 'fa-solid fa-bars'
-        }
     </script>
     </main>
 </body>
