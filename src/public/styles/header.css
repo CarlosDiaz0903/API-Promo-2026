@@ -207,17 +207,17 @@ header.hidden { opacity: 0; }
   }
 
   .nav-menu {
-    position: absolute;
-    top: 90px;
-    right: 0;
-    left: 0;
-    display: none;
-    background: rgba(6, 12, 20, 0.96);
-    padding: 20px;
-    flex-direction: column;
-    z-index: 3000;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  display: none;
+  background: rgba(6, 12, 20, 0.96);
+  padding: 20px;
+  flex-direction: column;
+  z-index: 9999;
   }
-  
+
   .nav-menu.open {
     display: flex;
   }
