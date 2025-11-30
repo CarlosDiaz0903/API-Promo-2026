@@ -203,6 +203,7 @@ header.hidden { opacity: 0; }
 
   #hamburger {
     display: block;
+    z-index: 4000;
   }
 
   .nav-menu {
@@ -216,6 +217,7 @@ header.hidden { opacity: 0; }
     background: rgba(6,12,20,0.9);
     backdrop-filter: blur(8px);
     gap: 24px;
+    z-index: 3000;
 
     opacity: 0;
     transform: translateY(-20px);
