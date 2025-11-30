@@ -93,3 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+const hamb = document.getElementById('hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamb.addEventListener('click', () => {
+  navMenu.classList.toggle('open');
+});
