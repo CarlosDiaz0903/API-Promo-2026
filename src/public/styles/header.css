@@ -229,6 +229,7 @@ header.hidden { opacity: 0; }
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    display: flex;
   }
 
   .nav-item.dropdown .dropdown-menu {
