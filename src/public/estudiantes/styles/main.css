@@ -1,0 +1,161 @@
+body{
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+.estudiantes {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.estudiantes::before {
+  content: "";
+  position: absolute;           
+  inset: 0;
+  background-image: url("/src/public/pictures/Festival-2025-FULL-HD-V2.png");
+  background-size: cover;
+  background-position: center -300px;
+  background-repeat: no-repeat;
+  mask-image: linear-gradient(to right, rgba(0,0,0,0.57) 0%, rgba(0,0,0,0.2) 100% );
+  z-index: -1;
+}
+
+.titulos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: -50px;
+  padding-left: 132px;
+  color: white;
+  user-select: none;
+}
+
+.title {
+  font-family: Nexa Heavy;
+  font-size: 110px;
+
+  opacity: 0;
+  animation: fadeUp 0.9s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.paragraph {
+  font-size: 23px;
+  margin-top: -30px;
+  margin-left: 5px;
+  letter-spacing: 1px;
+  opacity: 0; 
+  animation: fadeUp 0.9s ease-out forwards;
+  animation-delay: 0.6s; /* ⏱ aparece después del título */
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 8%;
+  width: 100%;
+  gap: 130px;
+}
+
+.botones button {
+  width: 580px;
+  height: 190px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);   
+  border: 1px solid rgba(255, 255, 255, 0.20); 
+  border-radius: 40px;
+
+  font-family: 'D-DIN Exp';
+  font-size: 80.11pt;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 2px; 
+
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: 0.3s ease;
+}
+
+.botones button:hover {
+  background: rgba(255, 255, 255, 0.20);
+  transform: scale(1.05); 
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); 
+}
+
+.botones button:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+
+@media (max-width: 575px) {
+  .estudiantes {
+    padding-top: 0px;
+    flex-direction: column;
+  }
+
+  .titulos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding-left: 0px;
+    user-select: none;
+  }
+
+  .title {
+    font-family: Nexa Heavy;
+    font-size: 40px;
+  }
+
+  .paragraph {
+    width: 300px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+
+  .botones button {
+    width: 380px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);   
+    border: 1px solid rgba(255, 255, 255, 0.20); 
+    border-radius: 40px;
+
+    font-family: 'D-DIN Exp';
+    font-size: 50pt;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px; 
+
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: 0.3s ease;
+  }
+
+}
