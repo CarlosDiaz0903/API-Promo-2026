@@ -1,0 +1,115 @@
+{
+  "courses": {
+    "MAT": {
+      "name": "Matemática",
+      "categories": [
+        "Cantidad",
+        "Regularidad",
+        "Forma",
+        "Datos"
+      ]
+    },
+
+    "COM": {
+      "name": "Comunicación",
+      "categories": [
+        "Oralidad",
+        "Lectura",
+        "Escritura"
+      ]
+    },
+
+    "DPCC": {
+      "name": "Desarrollo Personal, Ciudadanía y Cívica",
+      "categories": [
+        "Identidad",
+        "Convivencia"
+      ]
+    },
+
+    "ART": {
+      "name": "Arte y Cultura",
+      "categories": [
+        "Apreciación",
+        "Creación"
+      ]
+    },
+
+    "CYT": {
+      "name": "Ciencia y Tecnología",
+      "categories": [
+        "Indagación",
+        "Explicación",
+        "Diseño"
+      ]
+    },
+
+    "CCSS": {
+      "name": "Ciencias Sociales",
+      "categories": [
+        "Historia",
+        "Espacio",
+        "Economía"
+      ]
+    },
+
+    "ING": {
+      "name": "Inglés",
+      "categories": [
+        "Oral",
+        "Lectura",
+        "Escritura"
+      ]
+    },
+
+    "REL": {
+      "name": "Educación Religiosa",
+      "categories": [
+        "Identidad Cristiana",
+        "Proyecto de Vida"
+      ]
+    },
+
+    "EDUF": {
+      "name": "Educación Física",
+      "categories": [
+        "Motricidad",
+        "Vida Saludable",
+        "Sociomotriz"
+      ]
+    },
+
+    "FRA": {
+      "name": "Francés",
+      "categories": [
+        "Oral",
+        "Lectura",
+        "Escritura"
+      ]
+    },
+
+    "EPT": {
+      "name": "Educación para el Trabajo",
+      "categories": [
+        "Emprendimiento"
+      ]
+    },
+
+    "ALE": {
+      "name": "Alemán",
+      "categories": [
+        "Oral",
+        "Lectura",
+        "Escritura"
+      ]
+    },
+
+    "TRANS": {
+      "name": "Competencias Transversales",
+      "categories": [
+        "Entornos Virtuales",
+        "Aprendizaje Autónomo"
+      ]
+    }
+  }
+}
