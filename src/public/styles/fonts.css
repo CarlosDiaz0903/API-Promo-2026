@@ -69,7 +69,7 @@
 
 @font-face {
   font-family: 'Nexa Heavy';
-  src: url('/fonts/Nexa-Heavy.ttf') format('truetype');
+  src: url('/fonts/Nexa-Heavy.ttf')  ;
   font-weight: normal;
   font-style: normal;
 }
@@ -77,6 +77,14 @@
 @font-face {
   font-family: 'Publica Play';
   src: url('../fonts/Publica-Play.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Room Black';
+  src: url(../fonts/Room-Black/room-black.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
