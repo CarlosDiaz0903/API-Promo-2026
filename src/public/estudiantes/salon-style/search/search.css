@@ -1,0 +1,155 @@
+.search-bar.neon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  max-width: 700px;
+  margin: 0px auto;
+  margin-top: 130px;
+  padding: 14px 22px;
+  cursor: text;
+
+  background: rgba(8, 12, 22, 0.85);
+  backdrop-filter: blur(10px);
+
+  border-radius: 22px;
+  z-index: 0;
+  overflow: hidden;
+  box-shadow:
+    /* sombra base */
+    0 10px 30px rgba(0, 0, 0, 0.35),
+
+    /* glow azul cercano */
+    0 0 22px rgba(9, 77, 155, 0.25),
+
+    /* halo exterior suave */
+    0 0 60px rgba(0, 160, 255, 0.25);
+
+    transition:
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+}
+
+/* INPUT */
+.search-bar.neon input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  font-family: "Room Black", sans-serif;
+  font-size: 17px;
+  color: #eaf6ff;
+}
+
+.search-bar.neon input::placeholder {
+  color: rgba(180, 220, 255, 0.55);
+}
+
+/* ICONO */
+.search-bar.neon .search-icon {
+  font-size: 18px;
+  opacity: 0.6;
+  color: #bfe9ff;
+}
+
+/* WRAPPER */
+.search-orbit {
+  position: relative;
+  max-width: 560px;
+  margin: 56px auto 72px;
+}
+
+/* ANILLO NEON EXTERNO */
+.search-orbit::before,
+.search-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 28px;
+  pointer-events: none;
+}
+
+/* LÍNEA 1 */
+.search-orbit::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    #00cfff 10deg,
+    transparent 24deg,
+
+    transparent 180deg,
+    #7df9ff 190deg,
+    transparent 205deg
+  );
+
+  animation: orbit 3s linear infinite;
+  filter: drop-shadow(0 0 8px #00cfff);
+}
+
+/* LÍNEA 2 (opuesta) */
+.search-orbit::after {
+  background: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    #7df9ff 10deg,
+    transparent 24deg,
+
+    transparent 180deg,
+    #00cfff 190deg,
+    transparent 205deg
+  );
+
+  animation: orbit 5s linear infinite reverse;
+  filter: drop-shadow(0 0 10px #7df9ff);
+  opacity: 0.85;
+}
+
+/* RECORTE PARA QUE SEA SOLO BORDE */
+.search-orbit::before,
+.search-orbit::after {
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: 3px;
+}
+
+/* ANIMACIÓN */
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* RECORTE PARA QUE SEA SOLO BORDE */
+.search-bar.neon::before,
+.search-bar.neon::after {
+  mask: 
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: 2px;
+}
+
+/* ANIMACIÓN */
+
+/* FOCUS → MÁS INTENSO */
+.search-bar.neon:has(input:focus)::after {
+  opacity: 1;
+  filter: blur(18px);
+}
+
+.search-bar.neon:has(input:not(:placeholder-shown))::before {
+  animation-duration: 3s;
+}
+
+.search-bar.neon:has(input:focus),
+.search-bar.neon:hover {
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 220, 255, 0.55),
+    0 0 80px rgba(0, 180, 255, 0.45);
+}

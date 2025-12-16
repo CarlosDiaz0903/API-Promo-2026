@@ -16,8 +16,10 @@
 
     <link rel="stylesheet" href="../salon-style/data-loading/datos.css">
 
-    <link rel="stylesheet" href="../salon-style/cards/cards-grid.css">
-    <link rel="stylesheet" href="../salon-style/cards/student-card.css">
+    <link rel="stylesheet" href="../salon-style/tarjetas/cards-grid.css">
+    <link rel="stylesheet" href="../salon-style/tarjetas/student-card.css">
+
+    <link rel="stylesheet" href="../salon-style/search/search.css">
 </head>
 <body data-class="4A">
     <header>
@@ -75,8 +77,17 @@
           <script src="../salon-style/data-loading/data-loading.js"></script>
         </section>
     </main>
+
+    
+    <section class="search-bar neon">
+      <span class="neon-lines"></span>
+      <input type="text" id="searchInput" placeholder="Buscar estudiante..." autocomplete="off"/>
+      <span class="search-icon">⌕</span>
+      <script type="module" src="../salon-style/search/search.js"></script>
+    </section>
+
     <section class="students-grid" id="studentsGrid">
-      <script src="../salon-style/cards/cards.js"></script>
+      <script type="module" src="../salon-style/tarjetas/cards.js"></script>
       <script src="../salon-style/modal/modal.js"></script>
     </section>
 </body>
