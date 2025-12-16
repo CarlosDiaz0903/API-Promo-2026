@@ -157,7 +157,7 @@
     {
       "internalId": "STU-012",
       "schoolId": "212928",
-      "name": "Ana Flavia Carrión",
+      "name": "Ana Carrión",
       "photo": "",
       "quote": "",
       "birthday": "2009-09-16",
@@ -186,14 +186,14 @@
       "internalId": "STU-014",
       "schoolId": "212559",
       "name": "Stephano Cerna",
-      "photo": "/fotos/Stephano-Cerna.png",
+      "photo": "fotos/Stephano-Cerna.png",
       "quote": "Recuerda que siempre hay alguien esperándote con una sonrisa.",
       "birthday": "2009-09-26",
       "currentClass": "4A",
       "approved": false,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#590208"
       }
     },
     {
@@ -326,14 +326,14 @@
       "internalId": "STU-024",
       "schoolId": "212952",
       "name": "Mathew Espino",
-      "photo": "",
+      "photo": "fotos/Mathew-Espino.png",
       "quote": "Dos caminos se bifurcaban en un bosque, yo tome el menos transitado, eso marcó la diferencia.",
       "birthday": "2009-09-04",
       "currentClass": "4A",
       "approved": false,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#4C000D"
       }
     },
     {

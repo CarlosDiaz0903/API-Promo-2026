@@ -21,17 +21,16 @@ header.hidden { opacity: 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 48px;
+  padding-right: 48px;
+  padding-left: 35px;
   height: 90px;
 }
 
 /* Logo */
 .logo img {
   display: block;
-  width: 180px;
+  width: 130px;
   padding-top: 12px;
-  filter: blur(6px);
-  opacity: 0;
   -webkit-user-drag: none;
   transition: transform 180ms ease;
 }

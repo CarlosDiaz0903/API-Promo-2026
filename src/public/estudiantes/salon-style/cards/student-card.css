@@ -1,0 +1,58 @@
+.student-card {
+  width: 378px;
+  height: 170px;
+  border-radius: 25px;
+  display: flex;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+/* ---------------- INFO ---------------- */
+.card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding-left: 25px;
+  font-family: "Room Black";
+  text-transform: uppercase;
+  opacity: 40%;
+  color: white;
+}
+
+.card-info p {
+  margin: 0px;
+}
+
+.student-name {
+  font-size: 30pt;
+  line-height: 35px;
+}
+
+.student-meta {
+  display: flex;
+  flex-direction: column;
+  font-size: 11pt;
+  margin-right: 6px;
+}
+
+/* ---------------- FOTO ---------------- */
+.card-photo {
+  width: 40%;
+  position: relative;
+}
+
+.card-photo img {
+  position: absolute;
+  bottom: 0;
+  right: -9px; /* DESPLAZAMIENTO */
+  height: 160px;
+  width: auto;
+  object-fit: cover;
+}
+
+.card-photo img.unknown-photo {
+  opacity: 40%;
+}
