@@ -64,7 +64,7 @@
       "quote": "",
       "birthday": "2009-10-24",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": "#002945"
@@ -330,7 +330,7 @@
       "quote": "Dos caminos se bifurcaban en un bosque, yo tome el menos transitado, eso marcó la diferencia.",
       "birthday": "2009-09-04",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": "#4C000D"
