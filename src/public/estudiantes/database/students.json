@@ -64,7 +64,7 @@
       "quote": "",
       "birthday": "2009-10-24",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": "#002945"
@@ -596,7 +596,7 @@
       "quote": "",
       "birthday": "2010-03-30",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": ""
