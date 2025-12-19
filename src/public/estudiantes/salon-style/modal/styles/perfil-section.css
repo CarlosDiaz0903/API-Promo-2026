@@ -1,0 +1,145 @@
+.modal-profile {
+  flex: 9;
+  padding: 33px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.profile-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.profile-photo {
+  position: relative;
+  height: 344px;
+  width: 100%;
+  transform: translateY(39px);
+  overflow: hidden;
+
+  background-size: auto 344px;     /* altura fija */
+  background-repeat: no-repeat;
+  background-position: center top; /* centrada */
+
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 50%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+
+
+.profile-name {
+  text-align: center;
+  font-family: "Room Black";
+  text-transform: uppercase;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-name {
+  font-size: 60pt;
+}
+
+.last-name {
+  font-size: 19pt;
+  margin-top: -12px;
+  letter-spacing: 8px;
+}
+
+
+
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 30px;
+}
+
+
+.data {
+  font-family: "Room Black";
+  font-size: 13pt;
+  color: white;
+  gap: 2px;
+  opacity: .4;
+  text-transform: uppercase;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+
+.quote {
+  position: relative;
+  background: rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: 16px 16px;
+  margin-top: 10px;
+
+  font-family: D-DIN;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  text-align: justify;
+  color: white;
+}
+
+/* base */
+.quote-mark {
+  position: absolute;
+  height: 13px;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* esquina superior izquierda */
+.quote-mark.up {
+  top: -6px;
+  left: -6px;
+}
+
+/* esquina inferior derecha */
+.quote-mark.down {
+  bottom: -6px;
+  right: -6px;
+}
+
+
+
+.share-profile {
+  align-self: center;
+  justify-content: center;
+  width: 260px;
+  height: 22px;
+  padding-top: 2px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+
+  background: rgba(255,255,255,.32);
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+
+  font-family: "Publica Play";
+  font-size: 11.4px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: white;
+  cursor: pointer;
+}

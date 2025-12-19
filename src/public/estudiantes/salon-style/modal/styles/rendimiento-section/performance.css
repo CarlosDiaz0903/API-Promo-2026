@@ -1,0 +1,30 @@
+.performance {
+  flex: 10;
+  padding: 43px;
+  background: rgba(0,0,0,.31);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* Chrome, Edge, Safari */
+.performance::-webkit-scrollbar {
+  width: 6px;
+}
+
+.performance::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.performance::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+}
+
+/* Firefox */
+.performance {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}

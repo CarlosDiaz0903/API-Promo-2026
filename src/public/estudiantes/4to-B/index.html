@@ -15,11 +15,20 @@
     <link rel="stylesheet" href="../salon-style/main.css">
 
     <link rel="stylesheet" href="../salon-style/data-loading/datos.css">
-
     <link rel="stylesheet" href="../salon-style/tarjetas/cards-grid.css">
     <link rel="stylesheet" href="../salon-style/tarjetas/student-card.css">
 
     <link rel="stylesheet" href="../salon-style/search/search.css">
+
+    <link rel="stylesheet" href="../salon-style/modal/styles/modal.css">
+    <link rel="stylesheet" href="../salon-style/modal/styles/perfil-section.css">
+    
+    <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/performance.css">
+    <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/general-dashboard.css">
+    <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/japonese-profile.css">
+    <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/academic-performance.css">
+    
+
 </head>
 <body data-class="4B">
     <header>
@@ -62,20 +71,23 @@
             </div>
         </section>
         <section class="class-stats">
-          <div class="stat">
-            <span class="stat-number" data-target="37">0</span>
-            <span class="stat-label">Estudiantes</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number stat-letter">A+</span>
-            <span class="stat-label">Promedio general</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number" data-target="86" data-suffix="%">0%</span>
-            <span class="stat-label">Aprobados</span>
-          </div>
-          <script src="../salon-style/data-loading/data-loading.js"></script>
-        </section>
+            <div class="stat">
+              <span class="stat-number" data-target="0">0</span>
+              <span class="stat-label">Estudiantes</span>
+            </div>
+
+            <div class="stat">
+              <span class="stat-number stat-letter">—</span>
+              <span class="stat-label">Promedio general</span>
+            </div>
+
+            <div class="stat">
+              <span class="stat-number" data-suffix="%">0%</span>
+              <span class="stat-label">Aprobados</span>
+            </div>
+
+            <script src="../salon-style/data-loading/data-loading.js"></script>
+          </section>
     </main>
 
     
@@ -88,6 +100,9 @@
 
     <section class="students-grid" id="studentsGrid">
       <script type="module" src="../salon-style/tarjetas/cards.js"></script>
-      <script src="../salon-style/modal/modal.js"></script>
+      <script type="module" src="../salon-style/modal/modal.js"></script>
+      <script type="module" src="../salon-style/modal/modal-profile.js"></script>
+      <script type="module" src="../salon-style/modal/modal-performance.js"></script>
     </section>
 </body>
+</html>

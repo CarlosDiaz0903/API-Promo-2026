@@ -1,0 +1,59 @@
+.japanese-profile {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(2, 186px);
+  gap: 18px;
+}
+
+
+
+.jp-card {
+  box-sizing: border-box;
+
+  width: 186px;
+  height: 111px;
+  padding: 13px 14px ;
+  border: white 2px 1px;
+  border-radius: 16px;
+
+  background: rgba(255,255,255,.25);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "D-DIN Exp";
+  font-weight: bold;
+  color: white;
+}
+
+.jp-category {
+  font-size: 16px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.jp-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.jp-data div:first-child {
+  font-size: 50px;
+}
+
+.jp-data div:last-child {
+  font-size: 20px;
+  opacity: 53%;
+}
+
+.jp-disclaimer {
+  margin-top: 10px;
+  max-width: 370px;
+
+  font-family: "D-DIN Exp";
+  font-size: 10px;
+  line-height: 1.4;
+
+  color: rgba(255, 255, 255, 0.6);
+}

@@ -1,0 +1,43 @@
+.general-dashboard {
+  box-sizing: border-box;
+  max-width: 370px;
+  width: 100%;
+  background: rgba(255,255,255,.24);
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: "D-DIN Exp";
+  color: white;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.label, .grade, .points {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.label {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.grade {
+  justify-content: center;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.27);
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.points {
+  justify-content: flex-end;
+  font-weight: 300;
+  font-style: italic;
+}

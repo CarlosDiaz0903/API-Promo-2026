@@ -60,14 +60,14 @@
       "internalId": "STU-005",
       "schoolId": "212934",
       "name": "Julio Benitez",
-      "photo": "",
+      "photo": "fotos/Julio-Benitez.png",
       "quote": "",
       "birthday": "2009-10-24",
       "currentClass": "4A",
       "approved": false,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#002945"
       }
     },
     {

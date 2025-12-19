@@ -1,0 +1,95 @@
+.student-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.student-modal {
+  position: relative;
+  width: 100%;
+  max-width: 1074px;
+  height: 740px;
+  display: flex;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.modal-border {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* LEFT - TOP (77.5px) */
+.modal-border.lt {
+  top: 18px;
+  left: 18px;
+  height: 77.5px;
+}
+
+/* LEFT - BOTTOM (81px) */
+.modal-border.lb {
+  bottom: 18px;
+  left: 18px;
+  height: 81px;
+}
+
+/* RIGHT - TOP (81px) */
+.modal-border.rt {
+  top: 18px;
+  right: 18px;
+  height: 81px;
+}
+
+/* RIGHT - BOTTOM (77.5px) */
+.modal-border.rb {
+  bottom: 18px;
+  right: 18px;
+  height: 77.5px;
+}
+
+
+/* BLOQUEO */
+.student-modal.locked .modal-profile,
+.student-modal.locked .performance {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.modal-lock {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.lock-message {
+  text-align: center;
+  color: white;
+  font-family: "D-DIN Exp";
+}
+
+.lock-message span {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.lock-message p {
+  margin-top: 12px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
