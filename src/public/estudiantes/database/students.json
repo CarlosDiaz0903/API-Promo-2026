@@ -159,13 +159,13 @@
       "schoolId": "212928",
       "name": "Ana Carrión",
       "photo": "",
-      "quote": "",
+      "quote": "I wanna be Legendary.",
       "birthday": "2009-09-16",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#002345"
       }
     },
     {
@@ -173,13 +173,13 @@
       "schoolId": "212929",
       "name": "Valeria Carrión",
       "photo": "",
-      "quote": "",
+      "quote": "No matter how scared I feel, and even if it feels like I can't move my legs, I'll still keep going forward.",
       "birthday": "2009-09-16",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#005366"
       }
     },
     {
@@ -789,13 +789,13 @@
       "schoolId": "212985",
       "name": "Ainara Rocha",
       "photo": "",
-      "quote": "",
+      "quote": "I didn't sleep for 9 days doing science.",
       "birthday": "2009-10-16",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#855600"
       }
     },
     {
