@@ -369,13 +369,13 @@
       "schoolId": "212433",
       "name": "Meylin Gomez",
       "photo": "",
-      "quote": "",
+      "quote": "Los sueños se hacer realidad si te esfuerzas por hacerlos.",
       "birthday": "2009-12-10",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#004C2F"
       }
     },
     {
@@ -1041,13 +1041,13 @@
       "schoolId": "212901",
       "name": "Leonardo Zuñiga",
       "photo": "",
-      "quote": "",
+      "quote": "El mundo hay muchas papas",
       "birthday": "2010-01-29",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#002945"
       }
     }
   ]
