@@ -375,7 +375,7 @@
       "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": "#004C2F"
+        "accentColor": "#003226"
       }
     },
     {
@@ -536,14 +536,14 @@
       "internalId": "STU-039",
       "schoolId": "213006",
       "name": "Rodrigo Martinez",
-      "photo": "",
-      "quote": "",
+      "photo": "fotos/Rodrigo-Martinez.png",
+      "quote": "Tener una verdadera disciplina es hacer lo que más odias, en los días que menos quieres, como si fuera lo que más disfrutas.",
       "birthday": "2010-03-04",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#030303"
       }
     },
     {
