@@ -495,13 +495,13 @@
       "schoolId": "213004",
       "name": "Leonardo Marchand",
       "photo": "",
-      "quote": "",
+      "quote": "YHLQMDLG",
       "birthday": "2009-04-19",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#44004c"
       }
     },
     {
@@ -802,14 +802,14 @@
       "internalId": "STU-058",
       "schoolId": "212960",
       "name": "Alana Rojas",
-      "photo": "",
-      "quote": "",
+      "photo": "fotos/Alana-Rojas.png",
+      "quote": "Cada pequeño esfuerzo que hacemos nos acerca más al futuro que soñamos.",
       "birthday": "2009-05-01",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#002945"
       }
     },
     {
