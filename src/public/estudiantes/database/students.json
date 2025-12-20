@@ -313,7 +313,7 @@
       "schoolId": "212945",
       "name": "Kevin Elias",
       "photo": "",
-      "quote": "Jiwoong 🥺",
+      "quote": "We can make history, yes, I know that.",
       "birthday": "2009-12-06",
       "currentClass": "4B",
       "approved": true,
@@ -341,13 +341,13 @@
       "schoolId": "212923",
       "name": "Bárbara Fernandez",
       "photo": "",
-      "quote": "",
+      "quote": "El que no arriesga, no gana...",
       "birthday": "2010-02-20",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#002945"
       }
     },
     {
@@ -775,7 +775,7 @@
       "schoolId": "212954",
       "name": "Fabiana Robles",
       "photo": "",
-      "quote": "",
+      "quote": "Lay all your love on me.",
       "birthday": "2010-02-15",
       "currentClass": "4B",
       "approved": false,
@@ -957,13 +957,13 @@
       "schoolId": "212341",
       "name": "Valeria Valencia",
       "photo": "",
-      "quote": "",
+      "quote": "Cree en ti, incluso cuando nadie más lo haga.",
       "birthday": "2010-01-28",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#7D0D5E"
       }
     },
     {
