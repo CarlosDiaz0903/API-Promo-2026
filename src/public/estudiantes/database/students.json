@@ -131,13 +131,13 @@
       "schoolId": "213044",
       "name": "Matias Carbajal",
       "photo": "",
-      "quote": "",
+      "quote": "Se agradecido por todo lo que te dan y por la salud que Dios te brinda cada día.",
       "birthday": "2009-04-02",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#074523"
       }
     },
     {
@@ -705,13 +705,13 @@
       "schoolId": "213009",
       "name": "Liana Rebaza",
       "photo": "",
-      "quote": "",
+      "quote": "Soy una reine...",
       "birthday": "2009-07-24",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#7D0D5E"
       }
     },
     {
@@ -1013,13 +1013,13 @@
       "schoolId": "213020",
       "name": "Jordany Yauli",
       "photo": "",
-      "quote": "",
+      "quote": "Y si todos estan contra mi me llega al pincho hay arta lche pa tdos esos parrokos",
       "birthday": "2010-02-24",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#0A0A0A"
       }
     },
     {
