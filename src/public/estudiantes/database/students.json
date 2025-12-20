@@ -313,13 +313,13 @@
       "schoolId": "212945",
       "name": "Kevin Elias",
       "photo": "",
-      "quote": "",
+      "quote": "Jiwoong 🥺",
       "birthday": "2009-12-06",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#003226"
       }
     },
     {
