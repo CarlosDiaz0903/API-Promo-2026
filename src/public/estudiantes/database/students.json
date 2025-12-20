@@ -368,7 +368,7 @@
       "internalId": "STU-027",
       "schoolId": "212433",
       "name": "Meylin Gomez",
-      "photo": "",
+      "photo": "fotos/Meylin-Gomez.png",
       "quote": "Los sueños se hacer realidad si te esfuerzas por hacerlos.",
       "birthday": "2009-12-10",
       "currentClass": "4A",
@@ -733,13 +733,13 @@
       "schoolId": "213092",
       "name": "Ariana Rios",
       "photo": "",
-      "quote": "",
+      "quote": "Aunque pienses que estes solo, volteate y busca a esa persona que siempre te acompaña <3.",
       "birthday": "2009-09-05",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#002945"
       }
     },
     {
@@ -1041,7 +1041,7 @@
       "schoolId": "212901",
       "name": "Leonardo Zuñiga",
       "photo": "",
-      "quote": "El mundo hay muchas papas",
+      "quote": "El mundo hay muchas papas.",
       "birthday": "2010-01-29",
       "currentClass": "4A",
       "approved": true,
