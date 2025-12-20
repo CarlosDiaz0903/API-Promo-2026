@@ -117,13 +117,13 @@
       "schoolId": "214533",
       "name": "Luciana Calderón",
       "photo": "",
-      "quote": "",
+      "quote": "You know ,I know :lee know.",
       "birthday": "2009-04-15",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#250540"
       }
     },
     {
