@@ -915,13 +915,13 @@
       "schoolId": "214522",
       "name": "Mihai Simion",
       "photo": "",
-      "quote": "",
+      "quote": "LOY4LTY 4EVER.",
       "birthday": "2010-02-16",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#1ec292"
       }
     },
     {
