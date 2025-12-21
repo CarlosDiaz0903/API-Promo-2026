@@ -494,14 +494,14 @@
       "internalId": "STU-036",
       "schoolId": "213004",
       "name": "Leonardo Marchand",
-      "photo": "",
+      "photo": "fotos/Leonardo-Marchand.png",
       "quote": "YHLQMDLG",
       "birthday": "2009-04-19",
       "currentClass": "4B",
       "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": "#44004c"
+        "accentColor": "#170924"
       }
     },
     {
@@ -778,10 +778,10 @@
       "quote": "Lay all your love on me.",
       "birthday": "2010-02-15",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#dfaca5"
       }
     },
     {
