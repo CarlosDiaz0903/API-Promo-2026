@@ -143,3 +143,20 @@
   color: white;
   cursor: pointer;
 }
+
+@media (max-width: 1000px) {
+  .modal-profile {
+    flex-shrink: 0;
+    padding: 18px;
+  }
+
+  .first-name {
+    font-size: 55pt;
+  }
+
+  .last-name {
+    font-size: 15pt;
+    letter-spacing: 4px;
+  }
+}
+

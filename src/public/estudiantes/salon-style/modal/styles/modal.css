@@ -8,20 +8,28 @@
   z-index: 9999;
 }
 
+
 .student-modal {
   position: relative;
   width: 100%;
   max-width: 1074px;
   height: 740px;
-  display: flex;
+
   border-radius: 40px;
   overflow: hidden;
+}
+
+.modal-scroll {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .modal-border {
   position: absolute;
   pointer-events: none;
-  z-index: 5;
+  z-index: 10;
 }
 
 /* LEFT - TOP (77.5px) */
@@ -93,3 +101,30 @@
   opacity: 0.8;
 }
 
+
+@media (max-width: 1000px) {
+  .student-modal {
+    max-width: 410px;
+    height: 760px;
+
+  }
+
+  .student-modal::-webkit-scrollbar {
+    display: none;
+  }
+
+  .modal-scroll {
+    flex-direction: column;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .modal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+}

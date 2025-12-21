@@ -15,92 +15,100 @@ function darkenColor(hex, percent) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-
+// ==============================
+// IMPORTS
+// ==============================
+import { buildProfileSection } from "../modal/modal-profile.js";
+import {
+  buildPerformanceSection,
+  buildAcademicSection
+} from "../modal/modal-performance.js";
 
 // ==============================
 // MODAL PRINCIPAL
 // ==============================
-import { buildProfileSection } from "../modal/modal-profile.js";
-import { buildPerformanceSection } from "../modal/modal-performance.js";
-import { buildAcademicSection } from "../modal/modal-performance.js";
 
 export async function openStudentModal(student) {
   // Overlay
   const overlay = document.createElement("div");
   overlay.className = "student-modal-overlay";
 
-  // Modal
+  // Modal (MARCO)
   const modal = document.createElement("div");
   modal.className = "student-modal";
 
   applyModalBackground(modal, student);
 
-      // Bordes Decorativos
-      const borders = [
-        { class: "modal-border lt", src: "../salon-style/modal/margin/left-top.png" },
-        { class: "modal-border lb", src: "../salon-style/modal/margin/left-bottom.png" },
-        { class: "modal-border rt", src: "../salon-style/modal/margin/right-top.png" },
-        { class: "modal-border rb", src: "../salon-style/modal/margin/right-bottom.png" }
-      ];
+  // ==============================
+  // BORDES DECORATIVOS (FIJOS)
+  // ==============================
+  const borders = [
+    { class: "modal-border lt", src: "../salon-style/modal/margin/left-top.png" },
+    { class: "modal-border lb", src: "../salon-style/modal/margin/left-bottom.png" },
+    { class: "modal-border rt", src: "../salon-style/modal/margin/right-top.png" },
+    { class: "modal-border rb", src: "../salon-style/modal/margin/right-bottom.png" }
+  ];
 
-      borders.forEach(b => {
-        const img = document.createElement("img");
-        img.src = b.src;
-        img.className = b.class;
-        modal.appendChild(img);
-      });
+  borders.forEach(b => {
+    const img = document.createElement("img");
+    img.src = b.src;
+    img.className = b.class;
+    modal.appendChild(img);
+  });
 
   // ==============================
-  // PERFIL (IZQUIERDA)
+  // CONTENEDOR SCROLLEABLE
   // ==============================
+  const modalScroll = document.createElement("div");
+  modalScroll.className = "modal-scroll";
 
+  // PERFIL
   const profile = buildProfileSection(student);
 
-  // ==============================
-  // RENDIMIENTO (DERECHA)
-  // ==============================
-
+  // RENDIMIENTO
   const performance = await buildPerformanceSection(student);
   const academic = await buildAcademicSection(student);
   performance.appendChild(academic);
 
-// ==============================
-// ENSAMBLAR MODAL
-// ==============================
-    modal.append(profile, performance);
-    overlay.appendChild(modal);
-    document.body.appendChild(overlay);
+  modalScroll.append(profile, performance);
+  modal.appendChild(modalScroll);
 
-    // ==============================
-    // BLOQUEO POR APROBACIÓN
-    // ==============================
-    if (student.approved === false) {
-      modal.classList.add("locked");
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
 
-      const lockOverlay = document.createElement("div");
-      lockOverlay.className = "modal-lock";
+  document.body.style.overflow = "hidden";
 
-      lockOverlay.innerHTML = `
-        <div class="lock-message">
-          <span>PERFIL Y CALIFICACIONES</span>
-          <span>AÚN NO HABILITADAS</span>
-          <p>
-            Para habilitar este perfil,<br>
-            contacta a <strong>Carlos Díaz</strong>.
-          </p>
-        </div>
-      `;
 
-      modal.appendChild(lockOverlay);
-    }
+  // ==============================
+  // BLOQUEO POR APROBACIÓN
+  // ==============================
+  if (student.approved === false) {
+    modal.classList.add("locked");
+
+    const lockOverlay = document.createElement("div");
+    lockOverlay.className = "modal-lock";
+
+    lockOverlay.innerHTML = `
+      <div class="lock-message">
+        <span>PERFIL Y CALIFICACIONES</span>
+        <span>AÚN NO HABILITADAS</span>
+        <p>
+          Para habilitar este perfil,<br>
+          contacta a <strong>Carlos Díaz</strong>.
+        </p>
+      </div>
+    `;
+
+    modal.appendChild(lockOverlay);
+  }
 
   // ==============================
   // CERRAR MODAL
   // ==============================
-
-  overlay.addEventListener("click", (e) => {
+  overlay.addEventListener("click", e => {
     if (e.target === overlay) {
       overlay.remove();
+    document.body.style.overflow = "";
     }
   });
 }

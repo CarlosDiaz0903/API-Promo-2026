@@ -28,3 +28,11 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.1) transparent;
 }
+
+@media (max-width: 1000px) {
+  .performance {
+    padding: 25px;
+    gap: 20px;
+    overflow: visible;
+  }
+}

@@ -41,3 +41,9 @@
   font-weight: 300;
   font-style: italic;
 }
+
+@media (max-width: 1000px) {
+ .general-dashboard {
+  margin-top: 12px;
+ }
+}
