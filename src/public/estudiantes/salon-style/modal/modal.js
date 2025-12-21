@@ -15,6 +15,12 @@ function darkenColor(hex, percent) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+function closeModal(overlay) {
+  overlay.remove();
+  document.body.style.overflow = "";
+}
+
+
 // ==============================
 // IMPORTS
 // ==============================
@@ -37,14 +43,10 @@ export async function openStudentModal(student) {
   const modal = document.createElement("div");
   modal.className = "student-modal";
 
-//BOTON DE CIERRE-CELULAR
+//BOTON DE
   const closeBtn = document.createElement("button");
   closeBtn.className = "modal-close";
   closeBtn.innerHTML = "✕";
-
-  closeBtn.addEventListener("click", () => {
-    overlay.remove();
-  });
 
   modal.appendChild(closeBtn);
 
@@ -117,12 +119,18 @@ export async function openStudentModal(student) {
   // ==============================
   // CERRAR MODAL
   // ==============================
+  closeBtn.addEventListener("click", e => {
+    e.stopPropagation();
+    closeModal(overlay);
+  });
+
   overlay.addEventListener("click", e => {
     if (e.target === overlay) {
-      overlay.remove();
-    document.body.style.overflow = "";
+      closeModal(overlay);
     }
   });
+
+
 }
 
 // ==============================
