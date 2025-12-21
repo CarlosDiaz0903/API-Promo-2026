@@ -382,14 +382,14 @@
       "internalId": "STU-028",
       "schoolId": "212342",
       "name": "Jeany Gomez",
-      "photo": "",
+      "photo": "fotos/Jeany-Gomez.png",
       "quote": "Que no te importe lo que otros piensan, se tu mismo...",
       "birthday": "2009-05-23",
       "currentClass": "4A",
       "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": "#002945"
+        "accentColor": "#022640"
       }
     },
     {
@@ -705,7 +705,7 @@
       "schoolId": "213009",
       "name": "Liana Rebaza",
       "photo": "",
-      "quote": "Soy una reine...",
+      "quote": "emiloverrr <3",
       "birthday": "2009-07-24",
       "currentClass": "4B",
       "approved": true,
