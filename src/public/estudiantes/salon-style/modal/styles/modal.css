@@ -101,6 +101,10 @@
   opacity: 0.8;
 }
 
+.modal-close {
+  display: none;
+}
+
 
 @media (max-width: 1000px) {
   .student-modal {
@@ -125,6 +129,38 @@
 
   .modal-scroll::-webkit-scrollbar {
     display: none;
+  }
+
+
+
+  .modal-close {
+    display: flex;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    z-index: 2000;
+  }
+
+  .modal-close:active {
+    transform: scale(0.95);
   }
 
 }

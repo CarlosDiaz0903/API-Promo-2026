@@ -37,6 +37,18 @@ export async function openStudentModal(student) {
   const modal = document.createElement("div");
   modal.className = "student-modal";
 
+//BOTON DE CIERRE-CELULAR
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "modal-close";
+  closeBtn.innerHTML = "✕";
+
+  closeBtn.addEventListener("click", () => {
+    overlay.remove();
+  });
+
+  modal.appendChild(closeBtn);
+
+
   applyModalBackground(modal, student);
 
   // ==============================
