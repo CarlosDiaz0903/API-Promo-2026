@@ -747,13 +747,13 @@
       "schoolId": "212400",
       "name": "Pedro Rivera",
       "photo": "",
-      "quote": "",
+      "quote": "Aunque la sombra se sienta eterna, siempre va a existir una luz que te salve de ella.",
       "birthday": "2009-09-19",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#0a012c"
       }
     },
     {
