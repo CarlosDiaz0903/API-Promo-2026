@@ -985,13 +985,13 @@
       "schoolId": "213334",
       "name": "Esteban Villanueva",
       "photo": "",
-      "quote": "",
+      "quote": "Sin rendirse, solo intentar una vez más.",
       "birthday": "2009-11-26",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#030303"
       }
     },
     {
