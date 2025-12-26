@@ -481,13 +481,13 @@
       "schoolId": "213015",
       "name": "Juan Diego Mar",
       "photo": "",
-      "quote": "",
+      "quote": "Sin mente para pensar. Sin voluntad para romperse. Sin voz para gritar sufrimiento.",
       "birthday": "2009-11-18",
       "currentClass": "4B",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#002945"
       }
     },
     {
@@ -985,13 +985,13 @@
       "schoolId": "213334",
       "name": "Esteban Villanueva",
       "photo": "",
-      "quote": "",
+      "quote": "Sin rendirse, solo intentar una vez más.",
       "birthday": "2009-11-26",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#030303"
       }
     },
     {
