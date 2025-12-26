@@ -22,7 +22,7 @@
       "quote": "",
       "birthday": "2010-03-17",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": ""
@@ -470,7 +470,7 @@
       "quote": "",
       "birthday": "2009-05-06",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": ""
@@ -764,7 +764,7 @@
       "quote": "",
       "birthday": "2009-05-15",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": ""
@@ -946,7 +946,7 @@
       "quote": "",
       "birthday": "2010-03-04",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": ""
@@ -974,7 +974,7 @@
       "quote": "",
       "birthday": "2009-12-03",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": ""
