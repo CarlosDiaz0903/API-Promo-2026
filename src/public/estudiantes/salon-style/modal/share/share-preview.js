@@ -67,7 +67,7 @@ export async function openSharePreview(student) {
     try {
       await navigator.share({
         title: "Perfil Académico",
-        text: "Mira este perfil académico",
+        text: "Perfil académico 📊",
         files: [file]
       });
     } catch {
