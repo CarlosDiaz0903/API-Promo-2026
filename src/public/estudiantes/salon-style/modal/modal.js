@@ -1,27 +1,4 @@
 // ==============================
-// UTILIDADES
-// ==============================
-
-function darkenColor(hex, percent) {
-  let num = parseInt(hex.replace("#", ""), 16);
-  let r = (num >> 16) & 255;
-  let g = (num >> 8) & 255;
-  let b = num & 255;
-
-  r = Math.max(0, Math.floor(r * (1 - percent)));
-  g = Math.max(0, Math.floor(g * (1 - percent)));
-  b = Math.max(0, Math.floor(b * (1 - percent)));
-
-  return `rgb(${r}, ${g}, ${b})`;
-}
-
-function closeModal(overlay) {
-  overlay.remove();
-  document.body.style.overflow = "";
-}
-
-
-// ==============================
 // IMPORTS
 // ==============================
 import { buildProfileSection } from "../modal/modal-profile.js";
@@ -29,6 +6,7 @@ import {
   buildPerformanceSection,
   buildAcademicSection
 } from "../modal/modal-performance.js";
+import { applyModalBackground } from "./modal-utils.js";
 
 // ==============================
 // MODAL PRINCIPAL
@@ -119,6 +97,12 @@ export async function openStudentModal(student) {
   // ==============================
   // CERRAR MODAL
   // ==============================
+
+  function closeModal(overlay) {
+    overlay.remove();
+    document.body.style.overflow = "";
+  }
+ 
   closeBtn.addEventListener("click", e => {
     e.stopPropagation();
     closeModal(overlay);
@@ -130,27 +114,4 @@ export async function openStudentModal(student) {
     }
   });
 
-
-}
-
-// ==============================
-// FONDO DINÁMICO
-// ==============================
-
-function applyModalBackground(modal, student) {
-  if (student.profileTheme?.background) {
-    modal.style.backgroundImage = `url(${student.profileTheme.background})`;
-    modal.style.backgroundSize = "cover";
-    modal.style.backgroundPosition = "center";
-  } else {
-    const accent = student.profileTheme?.accentColor || "#333";
-
-    if (accent.toLowerCase() === "#333") {
-      modal.style.background = "#333";
-    } else {
-      const darkerAccent = darkenColor(accent, 0.4);
-      modal.style.background =
-        `linear-gradient(to right bottom, ${accent}, ${darkerAccent})`;
-    }
-  }
 }

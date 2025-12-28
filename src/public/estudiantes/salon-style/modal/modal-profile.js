@@ -11,6 +11,7 @@ function formatDate(dateStr) {
   }).toUpperCase();
 }
 
+import { openSharePreview } from "./share/share-preview.js";
 
 export function buildProfileSection(student) {
   const profile = document.createElement("section");
@@ -93,7 +94,13 @@ export function buildProfileSection(student) {
   shareBtn.className = "share-profile";
   shareBtn.textContent = "COMPARTIR PERFIL";
 
+  shareBtn.addEventListener("click", () => {
+    openSharePreview(student);
+  });
+
   meta.append(data, quoteDiv, shareBtn);
+
+
 
   profileContent.append(account, meta);
   profile.appendChild(profileContent);
