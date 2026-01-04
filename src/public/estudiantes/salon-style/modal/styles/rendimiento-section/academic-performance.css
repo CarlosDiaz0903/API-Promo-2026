@@ -9,6 +9,7 @@
   margin-top: 55px;
   gap: 17px;
   margin-bottom: 26px;
+  z-index: 4;
 }
 
 .academic-titles {

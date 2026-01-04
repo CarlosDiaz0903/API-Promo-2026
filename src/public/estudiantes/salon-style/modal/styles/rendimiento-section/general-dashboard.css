@@ -3,6 +3,8 @@
   max-width: 370px;
   width: 100%;
   background: rgba(255,255,255,.24);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
   border-radius: 12px;
 
   display: flex;

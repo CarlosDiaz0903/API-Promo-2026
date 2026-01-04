@@ -42,18 +42,24 @@ function calculateGeneralGrade(studentGrades) {
 // ================================
 // COUNTER ANIMATION
 // ================================
-function animateCounter(el, target, suffix = "", duration = 1200) {
+function animateCounter(el, target, suffix = "", duration = 1500) {
   let start = 0;
   const startTime = performance.now();
 
   function update(time) {
-    const progress = Math.min((time - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
+    const elapsed = time - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease-out cubic mejorado
+    const eased = 1 - Math.pow(1 - progress, 4);
     const value = Math.floor(eased * target);
-
+    
     el.textContent = value + suffix;
 
-    if (progress < 1) requestAnimationFrame(update);
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target + suffix; // Asegura valor exacto
+    }
   }
 
   requestAnimationFrame(update);

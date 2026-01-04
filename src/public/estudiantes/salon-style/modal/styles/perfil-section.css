@@ -1,8 +1,10 @@
 .modal-profile {
   flex: 9;
-  padding: 33px;
+  padding: 40px;
   display: flex;
   align-items: flex-end;
+  z-index: 3;
+  position: relative;
 }
 
 .profile-content {
@@ -38,6 +40,7 @@
     rgba(0,0,0,1) 50%,
     rgba(0,0,0,0) 100%
   );
+  
 }
 
 
@@ -160,3 +163,107 @@
   }
 }
 
+/* ===== ANIMACIÓN CLÁSICA 1 POR 1 - PERFIL (CORREGIDO PARA DATA opacity 0.4) ===== */
+
+@keyframes fadeUp {
+  to {
+    opacity: 1; /* Este queda para los elementos que SÍ quieren opacity 1 */
+    transform: translateY(0);
+  }
+}
+
+/* Keyframe especial para .data que termina en opacity 0.4 */
+@keyframes fadeUpData {
+  to {
+    opacity: 0.4; /* ¡Opacidad final exacta que quieres! */
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  to {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+  }
+  80% {
+    transform: translateY(5px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== ESTADO INICIAL ===== */
+.modal-profile .profile-name,
+.modal-profile .data,
+.modal-profile .quote,
+.modal-profile .share-profile,
+.modal-profile .quote-mark {
+  opacity: 0;
+}
+
+/* FOTO - solo fade (sin tocar transform ni opacity final) */
+.modal-profile .profile-photo {
+  opacity: 0;
+  animation: photoFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes photoFadeIn {
+  to {
+    opacity: 1; /* Respeta el opacity inline del JS (1 o 0.31) */
+  }
+}
+
+/* ===== ORDEN DE ENTRADA ===== */
+
+/* 1. Foto */
+.modal-profile .profile-photo {
+  animation-delay: 0.2s;
+}
+
+/* 2. Nombre */
+.modal-profile .profile-name {
+  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+/* 3. Datos - usa keyframe especial que termina en opacity 0.4 */
+.modal-profile .data {
+  transform: translateY(30px);
+  animation: fadeUpData 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.0s;
+}
+
+/* 4. Quote */
+.modal-profile .quote {
+  transform: translateY(40px);
+  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.4s;
+}
+
+/* 5. Comillas */
+.modal-profile .quote-mark {
+  transform: scale(0);
+  animation: fadeInScale 0.8s ease-out forwards;
+  animation-delay: 1.7s;
+}
+
+/* 6. Botón */
+.modal-profile .share-profile {
+  transform: translateY(50px);
+  animation: bounceIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 1.8s;
+}

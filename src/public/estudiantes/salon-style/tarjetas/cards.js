@@ -57,6 +57,17 @@ export async function renderStudents(students) {
       }
     }
 
+    // Animación de entrada escalonada al cargar
+    grid.style.opacity = "1";
+
+    // Forzamos reflow para que las animaciones se apliquen correctamente
+    grid.offsetHeight;
+
+    const cards = grid.querySelectorAll(".student-card");
+    cards.forEach((card, index) => {
+      card.style.animationDelay = `${0.1 + index * 0.1}s`;
+    });
+
     /* GENERAL */
     const studentGrades = gradesData.grades?.[student.internalId];
     let generalLabel = "—";

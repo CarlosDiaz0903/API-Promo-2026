@@ -1,0 +1,290 @@
+/* ============================
+   CONTENIDO
+============================ */
+
+/* ============================
+   BORDES
+============================ */
+.share-border {
+  position: absolute;
+  pointer-events: none;
+}
+
+.share-border.lt { top: 25px; left: 25px; height: 146px; }
+.share-border.rt { top: 25px; right: 25px; height: 146px; }
+.share-border.lb { bottom: 25px; left: 25px; height: 153px; }
+.share-border.rb { bottom: 25px; right: 25px; height: 153px; }
+
+
+.share-linear-bg {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.share-linear {
+  position: absolute;
+  top: 618px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.share-star {
+  position: absolute;
+  top: 33px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 51.6px;
+  width: 51px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+
+
+/* =========================
+   STARS FRONT (DELANTE DE TODO)
+   ========================= */
+.share-star-front {
+  position: absolute;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.share-star-front.big {
+  top: 979px;
+  right: -109px;
+  height: 227px;
+}
+
+.share-star-front.small {
+  top: 674px;
+  left: -20px;
+  height: 128px;
+}
+
+/* =========================
+   LOGO BLESSED (MÁXIMO NIVEL)
+   ========================= */
+.share-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 47px;
+  height: 48px;
+  z-index: 200;
+  pointer-events: none;
+}
+
+
+
+
+
+
+/* =========================
+   CONTENT CONTENT CONTENT
+   ========================= */
+.share-content {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-family: "Room Black";
+  color: #fff;
+  width: 100%;
+}
+
+/* =========================
+   CONTENT META
+   ========================= */
+
+.share-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  margin-top: 135px;
+  z-index: 3;
+}
+
+/* FECHA */
+.meta-date {
+  font-family: "D-DIN Exp";
+  font-size: 38.13px;
+  letter-spacing: 1.7px;
+  opacity: 0.72;
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+/* NOMBRE */
+.meta-name {
+  text-align: center;
+  line-height: 0.95;
+}
+
+.meta-name .first-name {
+  display: block;
+  font-size: var(--first-name-size);
+}
+
+.meta-name .last-name {
+  display: block;
+  font-size: 63.33px;
+}
+
+/* DATA PRIO */
+.meta-data-prio {
+  margin-top: 19px;
+  width: 896.4px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+  font-size: 35.8px;
+  opacity: 0.4;
+}
+
+
+/* =========================
+   CONTENT PHOTO
+   ========================= */
+
+.share-photo {
+  margin-top: -110px;
+  z-index: 8;
+  display: flex;
+  justify-content: center;
+}
+
+.share-photo img {
+  height: 1025.7px;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* =========================
+   CONTENT PERSONAL INFO
+   ========================= */
+
+.share-personal-info {
+  position: relative;
+  margin-top: -122px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  z-index: 5;
+}
+
+/* ==============================
+   SHARE - GENERAL DASHBOARD
+============================== */
+
+.share-general-dashboard {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 729.25px;
+  height: 66.77px;
+
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 60px;
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: "D-DIN Exp";
+  color: white;
+
+  padding: 0 18px;
+}
+
+/* columnas */
+.share-general-dashboard .label,
+.share-general-dashboard .grade,
+.share-general-dashboard .points {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+}
+
+/* LABEL */
+.share-general-dashboard .label {
+  font-size: 35px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  opacity: 0.85;
+}
+
+/* GRADE (CENTRO) */
+.share-general-dashboard .grade {
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.32);
+  border-radius: 60px;
+
+  font-size: 41px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* POINTS */
+.share-general-dashboard .points {
+  justify-content: flex-end;
+
+  font-size: 39px;
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+
+
+/* ==============================
+   SHARE - QUOTE
+============================== */
+
+.share-quote {
+  background: transparent;
+  display: inline-block;
+  width: 704px;
+
+  margin-top: 108px;
+
+  font-family: "D-DIN";
+  text-align: center;
+  font-size: 40.49px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* base */
+.share-quote-mark {
+  position: absolute;
+  height: 40px;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* esquina superior izquierda */
+.share-quote-mark.up {
+  top: 142px;
+  left: -80px;
+}
+
+/* esquina inferior derecha */
+.share-quote-mark.down {
+  bottom: -60px;
+  right: -70px;
+}

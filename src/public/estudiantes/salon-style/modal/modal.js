@@ -31,6 +31,11 @@ export async function openStudentModal(student) {
 
   applyModalBackground(modal, student);
 
+  const linear = document.createElement("img");
+  linear.src = "../salon-style/modal/linear-horizontal.png";
+  linear.className = "modal-linear";
+  modal.appendChild(linear);
+
   // ==============================
   // BORDES DECORATIVOS (FIJOS)
   // ==============================
@@ -66,6 +71,20 @@ export async function openStudentModal(student) {
   modal.appendChild(modalScroll);
 
   overlay.appendChild(modal);
+
+  // Animación de entrada premium
+  // Animación de entrada general del modal
+  overlay.classList.add("modal-overlay-enter");
+  modal.classList.add("modal-enter");
+
+  requestAnimationFrame(() => {
+    overlay.classList.add("active");
+    modal.classList.add("active");
+
+    // Forzamos reflow y luego animamos contenido
+    modal.offsetHeight; // trigger reflow
+    modal.classList.add("animate-content");
+  });
   document.body.appendChild(overlay);
 
   document.body.style.overflow = "hidden";
@@ -99,8 +118,12 @@ export async function openStudentModal(student) {
   // ==============================
 
   function closeModal(overlay) {
-    overlay.remove();
-    document.body.style.overflow = "";
+    overlay.classList.remove("active");
+    modal.classList.remove("active");
+    setTimeout(() => {
+      overlay.remove();
+      document.body.style.overflow = "";
+    }, 400);
   }
  
   closeBtn.addEventListener("click", e => {
