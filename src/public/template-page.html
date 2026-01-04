@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta name="description" content="[DESCRIPCIÓN DE LA PÁGINA]">
+
+  <!-- TÍTULO DINÁMICO -->
+  <title>[NOMBRE DE LA SECCIÓN] | Blessed</title>
+  <link rel="shortcut icon" href="../../icons/LOGO-P1.png" type="image/x-icon">
+
+  <!-- ============================
+       FUENTES (primero para evitar FOIT)
+       ============================ -->
+  <link rel="stylesheet" href="../../styles/fonts.css">
+
+  <!-- ============================
+       ESTILOS GLOBALES
+       ============================ -->
+  <link rel="stylesheet" href="../../styles/general.css">
+  <link rel="stylesheet" href="../../styles/header.css">
+
+  <!-- ============================
+       ESTILOS ESPECÍFICOS DE ESTA PÁGINA
+       ============================ -->
+
+
+</head>
+<body data-class="[ID-DE-LA-CLASE-O-SECCION]" data-page="[nombre-pagina]"> <!-- opcional, útil para JS -->
+
+  <!-- ============================
+       HEADER REUTILIZABLE
+       ============================ -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+      <a href="/" class="logo" aria-label="Inicio">
+        <img src="../../icons/BLESSED-LOGO.png" alt="Logo Blessed">
+      </a>
+
+      <button id="hamburger" aria-label="Abrir menú móvil">☰</button>
+
+      <ul class="nav-menu">
+        <li class="nav-item dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            CALENDARIO <span class="caret" aria-hidden="true">▾</span>
+          </button>
+          <ul id="calendario-menu" class="dropdown-menu">
+            <li><a href="/calendario/">CALENDARIO 4TO A</a></li>
+            <li><a href="/calendario-4to-b/">CALENDARIO 4TO B</a></li>
+            <!-- Agrega más si hay más salones -->
+          </ul>
+        </li>
+        <li class="nav-item"><a href="/olimpiadas/">OLIMPIADAS</a></li>
+        <li class="nav-item"><a href="/eventos/">EVENTOS</a></li>
+        <li class="nav-item"><a href="/estudiantes/">ESTUDIANTES</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Script del header (siempre al inicio del body para que funcione rápido) -->
+  <script src="../header.js"></script>
+
+  <!-- ============================
+       CONTENIDO PRINCIPAL
+       ============================ -->
+  <main>
+    <!-- HERO / TÍTULO DE LA SECCIÓN -->
+    <section class="principal">
+      <div class="titulos">
+        <p class="title">[NOMBRE DE LA SECCIÓN]</p>
+        <p class="paragraph">[SUBTÍTULO]</p>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- ============================
+       SCRIPTS ESPECÍFICOS (al final para mejor carga)
+       ============================ -->
+
+</body>
+</html>

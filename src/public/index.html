@@ -1,52 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="icons/LOGO-P1.png" type="image/x-icon">
   <meta name="google" content="notranslate">
-  <title>PROMO 2026 - BLESSED</title>
+  <meta name="description" content="Promo 2026 - BLESSED. Recuerdos, fotos y momentos de nuestra generación">
+
+  <title>PROMO 2026 | Blessed</title>
+  <link rel="shortcut icon" href="icons/LOGO-P1.png" type="image/x-icon">
+
+  <!-- ============================
+       FUENTES (primero para evitar FOIT)
+       ============================ -->
+  <link rel="stylesheet" href="styles/fonts.css">
+
+  <!-- ============================
+       ESTILOS GLOBALES
+       ============================ -->
   <link rel="stylesheet" href="styles/general.css">
   <link rel="stylesheet" href="styles/header.css">
-  <link rel="stylesheet" href="styles/fonts.css">
-  
-  <link rel="stylesheet" href="styles/main.css">
+
+  <!-- ============================
+       ESTILOS ESPECÍFICOS DE LA PROMO 2026
+       ============================ -->
+  <link rel="stylesheet" href="styles/main.css"> <!-- Ajusta la ruta si es necesario -->
+  <!-- Puedes agregar más CSS específicos aquí en el futuro, ej: promo.css -->
+
 </head>
 
-<body>
+<body data-page="promo-2026">
+
+  <!-- ============================
+       HEADER REUTILIZABLE
+       ============================ -->
   <header>
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <a href="/" class="logo" aria-label="Inicio">
-      <img src="../icons/BLESSED-LOGO.png" alt="Logo del sitio">
-    </a>
+      <nav class="navbar" role="navigation" aria-label="Main navigation">
+          <a href="/" class="logo" aria-label="Inicio">
+          <img src="icons/BLESSED-LOGO.png" alt="Logo del sitio">
+          </a>
 
-    <button id="hamburger" aria-label="Abrir menú móvil">
-      ☰
-    </button>
+          <button id="hamburger" aria-label="Abrir menú móvil">☰</button>
 
+          <ul class="nav-menu">
+          <li class="nav-item dropdown">
+            <button class="dropdown-toggle">
+              CALENDARIO
+            <span class="caret" aria-hidden="true">▾</span>
+            </button>
+            <ul id="calendario-menu" class="dropdown-menu">
+              <li role="none"><a role="menuitem" href="/calendario/">CALENDARIO 4TO A</a></li>
+              <li role="none"><a role="menuitem" href="/calendario-4to-b/">CALENDARIO 4TO B</a></li>
+            </ul>
+          </li>
 
-    <ul class="nav-menu">
-      <li class="nav-item dropdown">
-        <button class="dropdown-toggle">
-          CALENDARIO
-          <span class="caret" aria-hidden="true">▾</span>
-        </button>
+          <li class="nav-item"><a href="/olimpiadas/" class="nav-link">OLIMPIADAS</a></li>
+          <li class="nav-item"><a href="/eventos/" class="nav-link">EVENTOS</a></li>
+          <li class="nav-item"><a href="/estudiantes/" class="nav-link">ESTUDIANTES</a></li>
+          </ul>
+      </nav>
+      <script src="/header.js"></script>
+    </header>
 
-        <ul id="calendario-menu" class="dropdown-menu">
-          <li role="none"><a role="menuitem" href="/calendario/">CALENDARIO 4TO A</a></li>
-          <li role="none"><a role="menuitem" href="/calendario-4to-b/">CALENDARIO 4TO B</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item"><a href="/olimpiadas/" class="nav-link">OLIMPIADAS</a></li>
-      <li class="nav-item"><a href="/eventos/" class="nav-link">EVENTOS</a></li>
-      <li class="nav-item"><a href="/estudiantes/" class="nav-link">ESTUDIANTES</a></li>
-    </ul>
-  </nav>
-
+  <!-- Script del header (siempre justo después del header) -->
   <script src="header.js"></script>
-  </header>
 
+  <!-- ============================
+       CONTENIDO PRINCIPAL
+       ============================ -->
   <main>
     <section class="promo-main">
       <div class="titles">
@@ -56,7 +76,22 @@
       <div class="carrusel" style="width: 300px; background-color: red; opacity: 0.1;">
       </div>
     </section>
-    
+
+    <!-- Puedes agregar más secciones aquí abajo -->
+    <!-- Ejemplos futuros:
+    <section class="memories">...</section>
+    <section class="graduation-countdown">...</section>
+    -->
+
   </main>
+
+  <!-- ============================
+       SCRIPTS ESPECÍFICOS (si los necesitas en el futuro)
+       ============================ -->
+  <!--
+  <script type="module" src="../js/promo-carrusel.js"></script>
+  <script type="module" src="../js/countdown.js"></script>
+  -->
+
 </body>
 </html>
