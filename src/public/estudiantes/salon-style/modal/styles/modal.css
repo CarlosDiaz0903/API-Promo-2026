@@ -119,10 +119,7 @@
   color: white;
   font-family: "D-DIN Exp";
   padding: 30px;
-  background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .lock-message span {
