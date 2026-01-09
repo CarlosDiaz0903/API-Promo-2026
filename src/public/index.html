@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="principal/carrucel.css">
+  <link rel="stylesheet" href="principal/countdown.css">
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
   
 </head>
@@ -101,11 +102,49 @@
       </div>
     </section>
 
-    <!-- Puedes agregar más secciones aquí abajo -->
-    <!-- Ejemplos futuros:
-    <section class="memories">...</section>
-    <section class="graduation-countdown">...</section>
-    -->
+    <section class="countdown-section">
+      <div class="countdown-container">
+        <div class="countdown-text">
+          <h2 class="countdown-title">EL FUTURO COMIENZA EN...</h2>
+          <p class="countdown-desc">
+            Último día de clases:<br>
+            <strong>Viernes 18 de diciembre 2026 • 3:00 PM</strong><br><br>
+            Cada segundo nos acerca más a la libertad, a nuestros sueños y a lo que viene después...<br>
+            GRACIAS TOTALES, Promo 2026.<br>
+            <em>...BLESSED</em>
+          </p>
+        </div>
+
+        <div class="countdown-timer" id="timer">
+          <div class="time-unit">
+            <div class="number-wrapper">
+              <span class="number" id="days">000</span>
+            </div>
+            <span class="label">DÍAS</span>
+          </div>
+          <div class="time-unit">
+            <div class="number-wrapper">
+              <span class="number" id="hours">00</span>
+            </div>
+            <span class="label">HORAS</span>
+          </div>
+          <div class="time-unit">
+            <div class="number-wrapper">
+              <span class="number" id="minutes">00</span>
+            </div>
+            <span class="label">MINUTOS</span>
+          </div>
+          <div class="time-unit">
+            <div class="number-wrapper">
+              <span class="number" id="seconds">00</span>
+            </div>
+            <span class="label">SEGUNDOS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="principal/countdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   </main>
 

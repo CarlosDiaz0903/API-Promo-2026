@@ -397,13 +397,13 @@
       "schoolId": "213342",
       "name": "Katiuska Guevara",
       "photo": "",
-      "quote": "",
+      "quote": "God Always with me...",
       "birthday": "2009-07-14",
       "currentClass": "4A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#4A002B"
       }
     },
     {
