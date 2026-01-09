@@ -23,9 +23,11 @@
   <!-- ============================
        ESTILOS ESPECÍFICOS DE LA PROMO 2026
        ============================ -->
-  <link rel="stylesheet" href="styles/main.css"> <!-- Ajusta la ruta si es necesario -->
-  <!-- Puedes agregar más CSS específicos aquí en el futuro, ej: promo.css -->
-
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="principal/carrucel.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
+  
 </head>
 
 <body data-page="promo-2026">
@@ -73,7 +75,29 @@
         <div class="title">PROMO 2026</div>
         <div class="blessed-es">...BLESSED</div>
       </div>
-      <div class="carrusel" style="width: 300px; background-color: red; opacity: 0.1;">
+
+      <div class="carrusel-container">
+        <div class="carrusel-stack">
+          <!-- Aquí van las 11 imágenes, duplicadas al final para loop suave si querés -->
+          <img src="pictures/Carrucel/foto1.png" alt="Recuerdo 1" class="stack-item">
+          <img src="pictures/Carrucel/foto2.png" alt="Recuerdo 2" class="stack-item">
+          <img src="pictures/Carrucel/foto3.png" alt="Recuerdo 3" class="stack-item">
+          <img src="pictures/Carrucel/foto4.png" alt="Recuerdo 4" class="stack-item">
+          <img src="pictures/Carrucel/foto5.png" alt="Recuerdo 5" class="stack-item">
+          <img src="pictures/Carrucel/foto6.png" alt="Recuerdo 6" class="stack-item">
+          <img src="pictures/Carrucel/foto7.png" alt="Recuerdo 7" class="stack-item">
+          <img src="pictures/Carrucel/foto8.png" alt="Recuerdo 8" class="stack-item">
+          <img src="pictures/Carrucel/foto9.png" alt="Recuerdo 9" class="stack-item">
+          <img src="pictures/Carrucel/foto10.png" alt="Recuerdo 10" class="stack-item">
+          <img src="pictures/Carrucel/foto11.png" alt="Recuerdo 11" class="stack-item">
+
+          <!-- Para loop infinito suave, duplica las primeras 2 al final -->
+          <img src="pictures/Carrucel/foto1.png" alt="Recuerdo 1" class="stack-item">
+          <img src="pictures/Carrucel/foto2.png" alt="Recuerdo 2" class="stack-item">
+        </div>
+
+        <div class="carrusel-pagination"></div>
+        <script src="principal/swiper.js"></script> <!-- Dots aquí -->
       </div>
     </section>
 
@@ -84,14 +108,6 @@
     -->
 
   </main>
-
-  <!-- ============================
-       SCRIPTS ESPECÍFICOS (si los necesitas en el futuro)
-       ============================ -->
-  <!--
-  <script type="module" src="../js/promo-carrusel.js"></script>
-  <script type="module" src="../js/countdown.js"></script>
-  -->
 
 </body>
 </html>

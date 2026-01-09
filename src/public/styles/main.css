@@ -48,14 +48,40 @@
   margin-top: -20px;
 }
 
-@media (max-width: 575px) {
+.title, .blessed-es {
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+}
+
+@media (max-width: 1660px) {
     .title {
-      font-size: 450%;
-      line-height: 65px;
+      line-height: 120px;
     }
 
     .blessed-es {
-      font-size: 200%;
       margin-top: 20px;
     }
+
+}
+
+@media (max-width: 915px) {
+
+  .promo-main {
+    height: 100vh;
+    gap: 300px;
+    padding-top: 400px;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 450%;
+    line-height: 65px;
+  }
+
+  .blessed-es {
+    font-size: 200%;
+    margin-top: 20px;
+  }
 }
