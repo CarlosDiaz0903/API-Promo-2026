@@ -107,3 +107,42 @@
   .countdown-timer { gap: 30px; }
   .number-wrapper { padding: 15px 25px; }
 }
+
+@media (max-width: 868px) {
+
+  .countdown-container {
+    gap: 40px;
+  }
+
+  .countdown-title {
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+
+  .countdown-desc {
+    font-size: 17px;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .number-wrapper {
+    width: 50px;
+    padding: 10px 10px;
+    border-radius: 12px;
+    margin: auto;
+  }
+
+  .number {
+    font-size: 30px;
+  }
+
+  .label {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .countdown-timer {
+    display: flex;
+    gap: 15px;
+  }
+}
