@@ -1,0 +1,221 @@
+/* ==============================================
+   CLASS STATS - Modern Stats Cards
+   ============================================== */
+
+.class-stats {
+  padding: var(--space-16) var(--space-6);
+  margin-bottom: var(--space-16);
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Stat Card */
+.stat-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-8);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-3xl);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient overlay on hover */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 116, 0.08) 0%,
+    rgba(74, 144, 226, 0.08) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--color-secondary);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(255, 211, 116, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Stat Icon */
+.stat-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-secondary);
+  border-radius: var(--radius-2xl);
+  color: var(--color-primary);
+  transition: all var(--transition-base);
+  z-index: 1;
+}
+
+.stat-icon svg {
+  width: 32px;
+  height: 32px;
+  transition: transform var(--transition-base);
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.stat-card:hover .stat-icon svg {
+  transform: scale(1.1);
+}
+
+/* Stat Content */
+.stat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 1;
+}
+
+.stat-value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.stat-suffix {
+  font-family: var(--font-expanded);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+.stat-label {
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Grade specific styling */
+.stat-grade {
+  color: var(--color-secondary);
+  text-shadow: 0 0 20px rgba(255, 211, 116, 0.3);
+}
+
+/* ==============================================
+   ANIMATIONS
+   ============================================== */
+
+/* Counter animation is handled by JavaScript */
+
+/* Entry animations */
+.stat-card {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.stat-card[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+@media (max-width: 768px) {
+  .class-stats {
+    padding: var(--space-12) var(--space-4);
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    max-width: 400px;
+  }
+
+  .stat-card {
+    padding: var(--space-6);
+  }
+
+  .stat-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .stat-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .stat-number {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card {
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .stat-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Touch devices - simplify hover effects */
+@media (hover: none) and (pointer: coarse) {
+  .stat-card:hover {
+    transform: none;
+  }
+
+  .stat-card:active {
+    transform: scale(0.98);
+  }
+}

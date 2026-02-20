@@ -1,64 +1,292 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google" content="notranslate">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta name="description" content="Estudiantes - Promo 2026 Blessed. Datos específicos por salón y calificaciones">
+  <meta name="theme-color" content="#02060e">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="../icons/LOGO-P1.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../icons/LOGO-P1.png">
 
-    <link rel="shortcut icon" href="../icons/LOGO-P1.png" type="image/x-icon">
-    <title>ESTUDIANTES</title>
-    <!--<link rel="stylesheet" href="../styles/general.css"> -->
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/fonts.css">
-    <link rel="stylesheet" href="../styles/general.css">
+  <title>ESTUDIANTES | Promo 2026 Blessed</title>
 
-    <link rel="stylesheet" href="styles/main.css">
+  <!-- Critical CSS inline -->
+  <style>
+    :root {
+      --bg-primary: #02060e;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 
+  <!-- Fonts -->
+  <link rel="stylesheet" href="../styles/fonts.css">
+
+  <!-- Main Stylesheets - Reutilizando sistema de diseño -->
+  <link rel="stylesheet" href="../styles/design-system.css">
+  <link rel="stylesheet" href="../styles/header.css">
+  <link rel="stylesheet" href="../styles/animations.css">
+  
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="estudiantes.css">
 </head>
-<body>
-    <header>
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <a href="/" class="logo" aria-label="Inicio">
-        <img src="../icons/BLESSED-LOGO.png" alt="Logo del sitio">
-        </a>
 
-        <button id="hamburger" aria-label="Abrir menú móvil">
-        ☰
-        </button>
+<body data-page="estudiantes">
+  
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
 
+  <!-- Animated Background -->
+  <div class="animated-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
 
-        <ul class="nav-menu">
-        <li class="nav-item dropdown">
-            <button class="dropdown-toggle">
+  <!-- Header - Reutilizando componente -->
+  <header id="mainHeader">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+      <a href="/" class="logo" aria-label="Inicio">
+        <img src="../icons/BLESSED-LOGO.png" alt="Logo Blessed" width="130" height="auto">
+      </a>
+
+      <button 
+        id="hamburger" 
+        class="hamburger" 
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li class="nav-item dropdown" role="none">
+          <button 
+            class="dropdown-toggle" 
+            aria-haspopup="true" 
+            aria-expanded="false"
+            aria-controls="calendarioMenu"
+          >
             CALENDARIO
-            <span class="caret" aria-hidden="true">▾</span>
-            </button>
-
-            <ul id="calendario-menu" class="dropdown-menu">
-            <li role="none"><a role="menuitem" href="/calendario/">CALENDARIO 4TO A</a></li>
-            <li role="none"><a role="menuitem" href="/calendario-4to-b/">CALENDARIO 4TO B</a></li>
-            </ul>
+            <svg class="caret" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <ul id="calendarioMenu" class="dropdown-menu" role="menu">
+            <li role="none">
+              <a role="menuitem" href="/calendario-5to-A/">CALENDARIO 5TO A</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="/calendario-5to-b/">CALENDARIO 5TO B</a>
+            </li>
+          </ul>
         </li>
 
-        <li class="nav-item"><a href="/olimpiadas/" class="nav-link">OLIMPIADAS</a></li>
-        <li class="nav-item"><a href="/eventos/" class="nav-link">EVENTOS</a></li>
-        <li class="nav-item"><a href="/estudiantes/" class="nav-link">ESTUDIANTES</a></li>
-        </ul>
+        <li class="nav-item" role="none">
+          <a href="/olimpiadas/" class="nav-link" role="menuitem">OLIMPIADAS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/eventos/" class="nav-link" role="menuitem">EVENTOS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/estudiantes/" class="nav-link active" role="menuitem" aria-current="page">ESTUDIANTES</a>
+        </li>
+      </ul>
     </nav>
+  </header>
 
-    <script src="../header.js"></script>
-    </header>
-    <main>
-        <section class="estudiantes">
-            <div class="titulos">
-                <p class="title">ESTUDIANTES</p>
-                <p class="paragraph">DATOS ESPECÍFICOS POR SALÓN Y CALIFICACIONES APROXIMADAS</p>
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Students Section -->
+    <section class="students-section" id="studentsSection">
+      <div class="students-container">
+        
+        <!-- Content Side -->
+        <div class="students-content" data-aos="fade-right">
+          <div class="section-header">
+            <div class="header-badge">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Nuestros Estudiantes</span>
             </div>
-            <div class="botones">
-                <button onclick="window.location.href='4to-A'">4TO "A"</button>
-                <button onclick="window.location.href='4to-B'">4TO "B"</button>
+            
+            <h1 class="section-title">
+              <span class="title-line">ESTUDIANTES</span>
+              <span class="title-line gradient-text">PROMO 2026</span>
+            </h1>
+            
+            <p class="section-description">
+              Accede a los datos específicos de cada salón, información detallada de estudiantes y calificaciones aproximadas. Toda la información organizada para facilitar el seguimiento académico.
+            </p>
+          </div>
+
+          <!-- Stats Cards (opcional, para dar más contexto) -->
+          <div class="stats-grid">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Salones</div>
+              </div>
             </div>
-        </section>
-    </main>
+
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-value">5TO</div>
+                <div class="stat-label">Año</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Cards Side -->
+        <div class="students-actions" data-aos="fade-left" data-aos-delay="200">
+          <div class="actions-grid">
+            
+            <!-- Card 5TO A -->
+            <a href="5to-A" class="classroom-card card-a">
+              <div class="card-background"></div>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                      <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                  </div>
+                  <h2 class="card-title">5TO "A"</h2>
+                </div>
+                
+                <p class="card-description">
+                  Accede a la información completa del salón A, incluyendo datos de estudiantes y calificaciones.
+                </p>
+
+                <div class="card-footer">
+                  <span class="card-link">
+                    Ver detalles
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <div class="card-shine"></div>
+            </a>
+
+            <!-- Card 5TO B -->
+            <a href="5to-B" class="classroom-card card-b">
+              <div class="card-background"></div>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                      <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                  </div>
+                  <h2 class="card-title">5TO "B"</h2>
+                </div>
+                
+                <p class="card-description">
+                  Accede a la información completa del salón B, incluyendo datos de estudiantes y calificaciones.
+                </p>
+
+                <div class="card-footer">
+                  <span class="card-link">
+                    Ver detalles
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <div class="card-shine"></div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Promo Blessed. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts - Reutilizando módulos -->
+  <script type="module" src="estudiantes.js"></script>
+
 </body>
 </html>

@@ -7,7 +7,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-08-09",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -21,7 +21,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-03-17",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -35,7 +35,7 @@
       "photo": "",
       "quote": "Hay bien dentro de todos, únicamente hay que encontrarlo.",
       "birthday": "2010-03-02",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -49,7 +49,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-12-27",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -63,7 +63,7 @@
       "photo": "fotos/Julio-Benitez.png",
       "quote": "Siempre del otro lado de la cara principal...",
       "birthday": "2009-10-24",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -77,7 +77,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-04-11",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -91,7 +91,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-10-07",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -105,7 +105,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-07-20",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -119,7 +119,7 @@
       "photo": "",
       "quote": "You know ,I know :lee know.",
       "birthday": "2009-04-15",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -133,7 +133,7 @@
       "photo": "",
       "quote": "Se agradecido por todo lo que te dan y por la salud que Dios te brinda cada día.",
       "birthday": "2009-04-02",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -147,7 +147,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-11-10",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -161,7 +161,7 @@
       "photo": "",
       "quote": "I wanna be Legendary.",
       "birthday": "2009-09-16",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -175,7 +175,7 @@
       "photo": "",
       "quote": "No matter how scared I feel, and even if it feels like I can't move my legs, I'll still keep going forward.",
       "birthday": "2009-09-16",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -189,7 +189,7 @@
       "photo": "fotos/Stephano-Cerna.png",
       "quote": "Recuerda que siempre hay alguien esperándote con una sonrisa.",
       "birthday": "2009-09-26",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -203,7 +203,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-07-13",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -217,7 +217,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-07-13",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -231,7 +231,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-02-26",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -245,7 +245,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-02-08",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -259,7 +259,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-10-26",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -270,14 +270,18 @@
       "internalId": "STU-020",
       "schoolId": "212943",
       "name": "Carlos Diaz",
-      "photo": "",
+      "photo": "fotos/Carlos-Diaz.png",
       "quote": "",
       "birthday": "2010-03-09",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": ""
+        "accentColor": "#051324"
+
+
+
+
       }
     },
     {
@@ -287,7 +291,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-08-03",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -301,7 +305,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-02-01",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -315,7 +319,7 @@
       "photo": "",
       "quote": "We can make history, yes, I know that.",
       "birthday": "2009-12-06",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -329,7 +333,7 @@
       "photo": "fotos/Mathew-Espino.png",
       "quote": "Dos caminos se bifurcaban en un bosque, yo tome el menos transitado, eso marcó la diferencia.",
       "birthday": "2009-09-04",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -343,7 +347,7 @@
       "photo": "",
       "quote": "El que no arriesga, no gana...",
       "birthday": "2010-02-20",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -357,7 +361,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-02-27",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -371,7 +375,7 @@
       "photo": "fotos/Meylin-Gomez.png",
       "quote": "Los sueños se hacer realidad si te esfuerzas por hacerlos.",
       "birthday": "2009-12-10",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -385,7 +389,7 @@
       "photo": "fotos/Jeany-Gomez.png",
       "quote": "Que no te importe lo que otros piensan, se tu mismo...",
       "birthday": "2009-05-23",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -399,11 +403,11 @@
       "photo": "",
       "quote": "God Always with me...",
       "birthday": "2009-07-14",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
-        "accentColor": "#4A002B"
+        "accentColor": "#5A002B"
       }
     },
     {
@@ -413,7 +417,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-12-11",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -427,7 +431,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-07-22",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -441,7 +445,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-06-06",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -455,7 +459,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-03-03",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -469,7 +473,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-05-06",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -483,7 +487,7 @@
       "photo": "",
       "quote": "Sin mente para pensar. Sin voluntad para romperse. Sin voz para gritar sufrimiento.",
       "birthday": "2009-11-18",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -497,7 +501,7 @@
       "photo": "fotos/Leonardo-Marchand.png",
       "quote": "YHLQMDLG",
       "birthday": "2009-04-19",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -511,7 +515,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-07-03",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -525,7 +529,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-02-19",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -539,7 +543,7 @@
       "photo": "fotos/Rodrigo-Martinez.png",
       "quote": "Tener una verdadera disciplina es hacer lo que más odias, en los días que menos quieres, como si fuera lo que más disfrutas...",
       "birthday": "2010-03-04",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -553,7 +557,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-02-10",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -567,7 +571,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-09-04",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -581,7 +585,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-06-20",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -595,7 +599,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-03-30",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -609,7 +613,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-07-29",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -623,7 +627,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-04-03",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -637,7 +641,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-10-21",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -651,7 +655,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-02-25",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -665,7 +669,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-03-19",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -679,7 +683,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-09-29",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -693,7 +697,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-04-23",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -707,7 +711,7 @@
       "photo": "",
       "quote": "emiloverrr <3",
       "birthday": "2009-07-24",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -721,7 +725,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-09-03",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -735,7 +739,7 @@
       "photo": "",
       "quote": "Aunque pienses que estes solo, volteate y busca a esa persona que siempre te acompaña <3.",
       "birthday": "2009-09-05",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -749,7 +753,7 @@
       "photo": "",
       "quote": "Aunque la sombra se sienta eterna, siempre va a existir una luz que te salve de ella.",
       "birthday": "2009-09-19",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -763,7 +767,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-05-15",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -777,7 +781,7 @@
       "photo": "",
       "quote": "Lay all your love on me.",
       "birthday": "2010-02-15",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -791,7 +795,7 @@
       "photo": "",
       "quote": "I didn't sleep for 9 days doing science.",
       "birthday": "2009-10-16",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -805,7 +809,7 @@
       "photo": "fotos/Alana-Rojas.png",
       "quote": "Cada pequeño esfuerzo que hacemos nos acerca más al futuro que soñamos.",
       "birthday": "2009-05-01",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -819,7 +823,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-11-30",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -833,7 +837,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-05-02",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -847,7 +851,7 @@
       "photo": "",
       "quote": "chikinuni...",
       "birthday": "2009-07-31",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -861,7 +865,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-01-15",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -875,7 +879,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-02-15",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -889,7 +893,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-08-14",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -903,7 +907,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-03-03",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -917,7 +921,7 @@
       "photo": "",
       "quote": "LOY4LTY 4EVER.",
       "birthday": "2010-02-16",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -931,7 +935,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-10-15",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -945,7 +949,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2010-03-04",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -959,7 +963,7 @@
       "photo": "",
       "quote": "Cree en ti, incluso cuando nadie más lo haga.",
       "birthday": "2010-01-28",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -973,7 +977,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-12-03",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -987,7 +991,7 @@
       "photo": "",
       "quote": "Sin rendirse, solo intentar una vez más.",
       "birthday": "2009-11-26",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -1001,7 +1005,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-06-16",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -1015,7 +1019,7 @@
       "photo": "",
       "quote": "Y si todos estan contra mi me llega al pincho hay arta lche pa tdos esos parrokos",
       "birthday": "2010-02-24",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",
@@ -1029,7 +1033,7 @@
       "photo": "",
       "quote": "",
       "birthday": "2009-07-16",
-      "currentClass": "4B",
+      "currentClass": "5B",
       "approved": false,
       "profileTheme": {
         "background": "",
@@ -1043,7 +1047,7 @@
       "photo": "",
       "quote": "El mundo hay muchas papas.",
       "birthday": "2010-01-29",
-      "currentClass": "4A",
+      "currentClass": "5A",
       "approved": true,
       "profileTheme": {
         "background": "",

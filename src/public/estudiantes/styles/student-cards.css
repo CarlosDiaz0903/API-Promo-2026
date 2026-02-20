@@ -1,0 +1,406 @@
+/* ==============================================
+   STUDENTS SECTION - Grid & Cards
+   ============================================== */
+
+.students-section {
+  padding: var(--space-12) var(--space-6) var(--space-32);
+  min-height: 50vh;
+}
+
+/* Students Grid */
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--space-6);
+  max-width: 1300px;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.students-grid.loaded {
+  opacity: 1;
+}
+
+/* ==============================================
+   STUDENT CARD - Premium Design
+   ============================================== */
+
+.student-card {
+  position: relative;
+  display: flex;
+  height: 180px;
+  border-radius: var(--radius-3xl);
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  transition: all var(--transition-base);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Background gradient/image */
+.student-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  transition: opacity var(--transition-base);
+  z-index: 0;
+}
+
+.student-card:hover::before {
+  opacity: 0.25;
+}
+
+/* Shine effect */
+.student-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.6s var(--ease-out);
+  pointer-events: none;
+}
+
+.student-card:hover::after {
+  transform: translateX(100%) rotate(45deg);
+}
+
+/* Hover state */
+.student-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 211, 116, 0.3);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(255, 211, 116, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Focus state */
+.student-card:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 4px;
+}
+
+/* Active state */
+.student-card:active {
+  transform: translateY(-4px) scale(0.99);
+}
+
+/* ==============================================
+   CARD CONTENT
+   ============================================== */
+
+/* Info Section (Left) */
+.card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-6);
+  z-index: 1;
+}
+
+.student-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2vw, 2.25rem);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  transition: all 0.61;
+}
+
+.student-name:hover {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Student Meta Info */
+.student-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.4rem, 0.8vw, 0.6rem);
+  font-family: var(--font-primary);
+  font-size: clamp(0.84rem, 1.08vw, 0.7875rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.3px;
+}
+
+.student-meta div {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+}
+
+.student-card:hover .student-meta div {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Grade Badge Highlight */
+.student-meta div:last-child {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.12), rgba(155, 89, 182, 0.1));
+  border-color: rgba(74, 144, 226, 0.2);
+  font-weight: 700;
+}
+
+.student-card:hover .student-meta div:last-child {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(155, 89, 182, 0.15));
+  border-color: rgba(255, 211, 116, 0.3);
+}
+
+/* Photo Section (Right) */
+.card-photo {
+  position: relative;
+  width: 40%;
+  flex-shrink: 0;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.card-photo img {
+  position: fixed;
+  bottom: 0;
+  right: -8px;
+  height: 170px;
+  width: auto;
+  pointer-events: none;
+  object-fit: cover;
+  transition: 0.5s all ;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.student-card:hover .card-photo img {
+  transform: scale(1.08);
+  filter: brightness(1.1) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+}
+
+/* Unknown/Placeholder photo */
+.card-photo img.unknown-photo {
+  opacity: 0.35;
+  filter: 
+    brightness(0.8)
+    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+}
+
+.student-card:hover .card-photo img.unknown-photo {
+  opacity: 0.45;
+  filter: 
+    brightness(0.9)
+    drop-shadow(0 8px 20px rgba(0, 0, 0, 0.7));
+}
+
+/* ==============================================
+   EMPTY STATE
+   ============================================== */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-20) var(--space-6);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+  opacity: 0.6;
+}
+
+.empty-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.empty-description {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* ==============================================
+   LOADING SKELETON (Optional)
+   ============================================== */
+
+.student-card.skeleton {
+  pointer-events: none;
+  cursor: default;
+}
+
+.student-card.skeleton .student-name,
+.student-card.skeleton .student-meta {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  color: transparent;
+  border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ==============================================
+   ENTRY ANIMATIONS
+   ============================================== */
+
+.student-card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  animation: cardEntry 0.6s var(--ease-out) forwards;
+}
+
+@keyframes cardEntry {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Staggered delays */
+.student-card:nth-child(1) { animation-delay: 0.05s; }
+.student-card:nth-child(2) { animation-delay: 0.1s; }
+.student-card:nth-child(3) { animation-delay: 0.15s; }
+.student-card:nth-child(4) { animation-delay: 0.2s; }
+.student-card:nth-child(5) { animation-delay: 0.25s; }
+.student-card:nth-child(6) { animation-delay: 0.3s; }
+.student-card:nth-child(7) { animation-delay: 0.35s; }
+.student-card:nth-child(8) { animation-delay: 0.4s; }
+.student-card:nth-child(9) { animation-delay: 0.45s; }
+.student-card:nth-child(10) { animation-delay: 0.5s; }
+.student-card:nth-child(11) { animation-delay: 0.55s; }
+.student-card:nth-child(12) { animation-delay: 0.6s; }
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+@media (max-width: 1200px) {
+  .students-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--space-5);
+  }
+}
+
+@media (max-width: 768px) {
+  .students-section {
+    padding: var(--space-10) var(--space-4) var(--space-24);
+  }
+
+  .students-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    max-width: 400px;
+  }
+
+  .student-card {
+    height: 160px;
+  }
+
+  .card-info {
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .student-name {
+    font-size: clamp(1.68rem, 9vw, 2.06rem);;
+  }
+
+  .card-photo img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-card {
+    height: 140px;
+    border-radius: var(--radius-2xl);
+  }
+
+  .card-photo img {
+    height: 135px;
+  }
+
+  .student-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .student-card:hover {
+    transform: none;
+  }
+
+  .student-card:active {
+    transform: scale(0.98);
+  }
+
+  .student-card:hover .card-photo img {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .student-card {
+    break-inside: avoid;
+  }
+}

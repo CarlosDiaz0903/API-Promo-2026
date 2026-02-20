@@ -1,0 +1,407 @@
+/* ==============================================
+   COUNTDOWN SECTION - Graduation Timer
+   ============================================== */
+
+.countdown-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-32) var(--space-6);
+  overflow: hidden;
+}
+
+.countdown-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(74, 144, 226, 0.05) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.countdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-20);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Countdown Content */
+.countdown-content {
+  flex: 1;
+  max-width: 500px;
+}
+
+.countdown-header {
+  margin-bottom: var(--space-12);
+}
+
+.countdown-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.title-word {
+  display: inline-block;
+  animation: fadeInUp 0.8s var(--ease-out) backwards;
+}
+
+.title-word:nth-child(1) { animation-delay: 0.1s; }
+.title-word:nth-child(2) { animation-delay: 0.2s; }
+.title-word:nth-child(3) { animation-delay: 0.3s; }
+.title-word:nth-child(4) { animation-delay: 0.4s; }
+
+/* Info Card */
+.countdown-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.info-card {
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-base);
+}
+
+.info-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-secondary);
+  transform: translateX(8px);
+  box-shadow: var(--shadow-glow);
+}
+
+.info-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-secondary);
+  border-radius: var(--radius-xl);
+  color: var(--color-primary);
+}
+
+.info-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-label {
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.info-value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.info-time {
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-base);
+  color: var(--color-secondary);
+  margin: var(--space-2) 0 0 0;
+}
+
+.countdown-message {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.countdown-message strong {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.countdown-message em {
+  color: var(--color-secondary);
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  max-width: 700px;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  animation: fadeInUp 0.8s var(--ease-out) backwards;
+}
+
+.time-unit[data-unit="days"] { animation-delay: 0.2s; }
+.time-unit[data-unit="hours"] { animation-delay: 0.3s; }
+.time-unit[data-unit="minutes"] { animation-delay: 0.4s; }
+.time-unit[data-unit="seconds"] { animation-delay: 0.5s; }
+
+.time-card {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: 
+    var(--shadow-xl),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.time-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 116, 0.1) 0%,
+    transparent 50%,
+    rgba(74, 144, 226, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.time-unit:hover .time-card {
+  border-color: var(--color-secondary);
+  transform: translateY(-4px);
+  box-shadow: 
+    var(--shadow-2xl),
+    var(--shadow-glow);
+}
+
+.time-unit:hover .time-card::before {
+  opacity: 1;
+}
+
+.time-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: clamp(2.5rem, 5vw, 6rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(255, 211, 116, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.digit {
+  display: inline-block;
+  min-width: 0.6em;
+  text-align: center;
+  position: relative;
+}
+
+.digit.flip {
+  animation: flipDigit 0.6s var(--ease-out);
+}
+
+@keyframes flipDigit {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.time-label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-widest);
+}
+
+.time-separator {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  opacity: 0.5;
+  animation: blink 2s infinite;
+  align-self: flex-start;
+  padding-top: var(--space-6);
+}
+
+@keyframes blink {
+  0%, 49%, 100% {
+    opacity: 0.5;
+  }
+  50%, 99% {
+    opacity: 0.2;
+  }
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+@media (max-width: 1024px) {
+  .countdown-container {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-16);
+  }
+
+  .countdown-content {
+    max-width: 100%;
+  }
+
+  .info-card {
+    justify-content: center;
+  }
+
+  .countdown-message {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .countdown-timer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .countdown-section {
+    padding: var(--space-24) var(--space-4);
+  }
+
+  .countdown-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+
+  .countdown-timer {
+    gap: var(--space-3);
+  }
+
+  .time-card {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .time-value {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .time-label {
+    font-size: var(--font-size-xs);
+  }
+
+  .time-separator {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    padding-top: var(--space-4);
+  }
+
+  .info-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-timer {
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .time-unit {
+    gap: var(--space-2);
+    flex: 0 0 calc(50% - var(--space-2));
+  }
+
+  .time-separator {
+    display: none;
+  }
+
+  .time-card {
+    padding: var(--space-3) var(--space-4);
+    width: 100%;
+  }
+
+  .time-value {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  .info-card:hover {
+    transform: none;
+  }
+}
+
+/* Countdown Complete State */
+.countdown-complete {
+  text-align: center;
+  animation: celebrationPulse 2s infinite;
+}
+
+@keyframes celebrationPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.countdown-complete .time-card {
+  background: var(--gradient-secondary);
+  border-color: var(--color-secondary-light);
+  box-shadow: var(--shadow-glow-strong);
+}
+
+.countdown-complete .time-value {
+  color: var(--color-primary);
+}

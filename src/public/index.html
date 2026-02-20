@@ -5,147 +5,325 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" content="notranslate">
   <meta name="description" content="Promo 2026 - BLESSED. Recuerdos, fotos y momentos de nuestra generación">
+  <meta name="theme-color" content="#02060e">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="icons/LOGO-P1.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="icons/LOGO-P1.png">
 
   <title>PROMO 2026 | Blessed</title>
-  <link rel="shortcut icon" href="icons/LOGO-P1.png" type="image/x-icon">
 
-  <!-- ============================
-       FUENTES (primero para evitar FOIT)
-       ============================ -->
+  <!-- Critical CSS inline para evitar FOUC -->
+  <style>
+    /* Critical CSS - Carga instantánea */
+    :root {
+      --bg-primary: #02060e;
+      --bg-gradient: linear-gradient(135deg, #02060e 0%, #0a1628 100%);
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Loading screen */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    
+    .loader-content {
+      text-align: center;
+    }
+    
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Fonts -->
   <link rel="stylesheet" href="styles/fonts.css">
 
-  <!-- ============================
-       ESTILOS GLOBALES
-       ============================ -->
-  <link rel="stylesheet" href="styles/general.css">
+  <!-- Main Stylesheets -->
+  <link rel="stylesheet" href="styles/design-system.css">
   <link rel="stylesheet" href="styles/header.css">
-
-  <!-- ============================
-       ESTILOS ESPECÍFICOS DE LA PROMO 2026
-       ============================ -->
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="principal/carrucel.css">
-  <link rel="stylesheet" href="principal/countdown.css">
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
+  <link rel="stylesheet" href="styles/carousel.css">
+  <link rel="stylesheet" href="styles/countdown.css">
+  <link rel="stylesheet" href="styles/animations.css">
   
+  <!-- External libraries -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
 
 <body data-page="promo-2026">
+  
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
 
-  <!-- ============================
-       HEADER REUTILIZABLE
-       ============================ -->
-  <header>
-      <nav class="navbar" role="navigation" aria-label="Main navigation">
-          <a href="/" class="logo" aria-label="Inicio">
-          <img src="icons/BLESSED-LOGO.png" alt="Logo del sitio">
-          </a>
+  <!-- Animated Background -->
+  <div class="animated-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
 
-          <button id="hamburger" aria-label="Abrir menú móvil">☰</button>
+  <!-- Header -->
+  <header id="mainHeader">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+      <a href="/" class="logo" aria-label="Inicio">
+        <img src="icons/BLESSED-LOGO.png" alt="Logo Blessed" width="130" height="auto">
+      </a>
 
-          <ul class="nav-menu">
-          <li class="nav-item dropdown">
-            <button class="dropdown-toggle">
-              CALENDARIO
-            <span class="caret" aria-hidden="true">▾</span>
-            </button>
-            <ul id="calendario-menu" class="dropdown-menu">
-              <li role="none"><a role="menuitem" href="/calendario/">CALENDARIO 4TO A</a></li>
-              <li role="none"><a role="menuitem" href="/calendario-4to-b/">CALENDARIO 4TO B</a></li>
-            </ul>
-          </li>
+      <button 
+        id="hamburger" 
+        class="hamburger" 
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
 
-          <li class="nav-item"><a href="/olimpiadas/" class="nav-link">OLIMPIADAS</a></li>
-          <li class="nav-item"><a href="/eventos/" class="nav-link">EVENTOS</a></li>
-          <li class="nav-item"><a href="/estudiantes/" class="nav-link">ESTUDIANTES</a></li>
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li class="nav-item dropdown" role="none">
+          <button 
+            class="dropdown-toggle" 
+            aria-haspopup="true" 
+            aria-expanded="false"
+            aria-controls="calendarioMenu"
+          >
+            CALENDARIO
+            <svg class="caret" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <ul id="calendarioMenu" class="dropdown-menu" role="menu">
+            <li role="none">
+              <a role="menuitem" href="/calendario-5to-a/">CALENDARIO 5TO A</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="/calendario-5to-b/">CALENDARIO 5TO B</a>
+            </li>
           </ul>
-      </nav>
-      <script src="/header.js"></script>
-    </header>
+        </li>
 
-  <!-- Script del header (siempre justo después del header) -->
-  <script src="header.js"></script>
+        <li class="nav-item" role="none">
+          <a href="/olimpiadas/" class="nav-link" role="menuitem">OLIMPIADAS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/eventos/" class="nav-link" role="menuitem">EVENTOS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/estudiantes/" class="nav-link" role="menuitem">ESTUDIANTES</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- ============================
-       CONTENIDO PRINCIPAL
-       ============================ -->
+  <!-- Main Content -->
   <main>
-    <section class="promo-main">
-      <div class="titles">
-        <div class="title">PROMO 2026</div>
-        <div class="blessed-es">...BLESSED</div>
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="heroSection">
+      <div class="hero-content">
+        <div class="hero-text" data-aos="fade-right">
+          <h1 class="hero-title">
+            <span class="title-line">PROMO</span>
+            <span class="title-line gradient-text">2026</span>
+          </h1>
+          <p class="hero-subtitle">...BLESSED</p>
+          <div class="hero-description">
+            <p>Una generación destinada a marcar la diferencia. Unidos por los recuerdos, impulsados por los sueños.</p>
+          </div>
+        </div>
+
+        <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
+          <div class="carousel-wrapper">
+            <div class="carousel-container" id="mainCarousel">
+              <div class="carousel-track">
+                <div class="carousel-slide active">
+                  <img src="pictures/Carrucel/foto1.png" alt="Recuerdo 1" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto2.png" alt="Recuerdo 2" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto3.png" alt="Recuerdo 3" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto4.jpg" alt="Recuerdo 4" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto5.jpg" alt="Recuerdo 5" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto6.jpg" alt="Recuerdo 6" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto7.jpg" alt="Recuerdo 7" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto8.jpg" alt="Recuerdo 8" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto9.jpg" alt="Recuerdo 9" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                  <img src="pictures/Carrucel/foto10.jpg" alt="Recuerdo 10" loading="eager">
+                </div>
+              </div>
+            </div>
+            
+            <div class="carousel-pagination" id="carouselPagination" role="tablist" aria-label="Navegación de carrusel"></div>
+          </div>
+        </div>
       </div>
 
-      <div class="carrusel-container">
-        <div class="carrusel-stack">
-          <!-- Aquí van las 11 imágenes, duplicadas al final para loop suave si querés -->
-          <img src="pictures/Carrucel/foto1.png" alt="Recuerdo 1" class="stack-item">
-          <img src="pictures/Carrucel/foto2.png" alt="Recuerdo 2" class="stack-item">
-          <img src="pictures/Carrucel/foto3.png" alt="Recuerdo 3" class="stack-item">
-          <img src="pictures/Carrucel/foto4.jpg" alt="Recuerdo 4" class="stack-item">
-          <img src="pictures/Carrucel/foto5.jpg" alt="Recuerdo 5" class="stack-item">
-          <img src="pictures/Carrucel/foto6.jpg" alt="Recuerdo 6" class="stack-item">
-          <img src="pictures/Carrucel/foto7.jpg" alt="Recuerdo 7" class="stack-item">
-          <img src="pictures/Carrucel/foto8.jpg" alt="Recuerdo 8" class="stack-item">
-          <img src="pictures/Carrucel/foto9.jpg" alt="Recuerdo 9" class="stack-item">
-          <img src="pictures/Carrucel/foto10.jpg" alt="Recuerdo 10" class="stack-item">
-
-          <!-- Para loop infinito suave, duplica las primeras 2 al final -->
-          <img src="pictures/Carrucel/foto1.png" alt="Recuerdo 1" class="stack-item">
-          <img src="pictures/Carrucel/foto2.png" alt="Recuerdo 2" class="stack-item">
-        </div>
-
-        <div class="carrusel-pagination"></div>
-        <script src="principal/swiper.js"></script> <!-- Dots aquí -->
-      </div>
-    </section>
-
-    <section class="countdown-section">
-      <div class="countdown-container">
-        <div class="countdown-text">
-          <h2 class="countdown-title">EL FUTURO COMIENZA EN...</h2>
-          <p class="countdown-desc">
-            Último día de clases:<br>
-            <strong>Viernes 18 de diciembre 2026 • 3:00 PM</strong><br><br>
-            Cada segundo nos acerca más a la libertad, a nuestros sueños y a lo que viene después...<br>
-            GRACIAS TOTALES, Promo 2026.<br>
-            <em>...BLESSED</em>
-          </p>
-        </div>
-
-        <div class="countdown-timer" id="timer">
-          <div class="time-unit">
-            <div class="number-wrapper">
-              <span class="number" id="days">000</span>
-            </div>
-            <span class="label">DÍAS</span>
-          </div>
-          <div class="time-unit">
-            <div class="number-wrapper">
-              <span class="number" id="hours">00</span>
-            </div>
-            <span class="label">HORAS</span>
-          </div>
-          <div class="time-unit">
-            <div class="number-wrapper">
-              <span class="number" id="minutes">00</span>
-            </div>
-            <span class="label">MINUTOS</span>
-          </div>
-          <div class="time-unit">
-            <div class="number-wrapper">
-              <span class="number" id="seconds">00</span>
-            </div>
-            <span class="label">SEGUNDOS</span>
-          </div>
-        </div>
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-line"></div>
       </div>
     </section>
-    <script src="principal/countdown.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section" id="countdownSection">
+      <div class="countdown-container" data-aos="fade-up">
+        
+        <div class="countdown-content">
+          <div class="countdown-header">
+            <h2 class="countdown-title">
+              <span class="title-word">EL</span>
+              <span class="title-word">FUTURO</span>
+              <span class="title-word">COMIENZA</span>
+              <span class="title-word">EN...</span>
+            </h2>
+          </div>
+
+          <div class="countdown-info">
+            <div class="info-card">
+              <div class="info-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <div class="info-content">
+                <p class="info-label">Último día de clases</p>
+                <p class="info-value">Viernes, 18 de Diciembre 2026</p>
+                <p class="info-time">3:00 PM</p>
+              </div>
+            </div>
+
+            <p class="countdown-message">
+              Cada segundo nos acerca más a la libertad, a nuestros sueños y a lo que viene después...
+              <br><br>
+              <strong>GRACIAS TOTALES, Promo 2026.</strong>
+              <br>
+              <em>...BLESSED</em>
+            </p>
+          </div>
+        </div>
+
+        <div class="countdown-timer" id="countdownTimer" data-aos="fade-up" data-aos-delay="200">
+          <div class="time-unit" data-unit="days">
+            <div class="time-card">
+              <div class="time-value" id="days">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+              </div>
+            </div>
+            <span class="time-label">DÍAS</span>
+          </div>
+
+          <div class="time-separator" aria-hidden="true">:</div>
+
+          <div class="time-unit" data-unit="hours">
+            <div class="time-card">
+              <div class="time-value" id="hours">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+              </div>
+            </div>
+            <span class="time-label">HORAS</span>
+          </div>
+
+          <div class="time-separator" aria-hidden="true">:</div>
+
+          <div class="time-unit" data-unit="minutes">
+            <div class="time-card">
+              <div class="time-value" id="minutes">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+              </div>
+            </div>
+            <span class="time-label">MINUTOS</span>
+          </div>
+
+          <div class="time-separator" aria-hidden="true">:</div>
+
+          <div class="time-unit" data-unit="seconds">
+            <div class="time-card">
+              <div class="time-value" id="seconds">
+                <span class="digit">0</span>
+                <span class="digit">0</span>
+              </div>
+            </div>
+            <span class="time-label">SEGUNDOS</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
 
   </main>
+
+  <!-- Footer (opcional) -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Promo Blessed. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script type="module" src="scripts/main.js"></script>
 
 </body>
 </html>

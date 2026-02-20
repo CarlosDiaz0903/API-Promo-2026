@@ -2,7 +2,7 @@
   "period": "2025-B4",
   "grades": {
     "STU-001": {
-      "_meta": "Jimmy Alarcon (4B)",
+      "_meta": "Jimmy Alarcon (5B)",
       "MAT": [
         "B",
         "B",
@@ -65,7 +65,7 @@
       ]
     },
     "STU-002": {
-      "_meta": "Christopher Alvan (4A)",
+      "_meta": "Christopher Alvan (5A)",
       "MAT": [
         "A",
         "A",
@@ -128,7 +128,7 @@
       ]
     },
     "STU-003": {
-      "_meta": "Antonio Alvarado (4A)",
+      "_meta": "Antonio Alvarado (5A)",
       "MAT": [
         "A",
         "A",
@@ -191,7 +191,7 @@
       ]
     },
     "STU-004": {
-      "_meta": "Aaron Ballardo (4B)",
+      "_meta": "Aaron Ballardo (5B)",
       "MAT": [
         "A",
         "A",
@@ -254,7 +254,7 @@
       ]
     },
     "STU-005": {
-      "_meta": "Julio Benitez (4A)",
+      "_meta": "Julio Benitez (5A)",
       "MAT": [
         "A",
         "A",
@@ -317,7 +317,7 @@
       ]
     },
     "STU-006": {
-      "_meta": "Gianella Beretta (4B)",
+      "_meta": "Gianella Beretta (5B)",
       "MAT": [
         "B",
         "B",
@@ -380,7 +380,7 @@
       ]
     },
     "STU-007": {
-      "_meta": "Pierina Bollet (4A)",
+      "_meta": "Pierina Bollet (5A)",
       "MAT": [
         "A",
         "A",
@@ -443,7 +443,7 @@
       ]
     },
     "STU-008": {
-      "_meta": "Matias Bravo (4A)",
+      "_meta": "Matias Bravo (5A)",
       "MAT": [
         "AD",
         "AD",
@@ -506,7 +506,7 @@
       ]
     },
     "STU-009": {
-      "_meta": "Luciana Calderón (4A)",
+      "_meta": "Luciana Calderón (5A)",
       "MAT": [
         "A",
         "A",
@@ -569,7 +569,7 @@
       ]
     },
     "STU-010": {
-      "_meta": "Matias Carbajal (4A)",
+      "_meta": "Matias Carbajal (5A)",
       "MAT": [
         "A",
         "A",
@@ -632,7 +632,7 @@
       ]
     },
     "STU-011": {
-      "_meta": "Lennon Carbonell (4B)",
+      "_meta": "Lennon Carbonell (5B)",
       "MAT": [
         "A",
         "A",
@@ -695,7 +695,7 @@
       ]
     },
     "STU-012": {
-      "_meta": "Ana Flavia Carrión (4A)",
+      "_meta": "Ana Flavia Carrión (5A)",
       "MAT": [
         "A",
         "A",
@@ -758,7 +758,7 @@
       ]
     },
     "STU-013": {
-      "_meta": "Valeria Carrión (4A)",
+      "_meta": "Valeria Carrión (5A)",
       "MAT": [
         "A",
         "A",
@@ -821,7 +821,7 @@
       ]
     },
     "STU-014": {
-      "_meta": "Stephano Cerna (4A)",
+      "_meta": "Stephano Cerna (5A)",
       "MAT": [
         "A",
         "A",
@@ -884,7 +884,7 @@
       ]
     },
     "STU-015": {
-      "_meta": "Adriana Chaupis (4B)",
+      "_meta": "Adriana Chaupis (5B)",
       "MAT": [
         "A",
         "A",
@@ -947,7 +947,7 @@
       ]
     },
     "STU-016": {
-      "_meta": "Lucero Chaupis (4B)",
+      "_meta": "Lucero Chaupis (5B)",
       "MAT": [
         "A",
         "A",
@@ -1010,7 +1010,7 @@
       ]
     },
     "STU-017": {
-      "_meta": "Ricardo Cuadros (4B)",
+      "_meta": "Ricardo Cuadros (5B)",
       "MAT": [
         "A",
         "A",
@@ -1073,7 +1073,7 @@
       ]
     },
     "STU-018": {
-      "_meta": "Dannae Cumpa (4A)",
+      "_meta": "Dannae Cumpa (5A)",
       "MAT": [
         "A",
         "AD",
@@ -1136,7 +1136,7 @@
       ]
     },
     "STU-019": {
-      "_meta": "Maria Paz Cusi (4A)",
+      "_meta": "Maria Paz Cusi (5A)",
       "MAT": [
         "B",
         "A",
@@ -1199,7 +1199,7 @@
       ]
     },
     "STU-020": {
-      "_meta": "Carlos Diaz (4A)",
+      "_meta": "Carlos Diaz (5A)",
       "MAT": [
         "AD",
         "AD",
@@ -1262,7 +1262,7 @@
       ]
     },
     "STU-021": {
-      "_meta": "Valeria Elias (4A)",
+      "_meta": "Valeria Elias (5A)",
       "MAT": [
         "A",
         "A",
@@ -1325,7 +1325,7 @@
       ]
     },
     "STU-022": {
-      "_meta": "Rodrigo Elias (4B)",
+      "_meta": "Rodrigo Elias (5B)",
       "MAT": [
         "A",
         "A",
@@ -1388,7 +1388,7 @@
       ]
     },
     "STU-023": {
-      "_meta": "Kevin Elias (4B)",
+      "_meta": "Kevin Elias (5B)",
       "MAT": [
         "A",
         "A",
@@ -1451,7 +1451,7 @@
       ]
     },
     "STU-024": {
-      "_meta": "Mathew Espino (4A)",
+      "_meta": "Mathew Espino (5A)",
       "MAT": [
         "AD",
         "AD",
@@ -1514,7 +1514,7 @@
       ]
     },
     "STU-025": {
-      "_meta": "Bárbara Fernandez (4A)",
+      "_meta": "Bárbara Fernandez (5A)",
       "MAT": [
         "A",
         "A",
@@ -1577,7 +1577,7 @@
       ]
     },
     "STU-026": {
-      "_meta": "Kathryn Flores (4B)",
+      "_meta": "Kathryn Flores (5B)",
       "MAT": [
         "A",
         "A",
@@ -1640,7 +1640,7 @@
       ]
     },
     "STU-027": {
-      "_meta": "Meylin Gomez (4A)",
+      "_meta": "Meylin Gomez (5A)",
       "MAT": [
         "AD",
         "AD",
@@ -1703,7 +1703,7 @@
       ]
     },
     "STU-028": {
-      "_meta": "Jeany Gomez (4A)",
+      "_meta": "Jeany Gomez (5A)",
       "MAT": [
         "A",
         "AD",
@@ -1766,7 +1766,7 @@
       ]
     },
     "STU-029": {
-      "_meta": "Katiuska Guevara (4A)",
+      "_meta": "Katiuska Guevara (5A)",
       "MAT": [
         "A",
         "AD",
@@ -1829,7 +1829,7 @@
       ]
     },
     "STU-030": {
-      "_meta": "Valentina Inche (4B)",
+      "_meta": "Valentina Inche (5B)",
       "MAT": [
         "AD",
         "A",
@@ -1892,7 +1892,7 @@
       ]
     },
     "STU-031": {
-      "_meta": "Keyli La Rosa (4B)",
+      "_meta": "Keyli La Rosa (5B)",
       "MAT": [
         "AD",
         "A",
@@ -1955,7 +1955,7 @@
       ]
     },
     "STU-032": {
-      "_meta": "Sophia Landauro (4B)",
+      "_meta": "Sophia Landauro (5B)",
       "MAT": [
         "B",
         "A",
@@ -2018,7 +2018,7 @@
       ]
     },
     "STU-033": {
-      "_meta": "Alejandro Lopez (4B)",
+      "_meta": "Alejandro Lopez (5B)",
       "MAT": [
         "B",
         "B",
@@ -2081,7 +2081,7 @@
       ]
     },
     "STU-034": {
-      "_meta": "Adrian Malpartida (4A)",
+      "_meta": "Adrian Malpartida (5A)",
       "MAT": [
         "A",
         "A",
@@ -2144,7 +2144,7 @@
       ]
     },
     "STU-035": {
-      "_meta": "Juan Diego Mar (4B)",
+      "_meta": "Juan Diego Mar (5B)",
       "MAT": [
         "A",
         "A",
@@ -2207,7 +2207,7 @@
       ]
     },
     "STU-036": {
-      "_meta": "Leonardo Marchand (4B)",
+      "_meta": "Leonardo Marchand (5B)",
       "MAT": [
         "A",
         "A",
@@ -2270,7 +2270,7 @@
       ]
     },
     "STU-037": {
-      "_meta": "Valentino Marino (4B)",
+      "_meta": "Valentino Marino (5B)",
       "MAT": [
         "A",
         "A",
@@ -2333,7 +2333,7 @@
       ]
     },
     "STU-038": {
-      "_meta": "Stefano Martinez (4B)",
+      "_meta": "Stefano Martinez (5B)",
       "MAT": [
         "AD",
         "AD",
@@ -2396,7 +2396,7 @@
       ]
     },
     "STU-039": {
-      "_meta": "Rodrigo Martinez (4B)",
+      "_meta": "Rodrigo Martinez (5B)",
       "MAT": [
         "A",
         "A",
@@ -2459,7 +2459,7 @@
       ]
     },
     "STU-040": {
-      "_meta": "Luciana Moreno (4A)",
+      "_meta": "Luciana Moreno (5A)",
       "MAT": [
         "A",
         "A",
@@ -2522,7 +2522,7 @@
       ]
     },
     "STU-041": {
-      "_meta": "Luciana Mottoccanchi (4B)",
+      "_meta": "Luciana Mottoccanchi (5B)",
       "MAT": [
         "AD",
         "AD",
@@ -2585,7 +2585,7 @@
       ]
     },
     "STU-042": {
-      "_meta": "Daniela Olascoaga (4A)",
+      "_meta": "Daniela Olascoaga (5A)",
       "MAT": [
         "AD",
         "AD",
@@ -2648,7 +2648,7 @@
       ]
     },
     "STU-043": {
-      "_meta": "Amelia Ortiz (4A)",
+      "_meta": "Amelia Ortiz (5A)",
       "MAT": [
         "A",
         "B",
@@ -2711,7 +2711,7 @@
       ]
     },
     "STU-044": {
-      "_meta": "Maria Macherres (4A)",
+      "_meta": "Maria Macherres (5A)",
       "MAT": [
         "A",
         "A",
@@ -2774,7 +2774,7 @@
       ]
     },
     "STU-045": {
-      "_meta": "Camila Pala (4B)",
+      "_meta": "Camila Pala (5B)",
       "MAT": [
         "A",
         "A",
@@ -2837,7 +2837,7 @@
       ]
     },
     "STU-046": {
-      "_meta": "Luciana Perez (4B)",
+      "_meta": "Luciana Perez (5B)",
       "MAT": [
         "AD",
         "AD",
@@ -2900,7 +2900,7 @@
       ]
     },
     "STU-047": {
-      "_meta": "Edgar Popi (4B)",
+      "_meta": "Edgar Popi (5B)",
       "MAT": [
         "B",
         "A",
@@ -2963,7 +2963,7 @@
       ]
     },
     "STU-048": {
-      "_meta": "Mateo Pumapillo (4A)",
+      "_meta": "Mateo Pumapillo (5A)",
       "MAT": [
         "A",
         "A",
@@ -3026,7 +3026,7 @@
       ]
     },
     "STU-049": {
-      "_meta": "Ariana Qqueshuayllo (4B)",
+      "_meta": "Ariana Qqueshuayllo (5B)",
       "MAT": [
         "A",
         "AD",
@@ -3089,7 +3089,7 @@
       ]
     },
     "STU-050": {
-      "_meta": "Mia Quiroz (4B)",
+      "_meta": "Mia Quiroz (5B)",
       "MAT": [
         "A",
         "B",
@@ -3152,7 +3152,7 @@
       ]
     },
     "STU-051": {
-      "_meta": "Liana Rebaza (4B)",
+      "_meta": "Liana Rebaza (5B)",
       "MAT": [
         "A",
         "A",
@@ -3215,7 +3215,7 @@
       ]
     },
     "STU-052": {
-      "_meta": "Estrella Reyes (4B)",
+      "_meta": "Estrella Reyes (5B)",
       "MAT": [
         "B",
         "A",
@@ -3278,7 +3278,7 @@
       ]
     },
     "STU-053": {
-      "_meta": "Ariana Rios (4A)",
+      "_meta": "Ariana Rios (5A)",
       "MAT": [
         "A",
         "A",
@@ -3341,7 +3341,7 @@
       ]
     },
     "STU-054": {
-      "_meta": "Pedro Rivera (4B)",
+      "_meta": "Pedro Rivera (5B)",
       "MAT": [
         "A",
         "A",
@@ -3404,7 +3404,7 @@
       ]
     },
     "STU-055": {
-      "_meta": "Adriano Rivera (4A)",
+      "_meta": "Adriano Rivera (5A)",
       "MAT": [
         "B",
         "B",
@@ -3467,7 +3467,7 @@
       ]
     },
     "STU-056": {
-      "_meta": "Fabiana Robles (4B)",
+      "_meta": "Fabiana Robles (5B)",
       "MAT": [
         "A",
         "A",
@@ -3530,7 +3530,7 @@
       ]
     },
     "STU-057": {
-      "_meta": "Ainara Rocha (4A)",
+      "_meta": "Ainara Rocha (5A)",
       "MAT": [
         "A",
         "A",
@@ -3593,7 +3593,7 @@
       ]
     },
     "STU-058": {
-      "_meta": "Alana Rojas (4A)",
+      "_meta": "Alana Rojas (5A)",
       "MAT": [
         "A",
         "A",
@@ -3656,7 +3656,7 @@
       ]
     },
     "STU-059": {
-      "_meta": "Alessio Rojas (4B)",
+      "_meta": "Alessio Rojas (5B)",
       "MAT": [
         "A",
         "AD",
@@ -3719,7 +3719,7 @@
       ]
     },
     "STU-060": {
-      "_meta": "Thiago Rojas (4B)",
+      "_meta": "Thiago Rojas (5B)",
       "MAT": [
         "A",
         "A",
@@ -3782,7 +3782,7 @@
       ]
     },
     "STU-061": {
-      "_meta": "Luana Roman (4A)",
+      "_meta": "Luana Roman (5A)",
       "MAT": [
         "A",
         "B",
@@ -3845,7 +3845,7 @@
       ]
     },
     "STU-062": {
-      "_meta": "Ayelen Romero (4A)",
+      "_meta": "Ayelen Romero (5A)",
       "MAT": [
         "A",
         "A",
@@ -3908,7 +3908,7 @@
       ]
     },
     "STU-063": {
-      "_meta": "Gabriel Saldaña (4B)",
+      "_meta": "Gabriel Saldaña (5B)",
       "MAT": [
         "A",
         "A",
@@ -3971,7 +3971,7 @@
       ]
     },
     "STU-064": {
-      "_meta": "Kiara Saldaña (4B)",
+      "_meta": "Kiara Saldaña (5B)",
       "MAT": [
         "A",
         "A",
@@ -4034,7 +4034,7 @@
       ]
     },
     "STU-065": {
-      "_meta": "Luana Sanchez (4B)",
+      "_meta": "Luana Sanchez (5B)",
       "MAT": [
         "A",
         "A",
@@ -4097,7 +4097,7 @@
       ]
     },
     "STU-066": {
-      "_meta": "Mihai Simion (4B)",
+      "_meta": "Mihai Simion (5B)",
       "MAT": [
         "A",
         "A",
@@ -4160,7 +4160,7 @@
       ]
     },
     "STU-067": {
-      "_meta": "Camila Tafur (4B)",
+      "_meta": "Camila Tafur (5B)",
       "MAT": [
         "A",
         "AD",
@@ -4223,7 +4223,7 @@
       ]
     },
     "STU-068": {
-      "_meta": "Lucia Talledo (4A)",
+      "_meta": "Lucia Talledo (5A)",
       "MAT": [
         "A",
         "A",
@@ -4286,7 +4286,7 @@
       ]
     },
     "STU-069": {
-      "_meta": "Valeria Valencia (4A)",
+      "_meta": "Valeria Valencia (5A)",
       "MAT": [
         "A",
         "A",
@@ -4349,7 +4349,7 @@
       ]
     },
     "STU-070": {
-      "_meta": "Jhocelyn Veliz (4A)",
+      "_meta": "Jhocelyn Veliz (5A)",
       "MAT": [
         "A",
         "A",
@@ -4412,7 +4412,7 @@
       ]
     },
     "STU-071": {
-      "_meta": "Esteban Villanueva (4A)",
+      "_meta": "Esteban Villanueva (5A)",
       "MAT": [
         "A",
         "A",
@@ -4475,7 +4475,7 @@
       ]
     },
     "STU-072": {
-      "_meta": "Jennevith Yalico (4A)",
+      "_meta": "Jennevith Yalico (5A)",
       "MAT": [
         "A",
         "A",
@@ -4538,7 +4538,7 @@
       ]
     },
     "STU-073": {
-      "_meta": "Jordany Yauli (4A)",
+      "_meta": "Jordany Yauli (5A)",
       "MAT": [
         "A",
         "A",
@@ -4601,7 +4601,7 @@
       ]
     },
     "STU-074": {
-      "_meta": "Maria Zuluaga (4B)",
+      "_meta": "Maria Zuluaga (5B)",
       "MAT": [
         "AD",
         "A",
@@ -4664,7 +4664,7 @@
       ]
     },
     "STU-075": {
-      "_meta": "Leonardo Zuñiga (4A)",
+      "_meta": "Leonardo Zuñiga (5A)",
       "MAT": [
         "A",
         "A",

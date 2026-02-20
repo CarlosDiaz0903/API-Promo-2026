@@ -1,84 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google" content="notranslate">
-  <meta name="description" content="[DESCRIPCIÓN DE LA PÁGINA]">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <meta name="theme-color" content="#02060e" />
 
-  <!-- TÍTULO DINÁMICO -->
-  <title>[NOMBRE DE LA SECCIÓN] | Blessed</title>
-  <link rel="shortcut icon" href="../../icons/LOGO-P1.png" type="image/x-icon">
+  <!-- Título (se cambia en cada página) -->
+  <title>[TÍTULO DE LA PÁGINA] | PROMO 2026 - Blessed</title>
 
-  <!-- ============================
-       FUENTES (primero para evitar FOIT)
-       ============================ -->
-  <link rel="stylesheet" href="../../styles/fonts.css">
+  <!-- Descripción (idealmente única por página) -->
+  <meta name="description" content="[DESCRIPCIÓN BREVE DE LA PÁGINA]" />
 
-  <!-- ============================
-       ESTILOS GLOBALES
-       ============================ -->
-  <link rel="stylesheet" href="../../styles/general.css">
-  <link rel="stylesheet" href="../../styles/header.css">
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 
-  <!-- ============================
-       ESTILOS ESPECÍFICOS DE ESTA PÁGINA
-       ============================ -->
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="/icons/LOGO-P1.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/icons/LOGO-P1.png" />
 
+  <!-- Critical CSS (inline) -->
+  <style>
+    :root {
+      --bg-primary: #02060e;
+      --bg-gradient: linear-gradient(135deg, #02060e 0%, #0a1628 100%);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      color: #ffffff;
+    }
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-content {
+      text-align: center;
+    }
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 
+  <!-- Fuentes -->
+  <link rel="stylesheet" href="/styles/fonts.css" />
+
+  <!-- Estilos principales (orden importante) -->
+  <link rel="stylesheet" href="/styles/design-system.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/animations.css" />
+
+  <!-- Estilo específico de la página (opcional) -->
+  <link rel="stylesheet" href="/styles/[NOMBRE-PAGINA].css" />
 </head>
-<body data-class="[ID-DE-LA-CLASE-O-SECCION]" data-page="[nombre-pagina]"> <!-- opcional, útil para JS -->
 
-  <!-- ============================
-       HEADER REUTILIZABLE
-       ============================ -->
-  <header>
+<body data-page="[nombre-de-pagina-slug]">
+
+  <!-- Loader inicial -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
+
+  <!-- Fondo animado (presente en todas las páginas) -->
+  <div class="animated-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <!-- Header / Navegación (igual en todas las páginas) -->
+  <header id="mainHeader">
     <nav class="navbar" role="navigation" aria-label="Navegación principal">
       <a href="/" class="logo" aria-label="Inicio">
-        <img src="../../icons/BLESSED-LOGO.png" alt="Logo Blessed">
+        <img src="/icons/BLESSED-LOGO.png" alt="Logo Blessed" width="130" height="auto" />
       </a>
 
-      <button id="hamburger" aria-label="Abrir menú móvil">☰</button>
+      <button 
+        id="hamburger" 
+        class="hamburger" 
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
 
-      <ul class="nav-menu">
-        <li class="nav-item dropdown">
-          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-            CALENDARIO <span class="caret" aria-hidden="true">▾</span>
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li class="nav-item dropdown" role="none">
+          <button 
+            class="dropdown-toggle" 
+            aria-haspopup="true" 
+            aria-expanded="false"
+            aria-controls="calendarioMenu"
+          >
+            CALENDARIO
+            <svg class="caret" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
           </button>
-          <ul id="calendario-menu" class="dropdown-menu">
-            <li><a href="/calendario/">CALENDARIO 4TO A</a></li>
-            <li><a href="/calendario-4to-b/">CALENDARIO 4TO B</a></li>
-            <!-- Agrega más si hay más salones -->
+          <ul id="calendarioMenu" class="dropdown-menu" role="menu">
+            <li role="none">
+              <a role="menuitem" href="/calendario-5to-a/">CALENDARIO 5TO A</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="/calendario-5to-b/">CALENDARIO 5TO B</a>
+            </li>
           </ul>
         </li>
-        <li class="nav-item"><a href="/olimpiadas/">OLIMPIADAS</a></li>
-        <li class="nav-item"><a href="/eventos/">EVENTOS</a></li>
-        <li class="nav-item"><a href="/estudiantes/">ESTUDIANTES</a></li>
+
+        <li class="nav-item" role="none">
+          <a href="/olimpiadas/" class="nav-link" role="menuitem">OLIMPIADAS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/eventos/" class="nav-link" role="menuitem">EVENTOS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/estudiantes/" class="nav-link" role="menuitem">ESTUDIANTES</a>
+        </li>
       </ul>
     </nav>
   </header>
 
-  <!-- Script del header (siempre al inicio del body para que funcione rápido) -->
-  <script src="../header.js"></script>
-
-  <!-- ============================
-       CONTENIDO PRINCIPAL
-       ============================ -->
+  <!-- Contenido principal único de cada página -->
   <main>
-    <!-- HERO / TÍTULO DE LA SECCIÓN -->
-    <section class="principal">
-      <div class="titulos">
-        <p class="title">[NOMBRE DE LA SECCIÓN]</p>
-        <p class="paragraph">[SUBTÍTULO]</p>
-      </div>
-    </section>
-
-
+    <!-- Aquí va el contenido específico de cada página -->
+    <!-- Ejemplo: hero, secciones, tablas, galerías, etc. -->
   </main>
 
-  <!-- ============================
-       SCRIPTS ESPECÍFICOS (al final para mejor carga)
-       ============================ -->
+  <!-- Footer común -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>© 2026 Promo Blessed. Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
+  <!-- Scripts comunes -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script type="module" src="/scripts/main.js"></script>
+
+  <!-- Script específico de la página (opcional) -->
+  <script type="module" src="/scripts/[nombre-pagina].js"></script>
 </body>
 </html>

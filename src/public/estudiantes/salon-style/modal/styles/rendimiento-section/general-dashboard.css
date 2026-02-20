@@ -3,9 +3,14 @@
   max-width: 370px;
   width: 100%;
   background: rgba(255,255,255,.24);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    0 0 32px rgba(198, 205, 212, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
   border-radius: 12px;
+  border-color: rgba(210, 219, 230, 0.4);
 
   display: flex;
   align-items: center;
@@ -15,7 +20,19 @@
   color: white;
   font-size: 14px;
   line-height: 28px;
+
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+
+.general-dashboard:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 24px 64px rgba(0, 0, 0, 0.45),
+    0 0 48px rgba(207, 215, 224, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
 
 .label, .grade, .points {
   flex: 1;
@@ -32,16 +49,45 @@
 
 .grade {
   justify-content: center;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.27);
-  border-radius: 8px;
-  font-size: 15px;
+  
+  /* Premium grade display */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 116, 0.20) 0%,
+    rgba(255, 211, 116, 0.12) 100%
+  );
+  border-radius: 16px;
+  border: 1px solid rgba(255, 211, 116, 0.3);
+  
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  
+  color: #ffd67d;
+  text-shadow: 
+    0 2px 8px rgba(255, 211, 116, 0.4),
+    0 0 24px rgba(255, 211, 116, 0.2);
+  
+  margin: 0 14px;
+  
+  transition: all 0.3s ease;
 }
+
+.general-dashboard:hover .grade {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 116, 0.28) 0%,
+    rgba(255, 211, 116, 0.16) 100%
+  );
+  border-color: rgba(255, 211, 116, 0.4);
+  transform: scale(1.05);
+}
+
 
 .points {
   justify-content: flex-end;
   font-weight: 300;
   font-style: italic;
+  opacity: .82;
 }
 
 @media (max-width: 1000px) {
@@ -49,3 +95,4 @@
   margin-top: 12px;
  }
 }
+

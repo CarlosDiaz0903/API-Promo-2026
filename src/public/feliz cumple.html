@@ -3,171 +3,720 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños Camila</title>
+    <title>Feliz Cumpleaños Camila ✨</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary: #1BFD9C;
+            --primary-dark: #15c77e;
+            --primary-light: #82ffc9;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --shadow-primary: 0 0 30px rgba(27, 253, 156, 0.15);
+            --shadow-glow: 0 0 60px rgba(27, 253, 156, 0.3);
+        }
+
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    background-color: #000;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        body {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a1a 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-.image-container {
-    width: 100%;
-    position: relative;
-}
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-p {
-    font-family: 'Afacad Flux', sans-serif;
-    font-size: 22px;
-    margin: 15px 0;
-    line-height: 25px;
-}
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 15s infinite ease-in-out;
+            box-shadow: 0 0 10px var(--primary);
+        }
 
-.desktop-image {
-    display: none;
-    width: 100%;
-}
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
 
-.mobile-image {
-    display: none;
-    width: 100%;
-}
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.message-container {
-    display: none;
-    width: 88%;
-    margin: 20px 0;
-    background-color: rgba(27, 253, 156, 0.0);
-    padding: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 20px;
-    text-align: left;
-    font-size: 1.2rem;
-    box-shadow: 
-        0 0 10px rgba(27, 253, 156, 0.6), /* Resplandor exterior */
-        inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);;
-}
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
 
-button {
-  --green: #1BFD9C;
-  font-size: 15px;
-  padding: 0.7em 2.7em;
-  letter-spacing: 0.06em;
-  position: relative;
-  font-family: inherit;
-  border-radius: 0.6em;
-  overflow: hidden;
-  transition: all 0.3s;
-  line-height: 1.4em;
-  border: 2px solid var(--green);
-  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
-  color: var(--green);
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
-}
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(27, 253, 156, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            animation: pulse 4s ease-in-out infinite;
+        }
 
-button:hover {
-  color: #82ffc9;
-  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
-}
+        @keyframes pulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.1);
+                opacity: 0.8;
+            }
+        }
 
-button:before {
-  content: "";
-  position: absolute;
-  left: -4em;
-  width: 4em;
-  height: 100%;
-  top: 0;
-  transition: transform .4s ease-in-out;
-  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
-}
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 0 0 40px rgba(27, 253, 156, 0.3);
+        }
 
-button:hover:before {
-  transform: translateX(15em);
-}
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 12px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
 
-/* Media queries para cambiar la imagen en función del dispositivo */
-@media (min-width: 769px) {
-    .desktop-image {
-        display: block;
-    }
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-}
+        /* CTA Button */
+        .cta-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--bg-dark);
+            background: var(--primary);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(27, 253, 156, 0.4);
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
 
-@media (max-width: 768px) {
-    .mobile-image {
-        display: block;
-    }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
 
-    p {
-        font-size: 18px;
-        margin: 20px 0;
-        line-height: 27px;
-}
-}
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(27, 253, 156, 0.6);
+            background: var(--primary-light);
+        }
 
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .button-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover .button-icon {
+            transform: translateX(3px);
+        }
+
+        /* Message Card */
+        .message-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 0;
+            margin: 40px auto 60px;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        padding 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-primary);
+            border: 1px solid rgba(27, 253, 156, 0.1);
+            position: relative;
+        }
+
+        .message-card.active {
+            max-height: 5000px;
+            opacity: 1;
+            padding: 48px;
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .message-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .message-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(27, 253, 156, 0.1);
+            border-radius: 50%;
+            font-size: 32px;
+        }
+
+        .message-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .message-content {
+            line-height: 1.9;
+            font-size: 17px;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .message-content p {
+            margin-bottom: 28px;
+            animation: fadeIn 0.8s ease-out both;
+        }
+
+        .message-content p:nth-child(n) {
+            animation-delay: calc(0.1s * var(--i, 1));
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-content p:first-of-type {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 400;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .message-footer {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: right;
+        }
+
+        .message-signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .message-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Audio controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .audio-controls.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .audio-toggle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-primary);
+        }
+
+        .audio-toggle:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            box-shadow: var(--shadow-glow);
+            transform: scale(1.1);
+        }
+
+        /* Quote highlights */
+        .highlight {
+            position: relative;
+            display: inline;
+            background: linear-gradient(180deg, transparent 60%, rgba(27, 253, 156, 0.2) 60%);
+            padding: 2px 0;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .scroll-indicator.visible {
+            opacity: 1;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px 30px;
+            }
+
+            .message-card.active {
+                padding: 32px 24px;
+            }
+
+            .message-content {
+                font-size: 16px;
+            }
+
+            .audio-controls {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .audio-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(27, 253, 156, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .cta-button,
+            .audio-controls,
+            .particles,
+            .scroll-indicator {
+                display: none;
+            }
+
+            .message-card {
+                max-height: none;
+                opacity: 1;
+                padding: 48px;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="image-container">
-        <img src="fonts/FELIZ-CUMPLE.png" alt="Feliz Cumpleaños Camila" class="desktop-image">
-        <img src="fonts/Feliz-cumple-Movil.png" alt="Feliz Cumpleaños Camila" class="mobile-image">
+    <!-- Loading screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
     </div>
 
-    <button id="play-button" style="margin-bottom:20px;">DESPLEGAR MENSAJE</button>
+    <!-- Animated particles background -->
+    <div class="particles" id="particles"></div>
 
-    <div class="message-container" id="message-container">
-        <p>Camila,</p>
-        <p>Hoy es un día especial, 15 años de vida son irremplazables, son importantes y quería darme un tiempo para hablarte. En este día tan especial, quiero que sepas que todos los que tienes cerca, los que consideras amigos y tu familia, seremos siempre tu apoyo incondicional. Eres como esa estrella que brilla en el firmamento, única y especial, y iluminas a todos con aquella luz. Tenes la capacidad de entender los corazones de las personas de una forma en que yo jamás he podido y tampoco he comprendido. Tu manera de ver el mundo es tan distinta, mucho mejor que la mía. Siempre he tenido la tendencia de pensar con lógica, me ha jugado malas pasadas, pero tú no, tenes algo que va más allá de la razón. Hay cosas en ti que aspiro a tener en mí. De todo lo que soy, quisiera ser más como tú.</p>
+    <!-- Main content -->
+    <div class="container">
+        <!-- Hero section -->
+        <section class="hero">
+            <h1 class="hero-title">Feliz Cumpleaños</h1>
+            <p class="hero-subtitle">Una carta especial para</p>
+            <h2 class="hero-name">Camila</h2>
+            
+            <button class="cta-button" id="revealButton" aria-label="Leer mensaje especial">
+                <span>Abrir Mensaje</span>
+                <svg class="button-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </button>
+        </section>
 
-        <p>Mateo está ahí, en esa maravillosa vida, alguien especial para ti, y me alegra profundamente saber que te hace feliz, porque sé que tú también lo haces feliz a él. Hay algo en ti que te distingue de todos, algo que no puedo explicar del todo. Sos única, y esa rareza es lo que te hace tan maravillosa. Es algo que trasciende el tiempo y las circunstancias, y eso es algo tan bonito.</p>
+        <!-- Message card -->
+        <article class="message-card" id="messageCard" role="article" aria-labelledby="messageTitle">
+            <div class="message-header">
+                <div class="message-icon">✨</div>
+                <h3 class="message-title" id="messageTitle">Un Mensaje del Corazón</h3>
+            </div>
+            
+            <div class="message-content" id="messageContent">
+                <p style="--i: 1">Camila,</p>
+                
+                <p style="--i: 2">Hoy es un día especial, 15 años de vida son irremplazables, son importantes y quería darme un tiempo para hablarte. En este día tan especial, quiero que sepas que todos los que tienes cerca, los que consideras amigos y tu familia, seremos siempre tu apoyo incondicional. <span class="highlight">Eres como esa estrella que brilla en el firmamento, única y especial</span>, y iluminas a todos con aquella luz. Tenes la capacidad de entender los corazones de las personas de una forma en que yo jamás he podido y tampoco he comprendido. Tu manera de ver el mundo es tan distinta, mucho mejor que la mía. Siempre he tenido la tendencia de pensar con lógica, me ha jugado malas pasadas, pero tú no, tenes algo que va más allá de la razón. Hay cosas en ti que aspiro a tener en mí. De todo lo que soy, quisiera ser más como tú.</p>
 
-        <p>Quiero que recuerdes siempre que mereces todo lo que sueñas. Eres mucho más valiosa de lo que piensas, más de lo que la gente ve. Eres más valiosa que el oro, y más hermosa que el paisaje más soñado. No sigues los moldes, no te ajustas a los esquemas de la gente. Eres lo que eres, sin artificios ni disimulos, despojada de todo lo que el mundo marchita. Tu belleza es un arte en sí mismo, algo único que solo tú tienes.</p>
+                <p style="--i: 3">Mateo está ahí, en esa maravillosa vida, alguien especial para ti, y me alegra profundamente saber que te hace feliz, porque sé que tú también lo haces feliz a él. Hay algo en ti que te distingue de todos, algo que no puedo explicar del todo. <span class="highlight">Sos única, y esa rareza es lo que te hace tan maravillosa.</span> Es algo que trasciende el tiempo y las circunstancias, y eso es algo tan bonito.</p>
 
-        <p>Me entiendes, me comprendes de una forma en la que nadie más lo ha hecho. Has estado ahí en el momento en el que más sufrí, es algo que valoro muchísimo. Has logrado hacer algo que yo creía imposible, has cambiado mi vida de una manera que nunca habría imaginado, y eso me ha hecho bien. Me has alejado de preocupaciones innecesarias, y me has enseñado a no ser tan escéptico, a dejar que el futuro venga sin estar tan obsesionado con controlarlo. Porque a veces lo mejor es no tener todo planeado, y eso me lo has mostrado tú, porque tú haces bien. No solo a mí, sino a todos los que te rodean.</p>
+                <p style="--i: 4">Quiero que recuerdes siempre que mereces todo lo que sueñas. Eres mucho más valiosa de lo que piensas, más de lo que la gente ve. <span class="highlight">Eres más valiosa que el oro, y más hermosa que el paisaje más soñado.</span> No sigues los moldes, no te ajustas a los esquemas de la gente. Eres lo que eres, sin artificios ni disimulos, despojada de todo lo que el mundo marchita. Tu belleza es un arte en sí mismo, algo único que solo tú tienes.</p>
 
-        <p>Sos pura, y eso es algo que vale más que cualquier cosa. Quiero que siempre recuerdes que, si alguna vez hay algo que te preocupe, podes decírmelo, a nosotros a tus amigos, siempre estaremos aquí para escucharte. Tal vez yo no tenga la solución, pero siempre estaré dispuesto a ayudarte. Pase lo que pase, nunca pierdas tu esencia. Esa esencia es tu mayor tesoro, es lo que te hace única en este mundo. Nadie jamás podrá igualarte, cuida de tu personalidad y nunca te pierdas a ti misma.</p>
+                <p style="--i: 5">Me entiendes, me comprendes de una forma en la que nadie más lo ha hecho. Has estado ahí en el momento en el que más sufrí, es algo que valoro muchísimo. Has logrado hacer algo que yo creía imposible, has cambiado mi vida de una manera que nunca habría imaginado, y eso me ha hecho bien. Me has alejado de preocupaciones innecesarias, y me has enseñado a no ser tan escéptico, a dejar que el futuro venga sin estar tan obsesionado con controlarlo. Porque a veces lo mejor es no tener todo planeado, y eso me lo has mostrado tú, porque tú haces bien. No solo a mí, sino a todos los que te rodean.</p>
 
-        <p>Espero de todo corazón que este día sea maravilloso para ti. Sabes que me encantaría estar ahí, pero, como siempre, las circunstancias no me lo permiten. Aun así, tenes a tus amigos contigo, y siempre me tendrás a mí, aunque sea un poco a la distancia. Basta con recordar todos los momentos para darnos cuenta de todo lo bueno que ha sido. Me haces bien, y haces bien a todos los que te rodean, incluso de formas que no te imaginas. Y entre todos, hay alguien que te ama profundamente. Ese amor es para siempre, y siempre es hoy.</p>
+                <p style="--i: 6">Sos pura, y eso es algo que vale más que cualquier cosa. Quiero que siempre recuerdes que, si alguna vez hay algo que te preocupe, podes decírmelo, a nosotros a tus amigos, siempre estaremos aquí para escucharte. Tal vez yo no tenga la solución, pero siempre estaré dispuesto a ayudarte. <span class="highlight">Pase lo que pase, nunca pierdas tu esencia.</span> Esa esencia es tu mayor tesoro, es lo que te hace única en este mundo. Nadie jamás podrá igualarte, cuida de tu personalidad y nunca te pierdas a ti misma.</p>
 
-        <p>Haber tenido la oportunidad de conocerte, que Dios me haya brindado a amigos como tu ha sido un sueño cumplido.</p>
+                <p style="--i: 7">Espero de todo corazón que este día sea maravilloso para ti. Sabes que me encantaría estar ahí, pero, como siempre, las circunstancias no me lo permiten. Aun así, tenes a tus amigos contigo, y siempre me tendrás a mí, aunque sea un poco a la distancia. Basta con recordar todos los momentos para darnos cuenta de todo lo bueno que ha sido. Me haces bien, y haces bien a todos los que te rodean, incluso de formas que no te imaginas. Y entre todos, hay alguien que te ama profundamente. Ese amor es para siempre, y siempre es hoy.</p>
 
-        <p>Que todos tus sueños se hagan realidad. Te deseo lo mejor, y que las fuerzas del cielo siempre te acompañen.</p>
+                <p style="--i: 8">Haber tenido la oportunidad de conocerte, que Dios me haya brindado a amigos como tu ha sido un sueño cumplido.</p>
 
-        <p>Con cariño y todo mi aprecio,<br>Carlos Díaz<br>15/10/2024 02:25pm</p>
+                <p style="--i: 9"><span class="highlight">Que todos tus sueños se hagan realidad.</span> Te deseo lo mejor, y que las fuerzas del cielo siempre te acompañen.</p>
+            </div>
+
+            <div class="message-footer">
+                <p class="message-signature">Con cariño y todo mi aprecio,<br>Carlos Díaz</p>
+                <p class="message-date">15 de octubre, 2024</p>
+            </div>
+        </article>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
     </div>
 
-    <audio id="background-music" loop>
+    <!-- Audio controls -->
+    <div class="audio-controls" id="audioControls">
+        <button class="audio-toggle" id="audioToggle" aria-label="Reproducir música">
+            <span id="audioIcon">🔇</span>
+        </button>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="backgroundMusic" loop>
         <source src="fonts/Staring.mp3" type="audio/mpeg">
         Tu navegador no soporta la reproducción de audio.
     </audio>
 
     <script>
-        // Función para desplegar el mensaje y reproducir música
-        document.getElementById("play-button").onclick = function() {
-            var audio = document.getElementById("background-music");
-            audio.volume = 0.1;  // Ajusta el volumen al 30%
-            audio.play();
-            
-            // Desplegar el mensaje
-            var messageContainer = document.getElementById("message-container");
-            messageContainer.style.display = 'block'; // Mostrar el mensaje
-            this.style.display = 'none'; // Esconde el botón después de hacer clic
+        // State management
+        const state = {
+            audioPlaying: false,
+            messageRevealed: false
         };
+
+        // DOM elements
+        const elements = {
+            loading: document.getElementById('loading'),
+            revealButton: document.getElementById('revealButton'),
+            messageCard: document.getElementById('messageCard'),
+            audioControls: document.getElementById('audioControls'),
+            audioToggle: document.getElementById('audioToggle'),
+            audioIcon: document.getElementById('audioIcon'),
+            backgroundMusic: document.getElementById('backgroundMusic'),
+            scrollIndicator: document.getElementById('scrollIndicator'),
+            particles: document.getElementById('particles')
+        };
+
+        // Initialize particles
+        function createParticles() {
+            const particleCount = 30;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                elements.particles.appendChild(particle);
+            }
+        }
+
+        // Reveal message with smooth animation
+        function revealMessage() {
+            if (state.messageRevealed) return;
+            
+            state.messageRevealed = true;
+            elements.messageCard.classList.add('active');
+            elements.revealButton.style.display = 'none';
+            elements.audioControls.classList.add('visible');
+            
+            // Auto-play music
+            playAudio();
+            
+            // Show scroll indicator after a delay
+            setTimeout(() => {
+                elements.scrollIndicator.classList.add('visible');
+            }, 1000);
+            
+            // Smooth scroll to message
+            setTimeout(() => {
+                elements.messageCard.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 300);
+        }
+
+        // Audio controls
+        function playAudio() {
+            elements.backgroundMusic.volume = 0.15;
+            elements.backgroundMusic.play().then(() => {
+                state.audioPlaying = true;
+                updateAudioIcon();
+            }).catch(err => {
+                console.log('Audio autoplay blocked:', err);
+            });
+        }
+
+        function toggleAudio() {
+            if (state.audioPlaying) {
+                elements.backgroundMusic.pause();
+                state.audioPlaying = false;
+            } else {
+                elements.backgroundMusic.play();
+                state.audioPlaying = true;
+            }
+            updateAudioIcon();
+        }
+
+        function updateAudioIcon() {
+            elements.audioIcon.textContent = state.audioPlaying ? '🔊' : '🔇';
+            elements.audioToggle.setAttribute('aria-label', 
+                state.audioPlaying ? 'Pausar música' : 'Reproducir música'
+            );
+        }
+
+        // Event listeners
+        elements.revealButton.addEventListener('click', revealMessage);
+        elements.audioToggle.addEventListener('click', toggleAudio);
+
+        // Hide scroll indicator when scrolling
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (state.messageRevealed) {
+                elements.scrollIndicator.classList.remove('visible');
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    if (window.scrollY < 100) {
+                        elements.scrollIndicator.classList.add('visible');
+                    }
+                }, 1000);
+            }
+        });
+
+        // Keyboard accessibility
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && document.activeElement === elements.revealButton) {
+                revealMessage();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            
+            // Hide loading screen
+            setTimeout(() => {
+                elements.loading.classList.add('hidden');
+            }, 500);
+        });
+
+        // Handle visibility change (pause audio when tab is hidden)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && state.audioPlaying) {
+                elements.backgroundMusic.pause();
+            } else if (!document.hidden && state.audioPlaying) {
+                elements.backgroundMusic.play();
+            }
+        });
     </script>
 </body>
 </html>

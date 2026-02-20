@@ -6,44 +6,65 @@
 }
 
 
-
 .jp-card {
   box-sizing: border-box;
 
   width: 186px;
   height: 111px;
-  padding: 13px 14px ;
-  border: white 2px 1px;
+  padding: 12px 14px;
   border-radius: 16px;
 
-  background: rgba(255,255,255,.25);
-  backdrop-filter: blur(12px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-family: "D-DIN Exp";
-  font-weight: bold;
+  font-weight: 700;
   color: white;
-  transition: all 0.3s ease;
+
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .jp-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border-color: rgba(255, 211, 116, 0.35);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    0 0 32px rgba(255, 211, 116, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 
 .jp-category {
-  font-size: 16px;
-  letter-spacing: 0.8px;
+  font-size: clamp(13px, 1.8vw, 15px);
+  letter-spacing: 0.9px;
   text-transform: uppercase;
+  opacity: 0.92;
+  line-height: 1.2;
 }
 
 .jp-data {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  gap: 12px;
 }
 
 .jp-data div:first-child {
@@ -55,15 +76,44 @@
   opacity: 53%;
 }
 
+.jp-data div:first-child {
+  font-size: clamp(38px, 6vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+}
+
+.jp-data div:last-child {
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 600;
+  opacity: 0.55;
+}
+
 .jp-disclaimer {
-  margin-top: 10px;
+  width: 100%;
   max-width: 370px;
-
-  font-family: "D-DIN Exp";
-  font-size: 10px;
-  line-height: 1.4;
-
-  color: rgba(255, 255, 255, 0.6);
+  margin-top: 12px;
+  padding: 6px;
+  
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 116, 0.06) 0%,
+    rgba(255, 211, 116, 0.03) 100%
+  );
+  border: 1px solid rgba(255, 211, 116, 0.12);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  font-family: "D-DIN Exp", sans-serif;
+  font-size: clamp(8px, 1.2vw, 10px);
+  line-height: 1.55;
+  color: rgba(255, 211, 116, 0.75);
+  text-align: center;
+  letter-spacing: 0.4px;
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 1000px) {

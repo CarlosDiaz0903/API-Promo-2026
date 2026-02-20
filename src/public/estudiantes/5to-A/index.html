@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta name="description" content="5TO 'A' - Datos, calificaciones y perfiles de estudiantes">
+  <meta name="theme-color" content="#02060e">
+
+  <title>5TO "A" | Blessed</title>
+  
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="../../icons/LOGO-P1.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../../icons/LOGO-P1.png">
+
+  <!-- Critical CSS inline -->
+  <style>
+    :root {
+      --bg-primary: #02060e;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Fuentes -->
+  <link rel="stylesheet" href="../../styles/fonts.css">
+
+  <!-- Sistema de diseño global - REUTILIZADO -->
+  <link rel="stylesheet" href="../../styles/design-system.css">
+  <link rel="stylesheet" href="../../styles/header.css">
+  <link rel="stylesheet" href="../../styles/animations.css">
+
+  <!-- Estilos específicos de la página -->
+  <link rel="stylesheet" href="../styles/classroom.css">
+  <link rel="stylesheet" href="../styles/stats.css">
+  <link rel="stylesheet" href="../styles/search.css">
+  <link rel="stylesheet" href="../styles/student-cards.css">
+
+  <!-- Modal styles (mantener originales) -->
+  <link rel="stylesheet" href="../salon-style/modal/styles/modal.css">
+  <link rel="stylesheet" href="../salon-style/modal/styles/perfil-section.css">
+  <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/performance.css">
+  <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/general-dashboard.css">
+  <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/japonese-profile.css">
+  <link rel="stylesheet" href="../salon-style/modal/styles/rendimiento-section/academic-performance.css">
+  <link rel="stylesheet" href="../salon-style/modal/share/share.css">
+  <link rel="stylesheet" href="../salon-style/modal/share/share-image.css">
+</head>
+
+<body data-class="5A">
+  
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
+
+  <!-- Animated Background -->
+  <div class="animated-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <!-- Header - Reutilizando componente -->
+  <header id="mainHeader">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+      <a href="/" class="logo" aria-label="Inicio">
+        <img src="../../icons/BLESSED-LOGO.png" alt="Logo Blessed" width="130" height="auto">
+      </a>
+
+      <button 
+        id="hamburger" 
+        class="hamburger" 
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li class="nav-item dropdown" role="none">
+          <button 
+            class="dropdown-toggle" 
+            aria-haspopup="true" 
+            aria-expanded="false"
+            aria-controls="calendarioMenu"
+          >
+            CALENDARIO
+            <svg class="caret" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <ul id="calendarioMenu" class="dropdown-menu" role="menu">
+            <li role="none">
+              <a role="menuitem" href="/calendario/">CALENDARIO 5TO A</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="/calendario-5to-b/">CALENDARIO 5TO B</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" role="none">
+          <a href="/olimpiadas/" class="nav-link" role="menuitem">OLIMPIADAS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/eventos/" class="nav-link" role="menuitem">EVENTOS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/estudiantes/" class="nav-link active" role="menuitem" aria-current="page">ESTUDIANTES</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Classroom Hero Section -->
+    <section class="classroom-hero" id="classroomHero">
+      <div class="hero-content">
+        <div class="hero-badge" data-aos="fade-down">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+          <span>Promo 2026 - Blessed</span>
+        </div>
+        
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+          <span class="title-main">5TO "A"</span>
+          <span class="title-sub">DATOS Y CALIFICACIONES</span>
+        </h1>
+
+        <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+          Información académica detallada, perfiles de estudiantes y estadísticas del salón.
+        </p>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="class-stats" id="classStats" aria-label="Estadísticas generales de la clase">
+      <div class="stats-container">
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">
+              <span class="stat-number" id="totalStudents" data-target="0"></span>
+            </div>
+            <div class="stat-label">Estudiantes</div>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">
+              <span class="stat-number stat-grade" id="averageGrade">—</span>
+            </div>
+            <div class="stat-label">Promedio General</div>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">
+              <span class="stat-number" id="approvedPercent" data-suffix="%">0</span>
+              <span class="stat-suffix">%</span>
+            </div>
+            <div class="stat-label">Habilitados</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section" id="searchSection">
+      <div class="search-container">
+        <div class="search-bar" data-aos="fade-up">
+          <div class="search-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input"
+            placeholder="Buscar estudiante..." 
+            autocomplete="off" 
+            aria-label="Buscar estudiante"
+          >
+          <button class="search-clear" id="searchClear" aria-label="Limpiar búsqueda">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="search-results-info" id="searchResults" aria-live="polite">
+          <span id="resultsCount"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Students Grid Section -->
+    <section class="students-section" id="studentsSection">
+      <div class="students-grid" id="studentsGrid" role="list" aria-label="Lista de estudiantes">
+        <!-- Las tarjetas se generan dinámicamente con JavaScript -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+            <line x1="11" y1="8" x2="11" y2="12"></line>
+            <line x1="11" y1="16" x2="11.01" y2="16"></line>
+          </svg>
+        </div>
+        <h3 class="empty-title">No se encontraron estudiantes</h3>
+        <p class="empty-description">Intenta buscar con otro nombre o verifica la ortografía.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Promo Blessed. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts - Modal existente (mantener) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  
+  <!-- Scripts del modal (mantener intactos) -->
+  <script type="module">
+    import '../salon-style/modal/modal.js';
+    import '../salon-style/modal/modal-profile.js';
+    import '../salon-style/modal/modal-performance.js';
+    import '../salon-style/modal/modal-utils.js';
+    import '../salon-style/modal/share/share-image.js';
+    import '../salon-style/modal/share/share-preview.js';
+  </script>
+
+  <!-- Nuevo sistema modular -->
+  <script type="module" src="../scripts/classroom.js"></script>
+
+</body>
+</html>

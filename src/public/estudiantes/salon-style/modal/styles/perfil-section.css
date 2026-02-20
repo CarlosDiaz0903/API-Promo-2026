@@ -238,6 +238,7 @@
 .modal-profile .profile-name {
   animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.6s;
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
 }
 
 /* 3. Datos - usa keyframe especial que termina en opacity 0.4 */
@@ -249,10 +250,41 @@
 
 /* 4. Quote */
 .modal-profile .quote {
-  transform: translateY(40px);
   animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 1.4s;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    0 0 32px rgba(255, 211, 116, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transition: all 0.35s;
 }
+
+.modal-profile .quote:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.40),
+    0 0 45px rgba(255, 211, 116, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  
+  cursor: pointer;
+}
+
+
 
 /* 5. Comillas */
 .modal-profile .quote-mark {
@@ -263,7 +295,32 @@
 
 /* 6. Botón */
 .modal-profile .share-profile {
+  position: relative; /* Necesario para posicionar el brillo */
+  overflow: hidden;    /* Corta el brillo fuera del botón */
   transform: translateY(50px);
   animation: bounceIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   animation-delay: 1.8s;
+}
+
+/* Efecto Shine */
+.modal-profile .share-profile::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.2) 50%, /* Subí un poco la opacidad para que se note más */
+    transparent 70%
+  );
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.6s ease-out;
+  pointer-events: none;
+}
+
+.modal-profile .share-profile:hover::after {
+  transform: translateX(100%) rotate(45deg);
 }
