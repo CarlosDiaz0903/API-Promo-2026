@@ -32,7 +32,7 @@ export async function openStudentModal(student) {
   applyModalBackground(modal, student);
 
   const linear = document.createElement("img");
-  linear.src = "../salon-style/modal/linear-horizontal.png";
+  linear.src = "../salon-style/modal/icons/background/linear-horizontal.png";
   linear.className = "modal-linear";
   modal.appendChild(linear);
 

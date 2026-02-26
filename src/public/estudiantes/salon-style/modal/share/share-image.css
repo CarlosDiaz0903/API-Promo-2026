@@ -198,9 +198,14 @@
   max-width: 729.25px;
   height: 66.77px;
 
-  background: rgba(255, 255, 255, 0.22);
-  border-radius: 60px;
-  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,.24);
+
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    0 0 32px rgba(198, 205, 212, 0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 25px;
+  border: 2px solid rgba(210, 219, 230, 0.4);
 
   display: flex;
   align-items: center;
@@ -220,21 +225,31 @@
   align-items: center;
   height: 100%;
   flex: 1;
+  padding: 0.8px;
 }
 
 /* LABEL */
 .share-general-dashboard .label {
   font-size: 35px;
-  font-weight: 700;
+  font-weight: bold;
   letter-spacing: 1.4px;
-  opacity: 0.85;
+  opacity: 1;
 }
 
 /* GRADE (CENTRO) */
 .share-general-dashboard .grade {
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.32);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 116, 0.20) 0%,
+    rgba(255, 211, 116, 0.12) 100%
+  );
+  border: 2px solid rgba(255, 211, 116, 0.5);
+  color: #ffd67d;
+  text-shadow: 
+    0 2px 8px rgba(255, 211, 116, 0.4),
+    0 0 24px rgba(255, 211, 116, 0.2);
   border-radius: 60px;
 
   font-size: 41px;
@@ -249,7 +264,7 @@
   font-size: 39px;
   font-weight: 400;
   font-style: italic;
-  opacity: 0.75;
+  opacity: 0.82;
 }
 
 

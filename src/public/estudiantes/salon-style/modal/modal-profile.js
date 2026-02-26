@@ -30,7 +30,7 @@ export function buildProfileSection(student) {
 
   const photoSrc = student.photo && student.photo !== ""
     ? student.photo
-    : "../salon-style/tarjetas/unknown.png";
+    : "../salon-style/icons/unknown.png";
 
   photoDiv.style.backgroundImage = `url("${photoSrc}")`;
 
@@ -77,14 +77,14 @@ export function buildProfileSection(student) {
   quoteDiv.className = "quote";
 
   const quoteUp = document.createElement("img");
-  quoteUp.src = "../salon-style/modal/comilla-up.png";
+  quoteUp.src = "../salon-style/modal/icons/comilla/comilla-up.png";
   quoteUp.className = "quote-mark up";
 
   const quoteSpan = document.createElement("span");
   quoteSpan.textContent = student.quote || "";
 
   const quoteDown = document.createElement("img");
-  quoteDown.src = "../salon-style/modal/comilla-down.png";
+  quoteDown.src = "../salon-style/modal/icons/comilla/comilla-down.png";
   quoteDown.className = "quote-mark down";
 
   quoteDiv.append(quoteUp, quoteSpan, quoteDown);

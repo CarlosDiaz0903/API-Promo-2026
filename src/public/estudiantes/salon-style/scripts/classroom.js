@@ -4,12 +4,12 @@
  */
 
 // Import shared modules
-import { HeaderManager } from '../../scripts/modules/header.js';
-import { AOSManager, PageLoader } from '../../scripts/modules/utils.js';
+import { HeaderManager } from '../../../scripts/modules/header.js';
+import { AOSManager, PageLoader } from '../../../scripts/modules/utils.js';
 
 // Import modal functionality (mantener original)
-import { openStudentModal } from '../salon-style/modal/modal.js';
-import { calculateGeneralGrade } from '../salon-style/modal/modal-performance.js';
+import { openStudentModal } from '../modal/modal.js';
+import { calculateGeneralGrade } from '../modal/modal-performance.js';
 
 /**
  * Classroom Page Manager
@@ -313,7 +313,7 @@ class ClassroomPage {
     // Determine photo
     const isUnknown = !student.photo;
     const photoSrc = isUnknown
-      ? '../salon-style/tarjetas/unknown.png'
+      ? '../salon-style/icons/unknown.png'
       : student.photo;
 
     // Build HTML

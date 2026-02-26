@@ -13,14 +13,14 @@ function createShareQuote(text) {
   quote.className = "share-quote";
 
   const up = document.createElement("img");
-  up.src = "../salon-style/modal/comilla-up.png";
+  up.src = "../salon-style/modal/icons/comilla/comilla-up.png";
   up.className = "share-quote-mark up";
 
   const span = document.createElement("span");
   span.textContent = (text || "").toUpperCase();
 
   const down = document.createElement("img");
-  down.src = "../salon-style/modal/comilla-down.png";
+  down.src = "../salon-style/modal/icons/comilla/comilla-down.png";
   down.className = "share-quote-mark down";
 
   quote.append(up, span, down);
@@ -56,7 +56,7 @@ async function createShareGeneralDashboard(student) {
 // ==============================
 function getCanvasPhoto(src) {
   if (!src || src.includes("unknown")) {
-    return "../salon-style/tarjetas/unknown-cvs.png";
+    return "../salon-style/icons/unknown-cvs.png";
   }
 
   const dot = src.lastIndexOf(".");
@@ -81,8 +81,8 @@ export async function generateShareImage(student) {
 
   // Overlays
   [
-    ["share-linear-bg", "../salon-style/modal/background-linear.png"],
-    ["share-linear", "../salon-style/modal/linear.png"]
+    ["share-linear-bg", "../salon-style/modal/icons/background/background-linear.png"],
+    ["share-linear", "../salon-style/modal/icons/background/linear.png"]
   ].forEach(([cls, src]) => {
     const img = document.createElement("img");
     img.src = src;
@@ -108,7 +108,7 @@ export async function generateShareImage(student) {
     ["share-star-front small", "star.png"]
   ].forEach(([cls, file]) => {
     const img = document.createElement("img");
-    img.src = `../salon-style/modal/${file}`;
+    img.src = `../salon-style/modal/icons/star/${file}`;
     img.className = cls;
     canvas.appendChild(img);
   });
@@ -189,9 +189,14 @@ export async function generateShareImage(student) {
 // ==============================
 // UTILS
 // ==============================
-function formatDate(date) {
-  const d = new Date(date);
-  return `${String(d.getDate()).padStart(2,"0")}.${String(d.getMonth()+1).padStart(2,"0")}.${d.getFullYear()}`;
+function formatDate(dateStr) {
+  if (!dateStr) return "";
+
+  const [year, month, day] = dateStr.split("-").map(Number);
+  // Creamos la fecha con hora 12:00 para evitar que baje al día anterior por zona
+  const date = new Date(year, month - 1, day, 12, 0, 0);
+
+  return `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
 }
 
 async function htmlToImage(node) {

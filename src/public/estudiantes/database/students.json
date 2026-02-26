@@ -155,6 +155,20 @@
       }
     },
     {
+      "internalId": "STU-076",
+      "schoolId": "212935",
+      "name": "Micaela Carrasco",
+      "photo": "",
+      "quote": "",
+      "birthday": "2009-10-27",
+      "currentClass": "5B",
+      "approved": false,
+      "profileTheme": {
+        "background": "",
+        "accentColor": ""
+      }
+    },
+    {
       "internalId": "STU-012",
       "schoolId": "212928",
       "name": "Ana Carrión",
@@ -656,6 +670,20 @@
       "quote": "",
       "birthday": "2010-02-25",
       "currentClass": "5B",
+      "approved": false,
+      "profileTheme": {
+        "background": "",
+        "accentColor": ""
+      }
+    },
+    {
+      "internalId": "STU-077",
+      "schoolId": "",
+      "name": "Alejandro Porro",
+      "photo": "",
+      "quote": "",
+      "birthday": "2009-11-05",
+      "currentClass": "5A",
       "approved": false,
       "profileTheme": {
         "background": "",
