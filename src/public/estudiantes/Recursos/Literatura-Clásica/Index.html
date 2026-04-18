@@ -5,715 +5,854 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Literatura Clásica — Organizador Visual Académico</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --bg: #f7f6f3;
-    --surface: #ffffff;
-    --surface2: #f2f0eb;
-    --border: #e8e4dc;
-    --border2: #d4cfc4;
-    --text: #1a1916;
-    --text2: #5a5650;
-    --text3: #9a958e;
-    --accent: #2c5f8a;
-    --accent-light: #e8f0f8;
+/* ══ TOKENS ══ */
+:root {
+  --bg:        #f5f3ef;
+  --bg2:       #eeebe4;
+  --surface:   #ffffff;
+  --surface2:  #f8f6f2;
+  --surface3:  #f0ede6;
+  --border:    #e4e0d8;
+  --border2:   #cbc6bb;
+  --text:      #18160f;
+  --text2:     #56524a;
+  --text3:     #97928a;
+  --text4:     #bab6ae;
+  --radius-xl: 16px;
+  --radius:    12px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.04);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.04);
+  --shadow:    0 2px 8px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.06);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.08), 0 16px 48px rgba(0,0,0,.08);
+  --ease:      cubic-bezier(.4,0,.2,1);
+  --dur:       .22s;
+}
 
-    /* Author accent colors */
-    --c-sofocles:  #5b4a8a;
-    --c-esquilo:   #2d6a4f;
-    --c-aristofanes: #b5451b;
-    --c-safo:      #8a2d5b;
-    --c-virgilio:  #1d5c7a;
-    --c-homero:    #7a5c1d;
+/* ══ DARK MODE ══ */
+html.dark {
+  --bg:        #0f0e0c;
+  --bg2:       #161410;
+  --surface:   #1a1916;
+  --surface2:  #201e1a;
+  --surface3:  #272420;
+  --border:    #2c2a26;
+  --border2:   #3a3830;
+  --text:      #ede9e0;
+  --text2:     #a09890;
+  --text3:     #5e5a52;
+  --text4:     #3c3a34;
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.2);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.2);
+  --shadow:    0 2px 8px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.5), 0 16px 48px rgba(0,0,0,.4);
+}
 
-    --c-sofocles-light:  #f0ecfa;
-    --c-esquilo-light:   #e8f5ee;
-    --c-aristofanes-light: #fdf0eb;
-    --c-safo-light:      #faeef5;
-    --c-virgilio-light:  #e8f3f8;
-    --c-homero-light:    #f8f3e8;
+/* Author accent colors */
+:root {
+  --a: #5b4a8a; --a-l: #f0ecfa; --a-m: #ddd5f8; --a-d: #3d3060;
+}
+[data-author="esquilo"]     { --a: #2d6a4f; --a-l: #e8f5ee; --a-m: #c2e0cd; --a-d: #1a4030; }
+[data-author="aristofanes"] { --a: #b5451b; --a-l: #fdf0eb; --a-m: #f8ccb5; --a-d: #7a2d0e; }
+[data-author="safo"]        { --a: #8a2d5b; --a-l: #faeef5; --a-m: #f0c0d8; --a-d: #5c1a3c; }
+[data-author="virgilio"]    { --a: #1d5c7a; --a-l: #e8f3f8; --a-m: #b8d8ea; --a-d: #0d3d52; }
+[data-author="homero"]      { --a: #7a5c1d; --a-l: #f8f3e8; --a-m: #e8d8a8; --a-d: #503c0e; }
 
-    --radius: 12px;
-    --radius-sm: 8px;
-    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
-    --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
-  }
+html.dark [data-author="sofocles"]    { --a: #9b87d4; --a-l: #1e1a30; --a-m: #2e2850; --a-d: #c8bcf0; }
+html.dark [data-author="esquilo"]     { --a: #5aaa7a; --a-l: #0e1e16; --a-m: #162e20; --a-d: #8fd4aa; }
+html.dark [data-author="aristofanes"] { --a: #e07a50; --a-l: #1e120c; --a-m: #2e1c14; --a-d: #f0a880; }
+html.dark [data-author="safo"]        { --a: #c96a96; --a-l: #1e0e18; --a-m: #2e1628; --a-d: #f090b8; }
+html.dark [data-author="virgilio"]    { --a: #5aaad4; --a-l: #0c1820; --a-m: #142430; --a-d: #80c8f0; }
+html.dark [data-author="homero"]      { --a: #c0973a; --a-l: #1c1608; --a-m: #2c2010; --a-d: #e0b860; }
 
-  /* ── DARK MODE ── */
-  html.dark {
-    --bg: #111110;
-    --surface: #1c1b19;
-    --surface2: #252420;
-    --border: #2e2c28;
-    --border2: #3a3832;
-    --text: #e8e4dc;
-    --text2: #a09a90;
-    --text3: #5e5a54;
-    --shadow: 0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.2);
-    --shadow-sm: 0 1px 2px rgba(0,0,0,.25);
-  }
+/* ══ TRANSITIONS ══ */
+body, body * {
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+.panel { transition: none !important; }
+.obra-card, .tema-card, .char-card { transition: transform .18s var(--ease), box-shadow .18s var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease) !important; }
 
-  /* Dark mode author accent overrides — lighter tones for dark bg */
-  html.dark { --c-sofocles: #9b87d4; --c-esquilo: #5aaa7a; --c-aristofanes: #e07a50; --c-safo: #c96a96; --c-virgilio: #5aaad4; --c-homero: #c0973a; }
+/* ══ BASE ══ */
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* Colored inline styles (author initials, analisis headers, tags) need per-element dark overrides */
-  html.dark .author-initial   { filter: brightness(.75) saturate(1.2); }
-  html.dark .analisis-header  { filter: brightness(.5); }
-  html.dark .tema-card        { background: var(--surface2) !important; }
-  html.dark .stat-card        { background: var(--surface2) !important; border-color: var(--border) !important; }
-  html.dark .obra-card        { background: var(--surface) !important; border-color: var(--border) !important; }
-  html.dark .h-item           { background: var(--surface2) !important; border-color: var(--border) !important; }
-  html.dark .analisis-item    { background: var(--surface2) !important; border-color: var(--border) !important; }
-  html.dark .context-banner   { background: var(--surface2) !important; border-color: var(--border) !important; color: var(--text3) !important; }
-  html.dark .homero-obra-block{ border-color: var(--border) !important; }
-  html.dark .homero-obra-header{ filter: brightness(.45); }
-  html.dark .resumen-strip    { background: var(--surface2) !important; }
-  html.dark .debate-notice    { background: #2a2200 !important; border-color: #5a4800 !important; color: #c8a840 !important; }
-  html.dark .tag              { filter: brightness(.6) saturate(1.1); }
-  html.dark .pill             { filter: brightness(.6) saturate(1.1); }
+/* ══ SCROLLBAR ══ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
 
-  /* Smooth transition on all color changes */
-  *, *::before, *::after {
-    transition-property: background-color, border-color, color, box-shadow;
-    transition-duration: .22s;
-    transition-timing-function: ease;
-  }
-  /* Don't animate layout/transform/opacity with that global rule */
-  .panel, .panel.active, .tema-card, .obra-card { transition: background-color .22s, border-color .22s, color .22s, box-shadow .22s, transform .18s; }
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
 
-  /* ── DARK TOGGLE BUTTON ── */
-  .theme-toggle {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-left: auto;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 5px 12px 5px 8px;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text2);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: background .2s, border-color .2s, color .2s;
-  }
-  .theme-toggle:hover { background: var(--border); color: var(--text); }
+.header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
 
-  .toggle-track {
-    width: 30px;
-    height: 17px;
-    border-radius: 9px;
-    background: var(--border2);
-    position: relative;
-    flex-shrink: 0;
-    transition: background .22s;
-  }
-  html.dark .toggle-track { background: #7a6cc0; }
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 0 16px;
+  border-bottom: 1px solid var(--border);
+}
 
-  .toggle-thumb {
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: #fff;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: transform .22s cubic-bezier(.4,0,.2,1), background .22s;
-    box-shadow: 0 1px 3px rgba(0,0,0,.2);
-  }
-  html.dark .toggle-thumb { transform: translateX(13px); }
+.logo-mark {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #c9b68a 0%, #a08040 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 700;
+  color: #fff;
+  letter-spacing: -.02em;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+}
 
-  .toggle-icon { font-size: 14px; line-height: 1; user-select: none; }
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.03em;
+}
 
-  html { scroll-behavior: smooth; }
+.header-sep { color: var(--border2); font-size: 16px; }
 
-  body {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+.header-badge {
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--surface2);
+  color: var(--text3);
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+}
 
-  /* ── HEADER ── */
-  .app-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 32px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(12px);
-  }
+/* Theme toggle */
+.theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 5px 12px 5px 7px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text2);
+  white-space: nowrap;
+  flex-shrink: 0;
+  outline: none;
+}
+.theme-toggle:hover { border-color: var(--border2); color: var(--text); }
 
-  .header-top {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
-  }
+.tt-track {
+  width: 28px; height: 16px;
+  border-radius: 99px;
+  background: var(--border2);
+  position: relative;
+  flex-shrink: 0;
+}
+html.dark .tt-track { background: #6a5cb0; }
+.tt-thumb {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 2px; left: 2px;
+  transition: transform .2s var(--ease);
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+html.dark .tt-thumb { transform: translateX(12px); }
+.tt-icon { font-size: 13px; line-height: 1; user-select: none; }
 
-  .header-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -.02em;
-  }
+/* ══ TABS ══ */
+.tabs-bar {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-top: 2px;
+}
+.tabs-bar::-webkit-scrollbar { display: none; }
 
-  .header-badge {
-    font-size: 11px;
-    font-weight: 500;
-    background: var(--surface2);
-    color: var(--text3);
-    padding: 3px 10px;
-    border-radius: 20px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    border: 1px solid var(--border);
-  }
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 17px;
+  border: none;
+  background: transparent;
+  color: var(--text3);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  position: relative;
+  bottom: -1px;
+  outline: none;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: var(--text2); }
+.tab-btn.active { font-weight: 500; color: var(--text); border-bottom-color: var(--a, #5b4a8a); }
 
-  /* ── TABS ── */
-  .tabs-bar {
-    display: flex;
-    gap: 2px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .tabs-bar::-webkit-scrollbar { display: none; }
+.tab-pip {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: .7;
+}
+.tab-btn.active .tab-pip { opacity: 1; }
 
-  .tab-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    border: none;
-    background: transparent;
-    color: var(--text3);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13.5px;
-    font-weight: 400;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: color .2s, border-color .2s;
-    border-radius: 0;
-    position: relative;
-    bottom: -1px;
-  }
+/* ══════════════════════════════════════
+   MAIN LAYOUT
+══════════════════════════════════════ */
+.main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 36px 28px 80px;
+}
 
-  .tab-btn:hover { color: var(--text2); }
+.panel { display: none; }
+.panel.active {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: slideUp .3s var(--ease);
+}
 
-  .tab-btn.active {
-    font-weight: 500;
-    color: var(--text);
-    border-bottom-color: currentColor;
-  }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-  .tab-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+/* ══ AUTHOR HERO ══ */
+.author-hero {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 28px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
 
-  /* ── MAIN CONTENT ── */
-  .main {
-    max-width: 1020px;
-    margin: 0 auto;
-    padding: 32px 24px 64px;
-  }
+.author-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--a-l) 0%, transparent 60%);
+  opacity: .5;
+  pointer-events: none;
+}
 
-  .panel { display: none; }
-  .panel.active {
-    display: block;
-    animation: fadeIn .28s ease;
-  }
+.author-monogram {
+  width: 64px; height: 64px;
+  border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: -.04em;
+  background: var(--a-l);
+  color: var(--a);
+  border: 1.5px solid var(--a-m);
+  position: relative;
+  z-index: 1;
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+.author-info { flex: 1; position: relative; z-index: 1; }
 
-  /* ── AUTHOR HERO ── */
-  .author-hero {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    margin-bottom: 28px;
-  }
+.author-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--a);
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
 
-  .author-initial {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    flex-shrink: 0;
-    letter-spacing: -.02em;
-  }
+.author-sub {
+  font-size: 12.5px;
+  color: var(--text3);
+  letter-spacing: .04em;
+  font-weight: 400;
+}
 
-  .author-meta { flex: 1; }
+.author-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+.author-chip {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--a-l);
+  color: var(--a);
+  border: 1px solid var(--a-m);
+  letter-spacing: .03em;
+}
 
-  .author-name {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -.03em;
-    margin-bottom: 4px;
-  }
+/* ══ SECTION HEADER ══ */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.sec-num {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: var(--a);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+}
+.sec-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text3);
+}
 
-  .author-tagline {
-    font-size: 13px;
-    color: var(--text3);
-    font-weight: 400;
-    letter-spacing: .02em;
-  }
+/* ══ CARD BASE ══ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+}
+.card-pad { padding: 20px 22px; }
+.card-head {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--a);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
 
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-size: 10.5px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    color: var(--text3);
-    margin-bottom: 12px;
-    padding-left: 2px;
-  }
+/* ══ GRIDS ══ */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 800px) { .g3 { grid-template-columns: 1fr 1fr; } .g4 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } }
 
-  /* ── CARDS ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow .2s, border-color .2s;
-  }
-  .card:hover {
-    box-shadow: var(--shadow);
-    border-color: var(--border2);
-  }
+/* ══ BIO STATS ══ */
+.stat-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.sl { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--text4); margin-bottom: 4px; }
+.sv { font-size: 14.5px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.ss { font-size: 12px; color: var(--text3); margin-top: 2px; }
 
-  .card-title {
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-  }
+/* context banner */
+.ctx-banner {
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  color: var(--text3);
+  text-align: center;
+  font-style: italic;
+  letter-spacing: .01em;
+}
 
-  /* ── GRIDS ── */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+/* ══ BULLET LIST ══ */
+.blist { display: flex; flex-direction: column; gap: 10px; }
+.bitem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+.bitem strong { color: var(--text); font-weight: 500; }
+.bdot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--a);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
 
-  @media (max-width: 760px) {
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 500px) {
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  }
+/* ══ TAGS ROW ══ */
+.tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tag {
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-xs);
+  background: var(--a-l);
+  color: var(--a);
+  border: 1px solid var(--a-m);
+  letter-spacing: .02em;
+}
 
-  /* ── BIO STATS ── */
-  .stat-card {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-  }
-  .stat-label {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    color: var(--text3);
-    margin-bottom: 5px;
-  }
-  .stat-value {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.35;
-  }
-  .stat-sub {
-    font-size: 12px;
-    color: var(--text3);
-    margin-top: 2px;
-  }
+/* ══ TEMA CARDS ══ */
+.tema-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  cursor: default;
+}
+.tema-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--a-m); }
+.tema-icon { font-size: 18px; margin-bottom: 8px; line-height: 1; }
+.tema-title { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+.tema-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
 
-  /* ── BULLET LIST ── */
-  .bullet-list { display: flex; flex-direction: column; gap: 9px; }
-  .bullet-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.5;
-  }
-  .bullet-item strong { color: var(--text); font-weight: 500; }
-  .b-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 7px;
-  }
+/* ══ OBRA CARDS ══ */
+.obras-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 800px) { .obras-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .obras-grid { grid-template-columns: 1fr; } }
 
-  /* ── TEMA CARD ── */
-  .tema-card {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    transition: transform .18s, box-shadow .18s;
-  }
-  .tema-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .tema-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 5px;
-  }
-  .tema-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.obra-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: default;
+}
+.obra-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--a-m); }
 
-  /* ── OBRA CARD ── */
-  .obra-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    transition: transform .18s, box-shadow .18s;
-  }
-  .obra-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .obra-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 3px;
-    font-style: italic;
-  }
-  .obra-year {
-    font-size: 11px;
-    color: var(--text3);
-    margin-bottom: 7px;
-    letter-spacing: .04em;
-  }
-  .obra-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.obra-header {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.obra-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 2px;
+}
+.obra-year {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: .04em;
+  font-weight: 500;
+}
 
-  /* ── ANÁLISIS ── */
-  .analisis-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-  }
-  .analisis-header {
-    padding: 16px 22px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .analisis-obra-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    font-style: italic;
-  }
-  .analisis-body { padding: 20px 22px; }
-  .analisis-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  @media (max-width: 640px) { .analisis-grid { grid-template-columns: 1fr; } }
+.obra-body { padding: 13px 16px; display: flex; flex-direction: column; gap: 10px; }
 
-  .analisis-item {
-    background: var(--surface2);
-    border-radius: var(--radius-sm);
-    padding: 13px 15px;
-    border: 1px solid var(--border);
-  }
-  .analisis-item-label {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    margin-bottom: 6px;
-  }
-  .analisis-item-text {
-    font-size: 13.5px;
-    color: var(--text);
-    line-height: 1.55;
-  }
-  .analisis-item.full { grid-column: 1 / -1; }
+.obra-row { display: flex; flex-direction: column; gap: 3px; }
+.obra-row-label {
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--a);
+}
+.obra-row-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
 
-  .resumen-strip {
-    border-left: 3px solid;
-    background: var(--surface2);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: 13px 16px;
-    margin-bottom: 12px;
-    font-size: 13.5px;
-    color: var(--text);
-    line-height: 1.6;
-  }
+.obra-imp-strip {
+  margin-top: 4px;
+  padding: 9px 12px;
+  background: var(--a-l);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--a-m);
+  font-size: 12px;
+  color: var(--a);
+  line-height: 1.45;
+}
+.obra-imp-strip b { font-weight: 600; display: block; margin-bottom: 2px; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
 
-  .estructura-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 6px;
-  }
-  .pill {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 11px;
-    border-radius: 20px;
-    letter-spacing: .02em;
-    border: 1px solid transparent;
-  }
+/* ══ ANÁLISIS ══ */
+.analisis-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
 
-  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
-  .tag {
-    font-size: 11.5px;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-weight: 500;
-    letter-spacing: .02em;
-    border: 1px solid transparent;
-  }
+.analisis-hero {
+  padding: 24px 28px;
+  background: var(--a-l);
+  border-bottom: 1px solid var(--a-m);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.analisis-obra-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700;
+  font-style: italic;
+  color: var(--a);
+  margin-bottom: 2px;
+}
+.analisis-meta { font-size: 12px; color: var(--text3); }
+.analisis-badge {
+  font-size: 11px; font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 99px;
+  background: var(--a);
+  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  letter-spacing: .03em;
+}
 
-  .context-banner {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 11px 16px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: var(--text3);
-    text-align: center;
-    font-style: italic;
-  }
+.analisis-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 14px; }
 
-  /* section spacing */
-  .section-block { margin-bottom: 24px; }
+.resumen-block {
+  border-left: 3px solid var(--a);
+  padding: 14px 18px;
+  background: var(--surface2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.65;
+}
+.resumen-block strong { color: var(--a); font-weight: 600; }
 
-  /* Homero two-obra grid */
-  .homero-obras { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 680px) { .homero-obras { grid-template-columns: 1fr; } }
+.analisis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 600px) { .analisis-grid { grid-template-columns: 1fr; } }
 
-  .homero-obra-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-  }
-  .homero-obra-header {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-  }
-  .homero-obra-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    font-style: italic;
-    margin-bottom: 2px;
-  }
-  .homero-obra-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
-  .h-item { background: var(--surface2); border-radius: var(--radius-sm); padding: 11px 13px; border: 1px solid var(--border); }
-  .h-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; color: var(--text3); margin-bottom: 4px; }
-  .h-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+.aitem {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.aitem.full { grid-column: 1 / -1; }
+.aitem-label {
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--a);
+  margin-bottom: 7px;
+}
+.aitem-text { font-size: 13.5px; color: var(--text); line-height: 1.55; }
 
-  /* notice for debated existence */
-  .debate-notice {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    background: #fffbeb;
-    border: 1px solid #f3d96b;
-    border-radius: var(--radius-sm);
-    padding: 11px 14px;
-    font-size: 13px;
-    color: #6b5a1a;
-    margin-bottom: 14px;
-  }
-  .debate-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+.pill {
+  font-size: 12px; font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: var(--a-l);
+  color: var(--a);
+  border: 1px solid var(--a-m);
+  letter-spacing: .02em;
+}
+.pill.solid { background: var(--a); color: #fff; border-color: var(--a); }
 
-  /* scrollbar hide globally */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+/* ══ CHAR CARDS (características) ══ */
+.char-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-xs);
+}
+.char-card:hover { box-shadow: var(--shadow-sm); border-color: var(--a-m); }
+
+/* ══ HOMERO SPECIAL ══ */
+.homero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 700px) { .homero-split { grid-template-columns: 1fr; } }
+
+.homero-obra {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.homero-obra-head {
+  padding: 18px 20px;
+  background: var(--a-l);
+  border-bottom: 1px solid var(--a-m);
+}
+.homero-obra-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700; font-style: italic;
+  color: var(--a);
+  margin-bottom: 2px;
+}
+.homero-obra-sub { font-size: 11px; color: var(--text3); letter-spacing: .03em; }
+.homero-obra-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 11px; }
+.hitem {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+}
+.hl { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--a); margin-bottom: 4px; }
+.ht { font-size: 13px; color: var(--text); line-height: 1.5; }
+
+/* debate notice */
+.debate-notice {
+  display: flex; gap: 11px; align-items: flex-start;
+  background: #fffbeb;
+  border: 1px solid #e8c84a;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #6b5a1a;
+  margin-bottom: 0;
+}
+html.dark .debate-notice { background: #1e1800; border-color: #4a3c00; color: #c8a030; }
+.debate-icon { font-size: 16px; flex-shrink: 0; line-height: 1.4; }
+
+/* ══ DIVIDER ══ */
+.divider {
+  height: 1px;
+  background: var(--border);
+  border: none;
+}
 </style>
 </head>
 <body>
 
 <!-- ══════════ HEADER ══════════ -->
 <header class="app-header">
-  <div class="header-top">
-    <span class="header-title">Literatura Clásica</span>
-    <span class="header-badge">Organizador Académico · Secundaria Avanzada</span>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar modo oscuro/claro">
-      <span class="toggle-track"><span class="toggle-thumb"></span></span>
-      <span class="toggle-icon" id="toggle-icon">☀️</span>
-      <span id="toggle-label">Modo claro</span>
-    </button>
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="logo-mark">Λ</div>
+      <span class="header-title">Literatura Clásica</span>
+      <span class="header-sep">·</span>
+      <span class="header-badge">Organizador Académico</span>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+        <span class="tt-track"><span class="tt-thumb"></span></span>
+        <span class="tt-icon" id="tt-icon">☀️</span>
+        <span id="tt-label">Claro</span>
+      </button>
+    </div>
+    <nav class="tabs-bar" role="tablist">
+      <button class="tab-btn active" data-panel="sofocles" data-author="sofocles" role="tab" style="--a:#5b4a8a">
+        <span class="tab-pip" style="background:#5b4a8a"></span>Sófocles
+      </button>
+      <button class="tab-btn" data-panel="esquilo" data-author="esquilo" role="tab" style="--a:#2d6a4f">
+        <span class="tab-pip" style="background:#2d6a4f"></span>Esquilo
+      </button>
+      <button class="tab-btn" data-panel="aristofanes" data-author="aristofanes" role="tab" style="--a:#b5451b">
+        <span class="tab-pip" style="background:#b5451b"></span>Aristófanes
+      </button>
+      <button class="tab-btn" data-panel="safo" data-author="safo" role="tab" style="--a:#8a2d5b">
+        <span class="tab-pip" style="background:#8a2d5b"></span>Safo de Lesbos
+      </button>
+      <button class="tab-btn" data-panel="virgilio" data-author="virgilio" role="tab" style="--a:#1d5c7a">
+        <span class="tab-pip" style="background:#1d5c7a"></span>Virgilio
+      </button>
+      <button class="tab-btn" data-panel="homero" data-author="homero" role="tab" style="--a:#7a5c1d">
+        <span class="tab-pip" style="background:#7a5c1d"></span>Homero
+      </button>
+    </nav>
   </div>
-  <nav class="tabs-bar" role="tablist">
-    <button class="tab-btn active" data-panel="sofocles" role="tab">
-      <span class="tab-dot" style="background:#5b4a8a"></span>Sófocles
-    </button>
-    <button class="tab-btn" data-panel="esquilo" role="tab">
-      <span class="tab-dot" style="background:#2d6a4f"></span>Esquilo
-    </button>
-    <button class="tab-btn" data-panel="aristofanes" role="tab">
-      <span class="tab-dot" style="background:#b5451b"></span>Aristófanes
-    </button>
-    <button class="tab-btn" data-panel="safo" role="tab">
-      <span class="tab-dot" style="background:#8a2d5b"></span>Safo de Lesbos
-    </button>
-    <button class="tab-btn" data-panel="virgilio" role="tab">
-      <span class="tab-dot" style="background:#1d5c7a"></span>Virgilio
-    </button>
-    <button class="tab-btn" data-panel="homero" role="tab">
-      <span class="tab-dot" style="background:#7a5c1d"></span>Homero
-    </button>
-  </nav>
 </header>
 
 <!-- ══════════ MAIN ══════════ -->
 <main class="main">
 
-<!-- ─────────────────────────── SÓFOCLES ─────────────────────────── -->
-<section class="panel active" id="panel-sofocles">
+<!-- ═══════════════════════════════════════════════════════
+     SÓFOCLES
+═══════════════════════════════════════════════════════ -->
+<section class="panel active" id="panel-sofocles" data-author="sofocles">
 
   <div class="author-hero">
-    <div class="author-initial" style="background:#f0ecfa;color:#5b4a8a;">S</div>
-    <div class="author-meta">
-      <div class="author-name" style="color:#5b4a8a;">Sófocles</div>
-      <div class="author-tagline">Dramaturgo · Grecia Clásica · Siglo V a.C.</div>
-    </div>
-  </div>
-
-  <!-- BIO -->
-  <div class="section-block">
-    <div class="section-label">I — Biografía</div>
-    <div class="card">
-      <div class="context-banner">Atenas, período de mayor esplendor · Contemporáneo de Pericles, Esquilo y Eurípides</div>
-      <div class="grid-4" style="margin-bottom:14px;">
-        <div class="stat-card"><div class="stat-label">Nacimiento</div><div class="stat-value">c. 496 a.C.</div><div class="stat-sub">Colono, Atenas</div></div>
-        <div class="stat-card"><div class="stat-label">Muerte</div><div class="stat-value">c. 406 a.C.</div><div class="stat-sub">~90 años de vida</div></div>
-        <div class="stat-card"><div class="stat-label">Contexto</div><div class="stat-value">Edad de Oro</div><div class="stat-sub">Democracia ateniense</div></div>
-        <div class="stat-card"><div class="stat-label">Victorias</div><div class="stat-value">18–24 victorias</div><div class="stat-sub">Festival de Dionisio</div></div>
-      </div>
-      <div class="bullet-list">
-        <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div>Vivió durante las Guerras Médicas, la construcción del Partenón y la hegemonía ateniense en el mundo griego.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div><strong>Importancia:</strong> considerado el más perfecto de los tres grandes trágicos griegos (junto a Esquilo y Eurípides). Elevó la tragedia a su máxima expresión artística.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div>Escribió más de 120 obras; solo <strong>7 tragedias completas</strong> han llegado a nuestros días.</div></div>
+    <div class="author-monogram">S</div>
+    <div class="author-info">
+      <div class="author-name">Sófocles</div>
+      <div class="author-sub">Dramaturgo · Grecia Clásica · Siglo V a.C.</div>
+      <div class="author-chips">
+        <span class="author-chip">Tragedia griega</span>
+        <span class="author-chip">Tercer actor</span>
+        <span class="author-chip">7 obras conservadas</span>
       </div>
     </div>
   </div>
 
-  <!-- CARACTERÍSTICAS -->
-  <div class="section-block">
-    <div class="section-label">II — Características de sus obras</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title" style="color:#5b4a8a;">Innovaciones técnicas</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div><strong>Tercer actor:</strong> incorporó un tercer personaje en escena, multiplicando los conflictos posibles.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div><strong>Reducción del coro:</strong> de 12 a 15 miembros, rol más de comentarista que protagonista.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div><strong>Uso de la ironía dramática:</strong> el público conoce la verdad antes que el personaje.</div></div>
+  <!-- I BIOGRAFÍA -->
+  <div>
+    <div class="sec-head"><div class="sec-num">I</div><div class="sec-title">Biografía</div></div>
+    <div class="card card-pad">
+      <div class="ctx-banner">Atenas, Edad de Oro · Contemporáneo de Pericles, Esquilo y Eurípides</div>
+      <div class="g4" style="margin-bottom:16px">
+        <div class="stat-card"><div class="sl">Nacimiento</div><div class="sv">c. 496 a.C.</div><div class="ss">Colono, Atenas</div></div>
+        <div class="stat-card"><div class="sl">Muerte</div><div class="sv">c. 406 a.C.</div><div class="ss">~90 años de vida</div></div>
+        <div class="stat-card"><div class="sl">Contexto</div><div class="sv">Edad de Oro</div><div class="ss">Democracia ateniense</div></div>
+        <div class="stat-card"><div class="sl">Victorias</div><div class="sv">18–24 victorias</div><div class="ss">Festival de Dionisio</div></div>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bdot"></div><div>Vivió durante las Guerras Médicas, la construcción del Partenón y la hegemonía ateniense en el mundo griego.</div></div>
+        <div class="bitem"><div class="bdot"></div><div><strong>Importancia:</strong> considerado el más perfecto de los tres grandes trágicos griegos. Elevó la tragedia a su máxima expresión artística y humana.</div></div>
+        <div class="bitem"><div class="bdot"></div><div>Escribió más de 120 obras; solo <strong>7 tragedias completas</strong> han llegado a nuestros días.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- II CARACTERÍSTICAS -->
+  <div>
+    <div class="sec-head"><div class="sec-num">II</div><div class="sec-title">Características de sus obras</div></div>
+    <div class="g2">
+      <div class="char-card">
+        <div class="card-head">Innovaciones técnicas</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Tercer actor:</strong> incorporó un tercer personaje en escena, multiplicando los conflictos posibles.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Reducción del coro:</strong> de 12 a 15 miembros; rol más de comentarista que protagonista.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Ironía dramática:</strong> el público conoce la verdad antes que el personaje en escena.</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="color:#5b4a8a;">Dimensión humana</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div><strong>Psicología profunda:</strong> personajes con motivaciones internas complejas y dilemas morales verosímiles.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div><strong>Complejidad dramática:</strong> tensión entre distintas visiones del deber, la ley y los dioses.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#5b4a8a"></div><div><strong>Lenguaje:</strong> elevado y poético, con diálogos más ágiles que sus predecesores.</div></div>
+      <div class="char-card">
+        <div class="card-head">Dimensión humana</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Psicología profunda:</strong> personajes con motivaciones internas complejas y dilemas morales verosímiles.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Complejidad dramática:</strong> tensión entre distintas visiones del deber, la ley y los dioses.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Lenguaje:</strong> elevado y poético, con diálogos más ágiles que sus predecesores.</div></div>
         </div>
       </div>
     </div>
-    <div style="margin-top:12px;">
-      <div class="tags">
-        <span class="tag" style="background:#f0ecfa;color:#3c2d7a;border-color:#d4ccf0;">Ironía trágica</span>
-        <span class="tag" style="background:#f0ecfa;color:#3c2d7a;border-color:#d4ccf0;">Anagnórisis</span>
-        <span class="tag" style="background:#f0ecfa;color:#3c2d7a;border-color:#d4ccf0;">Peripecia</span>
-        <span class="tag" style="background:#f0ecfa;color:#3c2d7a;border-color:#d4ccf0;">Hamartía</span>
-        <span class="tag" style="background:#f0ecfa;color:#3c2d7a;border-color:#d4ccf0;">Catarsis</span>
+    <div class="tags-row">
+      <span class="tag">Ironía trágica</span><span class="tag">Anagnórisis</span><span class="tag">Peripecia</span><span class="tag">Hamartía</span><span class="tag">Catarsis</span>
+    </div>
+  </div>
+
+  <!-- III TEMAS -->
+  <div>
+    <div class="sec-head"><div class="sec-num">III</div><div class="sec-title">Temas centrales</div></div>
+    <div class="g2">
+      <div class="tema-card"><div class="tema-icon">⚡</div><div class="tema-title">Destino vs. libertad</div><div class="tema-desc">El ser humano intenta escapar de su destino, pero sus propias acciones lo conducen inevitablemente hacia él.</div></div>
+      <div class="tema-card"><div class="tema-icon">⚖️</div><div class="tema-title">Culpa y responsabilidad</div><div class="tema-desc">Los personajes cargan con la culpa de sus actos aunque los hayan cometido sin saberlo. La verdad los destruye.</div></div>
+      <div class="tema-card"><div class="tema-icon">🏛️</div><div class="tema-title">Humanos y dioses</div><div class="tema-desc">Tensión constante entre la voluntad divina y las leyes humanas. Desafiar a los dioses conlleva castigo inexorable.</div></div>
+      <div class="tema-card"><div class="tema-icon">🌑</div><div class="tema-title">Tragedia y sufrimiento</div><div class="tema-desc">El sufrimiento es inherente a la condición humana. A través del dolor se alcanza una verdad más profunda.</div></div>
+    </div>
+  </div>
+
+  <!-- IV OBRAS -->
+  <div>
+    <div class="sec-head"><div class="sec-num">IV</div><div class="sec-title">Obras principales</div></div>
+    <div class="obras-grid">
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Edipo Rey</div><div class="obra-year">c. 429 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Un rey descubre que ha cometido parricidio e incesto sin saberlo. Paradigma de la tragedia griega.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Considerada por Aristóteles el modelo perfecto de tragedia. Origen del concepto freudiano «complejo de Edipo».</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Antígona</div><div class="obra-year">c. 441 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Una mujer desafía el decreto real para sepultar a su hermano. Conflicto entre ley divina y humana.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Texto fundacional del debate entre ley natural y ley del Estado; referente del pensamiento político y ético occidental.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Edipo en Colono</div><div class="obra-year">c. 406 a.C. (póstuma)</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Edipo anciano, ciego y desterrado, encuentra la paz y una muerte sagrada en Colono.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Cierra la trilogía tebana con una visión de redención. Testamento poético del autor, escrita al final de su vida.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Ayax</div><div class="obra-year">c. 450–440 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">El héroe enloquece al no recibir las armas de Aquiles y termina quitándose la vida.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Primera exploración profunda de la dignidad herida y el suicidio heroico en la literatura occidental.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Electra</div><div class="obra-year">c. 410 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Electra y Orestes vengan el asesinato de Agamenón matando a su propia madre.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Modelo de la figura femenina como motor de venganza; influyó en Freud (complejo de Electra) y en la psicología moderna.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Filoctetes</div><div class="obra-year">c. 409 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Héroe abandonado en una isla debe ceder su arco divino para conquistar Troya.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Explora la manipulación, el aislamiento y la traición; considerada la obra más filosófica y moderna de Sófocles.</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- TEMAS -->
-  <div class="section-block">
-    <div class="section-label">III — Temas centrales</div>
-    <div class="grid-2">
-      <div class="tema-card"><div class="tema-title">Destino vs. libertad</div><div class="tema-desc">El ser humano intenta escapar de su destino, pero sus propias acciones lo conducen inevitablemente hacia él.</div></div>
-      <div class="tema-card"><div class="tema-title">Culpa y responsabilidad</div><div class="tema-desc">Los personajes cargan con la culpa de sus actos aunque los hayan cometido sin saberlo. La verdad los destruye.</div></div>
-      <div class="tema-card"><div class="tema-title">Humanos y dioses</div><div class="tema-desc">Tensión constante entre la voluntad divina y las leyes humanas. Desafiar a los dioses conlleva castigo.</div></div>
-      <div class="tema-card"><div class="tema-title">Tragedia y sufrimiento</div><div class="tema-desc">El sufrimiento es inherente a la condición humana. A través del dolor se alcanza una verdad más profunda.</div></div>
-    </div>
-  </div>
-
-  <!-- OBRAS -->
-  <div class="section-block">
-    <div class="section-label">IV — Obras principales</div>
-    <div class="grid-3">
-      <div class="obra-card"><div class="obra-name">Edipo Rey</div><div class="obra-year">c. 429 a.C.</div><div class="obra-desc">Un rey descubre que ha cometido parricidio e incesto sin saberlo. Paradigma de la tragedia griega.</div></div>
-      <div class="obra-card"><div class="obra-name">Antígona</div><div class="obra-year">c. 441 a.C.</div><div class="obra-desc">Una mujer desafía el decreto real para sepultar a su hermano. Conflicto entre ley divina y humana.</div></div>
-      <div class="obra-card"><div class="obra-name">Edipo en Colono</div><div class="obra-year">c. 406 a.C. (póstuma)</div><div class="obra-desc">Edipo anciano, ciego y desterrado, encuentra la paz y una muerte sagrada en Colono.</div></div>
-      <div class="obra-card"><div class="obra-name">Ayax</div><div class="obra-year">c. 450–440 a.C.</div><div class="obra-desc">El héroe griego enloquece al no recibir las armas de Aquiles y termina quitándose la vida.</div></div>
-      <div class="obra-card"><div class="obra-name">Electra</div><div class="obra-year">c. 410 a.C.</div><div class="obra-desc">Electra y Orestes vengan el asesinato de su padre Agamenón matando a su propia madre.</div></div>
-      <div class="obra-card"><div class="obra-name">Filoctetes</div><div class="obra-year">c. 409 a.C.</div><div class="obra-desc">Héroe abandonado en una isla debe ser persuadido de ceder su arco para conquistar Troya.</div></div>
-    </div>
-  </div>
-
-  <!-- ANÁLISIS -->
-  <div class="section-block">
-    <div class="section-label">V — Análisis de la obra principal</div>
+  <!-- V ANÁLISIS -->
+  <div>
+    <div class="sec-head"><div class="sec-num">V</div><div class="sec-title">Análisis de la obra principal</div></div>
     <div class="analisis-card">
-      <div class="analisis-header" style="background:#f0ecfa;border-color:#d4ccf0;">
-        <div class="analisis-obra-name" style="color:#5b4a8a;">Edipo Rey</div>
-        <span class="tag" style="background:#5b4a8a;color:#fff;border:none;">Obra maestra</span>
+      <div class="analisis-hero">
+        <div>
+          <div class="analisis-obra-title">Edipo Rey</div>
+          <div class="analisis-meta">Sófocles · c. 429 a.C. · Atenas</div>
+        </div>
+        <div class="analisis-badge">Obra maestra</div>
       </div>
       <div class="analisis-body">
-        <div class="resumen-strip" style="border-color:#5b4a8a;">
-          <strong>Resumen:</strong> Edipo, rey de Tebas, investiga el asesinato del rey anterior (Layo) para librar su ciudad de una plaga. Conforme avanza, descubre que él mismo mató a Layo —su propio padre— y que su esposa Yocasta es en realidad su madre. Al conocer la verdad, Yocasta se suicida y Edipo se arranca los ojos.
-        </div>
+        <div class="resumen-block"><strong>Resumen:</strong> Edipo, rey de Tebas, investiga el asesinato del rey anterior (Layo) para librar su ciudad de una plaga. Conforme avanza, descubre que él mismo mató a Layo —su propio padre— y que su esposa Yocasta es en realidad su madre. Al conocer la verdad, Yocasta se suicida y Edipo se arranca los ojos.</div>
         <div class="analisis-grid">
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#5b4a8a;">Género literario</div><div class="analisis-item-text">Dramático</div></div>
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#5b4a8a;">Especie literaria</div><div class="analisis-item-text">Tragedia</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#5b4a8a;">Tema central</div><div class="analisis-item-text">La inexorabilidad del destino: ningún ser humano puede escapar de lo que los dioses han determinado. El intento de huir del oráculo se convierte paradójicamente en el camino para cumplirlo.</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#5b4a8a;">Estructura</div>
-            <div class="estructura-pills">
-              <span class="pill" style="background:#f0ecfa;color:#5b4a8a;border-color:#d4ccf0;">Prólogo</span>
-              <span class="pill" style="background:#f0ecfa;color:#5b4a8a;border-color:#d4ccf0;">Párodos (entrada del coro)</span>
-              <span class="pill" style="background:#f0ecfa;color:#5b4a8a;border-color:#d4ccf0;">4 Episodios</span>
-              <span class="pill" style="background:#f0ecfa;color:#5b4a8a;border-color:#d4ccf0;">3 Estásimos (coro)</span>
-              <span class="pill" style="background:#5b4a8a;color:#fff;border-color:#5b4a8a;">Éxodo (desenlace)</span>
+          <div class="aitem"><div class="aitem-label">Género literario</div><div class="aitem-text">Dramático</div></div>
+          <div class="aitem"><div class="aitem-label">Especie literaria</div><div class="aitem-text">Tragedia</div></div>
+          <div class="aitem full"><div class="aitem-label">Tema central</div><div class="aitem-text">La inexorabilidad del destino: ningún ser humano puede escapar de lo que los dioses han determinado. El intento de huir del oráculo se convierte paradójicamente en el camino para cumplirlo.</div></div>
+          <div class="aitem full"><div class="aitem-label">Estructura</div>
+            <div class="pills">
+              <span class="pill">Prólogo</span>
+              <span class="pill">Párodos (entrada del coro)</span>
+              <span class="pill">4 Episodios</span>
+              <span class="pill">3 Estásimos</span>
+              <span class="pill solid">Éxodo (desenlace)</span>
             </div>
           </div>
         </div>
@@ -722,104 +861,139 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── ESQUILO ─────────────────────────── -->
-<section class="panel" id="panel-esquilo">
+<!-- ═══════════════════════════════════════════════════════
+     ESQUILO
+═══════════════════════════════════════════════════════ -->
+<section class="panel" id="panel-esquilo" data-author="esquilo">
 
   <div class="author-hero">
-    <div class="author-initial" style="background:#e8f5ee;color:#2d6a4f;">E</div>
-    <div class="author-meta">
-      <div class="author-name" style="color:#2d6a4f;">Esquilo</div>
-      <div class="author-tagline">Dramaturgo · Grecia Arcaica–Clásica · Siglo V a.C.</div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">I — Biografía</div>
-    <div class="card">
-      <div class="context-banner">Atenas, período de las Guerras Médicas · Padre de la tragedia griega</div>
-      <div class="grid-4" style="margin-bottom:14px;">
-        <div class="stat-card"><div class="stat-label">Nacimiento</div><div class="stat-value">c. 525 a.C.</div><div class="stat-sub">Eleusis, Ática</div></div>
-        <div class="stat-card"><div class="stat-label">Muerte</div><div class="stat-value">c. 456 a.C.</div><div class="stat-sub">Gela, Sicilia</div></div>
-        <div class="stat-card"><div class="stat-label">Contexto</div><div class="stat-value">Guerras Médicas</div><div class="stat-sub">Combatió en Maratón</div></div>
-        <div class="stat-card"><div class="stat-label">Obras</div><div class="stat-value">~90 obras</div><div class="stat-sub">7 conservadas</div></div>
-      </div>
-      <div class="bullet-list">
-        <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div>Participó personalmente en la Batalla de Maratón (490 a.C.) y posiblemente en Salamina (480 a.C.).</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div><strong>Padre de la tragedia:</strong> introdujo el segundo actor, transformando el drama de monólogos a diálogo verdadero.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div>Ganó más de 13 victorias en los festivales dramáticos atenienses; fue el primero en presentar trilogías conectadas.</div></div>
+    <div class="author-monogram">E</div>
+    <div class="author-info">
+      <div class="author-name">Esquilo</div>
+      <div class="author-sub">Dramaturgo · Grecia Arcaica–Clásica · Siglo V a.C.</div>
+      <div class="author-chips">
+        <span class="author-chip">Padre de la tragedia</span>
+        <span class="author-chip">Segundo actor</span>
+        <span class="author-chip">7 obras conservadas</span>
       </div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">II — Características de sus obras</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title" style="color:#2d6a4f;">Innovaciones técnicas</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div><strong>Segundo actor:</strong> pasó del monólogo al diálogo dramático real entre personajes.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div><strong>Trilogía conectada:</strong> creó obras vinculadas narrativamente (como la Orestíada).</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div><strong>Efectos escénicos:</strong> introdujo vestuario elaborado, máscaras expresivas y maquinaria teatral.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">I</div><div class="sec-title">Biografía</div></div>
+    <div class="card card-pad">
+      <div class="ctx-banner">Atenas, período de las Guerras Médicas · Padre de la tragedia griega</div>
+      <div class="g4" style="margin-bottom:16px">
+        <div class="stat-card"><div class="sl">Nacimiento</div><div class="sv">c. 525 a.C.</div><div class="ss">Eleusis, Ática</div></div>
+        <div class="stat-card"><div class="sl">Muerte</div><div class="sv">c. 456 a.C.</div><div class="ss">Gela, Sicilia</div></div>
+        <div class="stat-card"><div class="sl">Contexto</div><div class="sv">Guerras Médicas</div><div class="ss">Combatió en Maratón</div></div>
+        <div class="stat-card"><div class="sl">Obras</div><div class="sv">~90 obras</div><div class="ss">7 conservadas</div></div>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bdot"></div><div>Participó personalmente en la Batalla de Maratón (490 a.C.) y posiblemente en Salamina (480 a.C.).</div></div>
+        <div class="bitem"><div class="bdot"></div><div><strong>Padre de la tragedia:</strong> introdujo el segundo actor, transformando el drama de monólogos a diálogo verdadero.</div></div>
+        <div class="bitem"><div class="bdot"></div><div>Ganó más de 13 victorias en los festivales dramáticos; fue el primero en presentar trilogías conectadas temáticamente.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">II</div><div class="sec-title">Características de sus obras</div></div>
+    <div class="g2">
+      <div class="char-card">
+        <div class="card-head">Innovaciones técnicas</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Segundo actor:</strong> pasó del monólogo al diálogo dramático real entre personajes.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Trilogía conectada:</strong> creó obras vinculadas narrativamente (como la Orestíada).</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Efectos escénicos:</strong> introdujo vestuario elaborado, máscaras expresivas y maquinaria teatral.</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="color:#2d6a4f;">Estilo y forma</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div><strong>Lenguaje elevado y solemne:</strong> estilo grandioso, con imágenes poderosas y vocabulario arcaico.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div><strong>Coro protagonista:</strong> a diferencia de Sófocles, el coro mantiene un rol central y narrativo.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#2d6a4f"></div><div><strong>Teología y moralidad:</strong> sus obras exploran el orden divino y la justicia cósmica de Zeus.</div></div>
+      <div class="char-card">
+        <div class="card-head">Estilo y forma</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Lenguaje solemne:</strong> estilo grandioso con imágenes poderosas y vocabulario arcaico.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Coro protagonista:</strong> a diferencia de Sófocles, el coro mantiene un rol central y narrativo.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Teología y moralidad:</strong> sus obras exploran el orden divino y la justicia cósmica de Zeus.</div></div>
         </div>
       </div>
     </div>
-    <div style="margin-top:12px;"><div class="tags">
-      <span class="tag" style="background:#e8f5ee;color:#1a4a30;border-color:#b8ddc8;">Grandiosidad épica</span>
-      <span class="tag" style="background:#e8f5ee;color:#1a4a30;border-color:#b8ddc8;">Justicia divina</span>
-      <span class="tag" style="background:#e8f5ee;color:#1a4a30;border-color:#b8ddc8;">Trilogía</span>
-      <span class="tag" style="background:#e8f5ee;color:#1a4a30;border-color:#b8ddc8;">Coro central</span>
-    </div></div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">III — Temas centrales</div>
-    <div class="grid-2">
-      <div class="tema-card"><div class="tema-title">Justicia divina (Dike)</div><div class="tema-desc">Los dioses —especialmente Zeus— garantizan el orden moral del cosmos. Las transgresiones son castigadas inevitablemente.</div></div>
-      <div class="tema-card"><div class="tema-title">Hybris y castigo</div><div class="tema-desc">La soberbia humana que desafía a los dioses o el orden natural acarrea una venganza proporcional y devastadora.</div></div>
-      <div class="tema-card"><div class="tema-title">Maldición hereditaria</div><div class="tema-desc">Los pecados de los padres persiguen a sus descendientes generación tras generación, como en la casa de Atreo.</div></div>
-      <div class="tema-card"><div class="tema-title">Transición al orden civil</div><div class="tema-desc">La venganza privada debe dar paso a la justicia institucional. La civilización surge del control de los instintos.</div></div>
+    <div class="tags-row">
+      <span class="tag">Grandiosidad épica</span><span class="tag">Justicia divina</span><span class="tag">Trilogía</span><span class="tag">Coro central</span>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">IV — Obras principales</div>
-    <div class="grid-3">
-      <div class="obra-card"><div class="obra-name">La Orestíada</div><div class="obra-year">458 a.C.</div><div class="obra-desc">Única trilogía trágica completa conservada. Narra el ciclo de crímenes y venganzas en la casa de Atreo.</div></div>
-      <div class="obra-card"><div class="obra-name">Los Persas</div><div class="obra-year">472 a.C.</div><div class="obra-desc">La única tragedia griega basada en hechos históricos recientes: la derrota de Jerjes en Salamina.</div></div>
-      <div class="obra-card"><div class="obra-name">Prometeo encadenado</div><div class="obra-year">c. 460 a.C.</div><div class="obra-desc">Prometeo es castigado por Zeus por robar el fuego y dárselo a los humanos. Símbolo de la rebeldía.</div></div>
-      <div class="obra-card"><div class="obra-name">Los Siete contra Tebas</div><div class="obra-year">467 a.C.</div><div class="obra-desc">Etéocles defiende Tebas contra el ataque de su hermano Polinices; ambos mueren en combate.</div></div>
-      <div class="obra-card"><div class="obra-name">Las Suplicantes</div><div class="obra-year">c. 470 a.C.</div><div class="obra-desc">Las Danaides huyen de Egipto para evitar matrimonios forzados y piden asilo al rey de Argos.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">III</div><div class="sec-title">Temas centrales</div></div>
+    <div class="g2">
+      <div class="tema-card"><div class="tema-icon">⚖️</div><div class="tema-title">Justicia divina (Dike)</div><div class="tema-desc">Los dioses —especialmente Zeus— garantizan el orden moral del cosmos. Las transgresiones son castigadas inevitablemente.</div></div>
+      <div class="tema-card"><div class="tema-icon">🔥</div><div class="tema-title">Hybris y castigo</div><div class="tema-desc">La soberbia humana que desafía a los dioses o el orden natural acarrea una venganza proporcional y devastadora.</div></div>
+      <div class="tema-card"><div class="tema-icon">🩸</div><div class="tema-title">Maldición hereditaria</div><div class="tema-desc">Los pecados de los padres persiguen a sus descendientes generación tras generación, como en la casa de Atreo.</div></div>
+      <div class="tema-card"><div class="tema-icon">🏛️</div><div class="tema-title">Transición al orden civil</div><div class="tema-desc">La venganza privada debe dar paso a la justicia institucional. La civilización surge del control de los instintos.</div></div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">V — Análisis de la obra principal</div>
+  <div>
+    <div class="sec-head"><div class="sec-num">IV</div><div class="sec-title">Obras principales</div></div>
+    <div class="obras-grid">
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">La Orestíada</div><div class="obra-year">458 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Única trilogía trágica completa conservada. Narra el ciclo de crímenes y venganzas en la casa de Atreo.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Único ejemplo completo de trilogía trágica griega. Fundamento de la teoría del drama occidental y del concepto de justicia institucional.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Los Persas</div><div class="obra-year">472 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">La única tragedia griega basada en hechos históricos recientes: la derrota de Jerjes en Salamina.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Fuente histórica única sobre las Guerras Médicas. Pionera en el uso de eventos contemporáneos como materia trágica.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Prometeo encadenado</div><div class="obra-year">c. 460 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Prometeo es castigado por Zeus por robar el fuego y dárselo a los humanos.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Símbolo universal de la rebeldía contra el poder y la defensa del progreso humano. Influyó en el romanticismo europeo (Shelley, Byron).</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Los Siete contra Tebas</div><div class="obra-year">467 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Etéocles defiende Tebas contra el ataque de su hermano Polinices; ambos mueren en combate.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Antecedente directo de Antígona de Sófocles. Introduce el conflicto fratricida que marcará toda la saga tebana.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Las Suplicantes</div><div class="obra-year">c. 470 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Las Danaides huyen de Egipto para evitar matrimonios forzados y piden asilo al rey de Argos.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Probablemente la tragedia más antigua conservada. Plantea por primera vez el debate entre hospitalidad, asilo político y soberanía.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">V</div><div class="sec-title">Análisis de la obra principal</div></div>
     <div class="analisis-card">
-      <div class="analisis-header" style="background:#e8f5ee;border-color:#b8ddc8;">
-        <div class="analisis-obra-name" style="color:#2d6a4f;">La Orestíada</div>
-        <span class="tag" style="background:#2d6a4f;color:#fff;border:none;">Trilogía completa</span>
+      <div class="analisis-hero">
+        <div>
+          <div class="analisis-obra-title">La Orestíada</div>
+          <div class="analisis-meta">Esquilo · 458 a.C. · Trilogía completa</div>
+        </div>
+        <div class="analisis-badge">Trilogía completa</div>
       </div>
       <div class="analisis-body">
-        <div class="resumen-strip" style="border-color:#2d6a4f;">
-          <strong>Resumen:</strong> Trilogía formada por <em>Agamenón</em>, <em>Las Coéforas</em> y <em>Las Euménides</em>. Agamenón regresa victorioso de Troya y es asesinado por su esposa Clitemnestra. Su hijo Orestes venga la muerte matando a su madre. Perseguido por las Erinias (diosas de la venganza), Orestes es juzgado en Atenas, donde Atenea funda el primer tribunal humano y lo absuelve.
-        </div>
+        <div class="resumen-block"><strong>Resumen:</strong> Trilogía formada por <em>Agamenón</em>, <em>Las Coéforas</em> y <em>Las Euménides</em>. Agamenón regresa victorioso de Troya y es asesinado por su esposa Clitemnestra. Su hijo Orestes venga la muerte matando a su madre. Perseguido por las Erinias, Orestes es juzgado en Atenas, donde Atenea funda el primer tribunal humano y lo absuelve.</div>
         <div class="analisis-grid">
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#2d6a4f;">Género literario</div><div class="analisis-item-text">Dramático</div></div>
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#2d6a4f;">Especie literaria</div><div class="analisis-item-text">Tragedia (trilogía)</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#2d6a4f;">Tema central</div><div class="analisis-item-text">El ciclo de la venganza y su transformación en justicia institucional. La humanidad evoluciona desde la ley del talión hacia un sistema legal racional, simbolizado por el tribunal fundado por Atenea en Atenas.</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#2d6a4f;">Estructura (3 partes)</div>
-            <div class="estructura-pills">
-              <span class="pill" style="background:#e8f5ee;color:#2d6a4f;border-color:#b8ddc8;">I. Agamenón</span>
-              <span class="pill" style="background:#e8f5ee;color:#2d6a4f;border-color:#b8ddc8;">II. Las Coéforas</span>
-              <span class="pill" style="background:#2d6a4f;color:#fff;border-color:#2d6a4f;">III. Las Euménides</span>
+          <div class="aitem"><div class="aitem-label">Género literario</div><div class="aitem-text">Dramático</div></div>
+          <div class="aitem"><div class="aitem-label">Especie literaria</div><div class="aitem-text">Tragedia (trilogía)</div></div>
+          <div class="aitem full"><div class="aitem-label">Tema central</div><div class="aitem-text">El ciclo de la venganza y su transformación en justicia institucional. La humanidad evoluciona desde la ley del talión hacia un sistema legal racional, simbolizado por el tribunal fundado por Atenea en Atenas.</div></div>
+          <div class="aitem full"><div class="aitem-label">Estructura (3 obras)</div>
+            <div class="pills">
+              <span class="pill">I. Agamenón</span>
+              <span class="pill">II. Las Coéforas</span>
+              <span class="pill solid">III. Las Euménides</span>
             </div>
           </div>
         </div>
@@ -828,108 +1002,148 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── ARISTÓFANES ─────────────────────────── -->
-<section class="panel" id="panel-aristofanes">
+<!-- ═══════════════════════════════════════════════════════
+     ARISTÓFANES
+═══════════════════════════════════════════════════════ -->
+<section class="panel" id="panel-aristofanes" data-author="aristofanes">
 
   <div class="author-hero">
-    <div class="author-initial" style="background:#fdf0eb;color:#b5451b;">A</div>
-    <div class="author-meta">
-      <div class="author-name" style="color:#b5451b;">Aristófanes</div>
-      <div class="author-tagline">Comediógrafo · Grecia Clásica · Siglo V–IV a.C.</div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">I — Biografía</div>
-    <div class="card">
-      <div class="context-banner">Atenas, período de la Guerra del Peloponeso · Padre de la Comedia Antigua</div>
-      <div class="grid-4" style="margin-bottom:14px;">
-        <div class="stat-card"><div class="stat-label">Nacimiento</div><div class="stat-value">c. 446 a.C.</div><div class="stat-sub">Atenas (aprox.)</div></div>
-        <div class="stat-card"><div class="stat-label">Muerte</div><div class="stat-value">c. 386 a.C.</div><div class="stat-sub">Atenas</div></div>
-        <div class="stat-card"><div class="stat-label">Contexto</div><div class="stat-value">Guerra Peloponeso</div><div class="stat-sub">Crisis democrática</div></div>
-        <div class="stat-card"><div class="stat-label">Obras</div><div class="stat-value">~40 comedias</div><div class="stat-sub">11 conservadas</div></div>
-      </div>
-      <div class="bullet-list">
-        <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div>Escribió durante la devastadora Guerra del Peloponeso entre Atenas y Esparta, conflicto que inspiró gran parte de su obra.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div><strong>Único autor conservado</strong> de la Comedia Antigua griega. Sus obras son fuente histórica irremplazable sobre la vida ateniense.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div>Sus obras criticaron abiertamente a figuras como Sócrates, Eurípides y los demagogos del momento.</div></div>
+    <div class="author-monogram">A</div>
+    <div class="author-info">
+      <div class="author-name">Aristófanes</div>
+      <div class="author-sub">Comediógrafo · Grecia Clásica · Siglo V–IV a.C.</div>
+      <div class="author-chips">
+        <span class="author-chip">Comedia Antigua</span>
+        <span class="author-chip">Sátira política</span>
+        <span class="author-chip">11 obras conservadas</span>
       </div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">II — Características de sus obras</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title" style="color:#b5451b;">Forma y estilo</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div><strong>Comedia política y satírica:</strong> critica abiertamente a figuras reales (políticos, filósofos, poetas) con sus nombres verdaderos.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div><strong>Parábasis:</strong> el coro interrumpe la acción para dirigirse directamente al público con el punto de vista del autor.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div><strong>Lenguaje:</strong> mezcla de elocuencia poética con vulgaridad y obscenidad deliberada como recurso cómico.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">I</div><div class="sec-title">Biografía</div></div>
+    <div class="card card-pad">
+      <div class="ctx-banner">Atenas, período de la Guerra del Peloponeso · Padre de la Comedia Antigua</div>
+      <div class="g4" style="margin-bottom:16px">
+        <div class="stat-card"><div class="sl">Nacimiento</div><div class="sv">c. 446 a.C.</div><div class="ss">Atenas (aprox.)</div></div>
+        <div class="stat-card"><div class="sl">Muerte</div><div class="sv">c. 386 a.C.</div><div class="ss">Atenas</div></div>
+        <div class="stat-card"><div class="sl">Contexto</div><div class="sv">Guerra del Peloponeso</div><div class="ss">Crisis democrática</div></div>
+        <div class="stat-card"><div class="sl">Obras</div><div class="sv">~40 comedias</div><div class="ss">11 conservadas</div></div>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bdot"></div><div>Escribió durante la devastadora Guerra del Peloponeso entre Atenas y Esparta, conflicto que inspiró gran parte de su obra.</div></div>
+        <div class="bitem"><div class="bdot"></div><div><strong>Único autor conservado</strong> de la Comedia Antigua griega. Sus obras son fuente histórica irremplazable sobre la vida ateniense del siglo V a.C.</div></div>
+        <div class="bitem"><div class="bdot"></div><div>Sus obras criticaron abiertamente a figuras como Sócrates, Eurípides y los demagogos del momento usando sus nombres reales.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">II</div><div class="sec-title">Características de sus obras</div></div>
+    <div class="g2">
+      <div class="char-card">
+        <div class="card-head">Forma y estilo</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Comedia política y satírica:</strong> critica abiertamente a figuras reales con sus nombres verdaderos.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Parábasis:</strong> el coro interrumpe la acción para dirigirse directamente al público con la voz del autor.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Lenguaje:</strong> mezcla de elocuencia poética con vulgaridad y obscenidad deliberada como recurso cómico.</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="color:#b5451b;">Recursos dramáticos</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div><strong>Fantasía desbordante:</strong> situaciones absurdas e imposibles (una ciudad en las nubes, una huelga sexual) para exponer realidades sociales.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div><strong>Parodia:</strong> burla constante de la tragedia, la filosofía y la política contemporánea.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#b5451b"></div><div><strong>Personaje cómico:</strong> el ciudadano simple que triunfa sobre las instituciones corruptas o absurdas.</div></div>
+      <div class="char-card">
+        <div class="card-head">Recursos dramáticos</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Fantasía desbordante:</strong> situaciones absurdas e imposibles para exponer realidades sociales incómodas.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Parodia:</strong> burla constante de la tragedia, la filosofía y la política contemporánea.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Personaje cómico:</strong> el ciudadano simple que triunfa sobre las instituciones corruptas o absurdas.</div></div>
         </div>
       </div>
     </div>
-    <div style="margin-top:12px;"><div class="tags">
-      <span class="tag" style="background:#fdf0eb;color:#7a2d0e;border-color:#f0c4a8;">Sátira política</span>
-      <span class="tag" style="background:#fdf0eb;color:#7a2d0e;border-color:#f0c4a8;">Parábasis</span>
-      <span class="tag" style="background:#fdf0eb;color:#7a2d0e;border-color:#f0c4a8;">Parodia</span>
-      <span class="tag" style="background:#fdf0eb;color:#7a2d0e;border-color:#f0c4a8;">Comedia Antigua</span>
-      <span class="tag" style="background:#fdf0eb;color:#7a2d0e;border-color:#f0c4a8;">Crítica social</span>
-    </div></div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">III — Temas centrales</div>
-    <div class="grid-2">
-      <div class="tema-card"><div class="tema-title">Crítica a la guerra</div><div class="tema-desc">Aristófanes fue abiertamente pacifista. En varias obras, personajes comunes resuelven la guerra de formas ridículas pero eficaces, exponiendo la estupidez del conflicto.</div></div>
-      <div class="tema-card"><div class="tema-title">Sátira intelectual</div><div class="tema-desc">Critica a los sofistas y filósofos (especialmente Sócrates) presentándolos como charlatanes que engañan a los jóvenes con ideas peligrosas.</div></div>
-      <div class="tema-card"><div class="tema-title">Corrupción política</div><div class="tema-desc">Los demagogos, jueces venales y políticos son blancos frecuentes. La democracia ateniense es retratada como manipulable y demagógica.</div></div>
-      <div class="tema-card"><div class="tema-title">Nostalgia y tradición</div><div class="tema-desc">Añoranza por la Atenas más simple y virtuosa de antes. Lo nuevo —la sofística, el teatro moderno— es visto con desconfianza.</div></div>
+    <div class="tags-row">
+      <span class="tag">Sátira política</span><span class="tag">Parábasis</span><span class="tag">Parodia</span><span class="tag">Comedia Antigua</span><span class="tag">Crítica social</span>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">IV — Obras principales</div>
-    <div class="grid-3">
-      <div class="obra-card"><div class="obra-name">Las Nubes</div><div class="obra-year">423 a.C.</div><div class="obra-desc">Sócrates es satirizado como sofista charlatán que corrompe a los jóvenes en su escuela ridícula, el «Pensatorio».</div></div>
-      <div class="obra-card"><div class="obra-name">Lisístrata</div><div class="obra-year">411 a.C.</div><div class="obra-desc">Las mujeres de Grecia hacen una huelga sexual para obligar a sus maridos a firmar la paz y terminar la guerra.</div></div>
-      <div class="obra-card"><div class="obra-name">Las Ranas</div><div class="obra-year">405 a.C.</div><div class="obra-desc">Dionisio baja al Hades a resucitar a Eurípides y acaba eligiendo a Esquilo como el mejor poeta trágico.</div></div>
-      <div class="obra-card"><div class="obra-name">Los Caballeros</div><div class="obra-year">424 a.C.</div><div class="obra-desc">Feroz ataque al demagogo Cleón, retratado como un embustero que manipula al pueblo ateniense.</div></div>
-      <div class="obra-card"><div class="obra-name">Las Avispas</div><div class="obra-year">422 a.C.</div><div class="obra-desc">Crítica al sistema judicial ateniense: un anciano obsesionado con ser jurado es encerrado en casa por su hijo.</div></div>
-      <div class="obra-card"><div class="obra-name">Las Aves</div><div class="obra-year">414 a.C.</div><div class="obra-desc">Dos atenienses fundan una ciudad utópica en el aire con las aves, arrebatando el poder a dioses y hombres.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">III</div><div class="sec-title">Temas centrales</div></div>
+    <div class="g2">
+      <div class="tema-card"><div class="tema-icon">🕊️</div><div class="tema-title">Crítica a la guerra</div><div class="tema-desc">Aristófanes fue abiertamente pacifista. Sus personajes resuelven la guerra de formas ridículas pero eficaces, exponiendo la estupidez del conflicto.</div></div>
+      <div class="tema-card"><div class="tema-icon">🦉</div><div class="tema-title">Sátira intelectual</div><div class="tema-desc">Critica a los sofistas y filósofos —especialmente Sócrates— presentándolos como charlatanes que engañan a los jóvenes con ideas peligrosas.</div></div>
+      <div class="tema-card"><div class="tema-icon">🏛️</div><div class="tema-title">Corrupción política</div><div class="tema-desc">Los demagogos, jueces venales y políticos son blancos frecuentes. La democracia ateniense es retratada como manipulable y demagógica.</div></div>
+      <div class="tema-card"><div class="tema-icon">🌿</div><div class="tema-title">Nostalgia y tradición</div><div class="tema-desc">Añoranza por la Atenas más simple y virtuosa de antes. Lo nuevo —la sofística, el teatro moderno— es visto con desconfianza.</div></div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">V — Análisis de la obra principal</div>
+  <div>
+    <div class="sec-head"><div class="sec-num">IV</div><div class="sec-title">Obras principales</div></div>
+    <div class="obras-grid">
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Las Nubes</div><div class="obra-year">423 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Sócrates es satirizado como sofista charlatán que corrompe a los jóvenes en su escuela ridícula, el «Pensatorio».</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Documento histórico sobre la imagen pública de Sócrates antes de su juicio; influyó en la condena posterior del filósofo en 399 a.C.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Lisístrata</div><div class="obra-year">411 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Las mujeres de Grecia hacen una huelga sexual para obligar a sus maridos a firmar la paz.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Una de las primeras obras de la Antigüedad con una mujer como heroína protagonista; referente del pacifismo y el feminismo en la literatura.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Las Ranas</div><div class="obra-year">405 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Dionisio baja al Hades a resucitar a Eurípides y acaba eligiendo a Esquilo como el mejor poeta trágico.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Fuente insustituible para la crítica literaria antigua; contiene el primer debate formal sobre el arte poético en la literatura occidental.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Los Caballeros</div><div class="obra-year">424 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Feroz ataque al demagogo Cleón, retratado como un embustero que manipula al pueblo ateniense.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Primera sátira política directa contra un político vivo con nombre real. Ganó el primer premio en las Leneas pese a la presión de Cleón.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Las Avispas</div><div class="obra-year">422 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Crítica al sistema judicial ateniense: un anciano obsesionado con ser jurado es encerrado en casa por su hijo.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Retrato vívido de la corrupción y el populismo judicial en Atenas. Fuente histórica fundamental sobre los tribunales atenienses del siglo V.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Las Aves</div><div class="obra-year">414 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Dos atenienses fundan una ciudad utópica en el aire con las aves, arrebatando el poder a dioses y hombres.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Considerada la comedia más perfecta de Aristófanes. Su mundo utópico anticipó siglos de literatura fantástica y especulativa.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">V</div><div class="sec-title">Análisis de la obra principal</div></div>
     <div class="analisis-card">
-      <div class="analisis-header" style="background:#fdf0eb;border-color:#f0c4a8;">
-        <div class="analisis-obra-name" style="color:#b5451b;">Las Nubes</div>
-        <span class="tag" style="background:#b5451b;color:#fff;border:none;">Comedia satírica</span>
+      <div class="analisis-hero">
+        <div>
+          <div class="analisis-obra-title">Las Nubes</div>
+          <div class="analisis-meta">Aristófanes · 423 a.C. · Comedia satírica</div>
+        </div>
+        <div class="analisis-badge">Comedia Antigua</div>
       </div>
       <div class="analisis-body">
-        <div class="resumen-strip" style="border-color:#b5451b;">
-          <strong>Resumen:</strong> Estrepsíades, un campesino endeudado, inscribe a su hijo Fidípides en la escuela de Sócrates (el «Pensatorio») para aprender el arte de hacer que el argumento débil parezca fuerte y así evadir a los acreedores. Pero el método sofístico tiene consecuencias desastrosas: el hijo aprende a despreciar toda autoridad y termina golpeando a su propio padre. Al final, Estrepsíades quema el Pensatorio en venganza.
-        </div>
+        <div class="resumen-block"><strong>Resumen:</strong> Estrepsíades, un campesino endeudado, inscribe a su hijo Fidípides en la escuela de Sócrates (el «Pensatorio») para aprender a hacer que el argumento débil parezca fuerte y evadir así a los acreedores. Pero el método sofístico tiene consecuencias desastrosas: el hijo aprende a despreciar toda autoridad y termina golpeando a su propio padre. Estrepsíades quema el Pensatorio en venganza.</div>
         <div class="analisis-grid">
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#b5451b;">Género literario</div><div class="analisis-item-text">Dramático</div></div>
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#b5451b;">Especie literaria</div><div class="analisis-item-text">Comedia (Comedia Antigua)</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#b5451b;">Tema central</div><div class="analisis-item-text">El peligro de la sofística y la nueva educación que subvierte los valores tradicionales. La retórica sin ética produce individuos que usan el lenguaje para engañar, deshonrar y finalmente destruir el orden familiar y social.</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#b5451b;">Estructura</div>
-            <div class="estructura-pills">
-              <span class="pill" style="background:#fdf0eb;color:#b5451b;border-color:#f0c4a8;">Prólogo</span>
-              <span class="pill" style="background:#fdf0eb;color:#b5451b;border-color:#f0c4a8;">Párodos (coro de nubes)</span>
-              <span class="pill" style="background:#fdf0eb;color:#b5451b;border-color:#f0c4a8;">Agón (debate central)</span>
-              <span class="pill" style="background:#fdf0eb;color:#b5451b;border-color:#f0c4a8;">Parábasis</span>
-              <span class="pill" style="background:#b5451b;color:#fff;border:none;">Éxodo</span>
+          <div class="aitem"><div class="aitem-label">Género literario</div><div class="aitem-text">Dramático</div></div>
+          <div class="aitem"><div class="aitem-label">Especie literaria</div><div class="aitem-text">Comedia (Comedia Antigua)</div></div>
+          <div class="aitem full"><div class="aitem-label">Tema central</div><div class="aitem-text">El peligro de la sofística y la nueva educación que subvierte los valores tradicionales. La retórica sin ética produce individuos que usan el lenguaje para engañar, deshonrar y finalmente destruir el orden familiar y social.</div></div>
+          <div class="aitem full"><div class="aitem-label">Estructura</div>
+            <div class="pills">
+              <span class="pill">Prólogo</span>
+              <span class="pill">Párodos (coro de nubes)</span>
+              <span class="pill">Agón (debate central)</span>
+              <span class="pill">Parábasis</span>
+              <span class="pill solid">Éxodo</span>
             </div>
           </div>
         </div>
@@ -938,106 +1152,140 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── SAFO ─────────────────────────── -->
-<section class="panel" id="panel-safo">
+<!-- ═══════════════════════════════════════════════════════
+     SAFO
+═══════════════════════════════════════════════════════ -->
+<section class="panel" id="panel-safo" data-author="safo">
 
   <div class="author-hero">
-    <div class="author-initial" style="background:#faeef5;color:#8a2d5b;">S</div>
-    <div class="author-meta">
-      <div class="author-name" style="color:#8a2d5b;">Safo de Lesbos</div>
-      <div class="author-tagline">Poetisa lírica · Grecia Arcaica · c. 630–570 a.C.</div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">I — Biografía</div>
-    <div class="card">
-      <div class="context-banner">Lesbos (Mitilene), Grecia Arcaica · Considerada la mayor poetisa de la Antigüedad</div>
-      <div class="grid-4" style="margin-bottom:14px;">
-        <div class="stat-card"><div class="stat-label">Nacimiento</div><div class="stat-value">c. 630 a.C.</div><div class="stat-sub">Mitilene, Lesbos</div></div>
-        <div class="stat-card"><div class="stat-label">Muerte</div><div class="stat-value">c. 570 a.C.</div><div class="stat-sub">Fecha incierta</div></div>
-        <div class="stat-card"><div class="stat-label">Contexto</div><div class="stat-value">Grecia Arcaica</div><div class="stat-sub">Período de los tiranos</div></div>
-        <div class="stat-card"><div class="stat-label">Reconocimiento</div><div class="stat-value">«Décima Musa»</div><div class="stat-sub">Platón la llamó así</div></div>
-      </div>
-      <div class="bullet-list">
-        <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div>Vivió en Mitilene (isla de Lesbos) y dirigió un círculo educativo femenino dedicado a la música, la poesía y la danza en honor a Afrodita.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div><strong>Platón la llamó «la Décima Musa».</strong> Su obra fue clasificada y compilada por los eruditos de Alejandría en 9 libros; hoy solo conservamos fragmentos.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div>Creó la <strong>estrofa sáfica</strong>, forma métrica que lleva su nombre y fue imitada por Catulo y Horacio en Roma.</div></div>
+    <div class="author-monogram">S</div>
+    <div class="author-info">
+      <div class="author-name">Safo de Lesbos</div>
+      <div class="author-sub">Poetisa lírica · Grecia Arcaica · c. 630–570 a.C.</div>
+      <div class="author-chips">
+        <span class="author-chip">Décima Musa</span>
+        <span class="author-chip">Estrofa sáfica</span>
+        <span class="author-chip">Solo fragmentos conservados</span>
       </div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">II — Características de sus obras</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title" style="color:#8a2d5b;">Forma y estilo</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div><strong>Poesía lírica monódica:</strong> compuesta para ser cantada por una sola voz acompañada de lira.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div><strong>Estrofa sáfica:</strong> estructura métrica propia de 4 versos (tres endecasílabos + un adonio) que inventó y que lleva su nombre.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div><strong>Dialecto eólico:</strong> escribió en el dialecto de Lesbos, con musicalidad y sonoridad particulares.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">I</div><div class="sec-title">Biografía</div></div>
+    <div class="card card-pad">
+      <div class="ctx-banner">Lesbos (Mitilene), Grecia Arcaica · Considerada la mayor poetisa de la Antigüedad</div>
+      <div class="g4" style="margin-bottom:16px">
+        <div class="stat-card"><div class="sl">Nacimiento</div><div class="sv">c. 630 a.C.</div><div class="ss">Mitilene, Lesbos</div></div>
+        <div class="stat-card"><div class="sl">Muerte</div><div class="sv">c. 570 a.C.</div><div class="ss">Fecha incierta</div></div>
+        <div class="stat-card"><div class="sl">Contexto</div><div class="sv">Grecia Arcaica</div><div class="ss">Período de los tiranos</div></div>
+        <div class="stat-card"><div class="sl">Reconocimiento</div><div class="sv">«Décima Musa»</div><div class="ss">Platón la llamó así</div></div>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bdot"></div><div>Vivió en Mitilene (isla de Lesbos) y dirigió un círculo educativo femenino dedicado a la música, la poesía y la danza en honor a Afrodita.</div></div>
+        <div class="bitem"><div class="bdot"></div><div><strong>Platón la llamó «la Décima Musa».</strong> Su obra fue compilada en 9 libros por los eruditos de Alejandría; hoy solo conservamos fragmentos.</div></div>
+        <div class="bitem"><div class="bdot"></div><div>Creó la <strong>estrofa sáfica</strong>, forma métrica que lleva su nombre y fue imitada por Catulo y Horacio en Roma.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">II</div><div class="sec-title">Características de sus obras</div></div>
+    <div class="g2">
+      <div class="char-card">
+        <div class="card-head">Forma y estilo</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Poesía lírica monódica:</strong> compuesta para ser cantada por una sola voz acompañada de lira.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Estrofa sáfica:</strong> 4 versos (tres endecasílabos + un adonio) inventados por ella y que llevan su nombre.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Dialecto eólico:</strong> escribió en el dialecto de Lesbos, con musicalidad y sonoridad particulares.</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="color:#8a2d5b;">Expresión poética</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div><strong>Subjetividad radical:</strong> primera voz lírica femenina en la literatura occidental que expresa sus propias emociones.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div><strong>Imágenes sensoriales:</strong> usa el cuerpo, los sentidos y la naturaleza para expresar el amor y el deseo con precisión.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#8a2d5b"></div><div><strong>Invocación divina:</strong> apela directamente a los dioses (especialmente Afrodita) como interlocutores.</div></div>
+      <div class="char-card">
+        <div class="card-head">Expresión poética</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Subjetividad radical:</strong> primera voz lírica femenina en la literatura occidental que expresa sus propias emociones.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Imágenes sensoriales:</strong> usa el cuerpo, los sentidos y la naturaleza para expresar el amor y el deseo con precisión.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Invocación divina:</strong> apela directamente a los dioses —especialmente Afrodita— como interlocutores.</div></div>
         </div>
       </div>
     </div>
-    <div style="margin-top:12px;"><div class="tags">
-      <span class="tag" style="background:#faeef5;color:#6a1a45;border-color:#e8b8d0;">Poesía lírica</span>
-      <span class="tag" style="background:#faeef5;color:#6a1a45;border-color:#e8b8d0;">Estrofa sáfica</span>
-      <span class="tag" style="background:#faeef5;color:#6a1a45;border-color:#e8b8d0;">Voz femenina</span>
-      <span class="tag" style="background:#faeef5;color:#6a1a45;border-color:#e8b8d0;">Dialecto eólico</span>
-      <span class="tag" style="background:#faeef5;color:#6a1a45;border-color:#e8b8d0;">Monodía</span>
-    </div></div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">III — Temas centrales</div>
-    <div class="grid-2">
-      <div class="tema-card"><div class="tema-title">El amor y el deseo</div><div class="tema-desc">El eros como fuerza física y emocional arrolladora que trastorna el cuerpo y la mente. Safo describe el amor con precisión fisiológica y vulnerabilidad sin precedentes.</div></div>
-      <div class="tema-card"><div class="tema-title">Los celos y la ausencia</div><div class="tema-desc">La separación de la persona amada, la presencia de rivales y la angustia de la pérdida son emociones centrales que recorren sus poemas.</div></div>
-      <div class="tema-card"><div class="tema-title">Lo divino y lo femenino</div><div class="tema-desc">Afrodita es su diosa tutelar e interlocutora. El mundo femenino, los rituales y la belleza de las mujeres son el escenario de su poesía.</div></div>
-      <div class="tema-card"><div class="tema-title">La belleza y lo efímero</div><div class="tema-desc">La hermosura del cuerpo, las flores, la música y los momentos felices son valorados precisamente porque son pasajeros y fugaces.</div></div>
+    <div class="tags-row">
+      <span class="tag">Poesía lírica</span><span class="tag">Estrofa sáfica</span><span class="tag">Voz femenina</span><span class="tag">Dialecto eólico</span><span class="tag">Monodía</span>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">IV — Obras principales</div>
-    <div class="grid-3">
-      <div class="obra-card"><div class="obra-name">Oda a Afrodita</div><div class="obra-year">c. 600 a.C. (aprox.)</div><div class="obra-desc">Único poema completo conservado. Safo ruega a Afrodita que la ayude en su dolor amoroso.</div></div>
-      <div class="obra-card"><div class="obra-name">Fragmento 31</div><div class="obra-year">(Poema a la muchacha)</div><div class="obra-desc">Describe los síntomas físicos de los celos al ver a la amada junto a otro. Considerado uno de los mejores poemas de amor de la Antigüedad.</div></div>
-      <div class="obra-card"><div class="obra-name">Fragmento 16</div><div class="obra-year">(Sobre la belleza)</div><div class="obra-desc">Reflexión filosófica sobre qué es lo más bello en el mundo. Concluye que es aquello que uno ama.</div></div>
-      <div class="obra-card"><div class="obra-name">Epitalamios</div><div class="obra-year">(Poemas nupciales)</div><div class="obra-desc">Canciones compuestas para bodas, en honor a la novia o el novio, con gran riqueza sensorial.</div></div>
-      <div class="obra-card"><div class="obra-name">Fragmento 105a</div><div class="obra-year">(La manzana)</div><div class="obra-desc">Imagen de una manzana que nadie pudo alcanzar en el árbol más alto. Metáfora de la virginidad o la inocencia.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">III</div><div class="sec-title">Temas centrales</div></div>
+    <div class="g2">
+      <div class="tema-card"><div class="tema-icon">💘</div><div class="tema-title">El amor y el deseo</div><div class="tema-desc">El eros como fuerza física y emocional arrolladora. Safo describe el amor con precisión fisiológica y vulnerabilidad sin precedentes en la literatura antigua.</div></div>
+      <div class="tema-card"><div class="tema-icon">🌙</div><div class="tema-title">Los celos y la ausencia</div><div class="tema-desc">La separación de la persona amada, la presencia de rivales y la angustia de la pérdida son emociones centrales en su poesía.</div></div>
+      <div class="tema-card"><div class="tema-icon">🌸</div><div class="tema-title">Lo divino y lo femenino</div><div class="tema-desc">Afrodita es su diosa tutelar e interlocutora. El mundo femenino, los rituales y la belleza de las mujeres son el escenario de su poesía.</div></div>
+      <div class="tema-card"><div class="tema-icon">🍂</div><div class="tema-title">La belleza y lo efímero</div><div class="tema-desc">La hermosura del cuerpo, las flores y los momentos felices son valorados precisamente porque son pasajeros y fugaces.</div></div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">V — Análisis de la obra principal</div>
+  <div>
+    <div class="sec-head"><div class="sec-num">IV</div><div class="sec-title">Obras principales</div></div>
+    <div class="obras-grid">
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Oda a Afrodita</div><div class="obra-year">c. 600 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Único poema completo conservado. Safo ruega a Afrodita que la ayude en su dolor amoroso.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>El único poema de Safo conservado íntegramente. Modelo perfecto del himno clético y del lirismo femenino en la Antigüedad.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Fragmento 31</div><div class="obra-year">(Poema a la muchacha)</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Describe los síntomas físicos de los celos al ver a la amada junto a otro. Uno de los mejores poemas de amor de la Antigüedad.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Primer retrato clínico del amor en la literatura: describe taquicardia, palidez, temblor. Fue imitado por Catulo (Carmen 51) siglos después.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Fragmento 16</div><div class="obra-year">(Sobre la belleza)</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Reflexión filosófica sobre qué es lo más bello en el mundo. Concluye que es aquello que uno ama.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Ejemplo temprano de subjetivismo estético: la belleza no es objetiva sino relacional. Anticipa debates filosóficos que no se formalizarán hasta siglos después.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Epitalamios</div><div class="obra-year">(Poemas nupciales)</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Canciones compuestas para bodas, en honor a la novia o el novio, con gran riqueza sensorial.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Inauguraron la tradición del poema nupcial en la literatura occidental, imitada luego por Catulo, Estacio y los poetas renacentistas europeos.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Fragmento 105a</div><div class="obra-year">(La manzana)</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Imagen de una manzana que nadie pudo alcanzar en el árbol más alto. Metáfora de la virginidad o la inocencia.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Muestra la maestría de Safo en el símbolo poético condensado. Influyó en la tradición del epigrama griego y en la lírica medieval provenzal.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">V</div><div class="sec-title">Análisis de la obra principal</div></div>
     <div class="analisis-card">
-      <div class="analisis-header" style="background:#faeef5;border-color:#e8b8d0;">
-        <div class="analisis-obra-name" style="color:#8a2d5b;">Oda a Afrodita</div>
-        <span class="tag" style="background:#8a2d5b;color:#fff;border:none;">Poema completo</span>
+      <div class="analisis-hero">
+        <div>
+          <div class="analisis-obra-title">Oda a Afrodita</div>
+          <div class="analisis-meta">Safo · c. 600 a.C. · Poema completo conservado</div>
+        </div>
+        <div class="analisis-badge">Poema completo</div>
       </div>
       <div class="analisis-body">
-        <div class="resumen-strip" style="border-color:#8a2d5b;">
-          <strong>Resumen:</strong> Safo invoca a Afrodita, diosa del amor, pidiéndole ayuda en su dolor amoroso. La diosa le recuerda que ya la ha ayudado antes y le promete que quien hoy la rechaza pronto la buscará. El poema termina con la petición de que la diosa sea nuevamente su aliada en la «batalla» amorosa.
-        </div>
+        <div class="resumen-block"><strong>Resumen:</strong> Safo invoca a Afrodita, diosa del amor, pidiéndole ayuda en su dolor amoroso. La diosa le recuerda que ya la ha ayudado antes y le promete que quien hoy la rechaza pronto la buscará. El poema termina con la petición de que la diosa sea nuevamente su aliada en la «batalla» amorosa.</div>
         <div class="analisis-grid">
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#8a2d5b;">Género literario</div><div class="analisis-item-text">Lírico</div></div>
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#8a2d5b;">Especie literaria</div><div class="analisis-item-text">Oda (himno clético)</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#8a2d5b;">Tema central</div><div class="analisis-item-text">El amor no correspondido y el poder de Afrodita sobre el corazón humano. El poema explora la vulnerabilidad de quien ama sin ser amado, y la esperanza de que el ciclo del deseo se invierta.</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#8a2d5b;">Estructura</div>
-            <div class="estructura-pills">
-              <span class="pill" style="background:#faeef5;color:#8a2d5b;border-color:#e8b8d0;">7 estrofas sáficas</span>
-              <span class="pill" style="background:#faeef5;color:#8a2d5b;border-color:#e8b8d0;">Invocación a la diosa</span>
-              <span class="pill" style="background:#faeef5;color:#8a2d5b;border-color:#e8b8d0;">Recuerdo de ayuda pasada</span>
-              <span class="pill" style="background:#8a2d5b;color:#fff;border:none;">Petición final</span>
+          <div class="aitem"><div class="aitem-label">Género literario</div><div class="aitem-text">Lírico</div></div>
+          <div class="aitem"><div class="aitem-label">Especie literaria</div><div class="aitem-text">Oda (himno clético)</div></div>
+          <div class="aitem full"><div class="aitem-label">Tema central</div><div class="aitem-text">El amor no correspondido y el poder de Afrodita sobre el corazón humano. El poema explora la vulnerabilidad de quien ama sin ser amado, y la esperanza de que el ciclo del deseo se invierta.</div></div>
+          <div class="aitem full"><div class="aitem-label">Estructura</div>
+            <div class="pills">
+              <span class="pill">7 estrofas sáficas</span>
+              <span class="pill">Invocación a la diosa</span>
+              <span class="pill">Recuerdo de ayuda pasada</span>
+              <span class="pill solid">Petición final</span>
             </div>
           </div>
         </div>
@@ -1046,102 +1294,124 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── VIRGILIO ─────────────────────────── -->
-<section class="panel" id="panel-virgilio">
+<!-- ═══════════════════════════════════════════════════════
+     VIRGILIO
+═══════════════════════════════════════════════════════ -->
+<section class="panel" id="panel-virgilio" data-author="virgilio">
 
   <div class="author-hero">
-    <div class="author-initial" style="background:#e8f3f8;color:#1d5c7a;">V</div>
-    <div class="author-meta">
-      <div class="author-name" style="color:#1d5c7a;">Virgilio</div>
-      <div class="author-tagline">Poeta épico · Roma · Siglo I a.C.</div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">I — Biografía</div>
-    <div class="card">
-      <div class="context-banner">Roma, período de Augusto · Poeta oficial del Imperio Romano · Autor de la epopeya nacional de Roma</div>
-      <div class="grid-4" style="margin-bottom:14px;">
-        <div class="stat-card"><div class="stat-label">Nacimiento</div><div class="stat-value">70 a.C.</div><div class="stat-sub">Andes, Mantua (Italia)</div></div>
-        <div class="stat-card"><div class="stat-label">Muerte</div><div class="stat-value">19 a.C.</div><div class="stat-sub">Brindisi (regresando de Grecia)</div></div>
-        <div class="stat-card"><div class="stat-label">Contexto</div><div class="stat-value">Augusto y el Imperio</div><div class="stat-sub">Paz romana (Pax Augusta)</div></div>
-        <div class="stat-card"><div class="stat-label">Protector</div><div class="stat-value">Mecenas</div><div class="stat-sub">Círculo imperial</div></div>
-      </div>
-      <div class="bullet-list">
-        <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div>Protegido por Mecenas y el propio Augusto. Su obra fue usada para glorificar el régimen augusteo y legitimar el poder imperial.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div><strong>Obra principal:</strong> La Eneida, epopeya nacional de Roma, encargada para celebrar los orígenes del pueblo romano. Murió antes de terminarla.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div>También escribió las <em>Bucólicas</em> (poemas pastoriles) y las <em>Geórgicas</em> (poemas sobre la agricultura), consideradas obras maestras del género.</div></div>
+    <div class="author-monogram">V</div>
+    <div class="author-info">
+      <div class="author-name">Virgilio</div>
+      <div class="author-sub">Poeta épico · Roma · Siglo I a.C.</div>
+      <div class="author-chips">
+        <span class="author-chip">Épica latina</span>
+        <span class="author-chip">Poeta de Augusto</span>
+        <span class="author-chip">La Eneida</span>
       </div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">II — Características de sus obras</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title" style="color:#1d5c7a;">Estilo épico</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div><strong>Imitación y superación de Homero:</strong> modela La Eneida sobre La Ilíada y La Odisea, pero transforma sus modelos con mayor complejidad psicológica y política.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div><strong>In medias res:</strong> como Homero, comienza la narración en medio de la acción, narrando el pasado más tarde.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div><strong>Hexámetro dactílico:</strong> metro épico heredado de la tradición griega, perfeccionado en latín.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">I</div><div class="sec-title">Biografía</div></div>
+    <div class="card card-pad">
+      <div class="ctx-banner">Roma, período de Augusto · Poeta oficial del Imperio Romano · Epopeya nacional de Roma</div>
+      <div class="g4" style="margin-bottom:16px">
+        <div class="stat-card"><div class="sl">Nacimiento</div><div class="sv">70 a.C.</div><div class="ss">Andes, Mantua (Italia)</div></div>
+        <div class="stat-card"><div class="sl">Muerte</div><div class="sv">19 a.C.</div><div class="ss">Brindisi (regresando de Grecia)</div></div>
+        <div class="stat-card"><div class="sl">Contexto</div><div class="sv">Imperio de Augusto</div><div class="ss">Pax Augusta</div></div>
+        <div class="stat-card"><div class="sl">Protector</div><div class="sv">Mecenas</div><div class="ss">Círculo imperial</div></div>
+      </div>
+      <div class="blist">
+        <div class="bitem"><div class="bdot"></div><div>Protegido por Mecenas y el propio Augusto. Su obra fue usada para glorificar el régimen augusteo y legitimar el poder imperial.</div></div>
+        <div class="bitem"><div class="bdot"></div><div><strong>Obra principal:</strong> La Eneida, epopeya nacional de Roma, encargada para celebrar los orígenes del pueblo romano. Murió antes de terminarla.</div></div>
+        <div class="bitem"><div class="bdot"></div><div>También escribió las <em>Bucólicas</em> (poemas pastoriles) y las <em>Geórgicas</em> (poemas sobre la agricultura), consideradas obras maestras del género.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">II</div><div class="sec-title">Características de sus obras</div></div>
+    <div class="g2">
+      <div class="char-card">
+        <div class="card-head">Estilo épico</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Imitación y superación de Homero:</strong> modela La Eneida sobre La Ilíada y La Odisea con mayor complejidad psicológica.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>In medias res:</strong> como Homero, comienza en medio de la acción; el pasado se narra después mediante analepsis.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Hexámetro dactílico:</strong> metro épico heredado de la tradición griega, perfeccionado magistralmente en latín.</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="color:#1d5c7a;">Rasgos propios</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div><strong>Pietas:</strong> concepto central en Virgilio: el deber sagrado hacia los dioses, la patria y la familia.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div><strong>Profecía y destino:</strong> el destino de Roma está inscrito por los dioses desde el principio; los personajes son instrumentos de ese plan divino.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#1d5c7a"></div><div><strong>Lenguaje culto y refinado:</strong> latín literario de altísima perfección formal, con uso magistral de la aliteración y la sinécdoque.</div></div>
+      <div class="char-card">
+        <div class="card-head">Rasgos propios</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Pietas:</strong> el deber sagrado hacia los dioses, la patria y la familia como valor central del héroe romano.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Profecía y destino:</strong> el destino de Roma está inscrito por los dioses; los personajes son instrumentos de ese plan divino.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Lenguaje culto y refinado:</strong> latín literario de altísima perfección formal con uso magistral de aliteración y sinécdoque.</div></div>
         </div>
       </div>
     </div>
-    <div style="margin-top:12px;"><div class="tags">
-      <span class="tag" style="background:#e8f3f8;color:#0d3d52;border-color:#a8d0e0;">Épica latina</span>
-      <span class="tag" style="background:#e8f3f8;color:#0d3d52;border-color:#a8d0e0;">Pietas</span>
-      <span class="tag" style="background:#e8f3f8;color:#0d3d52;border-color:#a8d0e0;">In medias res</span>
-      <span class="tag" style="background:#e8f3f8;color:#0d3d52;border-color:#a8d0e0;">Hexámetro dactílico</span>
-      <span class="tag" style="background:#e8f3f8;color:#0d3d52;border-color:#a8d0e0;">Destino imperial</span>
-    </div></div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">III — Temas centrales</div>
-    <div class="grid-2">
-      <div class="tema-card"><div class="tema-title">El destino de Roma</div><div class="tema-desc">La fundación de Roma no es un accidente sino el plan eterno de los dioses. Eneas sufre porque debe cumplir su misión histórica, no sus deseos personales.</div></div>
-      <div class="tema-card"><div class="tema-title">El deber (Pietas)</div><div class="tema-desc">El héroe virgiliano subordina sus emociones al deber: hacia los dioses, la patria y la familia. Es el ideal romano por excelencia.</div></div>
-      <div class="tema-card"><div class="tema-title">Guerra y heroísmo</div><div class="tema-desc">La guerra es necesaria pero dolorosa. Virgilio muestra el precio humano de la victoria: la muerte de los jóvenes, el dolor de los vencidos.</div></div>
-      <div class="tema-card"><div class="tema-title">El amor frente al deber</div><div class="tema-desc">El amor de Eneas y Dido ilustra el conflicto entre los sentimientos privados y la misión pública. El héroe debe elegir el deber, con consecuencias trágicas.</div></div>
+    <div class="tags-row">
+      <span class="tag">Épica latina</span><span class="tag">Pietas</span><span class="tag">In medias res</span><span class="tag">Hexámetro dactílico</span><span class="tag">Destino imperial</span>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">IV — Obras principales</div>
-    <div class="grid-3">
-      <div class="obra-card"><div class="obra-name">La Eneida</div><div class="obra-year">29–19 a.C. (inacabada)</div><div class="obra-desc">Epopeya en 12 libros sobre Eneas, troyano que funda el pueblo que dará origen a Roma. Obra cumbre de la literatura latina.</div></div>
-      <div class="obra-card"><div class="obra-name">Las Bucólicas (Églogas)</div><div class="obra-year">42–39 a.C.</div><div class="obra-desc">Diez poemas pastoriles que idealizan la vida campestre. La Égloga IV fue interpretada como profecía del nacimiento de Cristo.</div></div>
-      <div class="obra-card"><div class="obra-name">Las Geórgicas</div><div class="obra-year">37–30 a.C.</div><div class="obra-desc">Poema didáctico en 4 libros sobre la agricultura, la ganadería y las abejas. Considerado técnicamente su obra más perfecta.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">III</div><div class="sec-title">Temas centrales</div></div>
+    <div class="g2">
+      <div class="tema-card"><div class="tema-icon">🏛️</div><div class="tema-title">El destino de Roma</div><div class="tema-desc">La fundación de Roma es el plan eterno de los dioses. Eneas sufre porque debe cumplir su misión histórica, no sus deseos personales.</div></div>
+      <div class="tema-card"><div class="tema-icon">⚖️</div><div class="tema-title">El deber (Pietas)</div><div class="tema-desc">El héroe virgiliano subordina sus emociones al deber hacia los dioses, la patria y la familia. Es el ideal romano por excelencia.</div></div>
+      <div class="tema-card"><div class="tema-icon">⚔️</div><div class="tema-title">Guerra y heroísmo</div><div class="tema-desc">La guerra es necesaria pero dolorosa. Virgilio muestra el precio humano de la victoria: la muerte de los jóvenes, el dolor de los vencidos.</div></div>
+      <div class="tema-card"><div class="tema-icon">💔</div><div class="tema-title">El amor frente al deber</div><div class="tema-desc">El amor de Eneas y Dido ilustra el conflicto entre sentimientos privados y misión pública. El héroe debe elegir el deber con consecuencias trágicas.</div></div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">V — Análisis de la obra principal</div>
+  <div>
+    <div class="sec-head"><div class="sec-num">IV</div><div class="sec-title">Obras principales</div></div>
+    <div class="obras-grid">
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">La Eneida</div><div class="obra-year">29–19 a.C. (inacabada)</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Epopeya en 12 libros sobre Eneas, troyano que funda el pueblo que dará origen a Roma.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Obra cumbre de la literatura latina. Epopeya nacional de Roma, Dante la tomó como modelo para la Divina Comedia; su influencia en la literatura occidental es equiparable a Homero.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Las Bucólicas (Églogas)</div><div class="obra-year">42–39 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Diez poemas pastoriles que idealizan la vida campestre y el mundo de los pastores.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Fundaron el género pastoril en la literatura latina. La Égloga IV, con su visión de un niño redentor, fue interpretada por los cristianos como profecía del nacimiento de Cristo.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">Las Geórgicas</div><div class="obra-year">37–30 a.C.</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Poema didáctico en 4 libros sobre la agricultura, la ganadería y las abejas.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Considerada técnicamente la obra más perfecta de Virgilio. Modelo del poema didáctico en toda la literatura europea posterior; influyó en la poesía agraria del Renacimiento e Ilustración.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-head"><div class="sec-num">V</div><div class="sec-title">Análisis de la obra principal</div></div>
     <div class="analisis-card">
-      <div class="analisis-header" style="background:#e8f3f8;border-color:#a8d0e0;">
-        <div class="analisis-obra-name" style="color:#1d5c7a;">La Eneida</div>
-        <span class="tag" style="background:#1d5c7a;color:#fff;border:none;">Epopeya nacional</span>
+      <div class="analisis-hero">
+        <div>
+          <div class="analisis-obra-title">La Eneida</div>
+          <div class="analisis-meta">Virgilio · 29–19 a.C. · Epopeya en 12 libros</div>
+        </div>
+        <div class="analisis-badge">Epopeya nacional</div>
       </div>
       <div class="analisis-body">
-        <div class="resumen-strip" style="border-color:#1d5c7a;">
-          <strong>Resumen:</strong> Eneas, héroe troyano, huye de la caída de Troya con su padre Anquises y su hijo Ascanio. Tras años de peripecias, llega a Cartago donde se enamora de la reina Dido, pero los dioses le ordenan partir. Dido se suicida. Eneas llega a Italia, desciende al inframundo, y finalmente vence en guerra a los pueblos locales para sentar las bases de la futura Roma.
-        </div>
+        <div class="resumen-block"><strong>Resumen:</strong> Eneas, héroe troyano, huye de la caída de Troya con su padre Anquises y su hijo Ascanio. Tras años de peripecias, llega a Cartago donde se enamora de la reina Dido, pero los dioses le ordenan partir. Dido se suicida. Eneas desciende al inframundo, llega a Italia y vence en guerra a los pueblos locales para sentar las bases de la futura Roma.</div>
         <div class="analisis-grid">
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#1d5c7a;">Género literario</div><div class="analisis-item-text">Épico</div></div>
-          <div class="analisis-item"><div class="analisis-item-label" style="color:#1d5c7a;">Especie literaria</div><div class="analisis-item-text">Epopeya</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#1d5c7a;">Tema central</div><div class="analisis-item-text">El cumplimiento del destino divino: Eneas debe sacrificar su felicidad personal para fundar el linaje que dará origen a Roma. La grandeza imperial exige renuncia individual.</div></div>
-          <div class="analisis-item full"><div class="analisis-item-label" style="color:#1d5c7a;">Estructura (12 libros)</div>
-            <div class="estructura-pills">
-              <span class="pill" style="background:#e8f3f8;color:#1d5c7a;border-color:#a8d0e0;">Lib. I–VI: Odisea (viaje)</span>
-              <span class="pill" style="background:#1d5c7a;color:#fff;border:none;">Lib. VII–XII: Ilíada (guerra)</span>
+          <div class="aitem"><div class="aitem-label">Género literario</div><div class="aitem-text">Épico</div></div>
+          <div class="aitem"><div class="aitem-label">Especie literaria</div><div class="aitem-text">Epopeya</div></div>
+          <div class="aitem full"><div class="aitem-label">Tema central</div><div class="aitem-text">El cumplimiento del destino divino: Eneas debe sacrificar su felicidad personal para fundar el linaje que dará origen a Roma. La grandeza imperial exige renuncia individual y subordinación al plan de los dioses.</div></div>
+          <div class="aitem full"><div class="aitem-label">Estructura (12 libros)</div>
+            <div class="pills">
+              <span class="pill">Lib. I–VI: Odisea (viaje y peripecias)</span>
+              <span class="pill solid">Lib. VII–XII: Ilíada (guerra en Italia)</span>
             </div>
           </div>
         </div>
@@ -1150,128 +1420,142 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── HOMERO ─────────────────────────── -->
-<section class="panel" id="panel-homero">
+<!-- ═══════════════════════════════════════════════════════
+     HOMERO
+═══════════════════════════════════════════════════════ -->
+<section class="panel" id="panel-homero" data-author="homero">
 
   <div class="author-hero">
-    <div class="author-initial" style="background:#f8f3e8;color:#7a5c1d;">H</div>
-    <div class="author-meta">
-      <div class="author-name" style="color:#7a5c1d;">Homero</div>
-      <div class="author-tagline">Poeta épico · Grecia Arcaica · c. Siglo VIII a.C.</div>
+    <div class="author-monogram">H</div>
+    <div class="author-info">
+      <div class="author-name">Homero</div>
+      <div class="author-sub">Poeta épico · Grecia Arcaica · c. Siglo VIII a.C.</div>
+      <div class="author-chips">
+        <span class="author-chip">Existencia debatida</span>
+        <span class="author-chip">Tradición oral</span>
+        <span class="author-chip">Fundador de la épica occidental</span>
+      </div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">I — Biografía</div>
-    <div class="card">
-      <div class="debate-notice">
+  <div>
+    <div class="sec-head"><div class="sec-num">I</div><div class="sec-title">Biografía</div></div>
+    <div class="card card-pad">
+      <div class="debate-notice" style="margin-bottom:14px">
         <span class="debate-icon">⚠</span>
         <div><strong>Existencia debatida:</strong> la historicidad de Homero es incierta. La «Cuestión Homérica» debate si existió como persona real, si fue un compilador de tradiciones orales, o si los poemas son obra colectiva. Se le atribuyen La Ilíada y La Odisea, monumentos fundacionales de la literatura occidental.</div>
       </div>
-      <div class="grid-4" style="margin-bottom:14px;">
-        <div class="stat-card"><div class="stat-label">Época probable</div><div class="stat-value">c. Siglo VIII a.C.</div><div class="stat-sub">Grecia Arcaica</div></div>
-        <div class="stat-card"><div class="stat-label">Origen posible</div><div class="stat-value">Jonia / Quíos</div><div class="stat-sub">7 ciudades disputadas</div></div>
-        <div class="stat-card"><div class="stat-label">Tradición</div><div class="stat-value">Aedo (cantor)</div><div class="stat-sub">Tradición oral</div></div>
-        <div class="stat-card"><div class="stat-label">Condición</div><div class="stat-value">¿Ciego?</div><div class="stat-sub">Según la leyenda</div></div>
+      <div class="g4" style="margin-bottom:16px">
+        <div class="stat-card"><div class="sl">Época probable</div><div class="sv">c. Siglo VIII a.C.</div><div class="ss">Grecia Arcaica</div></div>
+        <div class="stat-card"><div class="sl">Origen posible</div><div class="sv">Jonia / Quíos</div><div class="ss">7 ciudades disputadas</div></div>
+        <div class="stat-card"><div class="sl">Tradición</div><div class="sv">Aedo (cantor)</div><div class="ss">Transmisión oral</div></div>
+        <div class="stat-card"><div class="sl">Condición</div><div class="sv">¿Ciego?</div><div class="ss">Según la leyenda</div></div>
       </div>
-      <div class="bullet-list">
-        <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div>Los poemas homéricos se transmitieron oralmente por siglos antes de ser fijados por escrito, probablemente en el siglo VI a.C. en Atenas.</div></div>
-        <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div><strong>Posibles lugares de origen:</strong> Esmirna, Quíos, Colofón, Salamina, Rodas, Argos e Itaca reclaman ser su ciudad natal.</div></div>
+      <div class="blist">
+        <div class="bitem"><div class="bdot"></div><div>Los poemas se transmitieron oralmente por siglos antes de ser fijados por escrito, probablemente en el siglo VI a.C. en Atenas.</div></div>
+        <div class="bitem"><div class="bdot"></div><div><strong>Posibles lugares de origen:</strong> Esmirna, Quíos, Colofón, Salamina, Rodas, Argos e Ítaca reclaman ser su ciudad natal.</div></div>
       </div>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">II — Características de sus obras</div>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title" style="color:#7a5c1d;">Estilo oral y épico</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div><strong>Fórmulas orales:</strong> epítetos repetidos («Aquiles de pies ligeros», «Odiseo ingenioso») facilitan la memorización y recitación.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div><strong>In medias res:</strong> la narración comienza en medio de la acción; el origen se narra después.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div><strong>Símiles homéricos:</strong> comparaciones extensas y detalladas que retardan la acción para crear atmósfera.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">II</div><div class="sec-title">Características de sus obras</div></div>
+    <div class="g2">
+      <div class="char-card">
+        <div class="card-head">Estilo oral y épico</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Fórmulas orales:</strong> epítetos repetidos («Aquiles de pies ligeros», «Odiseo ingenioso») facilitan la memorización y recitación.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>In medias res:</strong> la narración comienza en medio de la acción; el origen se narra después.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Símiles homéricos:</strong> comparaciones extensas y detalladas que crean atmósfera y retardan estratégicamente la acción.</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title" style="color:#7a5c1d;">Lengua y forma</div>
-        <div class="bullet-list">
-          <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div><strong>Dialecto jónico-eólico:</strong> mezcla de dialectos que fue el lenguaje artificial de la épica, nunca hablado naturalmente.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div><strong>Hexámetro dactílico:</strong> metro de seis pies dáctilos, el verso épico por excelencia de toda la Antigüedad.</div></div>
-          <div class="bullet-item"><div class="b-dot" style="background:#7a5c1d"></div><div><strong>Objetividad narrativa:</strong> el narrador épico no juzga; presenta a los héroes y a sus enemigos con igual dignidad.</div></div>
+      <div class="char-card">
+        <div class="card-head">Lengua y forma</div>
+        <div class="blist">
+          <div class="bitem"><div class="bdot"></div><div><strong>Dialecto jónico-eólico:</strong> mezcla de dialectos que fue el lenguaje artificial de la épica, nunca hablado naturalmente.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Hexámetro dactílico:</strong> metro de seis pies dáctilos, el verso épico por excelencia de la Antigüedad.</div></div>
+          <div class="bitem"><div class="bdot"></div><div><strong>Objetividad narrativa:</strong> el narrador épico no juzga; presenta a héroes y enemigos con igual dignidad.</div></div>
         </div>
       </div>
     </div>
-    <div style="margin-top:12px;"><div class="tags">
-      <span class="tag" style="background:#f8f3e8;color:#5a3c0a;border-color:#e0caa0;">Épica oral</span>
-      <span class="tag" style="background:#f8f3e8;color:#5a3c0a;border-color:#e0caa0;">Hexámetro dactílico</span>
-      <span class="tag" style="background:#f8f3e8;color:#5a3c0a;border-color:#e0caa0;">Epítetos homéricos</span>
-      <span class="tag" style="background:#f8f3e8;color:#5a3c0a;border-color:#e0caa0;">In medias res</span>
-      <span class="tag" style="background:#f8f3e8;color:#5a3c0a;border-color:#e0caa0;">Símil épico</span>
-    </div></div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-label">III — Temas centrales</div>
-    <div class="grid-2">
-      <div class="tema-card"><div class="tema-title">La guerra y la gloria (kleos)</div><div class="tema-desc">La guerra es el espacio donde el héroe alcanza la inmortalidad a través de la fama. Morir joven en batalla es preferible a una vida larga y oscura.</div></div>
-      <div class="tema-card"><div class="tema-title">El destino y los dioses</div><div class="tema-desc">Los dioses intervienen directamente en los asuntos humanos, pero el destino (moira) es superior incluso a los dioses. Ningún héroe puede escapar a su fin.</div></div>
-      <div class="tema-card"><div class="tema-title">El nostos (regreso al hogar)</div><div class="tema-desc">La Odisea convierte el regreso al hogar en un viaje espiritual. Odiseo debe recordar quién es y recuperar su lugar: su esposa, su hijo, su reino.</div></div>
-      <div class="tema-card"><div class="tema-title">El honor y la cólera</div><div class="tema-desc">La Ilíada nace de la cólera de Aquiles al ser deshonrado. El honor (timé) es el bien más preciado del héroe homérico, más que la vida misma.</div></div>
+    <div class="tags-row">
+      <span class="tag">Épica oral</span><span class="tag">Hexámetro dactílico</span><span class="tag">Epítetos homéricos</span><span class="tag">In medias res</span><span class="tag">Símil épico</span>
     </div>
   </div>
 
-  <div class="section-block">
-    <div class="section-label">IV — Obras principales</div>
-    <div class="grid-2">
-      <div class="obra-card"><div class="obra-name">La Ilíada</div><div class="obra-year">c. Siglo VIII a.C. (composición oral) · ~15,700 versos</div><div class="obra-desc">Narra 51 días del décimo año de la Guerra de Troya, centrados en la cólera de Aquiles y sus consecuencias. Primer texto de la literatura occidental.</div></div>
-      <div class="obra-card"><div class="obra-name">La Odisea</div><div class="obra-year">c. Siglo VIII a.C. · ~12,100 versos</div><div class="obra-desc">El regreso de Odiseo a Ítaca tras la caída de Troya, con sus aventuras durante 10 años de viaje. Segunda gran epopeya de la tradición griega.</div></div>
+  <div>
+    <div class="sec-head"><div class="sec-num">III</div><div class="sec-title">Temas centrales</div></div>
+    <div class="g2">
+      <div class="tema-card"><div class="tema-icon">⚔️</div><div class="tema-title">La guerra y la gloria (kleos)</div><div class="tema-desc">La guerra es el espacio donde el héroe alcanza la inmortalidad a través de la fama. Morir joven en batalla es preferible a una vida larga y oscura.</div></div>
+      <div class="tema-card"><div class="tema-icon">🌩️</div><div class="tema-title">El destino y los dioses</div><div class="tema-desc">Los dioses intervienen directamente en los asuntos humanos, pero el destino (moira) es superior incluso a los dioses. Ningún héroe escapa a su fin.</div></div>
+      <div class="tema-card"><div class="tema-icon">🏠</div><div class="tema-title">El nostos (regreso al hogar)</div><div class="tema-desc">La Odisea convierte el regreso en un viaje espiritual. Odiseo debe recordar quién es y recuperar su lugar: su esposa, su hijo, su reino.</div></div>
+      <div class="tema-card"><div class="tema-icon">🛡️</div><div class="tema-title">El honor y la cólera</div><div class="tema-desc">La Ilíada nace de la cólera de Aquiles al ser deshonrado. El honor (timé) es el bien más preciado del héroe homérico, más que la vida misma.</div></div>
     </div>
   </div>
 
-  <!-- ANÁLISIS ESPECIAL HOMERO: DOS BLOQUES -->
-  <div class="section-block">
-    <div class="section-label">V — Análisis de las obras principales</div>
-    <div class="homero-obras">
+  <!-- OBRAS: dos bloques especiales -->
+  <div>
+    <div class="sec-head"><div class="sec-num">IV</div><div class="sec-title">Obras principales</div></div>
+    <div class="g2">
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">La Ilíada</div><div class="obra-year">c. Siglo VIII a.C. · ~15,700 versos</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">Narra 51 días del décimo año de la Guerra de Troya, centrados en la cólera de Aquiles y sus consecuencias. Primer texto de la literatura occidental.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Primer texto de la literatura occidental. Modelo fundacional de la épica, la ética heroica y la narración bélica. Base de la educación griega y romana durante siglos.</div>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-header"><div class="obra-title">La Odisea</div><div class="obra-year">c. Siglo VIII a.C. · ~12,100 versos</div></div>
+        <div class="obra-body">
+          <div class="obra-row"><div class="obra-row-label">Descripción</div><div class="obra-row-text">El regreso de Odiseo a Ítaca tras la caída de Troya, con sus aventuras durante 10 años de viaje y obstáculos sobrenaturales.</div></div>
+          <div class="obra-imp-strip"><b>★ Importancia</b>Arquetipo del viaje como búsqueda de identidad. Origen de incontables tradiciones narrativas: el relato de aventuras, el viaje del héroe y la novela moderna deben a ella su estructura esencial.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <!-- ILÍADA -->
-      <div class="homero-obra-block">
-        <div class="homero-obra-header" style="background:#f8f3e8;border-color:#e0caa0;">
-          <div class="homero-obra-name" style="color:#7a5c1d;">La Ilíada</div>
-          <div style="font-size:11px;color:#a08040;margin-top:2px;">~15,700 hexámetros · 24 cantos</div>
+  <!-- V ANÁLISIS HOMERO: dos bloques lado a lado -->
+  <div>
+    <div class="sec-head"><div class="sec-num">V</div><div class="sec-title">Análisis de las obras principales</div></div>
+    <div class="homero-split">
+
+      <div class="homero-obra">
+        <div class="homero-obra-head">
+          <div class="homero-obra-title">La Ilíada</div>
+          <div class="homero-obra-sub">~15,700 hexámetros · 24 cantos</div>
         </div>
         <div class="homero-obra-body">
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Género literario</div><div class="h-text">Épico</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Especie literaria</div><div class="h-text">Epopeya</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Resumen</div><div class="h-text">En el décimo año del sitio de Troya, Aquiles se niega a combatir por una disputa con Agamenón. La guerra gira a favor de Troya hasta que muere Patroclo, el mejor amigo de Aquiles. Devastado, Aquiles regresa al combate, mata a Héctor —el príncipe troyano— y devuelve su cuerpo al anciano rey Príamo.</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Tema central</div><div class="h-text">La cólera de Aquiles (menis) y sus consecuencias: el honor herido que lleva a la tragedia colectiva. La gloria del héroe se paga con la muerte de los suyos.</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Estructura</div>
-            <div class="estructura-pills" style="margin-top:4px;">
-              <span class="pill" style="background:#f8f3e8;color:#7a5c1d;border-color:#e0caa0;">24 cantos</span>
-              <span class="pill" style="background:#f8f3e8;color:#7a5c1d;border-color:#e0caa0;">Cólera → Retirada</span>
-              <span class="pill" style="background:#f8f3e8;color:#7a5c1d;border-color:#e0caa0;">Muerte de Patroclo</span>
-              <span class="pill" style="background:#7a5c1d;color:#fff;border:none;">Venganza · Reconciliación</span>
+          <div class="hitem"><div class="hl">Género literario</div><div class="ht">Épico</div></div>
+          <div class="hitem"><div class="hl">Especie literaria</div><div class="ht">Epopeya</div></div>
+          <div class="hitem"><div class="hl">Resumen</div><div class="ht">En el décimo año del sitio de Troya, Aquiles se niega a combatir por una disputa con Agamenón. La guerra gira a favor de Troya hasta que muere Patroclo, su mejor amigo. Devastado, Aquiles regresa, mata a Héctor y devuelve su cuerpo al anciano rey Príamo.</div></div>
+          <div class="hitem"><div class="hl">Tema central</div><div class="ht">La cólera de Aquiles (menis) y sus consecuencias: el honor herido que lleva a la tragedia colectiva. La gloria del héroe se paga con la muerte de los suyos.</div></div>
+          <div class="hitem"><div class="hl">Estructura</div>
+            <div class="pills" style="margin-top:4px">
+              <span class="pill">24 cantos</span>
+              <span class="pill">Cólera → Retirada</span>
+              <span class="pill">Muerte de Patroclo</span>
+              <span class="pill solid">Venganza · Reconciliación</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ODISEA -->
-      <div class="homero-obra-block">
-        <div class="homero-obra-header" style="background:#f8f3e8;border-color:#e0caa0;">
-          <div class="homero-obra-name" style="color:#7a5c1d;">La Odisea</div>
-          <div style="font-size:11px;color:#a08040;margin-top:2px;">~12,100 hexámetros · 24 cantos</div>
+      <div class="homero-obra">
+        <div class="homero-obra-head">
+          <div class="homero-obra-title">La Odisea</div>
+          <div class="homero-obra-sub">~12,100 hexámetros · 24 cantos</div>
         </div>
         <div class="homero-obra-body">
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Género literario</div><div class="h-text">Épico</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Especie literaria</div><div class="h-text">Epopeya</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Resumen</div><div class="h-text">Odiseo tarda 10 años en regresar a Ítaca tras la caída de Troya. En su viaje enfrenta al cíclope Polifemo, la hechicera Circe, las sirenas y el monstruo Escila. Mientras tanto, su esposa Penélope resiste a los pretendientes. Odiseo llega disfrazado y los masacra recuperando su reino.</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Tema central</div><div class="h-text">El nostos (regreso al hogar) como búsqueda de identidad. Odiseo, el héroe de la inteligencia, debe superar pruebas que representan tentaciones de olvido para recuperar su ser.</div></div>
-          <div class="h-item"><div class="h-label" style="color:#7a5c1d;">Estructura</div>
-            <div class="estructura-pills" style="margin-top:4px;">
-              <span class="pill" style="background:#f8f3e8;color:#7a5c1d;border-color:#e0caa0;">24 cantos</span>
-              <span class="pill" style="background:#f8f3e8;color:#7a5c1d;border-color:#e0caa0;">Telemaquia (I–IV)</span>
-              <span class="pill" style="background:#f8f3e8;color:#7a5c1d;border-color:#e0caa0;">Viaje de Odiseo (V–XII)</span>
-              <span class="pill" style="background:#7a5c1d;color:#fff;border:none;">Regreso a Ítaca (XIII–XXIV)</span>
+          <div class="hitem"><div class="hl">Género literario</div><div class="ht">Épico</div></div>
+          <div class="hitem"><div class="hl">Especie literaria</div><div class="ht">Epopeya</div></div>
+          <div class="hitem"><div class="hl">Resumen</div><div class="ht">Odiseo tarda 10 años en regresar a Ítaca. Enfrenta al cíclope Polifemo, la hechicera Circe, las sirenas y el monstruo Escila. Su esposa Penélope resiste a los pretendientes. Odiseo llega disfrazado y los masacra recuperando su reino.</div></div>
+          <div class="hitem"><div class="hl">Tema central</div><div class="ht">El nostos (regreso) como búsqueda de identidad. Odiseo, el héroe de la inteligencia, debe superar pruebas que representan tentaciones de olvido para recuperar su ser y su lugar en el mundo.</div></div>
+          <div class="hitem"><div class="hl">Estructura</div>
+            <div class="pills" style="margin-top:4px">
+              <span class="pill">24 cantos</span>
+              <span class="pill">Telemaquia (I–IV)</span>
+              <span class="pill">Viaje de Odiseo (V–XII)</span>
+              <span class="pill solid">Regreso a Ítaca (XIII–XXIV)</span>
             </div>
           </div>
         </div>
@@ -1284,45 +1568,41 @@
 </main>
 
 <script>
-  const tabs = document.querySelectorAll('.tab-btn');
-  const panels = document.querySelectorAll('.panel');
+/* ── TABS ── */
+const tabs   = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.panel');
+const main   = document.querySelector('.main');
 
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.panel;
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('panel-' + target).classList.add('active');
-    });
+tabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.panel;
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + target).classList.add('active');
+    main.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+});
 
-  /* ── DARK MODE ── */
-  const toggleBtn   = document.getElementById('theme-toggle');
-  const toggleIcon  = document.getElementById('toggle-icon');
-  const toggleLabel = document.getElementById('toggle-label');
-  const html        = document.documentElement;
+/* ── DARK MODE ── */
+const toggle = document.getElementById('theme-toggle');
+const icon   = document.getElementById('tt-icon');
+const label  = document.getElementById('tt-label');
+const html   = document.documentElement;
 
-  const saved = localStorage.getItem('theme');
-  if (saved === 'dark') applyDark(true);
+if (localStorage.getItem('theme') === 'dark') setDark(true);
 
-  toggleBtn.addEventListener('click', () => {
-    const isDark = html.classList.toggle('dark');
-    applyDark(isDark);
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
+toggle.addEventListener('click', () => {
+  const dark = html.classList.toggle('dark');
+  setDark(dark);
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+});
 
-  function applyDark(on) {
-    if (on) {
-      html.classList.add('dark');
-      toggleIcon.textContent  = '🌙';
-      toggleLabel.textContent = 'Modo oscuro';
-    } else {
-      html.classList.remove('dark');
-      toggleIcon.textContent  = '☀️';
-      toggleLabel.textContent = 'Modo claro';
-    }
-  }
+function setDark(on) {
+  html.classList.toggle('dark', on);
+  icon.textContent  = on ? '🌙' : '☀️';
+  label.textContent = on ? 'Oscuro' : 'Claro';
+}
 </script>
 </body>
 </html>
