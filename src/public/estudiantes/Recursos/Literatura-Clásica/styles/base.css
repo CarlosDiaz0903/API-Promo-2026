@@ -1,0 +1,80 @@
+/* ══════════════════════════════════════════
+   BASE.CSS — Tokens, reset, tipografía global
+   ══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ── */
+:root {
+  --bg: #f4f2ee; --bg2: #ece9e1;
+  --surface: #fff; --surface2: #f8f6f1; --surface3: #f0ede5;
+  --border: #e2ddd4; --border2: #c8c2b6;
+  --text: #16140e; --text2: #504c44; --text3: #928d84; --text4: #b8b3aa;
+  --rxl: 18px; --rx: 12px; --rsm: 8px; --rxs: 5px;
+  --s0: 0 1px 2px rgba(0,0,0,.04);
+  --s1: 0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
+  --s2: 0 4px 12px rgba(0,0,0,.07), 0 12px 36px rgba(0,0,0,.07);
+  --s3: 0 8px 24px rgba(0,0,0,.1), 0 24px 64px rgba(0,0,0,.1);
+  --ease: cubic-bezier(.4,0,.2,1); --dur: .2s;
+  --a: #5b4a8a; --al: #f0ecfa; --am: #ddd5f8; --ad: #3d3060;
+}
+
+/* ── COLORES POR AUTOR ── */
+[data-author=esquilo]     { --a:#2d6a4f; --al:#e8f5ee; --am:#c2e0cd; --ad:#1a4030 }
+[data-author=aristofanes] { --a:#b5451b; --al:#fdf0eb; --am:#f8ccb5; --ad:#7a2d0e }
+[data-author=safo]        { --a:#8a2d5b; --al:#faeef5; --am:#f0c0d8; --ad:#5c1a3c }
+[data-author=virgilio]    { --a:#1d5c7a; --al:#e8f3f8; --am:#b8d8ea; --ad:#0d3d52 }
+[data-author=homero]      { --a:#7a5c1d; --al:#f8f3e8; --am:#e8d8a8; --ad:#503c0e }
+
+/* ── DARK MODE ── */
+html.dark {
+  --bg:#0e0d0b; --bg2:#141310; --surface:#191816; --surface2:#1e1c18; --surface3:#242118;
+  --border:#2a2820; --border2:#383430;
+  --text:#eae6dc; --text2:#9e9890; --text3:#5a5650; --text4:#3a3830;
+  --s0:0 1px 2px rgba(0,0,0,.25);
+  --s1:0 1px 4px rgba(0,0,0,.35),0 4px 16px rgba(0,0,0,.25);
+  --s2:0 4px 12px rgba(0,0,0,.45),0 12px 36px rgba(0,0,0,.35);
+  --s3:0 8px 24px rgba(0,0,0,.6),0 24px 64px rgba(0,0,0,.5);
+}
+html.dark [data-author=sofocles]   { --a:#a090dc; --al:#1c1828; --am:#2c2848; --ad:#c0b4f4 }
+html.dark [data-author=esquilo]    { --a:#5aaa7a; --al:#0e1c14; --am:#162c1e; --ad:#8fd4aa }
+html.dark [data-author=aristofanes]{ --a:#e07a50; --al:#1c100a; --am:#2c1a12; --ad:#f0a880 }
+html.dark [data-author=safo]       { --a:#c96a96; --al:#1c0c16; --am:#2c1424; --ad:#f090b8 }
+html.dark [data-author=virgilio]   { --a:#5aaad4; --al:#0a1620; --am:#12222e; --ad:#80c8f0 }
+html.dark [data-author=homero]     { --a:#c0973a; --al:#1a1406; --am:#281e0c; --ad:#e0b860 }
+
+/* ── TRANSICIONES GLOBALES ── */
+body, body * {
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+.panel,.obra-card,.tema-card,.char-card,.aitem,.hitem,.stat-card {
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              transform .18s var(--ease),
+              box-shadow .18s var(--ease) !important;
+}
+
+/* ── BASE ── */
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+mark {
+  background: color-mix(in srgb, var(--a) 25%, transparent);
+  color: inherit; border-radius: 2px; padding: 0 2px;
+}

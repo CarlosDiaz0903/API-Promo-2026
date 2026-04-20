@@ -1,0 +1,150 @@
+/* ══════════════════════════════════════════
+   UI-EXTRAS.CSS — Mejoras UI/UX adicionales
+   ══════════════════════════════════════════ */
+
+/* ── READING MODE ── */
+body.reading-mode .content-area { max-width: 680px; margin: 0 auto; }
+body.reading-mode .obras-grid { grid-template-columns: 1fr 1fr; }
+
+.reading-toggle {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 99px; padding: 5px 12px 5px 9px;
+  cursor: pointer; font-size: 12px; font-weight: 500; color: var(--text2);
+  white-space: nowrap; flex-shrink: 0; outline: none; font-family: inherit;
+  transition: border-color .15s, color .15s;
+}
+.reading-toggle:hover { border-color: var(--border2); color: var(--text); }
+.reading-toggle.active { background: var(--al); border-color: var(--am); color: var(--a); }
+
+/* ── COPY BTN ── */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10.5px; font-weight: 500; padding: 3px 9px;
+  border-radius: 99px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text3);
+  cursor: pointer; transition: all .15s; font-family: inherit;
+  letter-spacing: .02em;
+}
+.copy-btn:hover { border-color: var(--a); color: var(--a); background: var(--al); }
+.copy-btn.copied { border-color: #2d6a4f; color: #2d6a4f; background: #e8f5ee; }
+
+/* ── AUTHOR SELECTOR (mobile) ── */
+.author-quick-nav {
+  display: none;
+  gap: 8px; padding: 14px 18px;
+  overflow-x: auto; scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.author-quick-nav::-webkit-scrollbar { display: none; }
+@media(max-width:640px) { .author-quick-nav { display: flex; } }
+.author-dot-btn {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Lora', serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; border: 2px solid transparent; transition: all .15s;
+  background: var(--surface2); color: var(--text3);
+}
+.author-dot-btn.active { border-color: var(--a); background: var(--al); color: var(--a); }
+
+/* ── STATS BANNER (resumen del autor) ── */
+.author-stats-row {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;
+  position: relative; z-index: 1;
+}
+.author-stat-pill {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 500;
+  padding: 4px 10px; border-radius: 99px;
+  background: color-mix(in srgb, var(--a) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--a) 25%, transparent);
+  color: var(--a);
+}
+.author-stat-pill svg { flex-shrink: 0; }
+
+/* ── SEARCH NO RESULTS ── */
+.search-no-results {
+  text-align: center; padding: 40px 20px; color: var(--text3);
+  font-size: 13px; display: none;
+}
+.search-no-results.visible { display: block; }
+.search-no-results svg { margin-bottom: 12px; opacity: .4; }
+
+/* ── BACK TO TOP mini indicator ── */
+.reading-progress-ring {
+  position: fixed; bottom: 28px; right: 24px; z-index: 51;
+  width: 38px; height: 38px; pointer-events: none;
+}
+.reading-progress-ring circle {
+  fill: none; stroke: color-mix(in srgb, var(--a) 30%, transparent);
+  stroke-width: 2; stroke-dasharray: 100; stroke-dashoffset: 100;
+  transition: stroke-dashoffset .2s, stroke .3s;
+  transform-origin: center; transform: rotate(-90deg);
+}
+
+/* ── SKELETON LOADING ── */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface2) 25%, var(--surface3) 50%, var(--surface2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--rsm);
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ── FOCUS MODE — solo resalta el card activo al hacer hover en obras ── */
+.obras-grid:hover .obra-card:not(:hover) { opacity: .65; }
+.obras-grid .obra-card { transition: opacity .2s, transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s !important; }
+
+/* ── BREADCRUMB LINEAL EN SIDEBAR ── */
+.side-progress {
+  height: 2px; background: var(--border);
+  margin: 8px 14px; border-radius: 99px; overflow: hidden;
+}
+.side-progress-fill {
+  height: 100%; background: var(--a); border-radius: 99px;
+  transition: width .3s var(--ease), background .3s;
+  width: 20%;
+}
+
+/* ── CHIP CONTADOR (obras section) ── */
+.section-obras-header {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 4px;
+}
+.obras-count-chip {
+  font-size: 10.5px; font-weight: 600; padding: 2px 9px;
+  border-radius: 99px; background: var(--al); color: var(--a);
+  border: 1px solid var(--am); letter-spacing: .04em;
+}
+
+/* ── FLOATING AUTHOR LABEL al hacer scroll ── */
+.author-float-label {
+  position: fixed; top: 70px; left: 50%; transform: translateX(-50%) translateY(-10px);
+  background: var(--a); color: #fff;
+  font-family: 'Lora', serif; font-size: 12px; font-weight: 600;
+  padding: 4px 14px; border-radius: 99px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  z-index: 190; white-space: nowrap;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--a) 40%, transparent);
+}
+.author-float-label.visible {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+
+/* ── ANIMATED PILL ON HOVER ── */
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--a) 30%, transparent); }
+  70% { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.analisis-badge:hover { animation: pulseRing .6s ease-out; }
+
+/* ── PRINT STYLES ── */
+@media print {
+  .app-header, .sidebar, #scroll-top, #progress-bar { display: none !important; }
+  .page-wrap { padding: 0; }
+  .panel { display: contents !important; }
+  body { font-size: 12px; color: #000; background: #fff; }
+}

@@ -1,0 +1,138 @@
+/* ══════════════════════════════════════════
+   OBRAS.CSS — Grid de obras + análisis + Homero
+   ══════════════════════════════════════════ */
+
+/* ── OBRAS GRID ── */
+.obras-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+@media(max-width:780px) { .obras-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:520px) { .obras-grid { grid-template-columns: 1fr; } }
+
+.obra-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--rx); overflow: hidden; cursor: default;
+  display: flex; flex-direction: column;
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s !important;
+}
+.obra-card:hover { transform: translateY(-3px); box-shadow: var(--s2); border-color: var(--am); }
+.obra-header { padding: 12px 14px 10px; border-bottom: 1px solid var(--border); background: var(--surface2); }
+.obra-title { font-family: 'Lora', serif; font-size: 14.5px; font-weight: 600; color: var(--text); font-style: italic; margin-bottom: 2px; }
+.obra-year { font-size: 10.5px; color: var(--text3); letter-spacing: .04em; font-weight: 500; }
+.obra-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+.obra-rl { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--a); margin-bottom: 2px; }
+.obra-rt { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
+.obra-imp {
+  margin-top: 2px; padding: 8px 11px;
+  background: var(--al); border-radius: var(--rxs); border: 1px solid var(--am);
+  font-size: 11.5px; color: var(--a); line-height: 1.45;
+}
+.obra-imp b { font-weight: 600; display: block; margin-bottom: 2px; font-size: 9.5px; text-transform: uppercase; letter-spacing: .08em; }
+
+/* ── ANÁLISIS PRINCIPAL ── */
+.analisis-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--rxl); overflow: hidden; box-shadow: var(--s1);
+}
+.analisis-hero {
+  padding: 22px 26px; background: var(--al); border-bottom: 1px solid var(--am);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.analisis-obra-title { font-family: 'Lora', serif; font-size: 21px; font-weight: 700; font-style: italic; color: var(--a); margin-bottom: 2px; }
+.analisis-meta { font-size: 11.5px; color: var(--text3); }
+.analisis-badge { font-size: 10.5px; font-weight: 600; padding: 5px 13px; border-radius: 99px; background: var(--a); color: #fff; white-space: nowrap; flex-shrink: 0; align-self: flex-start; letter-spacing: .04em; }
+.analisis-body { padding: 22px 26px; display: flex; flex-direction: column; gap: 13px; }
+
+.resumen-block {
+  border-left: 3px solid var(--a); padding: 13px 16px; background: var(--surface2);
+  border-radius: 0 var(--rsm) var(--rsm) 0; font-size: 13px; color: var(--text); line-height: 1.65;
+}
+.resumen-block strong { color: var(--a); font-weight: 600; }
+
+.analisis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+@media(max-width:560px) { .analisis-grid { grid-template-columns: 1fr; } }
+
+.aitem { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--rsm); padding: 13px 15px; }
+.aitem.full { grid-column: 1 / -1; }
+.aitem-label { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--a); margin-bottom: 6px; }
+.aitem-text { font-size: 13px; color: var(--text); line-height: 1.55; }
+
+/* temas en análisis */
+.temas-analisis { display: flex; flex-direction: column; gap: 8px; }
+.tema-analisis-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--rsm); padding: 11px 14px;
+  transition: border-color .15s, background .15s;
+}
+.tema-analisis-item:hover { border-color: var(--am); }
+.tai-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+.tai-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.tai-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* importancia en análisis */
+.analisis-imp {
+  background: var(--al); border: 1px solid var(--am); border-radius: var(--rsm); padding: 13px 16px;
+}
+.analisis-imp-label { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--a); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+.analisis-imp-label span { font-size: 13px; }
+.analisis-imp-text { font-size: 13px; color: var(--a); line-height: 1.55; font-weight: 400; }
+
+/* ── PERSONAJES ── */
+.personajes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; margin-top: 4px; }
+.personaje-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--rsm); padding: 10px 12px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.personaje-item:hover { border-color: var(--am); box-shadow: var(--s1); }
+.personaje-name { font-size: 12px; font-weight: 600; color: var(--a); margin-bottom: 3px; }
+.personaje-rol { font-size: 11px; color: var(--text2); line-height: 1.4; }
+
+/* ── MENSAJE / ENSEÑANZA ── */
+.mensaje-block {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: color-mix(in srgb, var(--a) 8%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--a) 25%, transparent);
+  border-radius: var(--rsm); padding: 13px 16px;
+}
+.mensaje-icon { font-size: 18px; flex-shrink: 0; line-height: 1.3; }
+.mensaje-label { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--a); margin-bottom: 4px; }
+.mensaje-text { font-size: 13px; color: var(--text); line-height: 1.55; font-style: italic; }
+
+/* ── ESTRUCTURA DETALLADA ── */
+.estructura-list { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.estructura-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 11px; border-radius: var(--rxs);
+  background: var(--surface); border: 1px solid var(--border);
+  transition: border-color .15s;
+}
+.estructura-item:hover { border-color: var(--am); }
+.estructura-num {
+  width: 18px; height: 18px; border-radius: 5px; background: var(--a); color: #fff;
+  font-size: 9px; font-weight: 700; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.estructura-label { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.estructura-desc { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+/* ── HOMERO SPECIAL ── */
+.homero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:680px) { .homero-split { grid-template-columns: 1fr; } }
+
+.homero-obra {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--rxl); overflow: hidden; box-shadow: var(--s1);
+}
+.homero-obra-head { padding: 16px 18px; background: var(--al); border-bottom: 1px solid var(--am); }
+.homero-obra-title { font-family: 'Lora', serif; font-size: 17px; font-weight: 700; font-style: italic; color: var(--a); margin-bottom: 2px; }
+.homero-obra-sub { font-size: 10.5px; color: var(--text3); letter-spacing: .03em; }
+.homero-obra-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; }
+.hitem { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--rsm); padding: 10px 13px; }
+.hl { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--a); margin-bottom: 3px; }
+.ht { font-size: 12.5px; color: var(--text); line-height: 1.5; }
+
+.htemas { display: flex; flex-direction: column; gap: 6px; }
+.htema-item { display: flex; gap: 8px; align-items: flex-start; }
+.htema-icon { font-size: 13px; flex-shrink: 0; line-height: 1.4; }
+.htema-title { font-size: 12px; font-weight: 600; color: var(--text); }
+.htema-desc { font-size: 11.5px; color: var(--text2); line-height: 1.45; }
