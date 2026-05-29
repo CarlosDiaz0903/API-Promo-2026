@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Día Más Largo — Normandía & Provenza</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&family=IM+Fell+English:ital@0;1&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy:    #07111f;
+  --gold:    #c8960c;
+  --gold-lt: #e8b520;
+  --gold-dim:#7a5a08;
+  --cream:   #f0e8d0;
+  --cream-dim:#9a8a6a;
+  --silver:  #7a8a9a;
+  --red-war: #8b1a1a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+html, body { width:100%; height:100%; overflow:hidden; background:var(--navy); cursor:crosshair; }
+body { font-family:'IM Fell English', serif; color:var(--cream); }
+
+/* ── GRAIN ── */
+body::before {
+  content:''; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity:.45; mix-blend-mode:overlay;
+}
+
+/* ── VIGNETTE ── */
+body::after {
+  content:''; position:fixed; inset:0; z-index:9998; pointer-events:none;
+  background:radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.65) 100%);
+}
+
+/* ── SLIDE ENGINE ── */
+#track {
+  display:flex;
+  width:calc(10 * 100vw);
+  height:100vh;
+  transition:transform 1.05s cubic-bezier(.77,0,.18,1);
+  will-change:transform;
+}
+
+.slide {
+  width:100vw; height:100vh;
+  position:relative; overflow:hidden;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* ── CHROME ── */
+#top-bar {
+  position:fixed; top:0; left:0; right:0; height:3px; z-index:5000;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold-lt),var(--gold),transparent);
+}
+#progress {
+  position:fixed; bottom:0; left:0; height:2px; z-index:5000;
+  background:linear-gradient(90deg,var(--gold-dim),var(--gold));
+  transition:width 1.05s cubic-bezier(.77,0,.18,1);
+}
+#slide-label {
+  position:fixed; top:22px; left:32px; z-index:5000;
+  font-family:'Orbitron',monospace; font-size:11px;
+  color:var(--gold-dim); letter-spacing:5px; text-transform:uppercase;
+}
+#watermark {
+  position:fixed; bottom:20px; right:28px; z-index:5000;
+  font-family:'Orbitron',monospace; font-size:9px;
+  color:var(--gold-dim); letter-spacing:2px; opacity:.5; text-align:right;
+}
+#nav-dots {
+  position:fixed; right:24px; top:50%; transform:translateY(-50%);
+  z-index:5000; display:flex; flex-direction:column; gap:14px;
+}
+.dot {
+  width:9px; height:9px; border-radius:50%;
+  border:1.5px solid var(--gold-dim); background:transparent;
+  cursor:pointer; transition:all .4s; title:attr(data-title);
+}
+.dot.active {
+  background:var(--gold); border-color:var(--gold);
+  box-shadow:0 0 14px var(--gold); transform:scale(1.5);
+}
+#nav-btns {
+  position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
+  z-index:5000; display:flex; gap:24px; align-items:center;
+}
+.nav-btn {
+  background:rgba(200,150,12,.1); border:1px solid var(--gold-dim);
+  color:var(--gold); width:54px; height:54px; border-radius:50%;
+  font-size:22px; cursor:pointer; transition:all .3s;
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:blur(8px);
+}
+.nav-btn:hover { background:rgba(200,150,12,.28); border-color:var(--gold); box-shadow:0 0 24px rgba(200,150,12,.4); }
+#counter {
+  font-family:'Orbitron',monospace; font-size:12px;
+  color:var(--gold-dim); letter-spacing:3px; min-width:70px; text-align:center;
+}
+
+/* ── MAP CONTAINER (full-slide) ── */
+.map-full {
+  position:absolute; inset:0; z-index:1;
+}
+
+/* Leaflet dark filter */
+.leaflet-tile { filter:brightness(.38) saturate(.5) hue-rotate(185deg); }
+.leaflet-container { background:#020811 !important; }
+
+/* Military map overlay style */
+.map-military .leaflet-tile {
+  filter:brightness(.28) saturate(.3) sepia(.4) hue-rotate(165deg);
+}
+
+/* ── FLOATING PANELS (over maps) ── */
+.map-overlay-panel {
+  position:absolute; z-index:400;
+  background:rgba(5,12,28,.88);
+  border:1px solid rgba(200,150,12,.22);
+  backdrop-filter:blur(12px);
+  border-radius:2px;
+  padding:22px 26px;
+}
+.map-overlay-panel.top-left   { top:70px;  left:30px; }
+.map-overlay-panel.top-right  { top:70px;  right:56px; }
+.map-overlay-panel.bot-left   { bottom:80px; left:30px; }
+.map-overlay-panel.bot-right  { bottom:80px; right:56px; }
+.map-overlay-panel.center-right{ top:50%;transform:translateY(-50%); right:44px; }
+
+/* ── TYPOGRAPHY SYSTEM ── */
+.eyebrow {
+  font-family:'Orbitron',monospace; font-size:11px;
+  color:var(--gold); letter-spacing:5px; text-transform:uppercase;
+  margin-bottom:10px;
+}
+.panel-title {
+  font-family:'Cinzel',serif; font-size:clamp(22px,2.8vw,36px);
+  font-weight:700; color:var(--cream); line-height:1.1;
+  margin-bottom:10px;
+}
+.panel-title span { color:var(--gold); }
+.panel-body {
+  font-family:'IM Fell English',serif; font-style:italic;
+  font-size:clamp(15px,1.5vw,19px); color:var(--cream-dim);
+  line-height:1.8; max-width:380px;
+}
+.gold-rule { width:48px; height:2px; background:var(--gold); margin:12px 0; }
+
+/* ── STAT ROW ── */
+.stat-row { display:flex; gap:28px; margin-top:14px; }
+.stat-item { display:flex; flex-direction:column; gap:3px; }
+.stat-num {
+  font-family:'Orbitron',monospace;
+  font-size:clamp(26px,3vw,42px); font-weight:900;
+  color:var(--gold); line-height:1;
+}
+.stat-lbl {
+  font-family:'Orbitron',monospace; font-size:9px;
+  color:var(--silver); letter-spacing:3px;
+}
+
+/* ── PHASE LIST ── */
+.phase-list { display:flex; flex-direction:column; gap:10px; margin-top:10px; }
+.phase-item {
+  display:flex; gap:14px; align-items:flex-start;
+  padding:12px 16px;
+  border:1px solid rgba(200,150,12,.12);
+  background:rgba(4,10,24,.7);
+  border-left:2px solid var(--gold-dim);
+}
+.phase-time {
+  font-family:'Orbitron',monospace; font-size:10px;
+  color:var(--gold); letter-spacing:2px; white-space:nowrap; padding-top:2px;
+}
+.phase-desc {
+  font-family:'IM Fell English',serif; font-style:italic;
+  font-size:clamp(13px,1.3vw,16px); color:var(--cream-dim); line-height:1.5;
+}
+
+/* ── LEGEND BOX ── */
+.legend-box {
+  background:rgba(4,10,24,.85); border:1px solid rgba(200,150,12,.2);
+  padding:14px 18px; border-radius:2px;
+  display:flex; flex-direction:column; gap:8px;
+}
+.leg-item {
+  display:flex; align-items:center; gap:9px;
+  font-family:'Orbitron',monospace; font-size:10px;
+  color:var(--cream-dim); letter-spacing:1px;
+}
+.leg-swatch { width:18px; height:10px; border-radius:1px; }
+
+/* ── BEACH MODAL ── */
+#beach-modal {
+  position:fixed; z-index:2000;
+  top:50%; left:50%; transform:translate(-50%,-50%) scale(.9);
+  background:rgba(5,14,30,.97);
+  border:1px solid rgba(200,150,12,.35);
+  border-top:4px solid var(--gold);
+  padding:28px 32px; min-width:280px; max-width:360px;
+  display:none; opacity:0;
+  transition:all .3s cubic-bezier(.25,.46,.45,.94);
+  backdrop-filter:blur(16px);
+}
+#beach-modal.open {
+  display:block; opacity:1; transform:translate(-50%,-50%) scale(1);
+}
+#beach-modal-close {
+  position:absolute; top:14px; right:16px;
+  background:none; border:none; color:var(--gold);
+  font-size:22px; cursor:pointer; font-family:'Cinzel',serif;
+}
+.bm-flag { font-size:36px; margin-bottom:8px; }
+.bm-code { font-family:'Orbitron',monospace; font-size:9px; color:var(--gold); letter-spacing:4px; margin-bottom:6px; }
+.bm-name { font-family:'Cinzel',serif; font-size:30px; font-weight:900; color:var(--cream); margin-bottom:4px; }
+.bm-nation { font-family:'IM Fell English',serif; font-style:italic; font-size:16px; color:var(--cream-dim); margin-bottom:14px; }
+.bm-stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+.bm-stat { text-align:center; padding:10px; background:rgba(200,150,12,.06); border:1px solid rgba(200,150,12,.15); }
+.bm-stat-n { font-family:'Orbitron',monospace; font-size:20px; font-weight:900; color:var(--gold); }
+.bm-stat-l { font-family:'Orbitron',monospace; font-size:8px; color:var(--silver); letter-spacing:2px; margin-top:3px; }
+.bm-desc { font-family:'IM Fell English',serif; font-style:italic; font-size:14px; color:var(--cream-dim); line-height:1.6; }
+
+/* ── TACTICAL ARROW OVERLAY (slide 5) ── */
+#tac-svg {
+  position:absolute; inset:0; z-index:400;
+  pointer-events:none; width:100%; height:100%;
+}
+
+/* Animated dashed arrows */
+.tac-arrow {
+  stroke-dasharray:12 6;
+  stroke-dashoffset:0;
+  animation:marchArrow 1.2s linear infinite;
+}
+@keyframes marchArrow {
+  to { stroke-dashoffset:-18; }
+}
+.tac-arrow-solid {
+  stroke-dasharray:1000;
+  stroke-dashoffset:1000;
+  animation:drawSolid 2.5s ease forwards;
+}
+@keyframes drawSolid {
+  to { stroke-dashoffset:0; }
+}
+
+.pulse-dot {
+  animation:pulseDot 1.8s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%,100%{ r:5; opacity:1; }
+  50%{ r:9; opacity:.5; }
+}
+
+/* ── SEARCHLIGHTS (slide 0) ── */
+.searchlight {
+  position:absolute; width:2px;
+  background:linear-gradient(180deg,rgba(255,255,220,.25) 0%,transparent 100%);
+  transform-origin:bottom center; bottom:0;
+  animation:sweep linear infinite;
+}
+.sl1{ left:12%; height:65vh; animation-duration:9s; opacity:.4; }
+.sl2{ left:72%; height:80vh; animation-duration:12s; animation-direction:reverse; opacity:.3; }
+.sl3{ left:42%; height:55vh; animation-duration:16s; opacity:.2; }
+@keyframes sweep {
+  0%  { transform:rotate(-28deg); }
+  50% { transform:rotate(28deg); }
+  100%{ transform:rotate(-28deg); }
+}
+
+/* ── INTRO ── */
+.intro-wrap {
+  position:relative; z-index:10;
+  text-align:center; display:flex; flex-direction:column; align-items:center;
+  animation:fadeUp 2.2s ease forwards;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+.intro-eyebrow { font-family:'Orbitron',monospace; font-size:14px; letter-spacing:9px; color:var(--gold); margin-bottom:22px; }
+.intro-title {
+  font-family:'Cinzel Decorative',serif; font-size:clamp(56px,9vw,120px); font-weight:700; line-height:.95;
+  background:linear-gradient(135deg,var(--cream) 0%,var(--gold-lt) 40%,var(--cream) 60%,var(--gold) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  letter-spacing:3px; margin-bottom:8px;
+}
+.intro-date { font-family:'Cinzel',serif; font-size:clamp(16px,2vw,24px); color:var(--gold); letter-spacing:7px; margin-bottom:24px; font-weight:600; }
+.intro-rule { width:220px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:0 auto 22px; }
+.intro-sub { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(18px,2.2vw,26px); color:var(--cream-dim); max-width:620px; line-height:1.6; margin-bottom:40px; }
+.intro-meta { font-family:'Orbitron',monospace; font-size:11px; color:var(--gold-dim); letter-spacing:3px; margin-bottom:50px; }
+.intro-cta { font-family:'Cinzel',serif; font-size:14px; letter-spacing:5px; color:var(--gold-dim); animation:blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+/* Stars */
+.stars { position:absolute; inset:0; pointer-events:none; }
+.stars::before, .stars::after {
+  content:''; position:absolute; inset:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 8%,rgba(255,255,255,.7) 0%,transparent 100%),
+    radial-gradient(1px 1px at 25% 18%,rgba(255,255,255,.5) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 6%,rgba(255,255,255,.8) 0%,transparent 100%),
+    radial-gradient(1px 1px at 72% 14%,rgba(255,255,255,.6) 0%,transparent 100%),
+    radial-gradient(1px 1px at 88% 5%,rgba(255,255,255,.5) 0%,transparent 100%),
+    radial-gradient(1px 1px at 35% 28%,rgba(255,255,255,.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 62% 22%,rgba(255,255,255,.6) 0%,transparent 100%);
+}
+
+/* ── OMAHA dark overlay ── */
+.omaha-smoke {
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 25% 45%,rgba(90,70,55,.18) 0%,transparent 50%),
+    radial-gradient(ellipse at 65% 30%,rgba(80,60,50,.14) 0%,transparent 40%);
+  animation:smokeShift 9s ease-in-out infinite alternate;
+}
+@keyframes smokeShift { from{opacity:.6;transform:translateX(-1%)} to{opacity:1;transform:translateX(1%)} }
+.omaha-flash {
+  position:absolute; inset:0; z-index:3; pointer-events:none;
+  background:rgba(190,90,40,.07);
+  animation:flashPulse 5s ease-in-out infinite;
+}
+@keyframes flashPulse { 0%,100%{opacity:0} 15%,17%{opacity:1} 16%,55%,57%{opacity:0} 56%{opacity:.5} }
+
+/* ── LIBERATION TIMELINE ── */
+.lib-tl { display:flex; flex-direction:column; gap:14px; position:relative; }
+.lib-tl::before {
+  content:''; position:absolute; left:18px; top:0; bottom:0; width:1px;
+  background:linear-gradient(180deg,var(--gold),transparent);
+}
+.lib-item { display:flex; gap:20px; }
+.lib-dot {
+  width:36px; height:36px; border-radius:50%;
+  border:2px solid var(--gold); background:var(--navy);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; flex-shrink:0; z-index:2;
+  box-shadow:0 0 16px rgba(200,150,12,.3);
+}
+.lib-date { font-family:'Orbitron',monospace; font-size:10px; color:var(--gold); letter-spacing:3px; margin-bottom:3px; }
+.lib-event { font-family:'Cinzel',serif; font-size:clamp(15px,1.5vw,19px); color:var(--cream); margin-bottom:3px; }
+.lib-detail { font-family:'IM Fell English',serif; font-size:clamp(13px,1.3vw,16px); color:var(--cream-dim); font-style:italic; }
+
+/* ── CLOSING ── */
+.closing-wrap {
+  position:relative; z-index:10; text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:20px;
+  padding:40px; max-width:820px;
+  animation:fadeUp 1.6s ease forwards;
+}
+.closing-quote { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(20px,2.8vw,34px); color:var(--cream); line-height:1.6; max-width:720px; }
+.closing-attr { font-family:'Cinzel',serif; font-size:13px; color:var(--gold); letter-spacing:5px; }
+.closing-rule { width:180px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+.final-title { font-family:'Cinzel Decorative',serif; font-size:clamp(28px,4.5vw,56px); color:var(--gold); letter-spacing:4px; }
+.cred-line { font-family:'Orbitron',monospace; font-size:10px; color:var(--gold-dim); letter-spacing:3px; }
+
+/* ── Provence fact list ── */
+.prov-fact { display:flex; gap:14px; align-items:flex-start; padding:14px 16px; border:1px solid rgba(200,150,12,.12); background:rgba(5,12,28,.7); border-left:2px solid var(--gold-dim); margin-bottom:10px; }
+.prov-icon { font-size:24px; flex-shrink:0; }
+.prov-lbl { font-family:'Orbitron',monospace; font-size:9px; color:var(--gold); letter-spacing:3px; margin-bottom:4px; }
+.prov-txt { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(13px,1.3vw,16px); color:var(--cream-dim); line-height:1.5; }
+
+/* Omaha stats */
+.omaha-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.o-stat { background:rgba(50,8,8,.5); border:1px solid rgba(139,26,26,.3); border-top:3px solid #8b1a1a; padding:16px; text-align:center; }
+.o-stat-n { font-family:'Orbitron',monospace; font-size:clamp(24px,2.5vw,34px); font-weight:900; color:#cc4444; line-height:1; margin-bottom:4px; }
+.o-stat-l { font-family:'IM Fell English',serif; font-size:13px; color:var(--cream-dim); font-style:italic; }
+
+/* Deception cards */
+.dec-card { background:rgba(200,150,12,.05); border:1px solid rgba(200,150,12,.15); border-left:3px solid var(--gold); padding:16px 20px; border-radius:2px; margin-bottom:12px; }
+.dec-lbl { font-family:'Orbitron',monospace; font-size:9px; color:var(--gold); letter-spacing:3px; margin-bottom:5px; }
+.dec-ttl { font-family:'Cinzel',serif; font-size:clamp(16px,1.6vw,20px); color:var(--cream); margin-bottom:5px; }
+.dec-body { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(13px,1.3vw,16px); color:var(--cream-dim); line-height:1.6; }
+
+/* tactical info overlay inside slide 5 */
+.tac-info {
+  position:absolute; z-index:400; top:70px; left:30px;
+  background:rgba(4,10,24,.88); border:1px solid rgba(200,150,12,.22);
+  border-left:3px solid var(--gold); padding:20px 24px;
+  max-width:300px; backdrop-filter:blur(10px);
+}
+
+/* timeline strip */
+.tl-strip { display:flex; gap:0; background:rgba(5,12,28,.7); border:1px solid rgba(200,150,12,.15); }
+.tl-item { flex:1; padding:14px 16px; border-right:1px solid rgba(200,150,12,.1); }
+.tl-item:last-child { border-right:none; }
+.tl-date { font-family:'Orbitron',monospace; font-size:9px; color:var(--gold); letter-spacing:2px; margin-bottom:5px; }
+.tl-event { font-family:'Cinzel',serif; font-size:clamp(13px,1.3vw,16px); color:var(--cream); }
+.tl-detail { font-family:'IM Fell English',serif; font-style:italic; font-size:12px; color:var(--cream-dim); margin-top:3px; }
+
+/* stats grid */
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.stat-block {
+  background:rgba(8,16,40,.85); border:1px solid rgba(200,150,12,.2); border-top:3px solid var(--gold);
+  padding:26px 18px; text-align:center; transition:all .4s;
+}
+.stat-block:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(200,150,12,.12); }
+.stat-icon { font-size:34px; margin-bottom:12px; display:block; }
+.stat-big { font-family:'Orbitron',monospace; font-size:clamp(26px,3vw,40px); font-weight:900; color:var(--gold); line-height:1; margin-bottom:4px; }
+.stat-unit { font-family:'Orbitron',monospace; font-size:9px; color:var(--silver); letter-spacing:3px; margin-bottom:8px; }
+.stat-desc { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(13px,1.2vw,15px); color:var(--cream-dim); }
+
+/* Comparison cards */
+.comp-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; }
+.comp-card { background:rgba(8,14,30,.8); border:1px solid rgba(200,150,12,.15); padding:16px 18px; }
+.comp-h { font-family:'Cinzel',serif; font-size:clamp(14px,1.4vw,17px); color:var(--gold); margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(200,150,12,.2); }
+.comp-b { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(12px,1.2vw,15px); color:var(--cream-dim); line-height:1.6; }
+
+/* Omaha quote */
+.omaha-quote { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(15px,1.6vw,20px); color:var(--cream-dim); line-height:1.7; border-left:2px solid #8b1a1a; padding-left:18px; max-width:420px; }
+
+/* Obstacles */
+.obstacle { display:flex; align-items:center; gap:12px; font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(13px,1.3vw,16px); color:var(--cream-dim); margin-bottom:8px; }
+.obs-icon { font-size:20px; }
+
+/* Beach instruction */
+.beach-instruction {
+  position:absolute; z-index:400; bottom:80px; left:50%;
+  transform:translateX(-50%);
+  font-family:'Orbitron',monospace; font-size:11px; color:var(--gold-dim);
+  letter-spacing:3px; text-align:center;
+  background:rgba(4,10,24,.7); padding:10px 20px; border:1px solid rgba(200,150,12,.15);
+  backdrop-filter:blur(6px); animation:blink 2.5s ease-in-out infinite;
+}
+
+/* ─ hide leaflet attribution clutter ─ */
+.leaflet-control-attribution { display:none !important; }
+.leaflet-control-zoom a { background:rgba(5,14,32,.9) !important; color:var(--gold) !important; border-color:rgba(200,150,12,.3) !important; font-family:'Cinzel',serif !important; }
+
+/* =============================================
+   FIX PARA PHASE ITEMS (Slide 5)
+   ============================================= */
+.phase-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1px solid rgba(200,150,12,.15);
+  background: rgba(4,10,24,.85);
+  border-left: 3px solid var(--gold-dim);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.phase-time {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  white-space: nowrap;
+  padding-top: 2px;
+  min-width: 52px;
+}
+
+.phase-desc {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--cream-dim);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* Hover y Active */
+.phase-item:hover {
+  background: rgba(200,150,12,.18);
+  border-left-color: var(--gold);
+  transform: translateX(8px);
+}
+
+.phase-item.active {
+  background: rgba(200,150,12,.28);
+  border-left-color: var(--gold-lt);
+  box-shadow: 0 0 16px rgba(200,150,12,.35);
+}
+/* =============================================
+   FIX FUERTE PARA PHASE-ITEM (Slide 5)
+   ============================================= */
+.phase-list .phase-item {
+  display: flex !important;
+  gap: 16px !important;
+  align-items: flex-start !important;
+  padding: 16px 18px !important;
+  margin-bottom: 10px !important;
+  border: 1px solid rgba(200,150,12,.25) !important;
+  background: rgba(4,10,24,.92) !important;
+  border-left: 4px solid var(--gold) !important;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.phase-list .phase-time {
+  font-family: 'Orbitron', monospace !important;
+  font-size: 14px !important;
+  color: #e8b520 !important;
+  letter-spacing: 3px !important;
+  white-space: nowrap !important;
+  min-width: 58px;
+  font-weight: 700;
+}
+
+.phase-list .phase-desc {
+  font-family: 'IM Fell English', serif !important;
+  font-style: italic !important;
+  font-size: 15.5px !important;
+  color: #d4c4a8 !important;
+  line-height: 1.55 !important;
+  flex: 1;
+}
+
+/* Efectos visuales */
+.phase-list .phase-item:hover {
+  background: rgba(200,150,12,.22) !important;
+  border-left-color: #e8b520 !important;
+  transform: translateX(12px);
+}
+
+.phase-list .phase-item.active {
+  background: rgba(200,150,12,.32) !important;
+  border-left-color: #f0d060 !important;
+  box-shadow: 0 0 20px rgba(232, 181, 32, 0.4);
+}
+</style>
+</head>
+<body>
+
+<!-- CHROME -->
+<div id="top-bar"></div>
+<div id="progress" style="width:10%"></div>
+<div id="slide-label">EL DÍA MÁS LARGO</div>
+<div id="watermark">CARLOS ANTONIO DÍAZ BENAVIDES<br>CCSS · PROF. GIOVANNA SOSA · 2026</div>
+
+<div id="nav-dots">
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
+  <div class="dot" onclick="goTo(4)"></div>
+  <div class="dot" onclick="goTo(5)"></div>
+  <div class="dot" onclick="goTo(6)"></div>
+  <div class="dot" onclick="goTo(7)"></div>
+  <div class="dot" onclick="goTo(8)"></div>
+  <div class="dot" onclick="goTo(9)"></div>
+</div>
+<div id="nav-btns">
+  <button class="nav-btn" onclick="prev()">←</button>
+  <span id="counter">01 / 10</span>
+  <button class="nav-btn" onclick="next()">→</button>
+</div>
+
+<!-- BEACH MODAL -->
+<div id="beach-modal">
+  <button id="beach-modal-close" onclick="closeBeachModal()">✕</button>
+  <div class="bm-flag" id="bm-flag"></div>
+  <div class="bm-code" id="bm-code"></div>
+  <div class="bm-name" id="bm-name"></div>
+  <div class="bm-nation" id="bm-nation"></div>
+  <div class="bm-stat-grid" id="bm-stats"></div>
+  <div class="bm-desc" id="bm-desc"></div>
+</div>
+
+<!-- ══════════════ TRACK ══════════════ -->
+<div id="track">
+
+
+<!-- ────────────────────────────────────
+     SLIDE 0  INTRO
+──────────────────────────────────────── -->
+<section class="slide" id="s0" style="background:#020609;">
+  <div class="stars"></div>
+  <div class="searchlight sl1"></div>
+  <div class="searchlight sl2"></div>
+  <div class="searchlight sl3"></div>
+  
+  <!-- Imagen de fondo -->
+  <img src="normandia-panoramica.png" 
+       alt="Normandía"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;z-index:1;">
+
+  
+  <div class="intro-wrap" style="z-index:3; position:relative;">
+    <p class="intro-eyebrow">6 · VI · 1944</p>
+    <h1 class="intro-title">El Día<br>Más Largo</h1>
+    <p class="intro-date">DÍA-D — NORMANDÍA & PROVENZA</p>
+    <div class="intro-rule"></div>
+    <p class="intro-sub">La operación anfibia más grande de la historia.<br>El día que cambió el rumbo de la Segunda Guerra Mundial.</p>
+    <p class="intro-meta">CIENCIAS SOCIALES · PROF. GIOVANNA SOSA · 2026</p>
+    <p class="intro-cta">▶ &nbsp; PRESIONA → PARA COMENZAR</p>
+  </div>
+</section>
+<!-- ────────────────────────────────────
+     SLIDE 1  EUROPA 1944  (Leaflet map)
+──────────────────────────────────────── -->
+<section class="slide" id="s1">
+  <div class="map-full" id="map1"></div>
+
+  <!-- Floating panel: text -->
+  <div class="map-overlay-panel top-left" style="max-width:380px;">
+    <p class="eyebrow">// SITUACIÓN · EUROPA 1944</p>
+    <h2 class="panel-title">El Continente<br>Bajo la <span>Esvástica</span></h2>
+    <div class="gold-rule"></div>
+    <p class="panel-body">Desde 1940, la Alemania nazi dominaba Europa occidental. Francia había caído en seis semanas. Los Aliados debían abrir un frente en el Oeste.</p>
+    <div class="stat-row" style="margin-top:16px;">
+      <div class="stat-item"><span class="stat-num">4</span><span class="stat-lbl">AÑOS OCUPACIÓN</span></div>
+      <div class="stat-item"><span class="stat-num">12+</span><span class="stat-lbl">PAÍSES OCUPADOS</span></div>
+      <div class="stat-item"><span class="stat-num">70M</span><span class="stat-lbl">BAJAS TOTALES</span></div>
+    </div>
+  </div>
+
+  <!-- Floating panel: legend -->
+  <div class="legend-box" style="position:absolute;z-index:400;bottom:80px;left:30px;">
+    <div class="leg-item"><div class="leg-swatch" style="background:#8b1a1a;"></div>REICH NAZI (ocupado)</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:#1a4a8a;"></div>Aliados occidentales</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:#1a5a1a;"></div>Unión Soviética</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:transparent; border:1px solid #777;"></div>Neutral</div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────
+     SLIDE 2  ¿POR QUÉ NORMANDÍA?  (Leaflet)
+──────────────────────────────────────── -->
+<section class="slide" id="s2">
+  <div class="map-full" id="map2"></div>
+
+  <div class="map-overlay-panel top-left" style="max-width:340px;">
+    <p class="eyebrow">// ENGAÑO ESTRATÉGICO</p>
+    <h2 class="panel-title">La <span>Gran</span> Ilusión</h2>
+    <div class="gold-rule"></div>
+    <div class="dec-card">
+      <div class="dec-lbl">OPERACIÓN FORTITUDE</div>
+      <div class="dec-ttl">El Ejército Fantasma</div>
+      <div class="dec-body">Ejército ficticio de Patton en el sureste de Inglaterra. Tanques inflables, señales de radio falsas para convencer a Hitler.</div>
+    </div>
+    <div class="dec-card">
+      <div class="dec-lbl">AGENTE GARBO</div>
+      <div class="dec-ttl">Juan Pujol García</div>
+      <div class="dec-body">Espía doble español que convenció a la inteligencia nazi de que Calais era el verdadero objetivo.</div>
+    </div>
+    <div class="dec-card">
+      <div class="dec-lbl">RESULTADO</div>
+      <div class="dec-ttl">Hitler Fue Engañado</div>
+      <div class="dec-body">El Führer mantuvo sus mejores divisiones en Calais mientras los Aliados asaltaban Normandía.</div>
+    </div>
+  </div>
+
+  <div class="legend-box" style="position:absolute;z-index:400;bottom:80px;left:30px;">
+    <div class="leg-item" style="gap:12px;">
+      <svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#c8960c" stroke-width="2.5" stroke-dasharray="8,4"/></svg>
+      ATAQUE REAL (Normandía)
+    </div>
+    <div class="leg-item" style="gap:12px;">
+      <svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#cc4444" stroke-width="1.5" stroke-dasharray="4,5" opacity=".5"/></svg>
+      ENGAÑO (Op. Fortitude → Calais)
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────
+     SLIDE 3  PREPARACIÓN
+──────────────────────────────────────── -->
+<section class="slide" id="s3" style="background:var(--navy);">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(200,150,12,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(200,150,12,.03) 1px,transparent 1px);background-size:55px 55px;"></div>
+  <div style="position:relative;z-index:5;width:100%;padding:55px 65px;display:flex;flex-direction:column;gap:36px;">
+    <div>
+      <p class="eyebrow">// OPERACIÓN OVERLORD · PREPARATIVOS</p>
+      <h2 class="panel-title" style="font-size:clamp(28px,3.5vw,48px);">La Fuerza <span>Más Grande</span><br>de la Historia</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-block"><span class="stat-icon">⚓</span><div class="stat-big" id="c1">5,000+</div><div class="stat-unit">NAVES</div><div class="stat-desc">Barcos de guerra, transporte y apoyo cruzaron el Canal</div></div>
+      <div class="stat-block"><span class="stat-icon">✈️</span><div class="stat-big" id="c2">11,590</div><div class="stat-unit">AERONAVES</div><div class="stat-desc">Bombarderos, cazas y transportes</div></div>
+      <div class="stat-block"><span class="stat-icon">🪖</span><div class="stat-big" id="c3">156,000</div><div class="stat-unit">SOLDADOS</div><div class="stat-desc">Solo el 6 de junio. Millones en semanas siguientes</div></div>
+      <div class="stat-block"><span class="stat-icon">🚗</span><div class="stat-big" id="c4">50,000</div><div class="stat-unit">VEHÍCULOS</div><div class="stat-desc">Tanques, jeeps, camiones y artillería</div></div>
+    </div>
+    <div class="tl-strip">
+      <div class="tl-item"><div class="tl-date">MAY 1943</div><div class="tl-event">Planificación</div><div class="tl-detail">Eisenhower nombrado comandante supremo aliado</div></div>
+      <div class="tl-item"><div class="tl-date">ENE 1944</div><div class="tl-event">Op. Fortitude</div><div class="tl-detail">Gran engaño a la inteligencia alemana</div></div>
+      <div class="tl-item"><div class="tl-date">5 JUN 1944</div><div class="tl-event">Decisión Final</div><div class="tl-detail">Ike lanza la operación pese al mal clima</div></div>
+      <div class="tl-item"><div class="tl-date">00:15 H</div><div class="tl-event">Paracaidistas</div><div class="tl-detail">101ª y 82ª Aerotransportada saltan sobre Normandía</div></div>
+      <div class="tl-item"><div class="tl-date">06:30 H</div><div class="tl-event">Hora-H</div><div class="tl-detail">Primera oleada asalta las playas normandas</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────
+     SLIDE 4  LAS 5 PLAYAS  (Leaflet — protagonista)
+──────────────────────────────────────── -->
+<section class="slide" id="s4">
+  <div class="map-full" id="map4"></div>
+
+  <!-- Header tiny -->
+  <div style="position:absolute;z-index:400;top:18px;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;">
+    <p class="eyebrow" style="font-size:13px;letter-spacing:8px;">// 6 · VI · 1944 · COSTA DE NORMANDÍA — LAS CINCO PLAYAS</p>
+  </div>
+
+  <!-- Instruction -->
+  <div class="beach-instruction">CLIC EN CADA PLAYA PARA VER DETALLES</div>
+</section>
+
+<!-- ────────────────────────────────────
+     SLIDE 5  DESEMBARCO (Leaflet + animated arrows)
+──────────────────────────────────────── -->
+<!-- ────────────────────────────────────
+     SLIDE 5  DESEMBARCO 
+──────────────────────────────────────── -->
+<section class="slide" id="s5">
+  <div class="map-full" id="map5"></div>
+  <svg id="tac-svg" viewBox="0 0 1920 1080" preserveAspectRatio="none"></svg>
+
+  <!-- Floating info left -->
+  <div class="tac-info">
+    <p class="eyebrow" style="font-size:10px;">// 6 JUNIO 1944</p>
+    <h2 class="panel-title" style="font-size:clamp(20px,2.5vw,30px);">El <span>Desembarco</span></h2>
+    <div class="gold-rule"></div>
+    
+    <div class="phase-list" id="phase-list">
+      <div class="phase-item" data-phase="1">
+        <div class="phase-time">00:15</div>
+        <div class="phase-desc">Paracaidistas saltan detrás de las líneas enemigas</div>
+      </div>
+      <div class="phase-item" data-phase="2">
+        <div class="phase-time">03:00</div>
+        <div class="phase-desc">Bombardeos aéreos masivos sobre el Muro del Atlántico</div>
+      </div>
+      <div class="phase-item" data-phase="3">
+        <div class="phase-time">05:30</div>
+        <div class="phase-desc">Cañones navales abren fuego. Soldados abordan lanchas</div>
+      </div>
+      <div class="phase-item" data-phase="4">
+        <div class="phase-time">06:30</div>
+        <div class="phase-desc">H-HOUR: Primera oleada asalta las cinco playas</div>
+      </div>
+      <div class="phase-item" data-phase="5">
+        <div class="phase-time">NOCHE</div>
+        <div class="phase-desc">156,000 hombres desembarcados. Europa empieza a liberarse</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating legend right -->
+  <div class="legend-box" style="position:absolute;z-index:400;bottom:80px;right:44px;">
+    <div class="leg-item" style="gap:12px;"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#c8960c" stroke-width="3" stroke-dasharray="10,5"/></svg>Flota de invasión</div>
+    <div class="leg-item" style="gap:12px;"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#5a9adc" stroke-width="2" stroke-dasharray="6,4"/></svg>EE.UU.</div>
+    <div class="leg-item" style="gap:12px;"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#cc3333" stroke-width="2" stroke-dasharray="6,4"/></svg>Canadá</div>
+    <div class="leg-item" style="gap:12px;"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#dddddd" stroke-width="2" stroke-dasharray="6,4"/></svg>Reino Unido</div>
+  </div>
+</section>
+<!-- ────────────────────────────────────
+     SLIDE 6  OMAHA BEACH
+──────────────────────────────────────── -->
+<section class="slide" id="s6">
+  <div class="map-full" id="map6"></div>
+  <div class="omaha-smoke"></div>
+  <div class="omaha-flash"></div>
+
+  <div class="map-overlay-panel top-left" style="max-width:380px;">
+    <p class="eyebrow" style="color:#cc4444;">// EL MOMENTO MÁS OSCURO</p>
+    <h2 class="panel-title" style="font-size:clamp(28px,3.5vw,52px);">
+      <span style="display:block;font-family:'IM Fell English',serif;font-style:italic;font-size:.5em;color:#8b3333;letter-spacing:6px;">— BLOODY —</span>
+      Omaha
+    </h2>
+    <div class="gold-rule" style="background:#8b1a1a;width:70px;"></div>
+    <blockquote class="omaha-quote">"Los hombres de Omaha no tenían otra opción que seguir avanzando, aunque eso significara morir."</blockquote>
+  </div>
+
+  <div class="map-overlay-panel" style="right:44px;top:70px;max-width:440px;">
+    <div class="omaha-stats" style="margin-bottom:14px;">
+      <div class="o-stat"><div class="o-stat-n">2,000+</div><div class="o-stat-l">Bajas americanas</div></div>
+      <div class="o-stat"><div class="o-stat-n">90 min</div><div class="o-stat-l">Sin avance inicial</div></div>
+      <div class="o-stat"><div class="o-stat-n">30 m</div><div class="o-stat-l">Altura acantilados</div></div>
+      <div class="o-stat"><div class="o-stat-n">34,000</div><div class="o-stat-l">Hombres ese día</div></div>
+    </div>
+    <div class="obstacle"><span class="obs-icon">🪝</span>Obstáculos belgas y minas en el agua</div>
+    <div class="obstacle"><span class="obs-icon">🏔️</span>Acantilados dominados por bunkers</div>
+    <div class="obstacle"><span class="obs-icon">🔫</span>Fuego cruzado desde posiciones elevadas</div>
+    <div class="obstacle"><span class="obs-icon">💥</span>Bombardeos aliados fallaron el blanco</div>
+    <div class="obstacle"><span class="obs-icon">🌊</span>Corrientes desviaron las embarcaciones</div>
+  </div>
+
+  <div class="map-overlay-panel bot-left" style="max-width:440px; border-left:3px solid #8b1a1a;">
+    <p style="font-family:'Orbitron',monospace;font-size:9px;color:#8b1a1a;letter-spacing:3px;margin-bottom:8px;">// PUNTO DE QUIEBRE</p>
+    <p class="panel-body" style="font-size:clamp(13px,1.3vw,16px);">El Gral. Cota avanzó bajo el fuego gritando: <em>"¡Dos tipos de hombres se quedan en esta playa: los muertos y los que van a morir!"</em> Su liderazgo rompió el estancamiento.</p>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────
+     SLIDE 7  CONSECUENCIAS (Leaflet)
+──────────────────────────────────────── -->
+<section class="slide" id="s7">
+  <div class="map-full" id="map7"></div>
+
+  <div class="map-overlay-panel top-left" style="max-width:370px;">
+    <p class="eyebrow">// POST D-DAY · LIBERACIÓN</p>
+    <h2 class="panel-title">Europa<br><span>Se Libera</span></h2>
+    <div class="gold-rule"></div>
+    <div class="lib-tl">
+      <div class="lib-item"><div class="lib-dot">🏖️</div><div><div class="lib-date">6 JUN 1944</div><div class="lib-event">Día D — Normandía asegurada</div><div class="lib-detail">La puerta de Europa está abierta</div></div></div>
+      <div class="lib-item"><div class="lib-dot">⚔️</div><div><div class="lib-date">25 JUL 1944</div><div class="lib-event">Operación Cobra</div><div class="lib-detail">Ruptura del frente. Avance hacia el interior</div></div></div>
+      <div class="lib-item"><div class="lib-dot">⚜</div><div><div class="lib-date">15 AGO 1944</div><div class="lib-event">Desembarco en Provenza</div><div class="lib-detail">Segundo frente sur de Francia</div></div></div>
+      <div class="lib-item"><div class="lib-dot">🗼</div><div><div class="lib-date">25 AGO 1944</div><div class="lib-event">Liberación de París</div><div class="lib-detail">De Gaulle entra triunfal en la capital</div></div></div>
+      <div class="lib-item"><div class="lib-dot">🏳️</div><div><div class="lib-date">8 MAY 1945</div><div class="lib-event">V-E Day — Rendición alemana</div><div class="lib-detail">La guerra en Europa termina</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────
+     SLIDE 8  PROVENZA (Leaflet)
+──────────────────────────────────────── -->
+<section class="slide" id="s8">
+  <div class="map-full" id="map8"></div>
+
+  <div class="map-overlay-panel top-left" style="max-width:370px;">
+    <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(200,150,12,.08);border:1px solid rgba(200,150,12,.3);padding:7px 14px;border-radius:2px;margin-bottom:14px;">
+      <span style="color:var(--gold);font-size:18px;">⚜</span>
+      <span style="font-family:'Orbitron',monospace;font-size:9px;color:var(--gold);letter-spacing:3px;">OP. DRAGOON · 15·VIII·1944</span>
+    </div>
+    <h2 class="panel-title">El Desembarco<br>en <span>Provenza</span></h2>
+    <div class="gold-rule"></div>
+    <div class="comp-grid">
+      <div class="comp-card"><div class="comp-h">🏖️ NORMANDÍA</div><div class="comp-b">Norte · Canal<br>156,000 el D-Day<br>5 playas<br>6 Jun 1944</div></div>
+      <div class="comp-card"><div class="comp-h">⚜ PROVENZA</div><div class="comp-b">Sur · Mediterráneo<br>~94,000 al inicio<br>3 zonas<br>15 Ago 1944</div></div>
+    </div>
+  </div>
+
+  <div class="map-overlay-panel" style="right:44px;top:70px;max-width:360px;">
+    <div class="prov-fact"><span class="prov-icon">🗺️</span><div><div class="prov-lbl">ZONA</div><div class="prov-txt">Costa del Var, entre Toulon y Cannes. Zonas Alpha, Delta y Camel.</div></div></div>
+    <div class="prov-fact"><span class="prov-icon">🇺🇸🇫🇷</span><div><div class="prov-lbl">FUERZAS</div><div class="prov-txt">7.º Ejército USA (Gral. Patch) + 1.º Ejército francés (Gral. de Lattre). Primer suelo francés con tropas francesas libres.</div></div></div>
+    <div class="prov-fact"><span class="prov-icon">⚡</span><div><div class="prov-lbl">AVANCE</div><div class="prov-txt">Marsella liberada el 28 Aug. Lyon el 3 Sep. Unión con Normandía el 11 Sep 1944.</div></div></div>
+    <div class="prov-fact"><span class="prov-icon">🏆</span><div><div class="prov-lbl">IMPORTANCIA</div><div class="prov-txt">Aseguró el puerto de Marsella (vital para suministros) y atrapó a los alemanes en una tenaza.</div></div></div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────
+     SLIDE 9  CIERRE
+──────────────────────────────────────── -->
+<!-- ────────────────────────────────────
+     SLIDE 9  CIERRE
+──────────────────────────────────────── -->
+<section class="slide" id="s9" style="background:#010306;">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(200,150,12,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(200,150,12,.025) 1px,transparent 1px);background-size:60px 60px;"></div>
+  
+  <!-- Imagen de fondo - Cementerio de Normandía -->
+  <img src="cementerio-normandia.png" 
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12;z-index:1;">
+
+  <div class="closing-wrap" style="z-index:3; position:relative;">
+    <div style="font-size:64px;margin-bottom:8px;">🎖️</div>
+    <p class="closing-quote">"El día más largo no fue el más largo de la guerra.<br>Fue el día en que el mundo recobró la esperanza."</p>
+    <div class="closing-rule"></div>
+    <div class="final-title">El Día Más Largo</div>
+    <div class="closing-rule"></div>
+    <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(16px,1.8vw,22px);color:var(--cream-dim);max-width:600px;line-height:1.7;text-align:center;">
+      En honor a los 156,000 hombres que desembarcaron el 6 de junio de 1944,<br>y a todos los que dieron su vida por la libertad de Europa.
+    </p>
+    <div class="closing-rule"></div>
+    <div style="display:flex;flex-direction:column;gap:6px;text-align:center;">
+      <div class="cred-line">EXPOSICIÓN ORAL · CIENCIAS SOCIALES</div>
+      <div class="cred-line" style="color:var(--gold);font-size:13px;letter-spacing:4px;">CARLOS ANTONIO DÍAZ BENAVIDES</div>
+      <div class="cred-line">PROF. GIOVANNA SOSA · 2026</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /track -->
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ============================================================
+   SLIDE ENGINE
+   ============================================================ */
+let cur = 0;
+const TOTAL = 10;
+const track = document.getElementById('track');
+const dots  = document.querySelectorAll('.dot');
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+const label = document.getElementById('slide-label');
+
+const LABELS = ['INTRODUCCIÓN','EUROPA 1944','¿POR QUÉ NORMANDÍA?','PREPARACIÓN',
+                'LAS CINCO PLAYAS','EL DESEMBARCO','OMAHA BEACH','CONSECUENCIAS',
+                'PROVENZA','CIERRE'];
+
+const mapsInitialized = {};
+
+function goTo(n) {
+  if (n < 0 || n >= TOTAL) return;
+  cur = n;
+  track.style.transform = `translateX(-${cur * 100}vw)`;
+  dots.forEach((d,i) => d.classList.toggle('active', i === cur));
+  counter.textContent = `${String(cur+1).padStart(2,'0')} / ${String(TOTAL).padStart(2,'0')}`;
+  progress.style.width = `${((cur+1)/TOTAL)*100}%`;
+  label.textContent = LABELS[cur];
+  setTimeout(() => initSlide(cur), 400);
+}
+function next() { goTo(cur+1); }
+function prev() { goTo(cur-1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}
+  if (e.key==='ArrowLeft'){e.preventDefault();prev();}
+});
+let tx=0;
+document.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; },{passive:true});
+document.addEventListener('touchend', e=>{ const d=tx-e.changedTouches[0].clientX; if(Math.abs(d)>50) d>0?next():prev(); });
+let wl=false;
+document.addEventListener('wheel', e=>{ if(wl)return; wl=true; (e.deltaY>0||e.deltaX>0)?next():prev(); setTimeout(()=>{wl=false;},1100); },{passive:true});
+
+/* ============================================================
+   TILE URL  — dark CartoDB tiles
+   ============================================================ */
+const TILE_DARK = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+const TILE_OPTS = { maxZoom:18, subdomains:'abcd' };
+
+/* ============================================================
+   SLIDE INITIALIZERS
+   ============================================================ */
+function initSlide(n) {
+  if (mapsInitialized[n]) return;
+  mapsInitialized[n] = true;
+  if (n===1) initMap1();
+  if (n===2) initMap2();
+  if (n===3) animateCounters();
+  if (n===4) initMap4();
+  if (n===5) initMap5();
+  if (n===6) initMap6();
+  if (n===7) initMap7();
+  if (n===8) initMap8();
+}
+
+/* ── helper: make a Leaflet map ── */
+function makeMap(id, lat, lng, zoom, extraOpts={}) {
+  const m = L.map(id, {
+    center:[lat,lng], zoom,
+    zoomControl:false, attributionControl:false,
+    scrollWheelZoom:false, doubleClickZoom:false,
+    dragging:false, ...extraOpts
+  });
+  L.tileLayer(TILE_DARK, TILE_OPTS).addTo(m);
+  return m;
+}
+
+/* helper: animated SVG arrow on map */
+function svgArrow(map, fromLatLng, toLatLng, color='#c8960c', dashed=true, delay=0) {
+  // convert latlng to pixel, draw an SVG polyline via a custom pane
+  const line = L.polyline([fromLatLng, toLatLng], {
+    color, weight: dashed?3:4,
+    dashArray: dashed?'12 6':null,
+    opacity:0.9
+  });
+  line.addTo(map);
+  return line;
+}
+
+/* ── helper: circle marker with popup ── */
+function warMarker(map, lat, lng, color, radius, title, tooltip='') {
+  const c = L.circleMarker([lat,lng], {
+    radius, color, weight:2, fillColor:color, fillOpacity:.8
+  }).addTo(map);
+  if (tooltip) c.bindTooltip(tooltip, {permanent:false, direction:'top', className:'war-tip'});
+  return c;
+}
+
+/* ── GeoJSON country fills ── */
+const STYLE_NAZI   = {fillColor:'#6b1010',fillOpacity:.42,color:'#9a1a1a',weight:1};
+const STYLE_ALLIED = {fillColor:'#0d2a5a',fillOpacity:.38,color:'#1a4a8a',weight:1};
+const STYLE_USSR   = {fillColor:'#0d3a0d',fillOpacity:.35,color:'#1a6a1a',weight:1};
+const STYLE_NEUTRAL= {fillColor:'#2a2a2a',fillOpacity:.25,color:'#444',weight:1};
+
+/* ─────────────────────────────────────
+   MAP 1 — Europa 1944
+────────────────────────────────────── */
+function initMap1() {
+  const m = makeMap('map1', 50, 15, 5);
+
+  // Load GeoJSON countries via CDN
+  fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
+    .then(r=>r.json())
+    .then(data=>{
+      const naziCountries   = ['France','Belgium','Netherlands','Luxembourg','Norway','Denmark','Poland','Czechia','Austria','Hungary','Romania','Bulgaria','Yugoslavia','Greece','Italy'];
+      const alliedCountries = ['United Kingdom','United States of America'];
+      const ussrCountries   = ['Russia'];
+      const neutralCountries= ['Switzerland','Spain','Portugal','Sweden','Finland','Turkey','Ireland'];
+
+      L.geoJSON(data, {
+        style: f => {
+          const n = f.properties.ADMIN;
+          if (naziCountries.includes(n))   return STYLE_NAZI;
+          if (alliedCountries.includes(n)) return STYLE_ALLIED;
+          if (ussrCountries.includes(n))   return STYLE_USSR;
+          if (neutralCountries.includes(n))return STYLE_NEUTRAL;
+          return {fillOpacity:0, color:'#333', weight:.5};
+        },
+        filter: f => {
+          const n = f.properties.ADMIN;
+          return [...naziCountries,...alliedCountries,...ussrCountries,...neutralCountries].includes(n);
+        }
+      }).addTo(m);
+
+      // Key city markers
+      const cities = [
+        {lat:51.51,lng:-0.13,  label:'Londres',  color:'#3a6ea8'},
+        {lat:48.85,lng:2.35,   label:'París',    color:'#cc4444'},
+        {lat:52.52,lng:13.41,  label:'Berlín',   color:'#cc8800'},
+        {lat:55.75,lng:37.62,  label:'Moscú',    color:'#2a9a2a'},
+        {lat:48.21,lng:16.37,  label:'Viena',    color:'#cc4444'},
+        {lat:41.9, lng:12.5,   label:'Roma',     color:'#cc4444'},
+      ];
+      cities.forEach(c=>{
+        L.circleMarker([c.lat,c.lng],{radius:6,color:c.color,weight:2,fillColor:c.color,fillOpacity:.9})
+          .bindTooltip(`<span style="font-family:'Orbitron',monospace;font-size:10px;color:${c.color};">${c.label}</span>`,
+            {permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+      });
+
+      // Arrows: Allied attack direction to Normandy
+      svgArrow(m, [51.5,-0.1],[49.4,-1.0],'#c8960c',true);
+    }).catch(()=>{
+      // Fallback if fetch fails
+      L.rectangle([[35,-10],[70,40]],{fillOpacity:0,color:'#333',weight:1}).addTo(m);
+    });
+}
+
+/* ─────────────────────────────────────
+   MAP 2 — Canal de la Mancha
+────────────────────────────────────── */
+function initMap2() {
+  const m = makeMap('map2', 50.1, -0.3, 8.2);
+
+  // Portsmouth / Southampton
+  L.circleMarker([50.8,-1.1],{radius:7,color:'#3a6ea8',fillColor:'#3a6ea8',fillOpacity:.9,weight:2})
+   .bindTooltip('<span style="font-family:Orbitron,monospace;font-size:10px;color:#3a6ea8;">PORTSMOUTH</span>',{permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+
+  // Calais (fake target)
+  L.circleMarker([50.95,1.85],{radius:8,color:'#cc4444',fillColor:'#cc4444',fillOpacity:.7,weight:2,dashArray:'4 3'})
+   .bindTooltip('<span style="font-family:Orbitron,monospace;font-size:10px;color:#cc4444;">CALAIS — OBJETIVO FALSO</span>',{permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+
+  // Normandy landing zone
+  L.rectangle([[49.25,-1.85],[49.45,0.3]],{color:'#c8960c',weight:2,fillColor:'#c8960c',fillOpacity:.12,dashArray:'6 4'}).addTo(m);
+  L.marker([49.35,-0.75]).bindTooltip('<span style="font-family:Orbitron,monospace;font-size:11px;color:#c8960c;">NORMANDÍA — OBJETIVO REAL</span>',{permanent:true,direction:'bottom',className:'war-tip'}).addTo(m);
+
+  // Dover
+  L.circleMarker([51.13,1.31],{radius:5,color:'#888',fillColor:'#888',fillOpacity:.7,weight:1})
+   .bindTooltip('<span style="font-family:Orbitron,monospace;font-size:9px;color:#888;">DOVER</span>',{permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+
+  // Arrows: real invasion (gold)
+  L.polyline([[50.8,-1.1],[49.35,-0.75]],{color:'#c8960c',weight:3.5,dashArray:'14 7',opacity:.95}).addTo(m);
+  L.polyline([[50.7,-1.3],[49.25,-1.5]],{color:'#c8960c',weight:3,dashArray:'14 7',opacity:.8}).addTo(m);
+  L.polyline([[50.9,-0.8],[49.4,-0.1]],{color:'#c8960c',weight:3,dashArray:'14 7',opacity:.8}).addTo(m);
+
+  // Arrows: deception Fortitude (red dashed)
+  L.polyline([[51.2,1.0],[50.95,1.85]],{color:'#cc4444',weight:2,dashArray:'5 7',opacity:.45}).addTo(m);
+  L.polyline([[51.0,0.5],[50.95,1.85]],{color:'#cc4444',weight:2,dashArray:'5 7',opacity:.35}).addTo(m);
+}
+
+/* ─────────────────────────────────────
+   MAP 4 — Las 5 Playas (protagonista)
+────────────────────────────────────── */
+const BEACH_DATA = {
+  utah:  {lat:49.415,lng:-1.175,color:'#3a6ea8',flag:'🇺🇸',code:'SECTOR WEST',name:'UTAH',nation:'EE.UU. · 4ª División de Infantería',stats:[{n:'23,000',l:'Soldados'},{n:'197',l:'Bajas'},{n:'EE.UU.',l:'Nación'},{n:'Éxito',l:'Resultado'}],desc:'La playa más occidental. A pesar del desvío, fue el desembarco más exitoso del día. Las fuerzas americanas avanzaron varios kilómetros tierra adentro.'},
+  omaha: {lat:49.371,lng:-0.862,color:'#8b1a1a',flag:'🇺🇸',code:'SECTOR CENTRAL OESTE',name:'OMAHA',nation:'EE.UU. · 1ª y 29ª División',stats:[{n:'34,000',l:'Soldados'},{n:'2,000+',l:'Bajas'},{n:'EE.UU.',l:'Nación'},{n:'⚠ Caos',l:'Resultado'}],desc:'La más sangrienta. Acantilados de 30 m dominados por bunkers alemanes. El avance fue casi imposible hasta que el Gral. Cota lideró el ascenso a los acantilados.'},
+  gold:  {lat:49.342,lng:-0.548,color:'#c8960c',flag:'🇬🇧',code:'SECTOR CENTRAL',name:'GOLD',nation:'Reino Unido · 50ª División',stats:[{n:'25,000',l:'Soldados'},{n:'400',l:'Bajas'},{n:'Reino Unido',l:'Nación'},{n:'Bayeux',l:'Liberada'}],desc:'Los británicos avanzaron con paso firme. Bayeux fue la primera ciudad francesa liberada, el 7 de junio.'},
+  juno:  {lat:49.332,lng:-0.280,color:'#cc3333',flag:'🇨🇦',code:'SECTOR CENTRAL ESTE',name:'JUNO',nation:'Canadá · 3ª División',stats:[{n:'21,400',l:'Soldados'},{n:'946',l:'Bajas'},{n:'Canadá',l:'Nación'},{n:'Mayor avance',l:'Resultado'}],desc:'Los canadienses tuvieron fuertes bajas en el agua por las defensas costeras, pero lograron el mayor avance aliado del día.'},
+  sword: {lat:49.295,lng:-0.097,color:'#1a5a8a',flag:'🇬🇧',code:'SECTOR ESTE',name:'SWORD',nation:'Reino Unido · 3ª División',stats:[{n:'29,000',l:'Soldados'},{n:'630',l:'Bajas'},{n:'Reino Unido',l:'Nación'},{n:'Hacia Caen',l:'Objetivo'}],desc:'La playa más oriental. Los británicos intentaban llegar a Caen el mismo día, pero la ciudad no cayó hasta julio de 1944.'},
+};
+
+function initMap4() {
+  const m = makeMap('map4', 49.36, -0.64, 11);
+
+  Object.entries(BEACH_DATA).forEach(([key, bd]) => {
+    // Zone rectangle
+    const offsets = {utah:[-1.85,-1.5],omaha:[-1.15,-0.6],gold:[-0.78,-0.32],juno:[-0.44,-0.12],sword:[-0.16,0.12]};
+    const [lngA, lngB] = offsets[key];
+    L.rectangle([[49.25, bd.lng+lngA*0.18],[49.42, bd.lng+lngB*0.18]],
+      {color:bd.color,weight:2,fillColor:bd.color,fillOpacity:.15,dashArray:'4 3'}).addTo(m);
+
+    // Clickable marker
+        // Clickable marker
+    const mk = L.circleMarker([bd.lat,bd.lng],{
+      radius:14, 
+      color:bd.color, 
+      weight:4, 
+      fillColor:bd.color, 
+      fillOpacity:.92,
+      interactive: true   // ← Esto es clave
+    }).addTo(m);
+    mk.bindTooltip(`<span style="font-family:'Orbitron',monospace;font-size:12px;letter-spacing:2px;color:${bd.color};">${bd.name}</span>`,
+      {permanent:true, direction:'top', className:'war-tip'});
+        mk.on('click', (e) => {
+      e.originalEvent.stopPropagation(); // Previene conflicto con el mapa
+      openBeachModal(bd);
+    });
+
+    // Invasion arrows from sea
+    L.polyline([[49.6,bd.lng],[bd.lat,bd.lng]],{color:bd.color,weight:3,dashArray:'10 5',opacity:.7}).addTo(m);
+  });
+
+  // German defense line
+  L.polyline([[49.25,-1.9],[49.42,-1.5],[49.42,-1.1],[49.35,-0.55],[49.30,-0.2],[49.27,0.15]],
+    {color:'#555',weight:2,dashArray:'4 6',opacity:.5}).addTo(m);
+}
+
+function openBeachModal(bd) {
+  document.getElementById('bm-flag').textContent   = bd.flag;
+  document.getElementById('bm-code').textContent   = '// '+bd.code;
+  document.getElementById('bm-name').textContent   = bd.name;
+  document.getElementById('bm-nation').textContent = bd.nation;
+  document.getElementById('bm-stats').innerHTML = bd.stats.map(s=>
+    `<div class="bm-stat"><div class="bm-stat-n" style="color:${bd.color}">${s.n}</div><div class="bm-stat-l">${s.l}</div></div>`
+  ).join('');
+  document.getElementById('bm-desc').textContent = bd.desc;
+  document.getElementById('beach-modal').style.borderTopColor = bd.color;
+  const modal = document.getElementById('beach-modal');
+  modal.style.display='block';
+  requestAnimationFrame(()=> modal.classList.add('open'));
+}
+function closeBeachModal() {
+  const modal = document.getElementById('beach-modal');
+  modal.classList.remove('open');
+  setTimeout(()=>{ modal.style.display='none'; },300);
+}
+
+/* ─────────────────────────────────────
+   MAP 5 — Desembarco táctico
+────────────────────────────────────── */
+let map5Layers = {}; // Para guardar referencias y poder resaltar
+
+function initMap5() {
+  const m = makeMap('map5', 50.0, -0.8, 8);
+
+  // Fleet in English Channel
+  const fleetPositions = [
+    [50.7,-1.1],[50.65,-0.9],[50.68,-0.65],[50.66,-0.4],[50.7,-0.15],[50.72,0.1],
+    [50.6,-1.3],[50.55,-0.7],[50.57,-0.3]
+  ];
+  fleetPositions.forEach((pos,i)=>{
+    setTimeout(()=>{
+      L.circleMarker(pos,{radius:5,color:'#c8960c',fillColor:'#c8960c',fillOpacity:.8,weight:1}).addTo(m);
+    }, i*120);
+  });
+
+  // Arrows: ship movements
+  const routes = [
+    {from:[50.8,-1.1],to:[49.415,-1.175],color:'#5a9adc', phase:4},  // Utah
+    {from:[50.7,-1.0],to:[49.371,-0.862],color:'#5a9adc', phase:4},  // Omaha
+    {from:[50.65,-0.6],to:[49.342,-0.548],color:'#dddddd', phase:4}, // Gold
+    {from:[50.6,-0.3],to:[49.332,-0.280],color:'#cc3333', phase:4},  // Juno
+    {from:[50.62,0.0],to:[49.295,-0.097],color:'#dddddd', phase:4},  // Sword
+  ];
+
+  map5Layers.routes = [];
+  routes.forEach((r,i)=>{
+    setTimeout(()=>{
+      const line = L.polyline([r.from,r.to],{
+        color:r.color, 
+        weight:3.5,
+        dashArray:'10 6',
+        opacity:.85
+      }).addTo(m);
+      map5Layers.routes.push(line);
+
+      L.circleMarker(r.to,{radius:7,color:r.color,fillColor:r.color,fillOpacity:.9,weight:2}).addTo(m);
+    }, i*200);
+  });
+
+  // Paratroopers (phase 1)
+  map5Layers.paras = [];
+  [[49.5,-1.5],[49.45,-1.65],[49.35,0.2],[49.4,0.35]].forEach(p=>{
+    const para = L.marker(p,{icon:L.divIcon({html:'🪂',iconSize:[28,28],className:''})}).addTo(m);
+    map5Layers.paras.push(para);
+  });
+
+  // Beach labels (phase 4)
+  Object.values(BEACH_DATA).forEach(bd=>{
+    L.marker([bd.lat+0.01,bd.lng],{icon:L.divIcon({
+      html:`<div style="font-family:'Orbitron',monospace;font-size:11px;color:${bd.color};letter-spacing:2px;text-shadow:0 0 8px rgba(0,0,0,.9);white-space:nowrap;">${bd.name}</div>`,
+      className:'',iconAnchor:[20,-5]
+    })}).addTo(m);
+  });
+
+  // Activar interactividad de las fases
+  setupPhaseInteractions(m);
+}
+
+// Nueva función para manejar los clics
+function setupPhaseInteractions(map) {
+  const phases = document.querySelectorAll('#phase-list .phase-item');
+  
+  phases.forEach(phase => {
+    phase.addEventListener('click', () => {
+      // Quitar active a todos
+      phases.forEach(p => p.classList.remove('active'));
+      // Activar el actual
+      phase.classList.add('active');
+
+      const phaseNum = parseInt(phase.dataset.phase);
+
+      // Resaltar según la fase
+      if (phaseNum === 1) {
+        // Paracaidistas
+        map5Layers.paras.forEach(p => p.setOpacity(1));
+      } 
+      else if (phaseNum === 4) {
+        // Flechas de desembarco
+        map5Layers.routes.forEach(route => {
+          route.setStyle({weight:5, opacity:1});
+        });
+      } 
+      else {
+        // Reset general
+        map5Layers.routes.forEach(route => route.setStyle({weight:3.5, opacity:0.85}));
+        map5Layers.paras.forEach(p => p.setOpacity(0.6));
+      }
+    });
+  });
+}
+
+/* ─────────────────────────────────────
+   MAP 6 — Omaha (zoom)
+────────────────────────────────────── */
+function initMap6() {
+  const m = makeMap('map6', 49.37, -0.86, 13);
+
+  // Omaha beach zone
+  L.rectangle([[49.35,-1.1],[49.40,-0.6]],{color:'#8b1a1a',weight:2,fillColor:'#8b1a1a',fillOpacity:.18}).addTo(m);
+
+  // German bunker positions (real positions)
+  const widerstandsnests = [
+    {lat:49.374,lng:-0.91,name:'WN60'},
+    {lat:49.371,lng:-0.87,name:'WN62 ★ (más mortífero)'},
+    {lat:49.368,lng:-0.83,name:'WN65'},
+    {lat:49.365,lng:-0.79,name:'WN68'},
+    {lat:49.362,lng:-0.73,name:'WN70'},
+  ];
+  widerstandsnests.forEach(wn=>{
+    L.circleMarker([wn.lat,wn.lng],{radius:8,color:'#444',fillColor:'#1a1a1a',fillOpacity:.9,weight:2})
+     .bindTooltip(`<span style="font-family:'Orbitron',monospace;font-size:10px;color:#888;">${wn.name}</span>`,{permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+  });
+
+  // American landing arrows
+  for (let i=0;i<8;i++) {
+    const lng = -1.05 + i*0.07;
+    L.polyline([[49.5,lng],[49.375,lng-0.01]],{color:'#3a6ea8',weight:2.5,dashArray:'8 5',opacity:.8}).addTo(m);
+  }
+
+  // Cliffs area label
+  L.marker([49.38,-0.875],{icon:L.divIcon({
+    html:'<div style="font-family:Orbitron,monospace;font-size:10px;color:#cc4444;letter-spacing:2px;text-shadow:0 0 8px black;">ACANTILADOS 30m</div>',
+    className:'',iconAnchor:[40,0]
+  })}).addTo(m);
+
+  L.marker([49.37,-0.86],{icon:L.divIcon({
+    html:'<div style="font-family:Orbitron,monospace;font-size:14px;letter-spacing:3px;color:#8b1a1a;text-shadow:0 0 10px black;font-weight:900;">OMAHA BEACH</div>',
+    className:'',iconAnchor:[60,-10]
+  })}).addTo(m);
+}
+
+/* ─────────────────────────────────────
+   MAP 7 — Liberación de Francia
+────────────────────────────────────── */
+function initMap7() {
+  const m = makeMap('map7', 46.5, 2.5, 6);
+
+  fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
+    .then(r=>r.json())
+    .then(data=>{
+      L.geoJSON(data, {
+        style: f => {
+          const n = f.properties.ADMIN;
+          if (n==='France')  return {fillColor:'#0a2a0a',fillOpacity:.5,color:'#1a7a2a',weight:1.5};
+          if (n==='Germany') return {fillColor:'#2a1a04',fillOpacity:.35,color:'#5a4a10',weight:1};
+          if (['United Kingdom','United States of America'].includes(n)) return STYLE_ALLIED;
+          if (n==='Russia')  return STYLE_USSR;
+          return {fillOpacity:0,color:'#333',weight:.5};
+        },
+        filter: f => ['France','Germany','United Kingdom','Russia','Belgium','Netherlands','Luxembourg','Switzerland','Spain','Italy'].includes(f.properties.ADMIN)
+      }).addTo(m);
+
+      // Liberation arrows
+      const arrows = [
+        {from:[49.37,-0.75],to:[48.85,2.35],color:'#c8960c'}, // Normandy → Paris
+        {from:[43.3,5.0],to:[43.3,2.8],color:'#2a9a3a'},      // Provence → Lyon area
+        {from:[48.85,2.35],to:[48.5,7.5],color:'#c8960c'},    // Paris → East
+      ];
+      arrows.forEach(a=>{
+        L.polyline([a.from,a.to],{color:a.color,weight:3,dashArray:'12 6',opacity:.85}).addTo(m);
+      });
+
+      // Key cities
+      [{lat:49.37,lng:-0.75,label:'NORMANDÍA',c:'#c8960c'},
+       {lat:48.85,lng:2.35, label:'PARIS\n25 Ago',c:'#c8960c'},
+       {lat:43.30,lng:5.37, label:'MARSELLA\n28 Ago',c:'#2a9a3a'},
+       {lat:45.75,lng:4.85, label:'LYON\n3 Sep',c:'#2a9a3a'},
+       {lat:43.12,lng:5.93, label:'TOULON\nProvenza',c:'#2a9a3a'},
+      ].forEach(c=>{
+        L.circleMarker([c.lat,c.lng],{radius:7,color:c.c,fillColor:c.c,fillOpacity:.9,weight:2})
+         .bindTooltip(`<span style="font-family:'Orbitron',monospace;font-size:10px;color:${c.c};white-space:pre;">${c.label}</span>`,{permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+      });
+    }).catch(()=>{});
+}
+
+/* ─────────────────────────────────────
+   MAP 8 — Provenza
+────────────────────────────────────── */
+function initMap8() {
+  const m = makeMap('map8', 43.4, 6.2, 9.3);
+
+  // Landing zones
+  const zones = [
+    {lat:43.18,lng:6.45,label:'ZONA ALPHA',color:'#3a6ea8'},
+    {lat:43.22,lng:6.72,label:'ZONA DELTA',color:'#c8960c'},
+    {lat:43.36,lng:6.87,label:'ZONA CAMEL',color:'#cc3333'},
+  ];
+  zones.forEach(z=>{
+    L.rectangle([[z.lat-0.05,z.lng-0.18],[z.lat+0.05,z.lng+0.18]],
+      {color:z.color,weight:2,fillColor:z.color,fillOpacity:.2}).addTo(m);
+    L.circleMarker([z.lat,z.lng],{radius:9,color:z.color,fillColor:z.color,fillOpacity:.9,weight:2})
+     .bindTooltip(`<span style="font-family:'Orbitron',monospace;font-size:11px;color:${z.color};">${z.label}</span>`,{permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+    // Fleet arrow from sea
+    L.polyline([[43.05,z.lng],[z.lat,z.lng]],{color:z.color,weight:3,dashArray:'10 5',opacity:.8}).addTo(m);
+  });
+
+  // Cities
+  [{lat:43.30,lng:5.37,label:'MARSELLA',c:'#c8960c'},
+   {lat:43.12,lng:5.93,label:'TOULON',  c:'#5a9adc'},
+   {lat:43.55,lng:7.01,label:'CANNES',  c:'#888'},
+  ].forEach(c=>{
+    L.circleMarker([c.lat,c.lng],{radius:6,color:c.c,fillColor:c.c,fillOpacity:.8,weight:2})
+     .bindTooltip(`<span style="font-family:'Orbitron',monospace;font-size:10px;color:${c.c};">${c.label}</span>`,{permanent:true,direction:'top',className:'war-tip'}).addTo(m);
+  });
+
+  // Advance arrows north
+  L.polyline([[43.18,6.45],[43.5,5.5],[43.3,5.37]],{color:'#c8960c',weight:2.5,dashArray:'10 5',opacity:.7}).addTo(m);
+}
+
+/* ─────────────────────────────────────
+   COUNTER ANIMATION (slide 3)
+────────────────────────────────────── */
+function animateCounters() {
+  const targets = [
+    {id:'c1',end:5000,suffix:'+'},
+    {id:'c2',end:11590,suffix:''},
+    {id:'c3',end:156000,suffix:''},
+    {id:'c4',end:50000,suffix:''},
+  ];
+  targets.forEach(({id,end,suffix})=>{
+    const el = document.getElementById(id);
+    if (!el) return;
+    let s=0; const step=end/(1800/16);
+    const t=setInterval(()=>{
+      s=Math.min(s+step,end);
+      el.textContent=Math.floor(s).toLocaleString('es')+suffix;
+      if(s>=end) clearInterval(t);
+    },16);
+  });
+}
+
+/* ─────────────────────────────────────
+   LEAFLET TOOLTIP STYLE
+────────────────────────────────────── */
+const style = document.createElement('style');
+style.textContent = `
+  .war-tip {
+    background:rgba(4,12,28,.92) !important;
+    border:1px solid rgba(200,150,12,.3) !important;
+    border-radius:2px !important;
+    color:var(--cream) !important;
+    font-family:'Orbitron',monospace !important;
+    font-size:10px !important;
+    letter-spacing:1px !important;
+    padding:5px 10px !important;
+    white-space:nowrap !important;
+  }
+  .war-tip::before { display:none !important; }
+  .leaflet-tooltip-top::before { border-top-color:rgba(200,150,12,.3) !important; }
+`;
+document.head.appendChild(style);
+
+/* ─────────────────────────────────────
+   INIT
+────────────────────────────────────── */
+goTo(0);
+</script>
+</body>
+</html>
