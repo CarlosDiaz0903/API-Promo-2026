@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch Gloss — Análisis Gramatical A1–A2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0B0F1A;
+  --surface:  #111827;
+  --card:     #161D2E;
+  --border:   #1E2A3E;
+  --border2:  #253347;
+
+  --ink:      #F0F4FF;
+  --ink2:     #8BA0C0;
+  --ink3:     #4A6080;
+
+  /* tag colors */
+  --S:   #3B82F6; --S-bg:  #0D1F40;
+  --V:   #22C55E; --V-bg:  #0A2410;
+  --AKK: #F97316; --AKK-bg:#2A1200;
+  --DAT: #EC4899; --DAT-bg:#2A0A1A;
+  --TMP: #A78BFA; --TMP-bg:#1A1030;
+  --LOK: #06B6D4; --LOK-bg:#001A20;
+  --MOD: #FBBF24; --MOD-bg:#201A00;
+  --NEG: #6B7280; --NEG-bg:#111318;
+  --NEB: #F472B6; --NEB-bg:#200A18;
+
+  --accent: #3B82F6;
+  --gold:   #FBBF24;
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 4px 24px rgba(0,0,0,.5);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────────────── */
+.app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+
+/* ── SIDEBAR ─────────────────────────────────────────────────────────── */
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto; padding: 0;
+  display: flex; flex-direction: column;
+}
+.sidebar-logo {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo .brand {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-logo .brand span {
+  background: linear-gradient(135deg, var(--accent), #8B5CF6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sidebar-logo .sub {
+  font-size: 11px; color: var(--ink3); margin-top: 4px; letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sidebar-section { padding: 16px 12px 8px; }
+.sidebar-label {
+  font-size: 10px; font-weight: 600; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 0 12px; margin-bottom: 6px;
+}
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  color: var(--ink2); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all .15s; text-decoration: none;
+  border: none; background: none; width: 100%; text-align: left;
+}
+.sidebar-link:hover { background: var(--border); color: var(--ink); }
+.sidebar-link.active { background: rgba(59,130,246,.15); color: var(--accent); }
+.sidebar-link .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--ink3); min-width: 20px;
+}
+
+/* Legend in sidebar */
+.legend { padding: 16px; margin: 8px 12px;
+  background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); }
+.legend-title { font-size: 10px; font-weight: 700; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.legend-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 6px; border-radius: 4px;
+  letter-spacing: 0.05em; min-width: 38px; text-align: center;
+}
+.legend-desc { font-size: 12px; color: var(--ink2); }
+
+/* ── MAIN ────────────────────────────────────────────────────────────── */
+.main { overflow: hidden; }
+
+/* ── TOPBAR ──────────────────────────────────────────────────────────── */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 36px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 10;
+}
+.topbar-title { font-size: 16px; font-weight: 600; color: var(--ink); }
+.topbar-sub { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  border: none; transition: all .15s; text-decoration: none;
+}
+.btn-ghost { background: transparent; color: var(--ink2); border: 1px solid var(--border2); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #2563EB; }
+
+/* ── CONTENT ─────────────────────────────────────────────────────────── */
+.content { padding: 36px; max-width: 900px; }
+
+/* ── ORIGINAL TEXT CARD ──────────────────────────────────────────────── */
+.original-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 36px;
+  position: relative; overflow: hidden;
+}
+.original-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--accent), #8B5CF6);
+}
+.original-card .eyebrow {
+  font-size: 10px; font-weight: 700; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.original-card .eyebrow::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.original-text {
+  font-family: 'Fraunces', serif;
+  font-size: 17px; line-height: 2;
+  color: var(--ink); font-weight: 300;
+  font-style: italic;
+}
+
+/* ── SECTION HEADER ──────────────────────────────────────────────────── */
+.section-hdr {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+}
+.section-hdr h2 {
+  font-size: 13px; font-weight: 700; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.section-hdr::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ── SENTENCE BLOCK ──────────────────────────────────────────────────── */
+.sentence-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.sentence-block:hover { border-color: var(--border2); }
+.sentence-block:target { border-color: var(--accent); }
+
+.sentence-header {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+.sentence-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; color: var(--ink3);
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 3px 8px; border-radius: 4px;
+  margin-top: 3px; flex-shrink: 0;
+}
+.sentence-text {
+  font-family: 'Fraunces', serif;
+  font-size: 17px; line-height: 1.7;
+  color: var(--ink); font-weight: 300; flex: 1;
+}
+.sentence-toggle {
+  color: var(--ink3); font-size: 18px; flex-shrink: 0;
+  transition: transform .2s; margin-top: 4px;
+}
+.sentence-block.open .sentence-toggle { transform: rotate(180deg); }
+
+/* ── GLOSS AREA ──────────────────────────────────────────────────────── */
+.gloss-area {
+  padding: 24px 24px 20px;
+  display: none;
+}
+.sentence-block.open .gloss-area { display: block; }
+
+.gloss-label {
+  font-size: 10px; font-weight: 700; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+/* ── GLOSS LINE ──────────────────────────────────────────────────────── */
+.gloss-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 4px;
+  align-items: flex-end;
+  padding: 20px 20px 16px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  min-height: 80px;
+}
+
+.word-unit {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.word-form {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--ink);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.word-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* word-tag color variants */
+.tag-S   { color: var(--S);   background: var(--S-bg);   border: 1px solid rgba(59,130,246,.2); }
+.tag-V   { color: var(--V);   background: var(--V-bg);   border: 1px solid rgba(34,197,94,.2); }
+.tag-AKK { color: var(--AKK); background: var(--AKK-bg); border: 1px solid rgba(249,115,22,.2); }
+.tag-DAT { color: var(--DAT); background: var(--DAT-bg); border: 1px solid rgba(236,72,153,.2); }
+.tag-TMP { color: var(--TMP); background: var(--TMP-bg); border: 1px solid rgba(167,139,250,.2); }
+.tag-LOK { color: var(--LOK); background: var(--LOK-bg); border: 1px solid rgba(6,182,212,.2); }
+.tag-MOD { color: var(--MOD); background: var(--MOD-bg); border: 1px solid rgba(251,191,36,.2); }
+.tag-NEG { color: var(--NEG); background: var(--NEG-bg); border: 1px solid rgba(107,114,128,.2); }
+.tag-NEB { color: var(--NEB); background: var(--NEB-bg); border: 1px solid rgba(244,114,182,.2); }
+
+/* highlight group on hover */
+.word-unit:hover .word-form { color: #fff; }
+
+/* ── ANALYSIS TABLE ──────────────────────────────────────────────────── */
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+}
+.analysis-item {
+  display: flex; flex-direction: column; gap: 3px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 12px;
+}
+.analysis-item .a-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.analysis-item .a-value {
+  font-size: 13px; color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+}
+.analysis-item .a-value.empty { color: var(--ink3); font-style: italic; }
+
+/* ── VERB TABLE ──────────────────────────────────────────────────────── */
+.verb-section { margin-top: 48px; }
+.verb-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.verb-table th {
+  background: var(--surface);
+  color: var(--ink3); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 12px 16px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.verb-table td {
+  padding: 11px 16px; font-size: 13px;
+  border-bottom: 1px solid var(--border);
+}
+.verb-table tr:last-child td { border-bottom: none; }
+.verb-table tr:hover td { background: rgba(255,255,255,.02); }
+.verb-table .v-inf {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 500; color: var(--S);
+}
+.verb-table .v-form {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--V);
+}
+.verb-table .v-aux {
+  font-size: 10px; color: var(--ink3);
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 1px 6px; border-radius: 3px; margin-left: 6px;
+}
+.verb-table .v-sep {
+  font-size: 10px; color: var(--AKK);
+  background: var(--AKK-bg); border: 1px solid rgba(249,115,22,.2);
+  padding: 1px 6px; border-radius: 3px; margin-left: 4px;
+}
+.verb-table .v-meaning { color: var(--ink2); }
+
+/* ── PRINT ────────────────────────────────────────────────────────────── */
+@media print {
+  .sidebar, .topbar { display: none; }
+  .app { grid-template-columns: 1fr; }
+  .content { padding: 20px; max-width: 100%; }
+  .sentence-block { page-break-inside: avoid; }
+  .gloss-area { display: block !important; }
+  .sentence-toggle { display: none; }
+  body { background: #fff; color: #000; }
+  .card, .sentence-block, .original-card { background: #fff; border-color: #ccc; }
+  .gloss-line { background: #f5f5f5; }
+  .word-form { color: #000; }
+}
+
+/* ── SCROLLBAR ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ── INLINE GLOSS MODE ───────────────────────────────────────────────── */
+.inline-gloss-card {
+  display: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 36px 36px;
+  margin-bottom: 36px;
+  position: relative; overflow: hidden;
+}
+.inline-gloss-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--accent), #8B5CF6);
+}
+.inline-gloss-card .eyebrow {
+  font-size: 10px; font-weight: 700; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+.inline-gloss-card .eyebrow::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.inline-gloss-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 6px;
+  align-items: flex-end;
+  line-height: 1;
+}
+.inline-word {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 28px;
+}
+.inline-word .w-text {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--ink);
+  white-space: nowrap;
+  line-height: 1;
+}
+.inline-word .w-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.inline-sent-break {
+  width: 100%;
+  height: 0;
+  margin-bottom: 8px;
+}
+.inline-sent-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--ink3);
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 4px;
+  margin-bottom: 28px;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+/* toggle button active state */
+.btn-toggle.active {
+  background: rgba(59,130,246,.2);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* mode: show inline */
+body.inline-mode .inline-gloss-card { display: block; }
+body.inline-mode .original-card { display: none; }
+body.inline-mode #sentences-container { display: none; }
+body.inline-mode .section-hdr:first-of-type { display: none; }
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<!-- ── SIDEBAR ─────────────────────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">🇩🇪 <span>DeutschGloss</span></div>
+    <div class="sub">Análisis Gramatical · A1–A2</div>
+  </div>
+
+  <!-- Legend -->
+  <div style="padding:16px 12px 0;">
+    <div class="legend">
+      <div class="legend-title">Leyenda</div>
+      <div class="legend-item"><span class="legend-badge tag-S">S</span><span class="legend-desc">Subjekt — Sujeto</span></div>
+      <div class="legend-item"><span class="legend-badge tag-V">V</span><span class="legend-desc">Verb — Verbo</span></div>
+      <div class="legend-item"><span class="legend-badge tag-AKK">AKK</span><span class="legend-desc">Akkusativobjekt</span></div>
+      <div class="legend-item"><span class="legend-badge tag-DAT">DAT</span><span class="legend-desc">Dativobjekt</span></div>
+      <div class="legend-item"><span class="legend-badge tag-TMP">TMP</span><span class="legend-desc">Temporalangabe</span></div>
+      <div class="legend-item"><span class="legend-badge tag-LOK">LOK</span><span class="legend-desc">Lokalangabe</span></div>
+      <div class="legend-item"><span class="legend-badge tag-MOD">MOD</span><span class="legend-desc">Modalangabe</span></div>
+      <div class="legend-item"><span class="legend-badge tag-NEB">NEB</span><span class="legend-desc">Nebensatz</span></div>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Oraciones</div>
+    <div id="sentence-nav"></div>
+  </div>
+
+  <div style="margin-top:auto; padding:16px; border-top:1px solid var(--border);">
+    <div style="font-size:11px;color:var(--ink3);">Carlos Díaz · Deutsch A1–A2<br>Colegio Santa Cruz · BLESSED 2026</div>
+  </div>
+</aside>
+
+<!-- ── MAIN ─────────────────────────────────────────────────────────────── -->
+<div class="main">
+
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">Ficha de Análisis Gramatical</div>
+      <div class="topbar-sub">Texto narrativo en Perfekt · 20 oraciones · 26 verbos</div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost btn-toggle" id="inline-toggle" onclick="toggleInlineMode(this)">✦ Modo gloss continuo</button>
+      <button class="btn btn-ghost" id="btn-expand" onclick="expandAll()">Expandir todo</button>
+      <button class="btn btn-ghost" onclick="collapseAll()">Colapsar todo</button>
+      <button class="btn btn-primary" onclick="window.print()">🖨 Imprimir</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- Original text -->
+    <div class="original-card">
+      <div class="eyebrow">Texto original</div>
+      <div class="original-text" id="full-text"></div>
+    </div>
+
+    <!-- Inline gloss card (shown in inline mode) -->
+    <div class="inline-gloss-card">
+      <div class="eyebrow">Gloss continuo — interlineado con etiquetas</div>
+      <div class="inline-gloss-wrap" id="inline-gloss-wrap"></div>
+    </div>
+
+    <!-- Sentences -->
+    <div class="section-hdr"><h2>Análisis gloss</h2></div>
+    <div id="sentences-container"></div>
+
+    <!-- Verb table -->
+    <div class="verb-section">
+      <div class="section-hdr"><h2>Tabla de verbos en infinitivo</h2></div>
+      <table class="verb-table" id="verb-table">
+        <thead>
+          <tr>
+            <th>Infinitivo</th>
+            <th>Forma en el texto</th>
+            <th>Aux.</th>
+            <th>Significado (ES)</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody id="verb-tbody"></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Each sentence: array of {w: word, tag: TAG, multi: bool (spans multiple words)}
+const sentences = [
+  {
+    n:1, text:"Gestern war ein sehr langer Tag für mich.",
+    words:[
+      {w:"Gestern",  tag:"TMP"},
+      {w:"war",      tag:"V"},
+      {w:"ein",      tag:"S"},
+      {w:"sehr",     tag:"S"},
+      {w:"langer",   tag:"S"},
+      {w:"Tag",      tag:"S"},
+      {w:"für",      tag:"MOD"},
+      {w:"mich",     tag:"MOD"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ein sehr langer Tag"},
+      {l:"Verb",            v:"war"},
+      {l:"Akkusativobjekt", v:"—"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Gestern"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"für mich"},
+    ]
+  },
+  {
+    n:2, text:"Ich bin schon um 6:00 Uhr aufgewacht, obwohl ich noch ein bisschen schlafen wollte.",
+    words:[
+      {w:"Ich",       tag:"S"},
+      {w:"bin",       tag:"V"},
+      {w:"schon",     tag:"TMP"},
+      {w:"um",        tag:"TMP"},
+      {w:"6:00",      tag:"TMP"},
+      {w:"Uhr",       tag:"TMP"},
+      {w:"aufgewacht,",tag:"V"},
+      {w:"obwohl",    tag:"NEB"},
+      {w:"ich",       tag:"NEB"},
+      {w:"noch",      tag:"NEB"},
+      {w:"ein",       tag:"NEB"},
+      {w:"bisschen",  tag:"NEB"},
+      {w:"schlafen",  tag:"NEB"},
+      {w:"wollte.",   tag:"NEB"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"Ich"},
+      {l:"Verb (Perfekt)",  v:"bin … aufgewacht"},
+      {l:"Akkusativobjekt", v:"—"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"schon um 6:00 Uhr"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"—"},
+      {l:"Nebensatz",       v:"obwohl ich noch ein bisschen schlafen wollte"},
+    ]
+  },
+  {
+    n:3, text:"Dann bin ich schnell aus dem Bett aufgestanden.",
+    words:[
+      {w:"Dann",        tag:"TMP"},
+      {w:"bin",         tag:"V"},
+      {w:"ich",         tag:"S"},
+      {w:"schnell",     tag:"MOD"},
+      {w:"aus",         tag:"LOK"},
+      {w:"dem",         tag:"LOK"},
+      {w:"Bett",        tag:"LOK"},
+      {w:"aufgestanden.",tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (Perfekt)",  v:"bin … aufgestanden"},
+      {l:"Akkusativobjekt", v:"—"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Dann"},
+      {l:"Lokalangabe",     v:"aus dem Bett"},
+      {l:"Modalangabe",     v:"schnell"},
+    ]
+  },
+  {
+    n:4, text:"Ich bin direkt ins Badezimmer gegangen und habe mein Gesicht gewaschen.",
+    words:[
+      {w:"Ich",          tag:"S"},
+      {w:"bin",          tag:"V"},
+      {w:"direkt",       tag:"MOD"},
+      {w:"ins",          tag:"LOK"},
+      {w:"Badezimmer",   tag:"LOK"},
+      {w:"gegangen",     tag:"V"},
+      {w:"und",          tag:"NEG"},
+      {w:"habe",         tag:"V"},
+      {w:"mein",         tag:"AKK"},
+      {w:"Gesicht",      tag:"AKK"},
+      {w:"gewaschen.",   tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"Ich"},
+      {l:"Verb 1 (Perfekt)",v:"bin … gegangen (sein)"},
+      {l:"Verb 2 (Perfekt)",v:"habe … gewaschen (haben)"},
+      {l:"Akkusativobjekt", v:"mein Gesicht"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"—"},
+      {l:"Lokalangabe",     v:"ins Badezimmer"},
+      {l:"Modalangabe",     v:"direkt"},
+    ]
+  },
+  {
+    n:5, text:"Danach habe ich in der Küche ein großes Frühstück vorbereitet.",
+    words:[
+      {w:"Danach",       tag:"TMP"},
+      {w:"habe",         tag:"V"},
+      {w:"ich",          tag:"S"},
+      {w:"in",           tag:"LOK"},
+      {w:"der",          tag:"LOK"},
+      {w:"Küche",        tag:"LOK"},
+      {w:"ein",          tag:"AKK"},
+      {w:"großes",       tag:"AKK"},
+      {w:"Frühstück",    tag:"AKK"},
+      {w:"vorbereitet.", tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (Perfekt)",  v:"habe … vorbereitet"},
+      {l:"Akkusativobjekt", v:"ein großes Frühstück"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Danach"},
+      {l:"Lokalangabe",     v:"in der Küche"},
+      {l:"Modalangabe",     v:"—"},
+    ]
+  },
+  {
+    n:6, text:"Ich habe Kaffee getrunken, weil ich am Morgen immer sehr müde bin.",
+    words:[
+      {w:"Ich",       tag:"S"},
+      {w:"habe",      tag:"V"},
+      {w:"Kaffee",    tag:"AKK"},
+      {w:"getrunken,",tag:"V"},
+      {w:"weil",      tag:"NEB"},
+      {w:"ich",       tag:"NEB"},
+      {w:"am",        tag:"NEB"},
+      {w:"Morgen",    tag:"NEB"},
+      {w:"immer",     tag:"NEB"},
+      {w:"sehr",      tag:"NEB"},
+      {w:"müde",      tag:"NEB"},
+      {w:"bin.",      tag:"NEB"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"Ich"},
+      {l:"Verb (Perfekt)",  v:"habe … getrunken"},
+      {l:"Akkusativobjekt", v:"Kaffee"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"—"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"—"},
+      {l:"Nebensatz",       v:"weil ich am Morgen immer sehr müde bin"},
+    ]
+  },
+  {
+    n:7, text:"Beim Frühstück habe ich auf meinem Handy gelesen, dass das Wetter heute schön wird.",
+    words:[
+      {w:"Beim",      tag:"TMP"},
+      {w:"Frühstück", tag:"TMP"},
+      {w:"habe",      tag:"V"},
+      {w:"ich",       tag:"S"},
+      {w:"auf",       tag:"LOK"},
+      {w:"meinem",    tag:"LOK"},
+      {w:"Handy",     tag:"LOK"},
+      {w:"gelesen,",  tag:"V"},
+      {w:"dass",      tag:"NEB"},
+      {w:"das",       tag:"NEB"},
+      {w:"Wetter",    tag:"NEB"},
+      {w:"heute",     tag:"NEB"},
+      {w:"schön",     tag:"NEB"},
+      {w:"wird.",     tag:"NEB"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (Perfekt)",  v:"habe … gelesen"},
+      {l:"Akkusativobjekt", v:"— (es el Nebensatz)"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Beim Frühstück"},
+      {l:"Lokalangabe",     v:"auf meinem Handy"},
+      {l:"Modalangabe",     v:"—"},
+      {l:"Nebensatz",       v:"dass das Wetter heute schön wird"},
+    ]
+  },
+  {
+    n:8, text:"Ein bisschen später habe ich meine Tasche für die Arbeit gepackt.",
+    words:[
+      {w:"Ein",      tag:"TMP"},
+      {w:"bisschen", tag:"TMP"},
+      {w:"später",   tag:"TMP"},
+      {w:"habe",     tag:"V"},
+      {w:"ich",      tag:"S"},
+      {w:"meine",    tag:"AKK"},
+      {w:"Tasche",   tag:"AKK"},
+      {w:"für",      tag:"MOD"},
+      {w:"die",      tag:"MOD"},
+      {w:"Arbeit",   tag:"MOD"},
+      {w:"gepackt.", tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (Perfekt)",  v:"habe … gepackt"},
+      {l:"Akkusativobjekt", v:"meine Tasche"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Ein bisschen später"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"für die Arbeit"},
+    ]
+  },
+  {
+    n:9, text:"Ich habe das Haus pünktlich um 7:30 Uhr verlassen.",
+    words:[
+      {w:"Ich",      tag:"S"},
+      {w:"habe",     tag:"V"},
+      {w:"das",      tag:"AKK"},
+      {w:"Haus",     tag:"AKK"},
+      {w:"pünktlich",tag:"TMP"},
+      {w:"um",       tag:"TMP"},
+      {w:"7:30",     tag:"TMP"},
+      {w:"Uhr",      tag:"TMP"},
+      {w:"verlassen.",tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"Ich"},
+      {l:"Verb (Perfekt)",  v:"habe … verlassen"},
+      {l:"Akkusativobjekt", v:"das Haus"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"pünktlich um 7:30 Uhr"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"—"},
+    ]
+  },
+  {
+    n:10, text:"Ich habe den Bus genommen, weil mein Auto kaputt war.",
+    words:[
+      {w:"Ich",     tag:"S"},
+      {w:"habe",    tag:"V"},
+      {w:"den",     tag:"AKK"},
+      {w:"Bus",     tag:"AKK"},
+      {w:"genommen,",tag:"V"},
+      {w:"weil",    tag:"NEB"},
+      {w:"mein",    tag:"NEB"},
+      {w:"Auto",    tag:"NEB"},
+      {w:"kaputt",  tag:"NEB"},
+      {w:"war.",    tag:"NEB"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"Ich"},
+      {l:"Verb (Perfekt)",  v:"habe … genommen"},
+      {l:"Akkusativobjekt", v:"den Bus"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"—"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"—"},
+      {l:"Nebensatz",       v:"weil mein Auto kaputt war"},
+    ]
+  },
+  {
+    n:11, text:"Im Büro habe ich sofort meinen Computer angemacht und meine E-Mails gecheckt.",
+    words:[
+      {w:"Im",        tag:"LOK"},
+      {w:"Büro",      tag:"LOK"},
+      {w:"habe",      tag:"V"},
+      {w:"ich",       tag:"S"},
+      {w:"sofort",    tag:"TMP"},
+      {w:"meinen",    tag:"AKK"},
+      {w:"Computer",  tag:"AKK"},
+      {w:"angemacht", tag:"V"},
+      {w:"und",       tag:"NEG"},
+      {w:"meine",     tag:"AKK"},
+      {w:"E-Mails",   tag:"AKK"},
+      {w:"gecheckt.", tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",          v:"ich"},
+      {l:"Verb 1 (trennbar)",v:"habe … angemacht (anmachen)"},
+      {l:"Verb 2 (Perfekt)", v:"habe … gecheckt"},
+      {l:"Akkusativobjekt",  v:"meinen Computer / meine E-Mails"},
+      {l:"Dativobjekt",      v:"—"},
+      {l:"Temporalangabe",   v:"sofort"},
+      {l:"Lokalangabe",      v:"Im Büro"},
+      {l:"Modalangabe",      v:"—"},
+    ]
+  },
+  {
+    n:12, text:"Ich habe viele Stunden gearbeitet, obwohl ich Kopfschmerzen hatte.",
+    words:[
+      {w:"Ich",          tag:"S"},
+      {w:"habe",         tag:"V"},
+      {w:"viele",        tag:"TMP"},
+      {w:"Stunden",      tag:"TMP"},
+      {w:"gearbeitet,",  tag:"V"},
+      {w:"obwohl",       tag:"NEB"},
+      {w:"ich",          tag:"NEB"},
+      {w:"Kopfschmerzen",tag:"NEB"},
+      {w:"hatte.",       tag:"NEB"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"Ich"},
+      {l:"Verb (Perfekt)",  v:"habe … gearbeitet"},
+      {l:"Akkusativobjekt", v:"—"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"viele Stunden"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"—"},
+      {l:"Nebensatz",       v:"obwohl ich Kopfschmerzen hatte"},
+    ]
+  },
+  {
+    n:13, text:"Um 13:00 Uhr habe ich mit meinen Kollegen in der Kantine zu Mittag gegessen.",
+    words:[
+      {w:"Um",       tag:"TMP"},
+      {w:"13:00",    tag:"TMP"},
+      {w:"Uhr",      tag:"TMP"},
+      {w:"habe",     tag:"V"},
+      {w:"ich",      tag:"S"},
+      {w:"mit",      tag:"MOD"},
+      {w:"meinen",   tag:"MOD"},
+      {w:"Kollegen", tag:"MOD"},
+      {w:"in",       tag:"LOK"},
+      {w:"der",      tag:"LOK"},
+      {w:"Kantine",  tag:"LOK"},
+      {w:"zu",       tag:"MOD"},
+      {w:"Mittag",   tag:"MOD"},
+      {w:"gegessen.",tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (Perfekt)",  v:"habe … gegessen"},
+      {l:"Akkusativobjekt", v:"—"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Um 13:00 Uhr"},
+      {l:"Lokalangabe",     v:"in der Kantine"},
+      {l:"Modalangabe",     v:"mit meinen Kollegen / zu Mittag"},
+    ]
+  },
+  {
+    n:14, text:"Dann haben wir noch ein kurzes Meeting mit dem Chef gehabt.",
+    words:[
+      {w:"Dann",    tag:"TMP"},
+      {w:"haben",   tag:"V"},
+      {w:"wir",     tag:"S"},
+      {w:"noch",    tag:"TMP"},
+      {w:"ein",     tag:"AKK"},
+      {w:"kurzes",  tag:"AKK"},
+      {w:"Meeting", tag:"AKK"},
+      {w:"mit",     tag:"MOD"},
+      {w:"dem",     tag:"MOD"},
+      {w:"Chef",    tag:"MOD"},
+      {w:"gehabt.", tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"wir"},
+      {l:"Verb (Perfekt)",  v:"haben … gehabt"},
+      {l:"Akkusativobjekt", v:"ein kurzes Meeting"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Dann / noch"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"mit dem Chef"},
+    ]
+  },
+  {
+    n:15, text:"Er hat gesagt, dass unsere Arbeit im Moment sehr gut ist.",
+    words:[
+      {w:"Er",      tag:"S"},
+      {w:"hat",     tag:"V"},
+      {w:"gesagt,", tag:"V"},
+      {w:"dass",    tag:"NEB"},
+      {w:"unsere",  tag:"NEB"},
+      {w:"Arbeit",  tag:"NEB"},
+      {w:"im",      tag:"NEB"},
+      {w:"Moment",  tag:"NEB"},
+      {w:"sehr",    tag:"NEB"},
+      {w:"gut",     tag:"NEB"},
+      {w:"ist.",    tag:"NEB"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"Er"},
+      {l:"Verb (Perfekt)",  v:"hat … gesagt"},
+      {l:"Akkusativobjekt", v:"— (es el Nebensatz)"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"—"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"—"},
+      {l:"Nebensatz",       v:"dass unsere Arbeit im Moment sehr gut ist"},
+    ]
+  },
+  {
+    n:16, text:"Um 17:00 Uhr habe ich Feierabend gemacht und bin nach Hause gefahren.",
+    words:[
+      {w:"Um",        tag:"TMP"},
+      {w:"17:00",     tag:"TMP"},
+      {w:"Uhr",       tag:"TMP"},
+      {w:"habe",      tag:"V"},
+      {w:"ich",       tag:"S"},
+      {w:"Feierabend",tag:"AKK"},
+      {w:"gemacht",   tag:"V"},
+      {w:"und",       tag:"NEG"},
+      {w:"bin",       tag:"V"},
+      {w:"nach",      tag:"LOK"},
+      {w:"Hause",     tag:"LOK"},
+      {w:"gefahren.", tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",          v:"ich"},
+      {l:"Verb 1 (Perfekt)", v:"habe … gemacht (haben)"},
+      {l:"Verb 2 (Perfekt)", v:"bin … gefahren (sein)"},
+      {l:"Akkusativobjekt",  v:"Feierabend"},
+      {l:"Dativobjekt",      v:"—"},
+      {l:"Temporalangabe",   v:"Um 17:00 Uhr"},
+      {l:"Lokalangabe",      v:"nach Hause"},
+      {l:"Modalangabe",      v:"—"},
+    ]
+  },
+  {
+    n:17, text:"Danach habe ich im Supermarkt ein paar Lebensmittel für das Abendessen gekauft.",
+    words:[
+      {w:"Danach",       tag:"TMP"},
+      {w:"habe",         tag:"V"},
+      {w:"ich",          tag:"S"},
+      {w:"im",           tag:"LOK"},
+      {w:"Supermarkt",   tag:"LOK"},
+      {w:"ein",          tag:"AKK"},
+      {w:"paar",         tag:"AKK"},
+      {w:"Lebensmittel", tag:"AKK"},
+      {w:"für",          tag:"MOD"},
+      {w:"das",          tag:"MOD"},
+      {w:"Abendessen",   tag:"MOD"},
+      {w:"gekauft.",     tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (Perfekt)",  v:"habe … gekauft"},
+      {l:"Akkusativobjekt", v:"ein paar Lebensmittel"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Danach"},
+      {l:"Lokalangabe",     v:"im Supermarkt"},
+      {l:"Modalangabe",     v:"für das Abendessen"},
+    ]
+  },
+  {
+    n:18, text:"Am Abend habe ich eine Suppe gekocht und eine Serie auf Netflix geschaut.",
+    words:[
+      {w:"Am",       tag:"TMP"},
+      {w:"Abend",    tag:"TMP"},
+      {w:"habe",     tag:"V"},
+      {w:"ich",      tag:"S"},
+      {w:"eine",     tag:"AKK"},
+      {w:"Suppe",    tag:"AKK"},
+      {w:"gekocht",  tag:"V"},
+      {w:"und",      tag:"NEG"},
+      {w:"eine",     tag:"AKK"},
+      {w:"Serie",    tag:"AKK"},
+      {w:"auf",      tag:"LOK"},
+      {w:"Netflix",  tag:"LOK"},
+      {w:"geschaut.",tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",          v:"ich"},
+      {l:"Verb 1 (Perfekt)", v:"habe … gekocht"},
+      {l:"Verb 2 (Perfekt)", v:"habe … geschaut"},
+      {l:"Akkusativobjekt",  v:"eine Suppe / eine Serie"},
+      {l:"Dativobjekt",      v:"—"},
+      {l:"Temporalangabe",   v:"Am Abend"},
+      {l:"Lokalangabe",      v:"auf Netflix"},
+      {l:"Modalangabe",      v:"—"},
+    ]
+  },
+  {
+    n:19, text:"Später habe ich noch ein Buch im Bett gelesen.",
+    words:[
+      {w:"Später", tag:"TMP"},
+      {w:"habe",   tag:"V"},
+      {w:"ich",    tag:"S"},
+      {w:"noch",   tag:"TMP"},
+      {w:"ein",    tag:"AKK"},
+      {w:"Buch",   tag:"AKK"},
+      {w:"im",     tag:"LOK"},
+      {w:"Bett",   tag:"LOK"},
+      {w:"gelesen.",tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (Perfekt)",  v:"habe … gelesen"},
+      {l:"Akkusativobjekt", v:"ein Buch"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Später / noch"},
+      {l:"Lokalangabe",     v:"im Bett"},
+      {l:"Modalangabe",     v:"—"},
+    ]
+  },
+  {
+    n:20, text:"Am Ende bin ich um 22:30 Uhr glücklich und zufrieden eingeschlafen.",
+    words:[
+      {w:"Am",            tag:"TMP"},
+      {w:"Ende",          tag:"TMP"},
+      {w:"bin",           tag:"V"},
+      {w:"ich",           tag:"S"},
+      {w:"um",            tag:"TMP"},
+      {w:"22:30",         tag:"TMP"},
+      {w:"Uhr",           tag:"TMP"},
+      {w:"glücklich",     tag:"MOD"},
+      {w:"und",           tag:"MOD"},
+      {w:"zufrieden",     tag:"MOD"},
+      {w:"eingeschlafen.",tag:"V"},
+    ],
+    analysis:[
+      {l:"Subjekt",         v:"ich"},
+      {l:"Verb (trennbar)", v:"bin … eingeschlafen (einschlafen + sein)"},
+      {l:"Akkusativobjekt", v:"—"},
+      {l:"Dativobjekt",     v:"—"},
+      {l:"Temporalangabe",  v:"Am Ende / um 22:30 Uhr"},
+      {l:"Lokalangabe",     v:"—"},
+      {l:"Modalangabe",     v:"glücklich und zufrieden"},
+    ]
+  },
+];
+
+const verbData = [
+  {inf:"sein",        form:"war / bin … / ist",          aux:"sein",  sep:false, meaning:"ser / estar"},
+  {inf:"aufwachen",   form:"bin … aufgewacht",            aux:"sein",  sep:true,  meaning:"despertarse"},
+  {inf:"wollen",      form:"wollte",                      aux:"—",     sep:false, meaning:"querer"},
+  {inf:"schlafen",    form:"schlafen (inf. en Modalverb)",aux:"sein",  sep:false, meaning:"dormir"},
+  {inf:"aufstehen",   form:"bin … aufgestanden",          aux:"sein",  sep:true,  meaning:"levantarse"},
+  {inf:"gehen",       form:"bin … gegangen",              aux:"sein",  sep:false, meaning:"ir"},
+  {inf:"waschen",     form:"habe … gewaschen",            aux:"haben", sep:false, meaning:"lavar"},
+  {inf:"vorbereiten", form:"habe … vorbereitet",          aux:"haben", sep:true,  meaning:"preparar"},
+  {inf:"trinken",     form:"habe … getrunken",            aux:"haben", sep:false, meaning:"beber / tomar"},
+  {inf:"lesen",       form:"habe … gelesen",              aux:"haben", sep:false, meaning:"leer"},
+  {inf:"werden",      form:"wird",                        aux:"—",     sep:false, meaning:"(futuro / volverse)"},
+  {inf:"packen",      form:"habe … gepackt",              aux:"haben", sep:false, meaning:"empacar"},
+  {inf:"verlassen",   form:"habe … verlassen",            aux:"haben", sep:false, meaning:"dejar / salir de"},
+  {inf:"nehmen",      form:"habe … genommen",             aux:"haben", sep:false, meaning:"tomar / coger"},
+  {inf:"anmachen",    form:"habe … angemacht",            aux:"haben", sep:true,  meaning:"encender / prender"},
+  {inf:"checken",     form:"habe … gecheckt",             aux:"haben", sep:false, meaning:"revisar / chequear"},
+  {inf:"arbeiten",    form:"habe … gearbeitet",           aux:"haben", sep:false, meaning:"trabajar"},
+  {inf:"haben",       form:"hatte / haben … gehabt",      aux:"haben", sep:false, meaning:"tener"},
+  {inf:"essen",       form:"habe … gegessen",             aux:"haben", sep:false, meaning:"comer"},
+  {inf:"sagen",       form:"hat … gesagt",                aux:"haben", sep:false, meaning:"decir"},
+  {inf:"machen",      form:"habe … gemacht",              aux:"haben", sep:false, meaning:"hacer"},
+  {inf:"fahren",      form:"bin … gefahren",              aux:"sein",  sep:false, meaning:"viajar / conducir"},
+  {inf:"kaufen",      form:"habe … gekauft",              aux:"haben", sep:false, meaning:"comprar"},
+  {inf:"kochen",      form:"habe … gekocht",              aux:"haben", sep:false, meaning:"cocinar"},
+  {inf:"schauen",     form:"habe … geschaut",             aux:"haben", sep:false, meaning:"mirar / ver"},
+  {inf:"einschlafen", form:"bin … eingeschlafen",         aux:"sein",  sep:true,  meaning:"quedarse dormido"},
+];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════════════════
+
+const tagClass = {S:"tag-S",V:"tag-V",AKK:"tag-AKK",DAT:"tag-DAT",TMP:"tag-TMP",LOK:"tag-LOK",MOD:"tag-MOD",NEG:"tag-NEG",NEB:"tag-NEB"};
+const analysisColor = {
+  "Subjekt":"var(--S)","Verb (Perfekt)":"var(--V)","Verb":"var(--V)",
+  "Verb (trennbar)":"var(--V)","Verb 1 (Perfekt)":"var(--V)","Verb 2 (Perfekt)":"var(--V)",
+  "Verb 1 (trennbar)":"var(--V)","Verb 2 (trennbar)":"var(--V)",
+  "Akkusativobjekt":"var(--AKK)","Dativobjekt":"var(--DAT)",
+  "Temporalangabe":"var(--TMP)","Lokalangabe":"var(--LOK)","Modalangabe":"var(--MOD)",
+  "Nebensatz":"var(--NEB)"
+};
+
+// Full text
+document.getElementById('full-text').textContent = sentences.map(s=>s.text).join(' ');
+
+// Sidebar nav
+const nav = document.getElementById('sentence-nav');
+sentences.forEach(s => {
+  const btn = document.createElement('button');
+  btn.className = 'sidebar-link';
+  btn.innerHTML = `<span class="num">${String(s.n).padStart(2,'0')}</span><span style="font-size:12px;color:var(--ink2)">${s.text.substring(0,28)}…</span>`;
+  btn.onclick = () => {
+    document.getElementById('s'+s.n)?.scrollIntoView({behavior:'smooth', block:'start'});
+  };
+  nav.appendChild(btn);
+});
+
+// Sentences
+const container = document.getElementById('sentences-container');
+sentences.forEach(s => {
+  const block = document.createElement('div');
+  block.className = 'sentence-block open';
+  block.id = 's' + s.n;
+
+  // Gloss line
+  const glossWords = s.words.map(w => `
+    <div class="word-unit">
+      <span class="word-form">${w.w}</span>
+      <span class="word-tag ${tagClass[w.tag]||'tag-NEG'}">${w.tag}</span>
+    </div>
+  `).join('');
+
+  // Analysis items
+  const analysisItems = s.analysis.map(a => {
+    const color = analysisColor[a.l] || 'var(--ink2)';
+    const empty = a.v === '—';
+    return `
+      <div class="analysis-item">
+        <span class="a-label" style="color:${color}">${a.l}</span>
+        <span class="a-value${empty?' empty':''}">${a.v}</span>
+      </div>
+    `;
+  }).join('');
+
+  block.innerHTML = `
+    <div class="sentence-header" onclick="toggleBlock(this.parentElement)">
+      <span class="sentence-num">${String(s.n).padStart(2,'0')}</span>
+      <span class="sentence-text">${s.text}</span>
+      <span class="sentence-toggle">⌄</span>
+    </div>
+    <div class="gloss-area">
+      <div class="gloss-label">Gloss — palabra por palabra</div>
+      <div class="gloss-line">${glossWords}</div>
+      <div class="gloss-label" style="margin-top:4px;">Análisis de elementos</div>
+      <div class="analysis-grid">${analysisItems}</div>
+    </div>
+  `;
+  container.appendChild(block);
+});
+
+// Verb table
+const tbody = document.getElementById('verb-tbody');
+verbData.forEach((v,i) => {
+  const tr = document.createElement('tr');
+  const auxColor = v.aux === 'sein' ? 'var(--S)' : 'var(--V)';
+  const auxBadge = v.aux !== '—'
+    ? `<span class="v-aux" style="color:${auxColor}">${v.aux}</span>`
+    : '<span style="color:var(--ink3);font-size:12px">—</span>';
+  const sepBadge = v.sep ? `<span class="v-sep">trennbar</span>` : '';
+  tr.innerHTML = `
+    <td><span class="v-inf">${v.inf}</span>${sepBadge}</td>
+    <td><span class="v-form">${v.form}</span></td>
+    <td>${auxBadge}</td>
+    <td class="v-meaning">${v.meaning}</td>
+    <td style="font-size:11px;color:var(--ink3)">${v.sep ? '⚡ Verbo separable' : v.aux==='sein' ? '🔵 Usa sein' : v.aux==='haben' ? '🟢 Usa haben' : ''}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// Build inline gloss
+function buildInlineGloss() {
+  const wrap = document.getElementById('inline-gloss-wrap');
+  if (wrap.children.length > 0) return; // already built
+  sentences.forEach(s => {
+    // sentence break + number
+    const br = document.createElement('div');
+    br.className = 'inline-sent-break';
+    wrap.appendChild(br);
+
+    const num = document.createElement('div');
+    num.className = 'inline-sent-num';
+    num.textContent = String(s.n).padStart(2,'0');
+    wrap.appendChild(num);
+
+    s.words.forEach(w => {
+      const unit = document.createElement('div');
+      unit.className = 'inline-word';
+      const cls = tagClass[w.tag] || 'tag-NEG';
+      unit.innerHTML = `<span class="w-text">${w.w}</span><span class="w-tag ${cls}">${w.tag}</span>`;
+      wrap.appendChild(unit);
+    });
+  });
+}
+
+// Controls
+function toggleInlineMode(btn) {
+  const isOn = document.body.classList.toggle('inline-mode');
+  btn.classList.toggle('active', isOn);
+  // hide/show expand buttons
+  document.getElementById('btn-expand').style.display = isOn ? 'none' : '';
+  if (isOn) buildInlineGloss();
+}
+function toggleBlock(el) {
+  el.classList.toggle('open');
+}
+function expandAll() {
+  document.querySelectorAll('.sentence-block').forEach(b => b.classList.add('open'));
+}
+function collapseAll() {
+  document.querySelectorAll('.sentence-block').forEach(b => b.classList.remove('open'));
+}
+</script>
+</body>
+</html>
