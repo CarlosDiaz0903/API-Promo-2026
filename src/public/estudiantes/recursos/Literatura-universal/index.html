@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Literatura Universal — Enciclopedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Nueva paleta: cálida, literaria, pergamino oscuro */
+  --bg:        #12100E;
+  --surface:   #1A1714;
+  --card:      #201D1A;
+  --card2:     #272320;
+  --border:    #2E2A26;
+  --border2:   #3D3830;
+  --ink:       #F0E8DC;
+  --ink2:      #A89880;
+  --ink3:      #6B5D4F;
+  --gold:      #D4A843;
+  --gold2:     #E8C070;
+  --gold-dim:  #1E1600;
+  --wine:      #8B3252;
+  --wine2:     #B04060;
+  --wine-dim:  #1A0810;
+  --sage:      #4A7C6F;
+  --sage2:     #6BAF9F;
+  --sage-dim:  #071412;
+  --amber:     #C4783A;
+  --amber2:    #E09050;
+  --amber-dim: #1A0E00;
+  --slate:     #5A7A9A;
+  --slate2:    #7A9FBF;
+  --slate-dim: #08101A;
+  --crimson:   #A03030;
+  --crimson2:  #C04040;
+  --mist:      #7080A0;
+  --r:12px; --rsm:7px; --rx:18px;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;min-height:100vh}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ═══════════════════════════════════════════
+   TOPBAR — minimal, editorial
+═══════════════════════════════════════════ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(18,16,14,.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px; height:58px;
+}
+.tb-brand{display:flex;align-items:center;gap:12px}
+.tb-brand .icon{font-size:20px;line-height:1}
+.tb-brand .name{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--ink);letter-spacing:.01em}
+.tb-brand .sub{font-size:10px;color:var(--ink3);margin-left:14px;text-transform:uppercase;letter-spacing:.12em;border-left:1px solid var(--border2);padding-left:14px}
+.tb-nav{display:flex;gap:2px}
+.tb-nav-btn{background:none;border:none;color:var(--ink3);font-size:12px;font-family:'Inter',sans-serif;font-weight:500;padding:6px 12px;border-radius:var(--rsm);cursor:pointer;transition:all .15s;white-space:nowrap}
+.tb-nav-btn:hover{color:var(--ink);background:var(--card2)}
+.tb-nav-btn.active{color:var(--gold);background:rgba(212,168,67,.08)}
+.tb-right{display:flex;gap:8px}
+.tb-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--rsm);font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .15s}
+.tb-ghost{background:transparent;color:var(--ink2);border:1px solid var(--border2)}
+.tb-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.tb-gold{background:var(--gold);color:#12100E;font-weight:600}
+.tb-gold:hover{background:var(--gold2)}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  padding:100px 48px 48px;
+  background:linear-gradient(180deg, #1A1410 0%, var(--bg) 100%);
+  border-bottom:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle, rgba(212,168,67,.05) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-label{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.hero-label::after{content:'';flex:1;max-width:60px;height:1px;background:var(--gold);opacity:.4}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.02em;margin-bottom:16px}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-desc{font-size:14px;color:var(--ink2);max-width:520px;line-height:1.7;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;gap:3px}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:500;color:var(--ink)}
+.stat-label{font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em}
+.stat-sep{width:1px;background:var(--border2);align-self:stretch}
+
+/* SEARCH BAR */
+.search-wrap{margin-top:32px;max-width:480px;position:relative}
+.search-wrap input{
+  width:100%;background:var(--card);border:1px solid var(--border2);
+  border-radius:var(--rx);padding:13px 20px 13px 44px;
+  color:var(--ink);font-size:14px;font-family:'Inter',sans-serif;outline:none;
+  transition:border-color .2s;
+}
+.search-wrap input::placeholder{color:var(--ink3)}
+.search-wrap input:focus{border-color:var(--gold)}
+.search-wrap .si{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:15px;pointer-events:none}
+
+/* ═══════════════════════════════════════════
+   TIMELINE STRIP
+═══════════════════════════════════════════ */
+.timeline-strip{padding:28px 48px;border-bottom:1px solid var(--border);overflow-x:auto;background:var(--surface)}
+.timeline{display:flex;align-items:center;gap:0;min-width:max-content;position:relative}
+.tl-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:0 20px;position:relative;transition:all .2s}
+.tl-item:not(:last-child)::after{content:'';position:absolute;right:-1px;top:50%;width:2px;height:30px;transform:translateY(-50%);background:var(--border)}
+.tl-dot{width:12px;height:12px;border-radius:50%;border:2px solid;transition:all .2s;flex-shrink:0}
+.tl-item:hover .tl-dot,.tl-item.active .tl-dot{transform:scale(1.4)}
+.tl-name{font-size:11px;font-weight:600;color:var(--ink2);white-space:nowrap;transition:color .2s}
+.tl-era{font-size:9px;color:var(--ink3);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.tl-item:hover .tl-name,.tl-item.active .tl-name{color:var(--ink)}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.content{max-width:960px;margin:0 auto;padding:40px 32px 80px}
+
+/* ═══════════════════════════════════════════
+   AUTHOR ENTRY — nueva visual tipo enciclopedia
+═══════════════════════════════════════════ */
+.entry{
+  margin-bottom:16px;
+  border-radius:var(--r);
+  border:1px solid var(--border);
+  overflow:hidden;
+  background:var(--card);
+  transition:border-color .25s;
+}
+.entry:hover{border-color:var(--border2)}
+.entry.open{border-color:var(--border2)}
+
+/* ENTRY HEADER */
+.entry-hdr{
+  display:flex;align-items:stretch;cursor:pointer;user-select:none;
+  position:relative; overflow:hidden;
+}
+.entry-accent{width:5px;flex-shrink:0}
+.entry-hdr-inner{display:flex;align-items:center;gap:18px;padding:22px 24px;flex:1}
+.entry-initial{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:700;
+  width:56px;height:56px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;line-height:1;
+}
+.entry-info{flex:1;min-width:0}
+.entry-info h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.entry-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:5px;align-items:center}
+.entry-meta span{font-size:11px;color:var(--ink3)}
+.entry-meta span strong{color:var(--ink2);font-weight:500}
+.entry-badge{font-size:9px;font-weight:700;padding:2px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.entry-right{display:flex;align-items:center;gap:12px;padding-right:22px}
+.entry-obra-pill{font-size:10px;font-weight:600;color:var(--ink3);background:var(--card2);border:1px solid var(--border);padding:4px 12px;border-radius:20px;white-space:nowrap}
+.entry-chevron{color:var(--ink3);font-size:18px;transition:transform .25s;flex-shrink:0}
+.entry.open .entry-chevron{transform:rotate(180deg)}
+
+/* ENTRY BODY */
+.entry-body{display:none;padding:0 5px 5px}
+.entry.open .entry-body{display:block}
+
+/* ═══════════════════════════════════════════
+   TABS — nueva visual
+═══════════════════════════════════════════ */
+.tab-bar{
+  display:flex;gap:0;
+  background:var(--card2);
+  border-bottom:1px solid var(--border);
+  overflow-x:auto;
+  padding:0 20px;
+}
+.tab-bar::-webkit-scrollbar{height:0}
+.tab-btn{
+  padding:12px 18px;font-size:12px;font-weight:500;
+  color:var(--ink3);cursor:pointer;border:none;background:none;
+  white-space:nowrap;border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all .15s;font-family:'Inter',sans-serif;
+  position:relative;
+}
+.tab-btn:hover{color:var(--ink2)}
+.tab-btn.on{color:var(--ink);border-bottom-color:currentColor}
+.tab-pane{display:none;padding:24px}
+.tab-pane.on{display:block}
+
+/* ═══════════════════════════════════════════
+   BIO GRID
+═══════════════════════════════════════════ */
+.bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bio-cell{background:var(--card2);border:1px solid var(--border);border-radius:var(--rsm);padding:12px 15px;display:flex;flex-direction:column;gap:4px}
+.bio-cell.w2{grid-column:1/-1}
+.bio-k{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3)}
+.bio-v{font-size:13px;color:var(--ink);line-height:1.55}
+
+/* ═══════════════════════════════════════════
+   MOVEMENT CARDS
+═══════════════════════════════════════════ */
+.mov-item{
+  background:var(--card2);border:1px solid var(--border);border-radius:var(--rsm);
+  padding:14px 18px;margin-bottom:8px;
+  border-left:3px solid;
+}
+.mov-item-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.mov-item-type{font-size:9px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-left:8px}
+.mov-item-body{font-size:12.5px;color:var(--ink2);line-height:1.6}
+
+/* ═══════════════════════════════════════════
+   STYLED LIST
+═══════════════════════════════════════════ */
+.slist{list-style:none;display:flex;flex-direction:column;gap:6px}
+.slist li{
+  display:flex;gap:10px;font-size:13px;color:var(--ink2);
+  padding:10px 14px;background:var(--card2);
+  border:1px solid var(--border);border-radius:var(--rsm);line-height:1.5;
+}
+.slist li::before{content:'◆';font-size:7px;color:inherit;opacity:.5;margin-top:4px;flex-shrink:0}
+.slist li strong{color:var(--ink)}
+
+/* ═══════════════════════════════════════════
+   DATA TABLES
+═══════════════════════════════════════════ */
+.dtbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:20px}
+.dtbl th{background:var(--card2);color:var(--ink3);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:10px 14px;text-align:left;border-bottom:2px solid var(--border2)}
+.dtbl td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top}
+.dtbl tr:last-child td{border-bottom:none}
+.dtbl tr:hover td{background:rgba(255,255,255,.015);color:var(--ink)}
+.dtbl td:first-child{color:var(--ink);font-weight:500}
+
+/* ═══════════════════════════════════════════
+   OBRA PRINCIPAL CARD
+═══════════════════════════════════════════ */
+.obra{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.obra-top{display:flex;align-items:center;gap:16px;padding:18px 22px;border-bottom:1px solid var(--border)}
+.obra-icon-wrap{font-size:28px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:10px;border:1px solid var(--border);flex-shrink:0}
+.obra-top-info h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--ink)}
+.obra-top-info p{font-size:11px;color:var(--ink3);margin-top:3px}
+.obra-body{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.obra-field{background:var(--card);border:1px solid var(--border);border-radius:var(--rsm);padding:11px 14px}
+.obra-field.w2{grid-column:1/-1}
+.obra-k{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-bottom:5px}
+.obra-v{font-size:13px;color:var(--ink2);line-height:1.55}
+.obra-v strong{color:var(--ink)}
+.chars{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}
+.chars li{font-size:12px;color:var(--ink2);padding:9px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--rsm);line-height:1.4}
+.chars li strong{color:var(--ink);display:block;font-size:12.5px;margin-bottom:2px}
+
+/* ═══════════════════════════════════════════
+   IMPORTANCIA
+═══════════════════════════════════════════ */
+.imp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.imp-cell{background:var(--card2);border:1px solid var(--border);border-radius:var(--rsm);padding:14px 16px}
+.imp-k{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-bottom:7px}
+.imp-v{font-size:12.5px;color:var(--ink2);line-height:1.6}
+
+/* ═══════════════════════════════════════════
+   SECTION DIVIDER
+═══════════════════════════════════════════ */
+.sdiv{display:flex;align-items:center;gap:10px;margin:22px 0 12px}
+.sdiv-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);white-space:nowrap}
+.sdiv-line{flex:1;height:1px;background:var(--border)}
+
+/* ═══════════════════════════════════════════
+   NOTA ITALIC
+═══════════════════════════════════════════ */
+.nota{font-size:11px;color:var(--ink3);font-style:italic;margin-top:8px}
+
+/* ═══════════════════════════════════════════
+   PRINT
+═══════════════════════════════════════════ */
+@media print{
+  .topbar,.timeline-strip,.search-wrap,.tb-right,.entry-chevron{display:none!important}
+  .hero{padding-top:20px}
+  body{background:#fff;color:#000}
+  .entry,.obra,.bio-cell,.slist li,.dtbl th,.dtbl td,.imp-cell,.obra-field,.mov-item,.tab-bar{background:#fff!important;border-color:#ccc!important;color:#000!important}
+  .entry-body{display:block!important}
+  .tab-pane{display:block!important}
+  .entry{page-break-inside:avoid;page-break-after:always;border:1px solid #999!important}
+  .ink,.ink2,.bio-v,.obra-v,.imp-v,.mov-item-body,.slist li{color:#111!important}
+  .bio-k,.obra-k,.imp-k,.sdiv-label,.mov-item-type{color:#555!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ══════════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="tb-brand">
+    <span class="icon">📜</span>
+    <span class="name">Literatura Universal</span>
+    <span class="sub">Enciclopedia · BLESSED 2026</span>
+  </div>
+  <nav class="tb-nav" id="tb-nav"></nav>
+  <div class="tb-right">
+    <button class="tb-btn tb-ghost" onclick="expandAll()">Expandir todo</button>
+    <button class="tb-btn tb-ghost" onclick="collapseAll()">Colapsar</button>
+    <button class="tb-btn tb-gold" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+</header>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-label">Colegio Santa Cruz · Callao, Perú</div>
+  <h1>Autores de la<br><em>Literatura Universal</em></h1>
+  <p class="hero-desc">Análisis académico completo: biografía, movimientos literarios, características, temas, géneros, obras y legado de los grandes autores de la literatura occidental.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">7</span><span class="stat-label">Autores</span></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><span class="stat-num">5</span><span class="stat-label">Siglos</span></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Obras</span></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">Movimientos</span></div>
+  </div>
+  <div class="search-wrap">
+    <span class="si">🔍</span>
+    <input type="text" id="q" placeholder="Buscar autor, obra, tema, movimiento…">
+  </div>
+</section>
+
+<!-- ══ TIMELINE STRIP ════════════════════════════════════════════════ -->
+<div class="timeline-strip">
+  <div class="timeline" id="timeline"></div>
+</div>
+
+<!-- ══ CONTENT ═══════════════════════════════════════════════════════ -->
+<main class="content" id="entries"></main>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════════
+const AUTHORS = [
+  {
+    id:'dante', name:'Dante Alighieri', initial:'D',
+    dates:'1265–1321', nation:'🇮🇹 Florencia, Italia',
+    movement:'Prerrenacimiento · Trecento',
+    obra:'Divina Comedia', obraIcon:'📖',
+    color:'#D4A843', colorDim:'rgba(212,168,67,.12)',
+    bio:[
+      {k:'Nombre completo',v:'Durante di Alighiero degli Alighieri'},
+      {k:'Nacimiento',v:'Mayo de 1265, Florencia, República de Florencia (actual Italia)'},
+      {k:'Fallecimiento',v:'14 de septiembre de 1321, Rávena'},
+      {k:'Nacionalidad',v:'Italiana (florentino)'},
+      {k:'Profesiones',v:'Poeta, político, filósofo'},
+      {k:'Contexto histórico',v:'Italia medieval fragmentada en ciudades-Estado; conflicto entre güelfos (partidarios del Papado) y gibelinos (partidarios del Imperio); transición entre la Edad Media y el Humanismo',w:true},
+      {k:'Formación',v:'Estudios de retórica y filosofía escolástica; posible vínculo con Brunetto Latini; influencia de Boecio, Cicerón y Santo Tomás de Aquino',w:true},
+      {k:'Principales acontecimientos',v:'Amor idealizado por Beatriz Portinari; participación política como güelfo blanco; exilio de Florencia en 1302 (acusado de corrupción); redacción de la Divina Comedia durante el exilio; muerte en Rávena sin poder regresar a su ciudad',w:true},
+      {k:'Legado',v:'Considerado el padre de la lengua italiana; autor de la Divina Comedia, obra cumbre de la literatura medieval y puente hacia el Renacimiento',w:true},
+    ],
+    movs:[
+      {name:'Prerrenacimiento / Trecento italiano',type:'Movimiento principal',body:'Combina la cosmovisión teológica y alegórica de la Edad Media con rasgos que anuncian el Humanismo, como el uso del italiano vernáculo y la valoración del individuo y su experiencia interior.'},
+      {name:'Dolce Stil Novo',type:'Movimiento relacionado',body:'Corriente poética italiana que idealizaba el amor como vía de elevación espiritual. Dante es uno de sus máximos exponentes.'},
+    ],
+    carac:['Uso del <strong>alegorismo medieval</strong> para representar verdades morales y teológicas.','Empleo de la <strong>lengua vernácula toscana</strong> en lugar del latín culto.','<strong>Estructura numerológica simbólica</strong> basada en los números 3 y 9.','Fusión de <strong>teología, filosofía y poesía</strong>.','<strong>Idealización del amor</strong> como vía de elevación espiritual (influencia del Stil Novo).','<strong>Crítica política y moral</strong> mediante personajes históricos y contemporáneos.','Uso del <strong>endecasílabo y la terza rima</strong> (tercetos encadenados).','<strong>Visión enciclopédica</strong> del saber medieval (ciencia, teología, política, historia).'],
+    temas:['<strong>Amor idealizado:</strong> el amor como fuerza espiritual que conduce a Dios.','<strong>Justicia divina:</strong> retribución moral según los actos en vida.','<strong>Pecado y redención:</strong> el camino del alma desde el error hacia la salvación.','<strong>Política y corrupción:</strong> crítica a Florencia y a la Iglesia de su tiempo.','<strong>Búsqueda del conocimiento:</strong> el deseo humano de comprender el orden universal.','<strong>El viaje como transformación:</strong> el recorrido físico como metáfora del progreso espiritual.'],
+    generosTbl:[['Lírico','Soneto, canción, prosímetro autobiográfico','Vita Nuova'],['Narrativo-épico','Poema alegórico','Divina Comedia'],['Ensayístico / tratado','Tratado filosófico, político y lingüístico','Convivio, De Monarchia, De Vulgari Eloquentia']],
+    obrasTbl:[['Vita Nuova','c. 1293','Prosímetro lírico','Relato autobiográfico en prosa y verso sobre su amor por Beatriz.'],['Convivio','c. 1304–1307','Tratado filosófico','Comentario filosófico de varias canciones propias, inconcluso.'],['De Vulgari Eloquentia','c. 1304–1305','Tratado lingüístico','Defensa y estudio de la lengua vulgar italiana frente al latín.'],['De Monarchia','c. 1312–1313','Tratado político','Defensa de la autoridad imperial independiente del poder papal.'],['Divina Comedia','c. 1308–1320','Poema alegórico-épico','Viaje alegórico por el Infierno, Purgatorio y Paraíso.']],
+    obraPrincipal:{
+      titulo:'Divina Comedia', fecha:'c. 1308–1320', genero:'Poema narrativo alegórico',
+      fields:[
+        {k:'Año de publicación',v:'Compuesta entre 1308 y 1320, difundida tras la muerte del autor (1321)'},
+        {k:'Género',v:'Poema narrativo alegórico'},
+        {k:'Contexto de creación',v:'Escrita durante el exilio de Dante, en un clima de crisis política en Florencia y de búsqueda personal de justicia y sentido trascendente.',w:true},
+        {k:'Estructura',v:'Tres partes (Infierno, Purgatorio, Paraíso), cada una con cantos en terza rima; 34 cantos en el Infierno (incluido el proemio) y 33 en cada una de las otras dos partes, sumando 100 cantos en total.',w:true},
+        {k:'Resumen',v:'Dante, perdido espiritualmente, es guiado primero por el poeta Virgilio a través del Infierno y el Purgatorio, y luego por Beatriz a través del Paraíso, en un recorrido alegórico hacia el encuentro con Dios.',w:true},
+        {k:'Tema principal',v:'La redención del alma humana mediante el conocimiento del pecado y la gracia divina.'},
+        {k:'Temas secundarios',v:'La política florentina, la justicia, el amor, la filosofía escolástica.'},
+        {k:'Mensaje o enseñanza',v:'El ser humano puede alcanzar la salvación a través de la razón y la fe, abandonando el pecado.',w:true},
+        {k:'Aporte o innovación literaria',v:'Consolidación del italiano vernáculo como lengua literaria de prestigio; síntesis entre la cultura clásica grecolatina y la cosmovisión cristiana medieval.',w:true},
+      ],
+      personajes:[{n:'Dante',d:'Protagonista y narrador, representa a la humanidad en busca de salvación.'},{n:'Virgilio',d:'Poeta latino que guía a Dante por el Infierno y Purgatorio, símbolo de la razón humana.'},{n:'Beatriz',d:'Guía de Dante por el Paraíso, símbolo del amor y la gracia divina.'},{n:'Lucifer',d:'Figura del mal absoluto situada en el centro del Infierno.'}],
+    },
+    imp:[
+      {k:'Para la literatura',v:'Obra fundacional de la lengua y la literatura italianas, modelo de poema alegórico.'},
+      {k:'Influencia en autores posteriores',v:'Petrarca, Boccaccio, Milton, T.S. Eliot, Jorge Luis Borges.'},
+      {k:'Aportes al movimiento',v:'Impulsó el uso literario del vernáculo y anticipó la valoración humanista del individuo.'},
+      {k:'Vigencia actual',v:'Se estudia por su valor literario, filosófico, teológico y lingüístico, y por su influencia continua en el arte y la cultura occidental.'},
+    ],
+  },
+  {
+    id:'maquiavelo', name:'Nicolás Maquiavelo', initial:'M',
+    dates:'1469–1527', nation:'🇮🇹 Florencia, Italia',
+    movement:'Renacimiento · Humanismo político',
+    obra:'El Príncipe', obraIcon:'👑',
+    color:'#C4783A', colorDim:'rgba(196,120,58,.12)',
+    bio:[
+      {k:'Nombre completo',v:'Niccolò di Bernardo dei Machiavelli'},
+      {k:'Nacimiento',v:'3 de mayo de 1469, Florencia'},
+      {k:'Fallecimiento',v:'21 de junio de 1527, Florencia'},
+      {k:'Nacionalidad',v:'Italiana (florentina)'},
+      {k:'Profesiones',v:'Diplomático, funcionario público, filósofo político, historiador, dramaturgo'},
+      {k:'Contexto histórico',v:'Renacimiento italiano; fragmentación política de Italia; invasiones extranjeras (Francia, España); gobierno e influencia de los Médici en Florencia',w:true},
+      {k:'Formación',v:'Educación humanista clásica; lectura de autores latinos como Tito Livio y Cicerón',w:true},
+      {k:'Principales acontecimientos',v:'Secretario de la Segunda Cancillería de Florencia (1498–1512); misiones diplomáticas ante distintas cortes europeas; caída de la república y retorno de los Médici (1512); encarcelamiento y tortura; retiro forzoso y redacción de El Príncipe (1513); intentos fallidos de reinserción política',w:true},
+      {k:'Legado',v:'Considerado fundador de la ciencia política moderna por separar el análisis político de la moral tradicional (razón de Estado)',w:true},
+    ],
+    movs:[
+      {name:'Renacimiento — Humanismo político',type:'Movimiento principal',body:'Aplica un método racional y empírico, inspirado en la Antigüedad clásica, al estudio de la política, característico del humanismo renacentista.'},
+      {name:'Pensamiento republicano clásico · Realismo político',type:'Movimientos relacionados',body:'Recuperación de los modelos de gobierno romano y análisis descarnado de la realidad política tal como es, no como debería ser.'},
+    ],
+    carac:['<strong>Realismo político:</strong> analiza la política tal como es, no como debería ser idealmente.','Estilo <strong>claro, directo y argumentativo</strong>.','Uso de <strong>ejemplos históricos</strong> clásicos y contemporáneos para sustentar sus tesis.','<strong>Separación entre moral privada y eficacia política</strong>.','<strong>Visión cíclica de la historia</strong>, inspirada en Polibio.','<strong>Pragmatismo y orientación utilitaria</strong> del pensamiento.','Crítica a la <strong>fragmentación política italiana</strong> y a la injerencia papal.','Estilo <strong>ensayístico, sentencioso y aforístico</strong>.'],
+    temas:['<strong>El poder:</strong> cómo se obtiene y se conserva.','<strong>La virtud (virtù):</strong> capacidad y habilidad del gobernante para actuar eficazmente.','<strong>La fortuna:</strong> el azar como fuerza que el gobernante debe controlar en lo posible.','<strong>La unidad de Italia:</strong> aspiración política frente a la fragmentación.','<strong>La naturaleza humana:</strong> concebida como egoísta y cambiante.','<strong>Fuerza y consenso:</strong> equilibrio necesario para gobernar.'],
+    generosTbl:[['Ensayístico / tratado','Tratado político, tratado militar','El Príncipe, Discursos sobre la primera década de Tito Livio, Del arte de la guerra'],['Teatro','Comedia','La Mandrágora'],['Narrativo-histórico','Historia','Historia de Florencia']],
+    obrasTbl:[['El Príncipe','Escrito 1513, pub. 1532','Tratado político','Manual práctico para la adquisición y conservación del poder.'],['Discursos sobre la primera década de Tito Livio','c. 1517','Tratado político','Análisis del gobierno republicano a partir de la historia romana.'],['La Mandrágora','1518','Comedia teatral','Sátira sobre el engaño y la corrupción moral en la sociedad florentina.'],['Del arte de la guerra','1521','Tratado militar','Reflexión sobre la organización militar y la importancia de ejércitos propios.'],['Historia de Florencia','1532','Obra histórica','Crónica de la historia política de Florencia encargada por los Médici.']],
+    obraPrincipal:{
+      titulo:'El Príncipe', fecha:'Escrito en 1513, publicado póstumamente en 1532', genero:'Tratado político',
+      fields:[
+        {k:'Género',v:'Tratado político (ensayo)'},
+        {k:'Estructura',v:'26 capítulos: tipos de principados, formas de conquistarlos y conservarlos, virtud y fortuna, organización militar, y cualidades del buen gobernante.'},
+        {k:'Contexto de creación',v:'Redactado tras la caída de la república florentina y el exilio político de Maquiavelo, dedicado a Lorenzo de Médici con la intención de recuperar influencia política y promover la unificación de Italia.',w:true},
+        {k:'Resumen',v:'Analiza los distintos tipos de Estados y principados existentes, y ofrece consejos prácticos para que un gobernante obtenga y mantenga el poder de forma eficaz.',w:true},
+        {k:'Tema principal',v:'Cómo adquirir y conservar el poder político.'},
+        {k:'Temas secundarios',v:'La virtud (virtù), la fortuna, las milicias propias frente a las mercenarias, la relación entre gobernante y pueblo.'},
+        {k:'Mensaje o enseñanza',v:'El buen gobernante debe combinar fuerza y astucia (símil del león y la zorra) y priorizar la estabilidad del Estado sobre consideraciones morales tradicionales.',w:true},
+        {k:'Aporte o innovación literaria',v:'Fundación del realismo político moderno; separación explícita entre ética privada y razón de Estado.',w:true},
+      ],
+      personajes:[{n:'César Borgia',d:'Ejemplo de príncipe que combina virtud y crueldad eficaz.'},{n:'Lorenzo de Médici',d:'Dedicatario de la obra.'},{n:'Moisés, Ciro, Rómulo',d:'Fundadores ejemplares citados como modelos de virtud política.'}],
+      pLabel:'Figuras históricas referidas',
+    },
+    imp:[
+      {k:'Para la literatura/pensamiento',v:'Texto fundacional de la ciencia política moderna.'},
+      {k:'Influencia en autores posteriores',v:'Thomas Hobbes, Jean-Jacques Rousseau, teóricos modernos del Estado.'},
+      {k:'Aportes al movimiento',v:'Consolidó el análisis empírico y racional de la política propio del humanismo renacentista.'},
+      {k:'Vigencia actual',v:'El término "maquiavélico" pasó al lenguaje común; se estudia en ciencia política, historia y filosofía como referencia obligada del realismo político.'},
+    ],
+  },
+  {
+    id:'rojas', name:'Fernando de Rojas', initial:'R',
+    dates:'c. 1470–1541', nation:'🇪🇸 Toledo, España',
+    movement:'Prerrenacimiento español',
+    obra:'La Celestina', obraIcon:'🕯️',
+    color:'#4A7C6F', colorDim:'rgba(74,124,111,.12)',
+    bio:[
+      {k:'Nombre completo',v:'Fernando de Rojas'},
+      {k:'Nacimiento',v:'c. 1470–1473, La Puebla de Montalbán, Toledo, España'},
+      {k:'Fallecimiento',v:'1541, Talavera de la Reina, España'},
+      {k:'Nacionalidad',v:'Española'},
+      {k:'Profesiones',v:'Jurista (bachiller en leyes), alcalde de Talavera de la Reina'},
+      {k:'Contexto histórico',v:'España de los Reyes Católicos; transición entre la Edad Media y el Renacimiento; presencia de la Inquisición y ambiente de tensión hacia la población conversa',w:true},
+      {k:'Formación',v:'Estudios de derecho en la Universidad de Salamanca',w:true},
+      {k:'Principales acontecimientos',v:'Posible origen judeoconverso; ejercicio profesional como abogado y posteriormente como alcalde; autoría discutida de La Celestina (se le atribuye la continuación de un primer acto anónimo); publicación de la Comedia (1499) y de la Tragicomedia (1502)',w:true},
+      {k:'Legado',v:'Autor de una de las obras cumbre de la literatura española, antecedente directo de la novela moderna y de la picaresca',w:true},
+    ],
+    movs:[
+      {name:'Prerrenacimiento español — Transición Edad Media–Renacimiento',type:'Movimiento principal',body:'Combina elementos medievales (moralización, sentencias) con un espíritu renacentista de individualismo, realismo psicológico y crítica social.'},
+      {name:'Comedia humanística latina · Realismo literario',type:'Movimientos relacionados',body:'Hereda la estructura dialogada de la comedia humanística latina y anticipa el realismo en el retrato de personajes y ambientes urbanos.'},
+    ],
+    carac:['<strong>Realismo descarnado</strong> en la representación de personajes y ambientes.','Mezcla de <strong>registros lingüísticos:</strong> culto y popular.','<strong>Estructura dialogada</strong>, concebida originalmente para lectura, no para representación.','<strong>Crítica social</strong> a todos los estratos: nobleza, servidumbre y clero.','<strong>Pesimismo existencial</strong> y visión trágica del amor y la fortuna.','Uso abundante de <strong>sentencias y refranes populares</strong>.','<strong>Profundidad psicológica</strong> inusual para la época en sus personajes.','<strong>Sátira y humor negro</strong> como recursos expresivos.'],
+    temas:['<strong>Amor pasional y destructivo:</strong> fuerza que arrastra a los personajes hacia su ruina.','<strong>Fortuna y destino trágico:</strong> el azar como fuerza incontrolable.','<strong>Codicia e interés material:</strong> motor de las acciones de varios personajes.','<strong>Hipocresía social:</strong> crítica a las apariencias de las distintas clases.','<strong>Muerte:</strong> desenlace inevitable de las pasiones desordenadas.','<strong>Conflicto de clases sociales:</strong> tensión entre nobleza y servidumbre.'],
+    generosTbl:[['Narrativo-dramático','Comedia humanística / novela dialogada','La Celestina']],
+    obrasTbl:[['Comedia de Calisto y Melibea','1499','Novela dialogada','Primera versión de la obra, en 16 actos.'],['Tragicomedia de Calisto y Melibea (La Celestina)','1502','Novela dialogada','Versión ampliada a 21 actos, con mayor desarrollo de personajes.']],
+    obrasTblNota:'Nota: a Fernando de Rojas únicamente se le atribuye con certeza esta obra.',
+    obraPrincipal:{
+      titulo:'La Celestina (Tragicomedia de Calisto y Melibea)', fecha:'1499 / 1502', genero:'Novela dialogada',
+      fields:[
+        {k:'Año de publicación',v:'1499 (Comedia, 16 actos), ampliada en 1502 (Tragicomedia, 21 actos)'},
+        {k:'Género',v:'Novela dialogada (forma dramática no destinada a la representación escénica en su época)'},
+        {k:'Contexto de creación',v:'España de finales del siglo XV, en un ambiente urbano marcado por la crisis de los valores medievales y, según algunos críticos, por una mirada crítica vinculada al origen converso del autor.',w:true},
+        {k:'Estructura',v:'21 actos en la versión definitiva (Tragicomedia).'},
+        {k:'Tema principal',v:'El amor pasional como fuerza destructiva.'},
+        {k:'Resumen',v:'Calisto, joven enamorado de Melibea, recurre a la vieja alcahueta Celestina para conquistarla; la intervención de esta y de los criados desencadena engaños, traiciones y muertes que culminan en una tragedia generalizada.',w:true},
+        {k:'Temas secundarios',v:'La codicia, la traición, la fortuna, la crítica social.'},
+        {k:'Mensaje o enseñanza',v:'Las pasiones desordenadas y la codicia conducen a la destrucción individual y colectiva.',w:true},
+        {k:'Aporte o innovación literaria',v:'Creación de un nuevo género narrativo-dramático; profundidad psicológica inédita en los personajes; antecedente directo de la novela picaresca y de la novela moderna.',w:true},
+      ],
+      personajes:[{n:'Calisto',d:'Joven enamorado e idealista, impulsado únicamente por la pasión.'},{n:'Melibea',d:'Joven noble que termina cediendo a la pasión amorosa.'},{n:'Celestina',d:'Alcahueta astuta y codiciosa que manipula a los demás personajes.'},{n:'Sempronio y Pármeno',d:'Criados de Calisto, motivados por el interés propio.'},{n:'Areúsa y Elicia',d:'Prostitutas vinculadas al entorno de Celestina.'}],
+    },
+    imp:[
+      {k:'Para la literatura',v:'Una de las obras fundamentales de la literatura española, junto al Quijote.'},
+      {k:'Influencia en autores posteriores',v:'La novela picaresca y el teatro del Siglo de Oro español.'},
+      {k:'Aportes al movimiento',v:'Consolidó el realismo psicológico y social como recurso literario en la transición al Renacimiento.'},
+      {k:'Vigencia actual',v:'Se estudia por su innovación de género, riqueza lingüística y agudo retrato social de la España de su tiempo.'},
+    ],
+  },
+  {
+    id:'manrique', name:'Jorge Manrique', initial:'J',
+    dates:'c. 1440–1479', nation:'🇪🇸 Palencia, España',
+    movement:'Prerrenacimiento · Poesía de cancionero',
+    obra:'Coplas a la muerte de su padre', obraIcon:'⚰️',
+    color:'#8B3252', colorDim:'rgba(139,50,82,.12)',
+    bio:[
+      {k:'Nombre completo',v:'Jorge Manrique de Lara'},
+      {k:'Nacimiento',v:'c. 1440, Paredes de Nava, Palencia, España'},
+      {k:'Fallecimiento',v:'24 de abril de 1479, Santa María del Campo Rus (Cuenca), en combate'},
+      {k:'Nacionalidad',v:'Española (castellana)'},
+      {k:'Profesiones',v:'Noble, militar, poeta'},
+      {k:'Contexto histórico',v:'Castilla del siglo XV; guerras civiles entre Enrique IV e Isabel la Católica; decadencia del orden feudal; mentalidad de transición entre la Edad Media y el Renacimiento',w:true},
+      {k:'Formación',v:'Educación cortesana y militar propia de la nobleza castellana',w:true},
+      {k:'Principales acontecimientos',v:'Participación en las luchas nobiliarias a favor de Isabel la Católica; muerte en combate durante el asedio del castillo de Garcimuñoz; redacción de las Coplas a la muerte de su padre tras el fallecimiento de don Rodrigo Manrique (1476)',w:true},
+      {k:'Legado',v:'Autor de una de las elegías más importantes de la lengua castellana',w:true},
+    ],
+    movs:[
+      {name:'Prerrenacimiento español / Poesía de cancionero',type:'Movimiento principal',body:'Combina tópicos medievales (ubi sunt, fortuna, vanidad de los bienes terrenales) con una sobriedad expresiva que anticipa la sensibilidad renacentista.'},
+      {name:'Tradición elegíaca medieval',type:'Movimiento relacionado',body:'Hereda la forma elegíaca de la tradición medieval castellana, renovándola con mayor interioridad y economía expresiva.'},
+    ],
+    carac:['<strong>Sobriedad y sencillez expresiva</strong>, sin ornamentación excesiva.','Uso magistral de la <strong>copla de pie quebrado</strong> (estrofa manriqueña).','Tono <strong>moral y filosófico</strong> ante la vida y la muerte.','Empleo de tópicos medievales como el <strong>ubi sunt?</strong> y la fortuna inestable.','Tono <strong>elegíaco y meditativo</strong>.','<strong>Estructura argumentativa progresiva</strong>, de lo general a lo particular.','Equilibrio entre el <strong>contenido doctrinal y la emotividad personal</strong>.'],
+    temas:['<strong>La muerte:</strong> presentada como igualadora universal de todos los seres humanos.','<strong>La fugacidad de la vida</strong> y de los bienes terrenales.','<strong>La fama:</strong> como única forma posible de trascendencia.','<strong>La fortuna inestable:</strong> que cambia el destino de las personas.','<strong>La vida como camino hacia la muerte:</strong> metáfora central del poema.','<strong>El elogio de la figura paterna:</strong> homenaje a don Rodrigo Manrique.'],
+    generosTbl:[['Lírico','Elegía, copla de pie quebrado, poesía cancioneril (canciones, esparsas)','Coplas a la muerte de su padre']],
+    obrasTbl:[['Poesía cancioneril amorosa','Anteriores a 1476','Lírico','Composiciones menores de tema amoroso cortesano.'],['Coplas a la muerte de su padre','c. 1476','Elegía','Elegía dedicada a su padre, don Rodrigo Manrique.']],
+    obraPrincipal:{
+      titulo:'Coplas a la muerte de su padre', fecha:'c. 1476', genero:'Elegía lírica',
+      fields:[
+        {k:'Año',v:'Compuesta hacia 1476'},
+        {k:'Género',v:'Elegía lírica'},
+        {k:'Contexto de creación',v:'Escrita tras la muerte de su padre, don Rodrigo Manrique, maestre de la Orden de Santiago.',w:true},
+        {k:'Estructura',v:'40 coplas de pie quebrado (estrofas de 12 versos octosílabos combinados con quebrados de 4 sílabas), organizadas en tres partes: reflexión general sobre la vida y la muerte, ejemplos históricos de la fortuna, y elogio particular a don Rodrigo.',w:true},
+        {k:'Resumen',v:'El poema reflexiona sobre la fugacidad de la vida, presenta ejemplos de figuras históricas vencidas por la muerte, y culmina con el elogio de la vida y la muerte ejemplar de don Rodrigo Manrique.',w:true},
+        {k:'Tema principal',v:'La muerte como destino igualador de todos los seres humanos.'},
+        {k:'Temas secundarios',v:'La fama, la fortuna, la vanidad de los bienes terrenales, la vida virtuosa.'},
+        {k:'Mensaje o enseñanza',v:'Solo la fama ganada por las buenas obras y la fe trascienden a la muerte.',w:true},
+        {k:'Aporte o innovación literaria',v:'Renovación de la elegía castellana mediante la sobriedad expresiva y el uso magistral de la estrofa de pie quebrado.',w:true},
+      ],
+      personajes:[{n:'Don Rodrigo Manrique',d:'Padre del poeta, presentado como modelo de virtud caballeresca.'},{n:'La Muerte',d:'Figura personificada que iguala a todos los seres humanos.'},{n:'Figuras históricas castellanas',d:'Mencionadas como ejemplo de la inestabilidad de la fortuna.'}],
+      pLabel:'Figuras / personajes',
+    },
+    imp:[
+      {k:'Para la literatura',v:'Considerada una obra cumbre de la poesía castellana del siglo XV.'},
+      {k:'Influencia en autores posteriores',v:'Modelo de la elegía en lengua española y referente de la poesía moral posterior.'},
+      {k:'Aportes al movimiento',v:'Síntesis entre el pensamiento medieval y la sensibilidad humanista emergente.'},
+      {k:'Vigencia actual',v:'Se estudia por su perfección formal, su profundidad filosófica y su valor como testimonio de la mentalidad castellana del siglo XV.'},
+    ],
+  },
+  {
+    id:'cervantes', name:'Miguel de Cervantes Saavedra', initial:'C',
+    dates:'1547–1616', nation:'🇪🇸 Alcalá de Henares',
+    movement:'Siglo de Oro · Renacimiento tardío–Barroco',
+    obra:'Don Quijote de la Mancha', obraIcon:'⚔️',
+    color:'#5A7A9A', colorDim:'rgba(90,122,154,.12)',
+    bio:[
+      {k:'Nombre completo',v:'Miguel de Cervantes Saavedra'},
+      {k:'Nacimiento',v:'29 de septiembre de 1547 (fecha de bautismo), Alcalá de Henares, España'},
+      {k:'Fallecimiento',v:'22 de abril de 1616, Madrid'},
+      {k:'Nacionalidad',v:'Española'},
+      {k:'Profesiones',v:'Escritor, soldado, funcionario público'},
+      {k:'Contexto histórico',v:'Siglo de Oro español; apogeo y posterior decadencia del Imperio español; contexto de la Contrarreforma',w:true},
+      {k:'Formación',v:'Educación mayormente autodidacta, posiblemente con maestros jesuitas; sin estudios universitarios completos comprobados',w:true},
+      {k:'Principales acontecimientos',v:'Participación en la batalla de Lepanto (1571), donde perdió movilidad de la mano izquierda; cautiverio en Argel (1575–1580); trabajos como funcionario y recaudador de impuestos; encarcelamientos por deudas; publicación tardía de Don Quijote (Parte I, 1605; Parte II, 1615)',w:true},
+      {k:'Legado',v:'Máximo exponente de la literatura española y creador de la novela moderna',w:true},
+    ],
+    movs:[
+      {name:'Siglo de Oro español — Transición Renacimiento tardío–Barroco',type:'Movimiento principal',body:'Su obra combina el idealismo renacentista con el desengaño propio del Barroco, además de parodiar géneros literarios anteriores con un enfoque realista.'},
+      {name:'Precursor del realismo narrativo moderno',type:'Movimiento relacionado',body:'A través de la metaficción, los personajes complejos y la multiplicidad de voces narrativas, anticipa la novela realista del siglo XIX.'},
+    ],
+    carac:['<strong>Ironía y parodia</strong>, especialmente de los libros de caballerías.','Combinación de <strong>realismo e idealismo</strong> en la construcción narrativa.','<strong>Multiplicidad de voces narrativas</strong> y recursos metaficcionales.','<strong>Profundidad psicológica</strong> de los personajes.','<strong>Crítica social y cultural</strong> disimulada mediante el humor.','<strong>Diversidad de registros</strong> lingüísticos y estilísticos.','<strong>Estructura de relatos intercalados</strong> (novela dentro de la novela).','Reflexión constante sobre la <strong>relación entre realidad y ficción</strong>.'],
+    temas:['<strong>La locura y la cordura:</strong> límites difusos entre ambas en la experiencia humana.','<strong>Idealismo frente al desengaño:</strong> tensión central de la época barroca.','<strong>La libertad individual:</strong> defendida frente a las convenciones sociales.','<strong>La justicia social:</strong> crítica a las desigualdades de la época.','<strong>El amor:</strong> presentado en sus múltiples formas y matices.','<strong>La literatura y la ficción:</strong> reflexión metaliteraria constante.'],
+    generosTbl:[['Narrativo','Novela pastoril, novela picaresca, novela bizantina, novela corta','La Galatea, Novelas ejemplares, Don Quijote de la Mancha'],['Teatro','Comedia, entremés','Los baños de Argel, El retablo de las maravillas'],['Lírico','Poesía narrativa','Viaje del Parnaso']],
+    obrasTbl:[['La Galatea','1585','Novela pastoril','Relato idealizado de pastores enamorados.'],['Don Quijote de la Mancha (Parte I)','1605','Novela','Aventuras de un hidalgo enloquecido por los libros de caballerías.'],['Novelas ejemplares','1613','Novela corta','Colección de doce relatos de carácter moral y variado.'],['Viaje del Parnaso','1614','Poema','Alegoría sobre los poetas españoles de su tiempo.'],['Ocho comedias y ocho entremeses nuevos','1615','Teatro','Colección de obras dramáticas mayores y menores.'],['Don Quijote de la Mancha (Parte II)','1615','Novela','Continuación de las aventuras de Don Quijote y Sancho.'],['Los trabajos de Persiles y Sigismunda','1617 (póstuma)','Novela bizantina','Relato de aventuras y peregrinaciones de dos amantes.']],
+    obraPrincipal:{
+      titulo:'Don Quijote de la Mancha', fecha:'Parte I: 1605 · Parte II: 1615', genero:'Novela',
+      fields:[
+        {k:'Género',v:'Novela (parodia caballeresca con elementos picarescos, pastoriles y dialógicos)'},
+        {k:'Estructura',v:'Dos partes; la Parte I consta de 52 capítulos y la Parte II de 74 capítulos.'},
+        {k:'Contexto de creación',v:'España en proceso de decadencia tras el esplendor imperial; intención de parodiar los todavía populares libros de caballerías.',w:true},
+        {k:'Resumen',v:'Alonso Quijano, hidalgo enloquecido por la lectura de libros de caballerías, se convierte en "Don Quijote de la Mancha" y emprende, junto a su escudero Sancho Panza, diversas aventuras en defensa de ideales caballerescos ya extintos, confundiendo constantemente la realidad con sus fantasías.',w:true},
+        {k:'Tema principal',v:'La tensión entre el idealismo y la realidad.'},
+        {k:'Temas secundarios',v:'La locura, la libertad, la justicia, la literatura como ficción, la amistad.'},
+        {k:'Mensaje o enseñanza',v:'La dignidad humana puede sostenerse en los ideales propios, incluso cuando estos chocan con una realidad adversa.',w:true},
+        {k:'Aporte o innovación literaria',v:'Fundación de la novela moderna mediante la metaficción, el diálogo de perspectivas múltiples y la complejidad psicológica de los personajes.',w:true},
+      ],
+      personajes:[{n:'Don Quijote',d:'Idealista enloquecido por la lectura de novelas de caballerías.'},{n:'Sancho Panza',d:'Escudero pragmático, fiel y de sentido común popular.'},{n:'Dulcinea del Toboso',d:'Dama idealizada por Don Quijote, en realidad una sencilla aldeana.'},{n:'El cura y el barbero',d:'Representan la cordura y el orden social.'},{n:'Sansón Carrasco',d:'Antagonista que enfrenta a Don Quijote en la Parte II.'}],
+    },
+    imp:[
+      {k:'Para la literatura',v:'Considerada la primera novela moderna y una de las obras más influyentes de la literatura universal.'},
+      {k:'Influencia en autores posteriores',v:'Gustave Flaubert, Fiódor Dostoievski, Franz Kafka, entre muchos otros.'},
+      {k:'Aportes al movimiento',v:'Consolidó la narrativa realista y metaficcional propia del Siglo de Oro español.'},
+      {k:'Vigencia actual',v:'Origen del término "quijotesco"; se estudia por su innovación narrativa, riqueza lingüística y profundidad filosófica.'},
+    ],
+  },
+  {
+    id:'lope', name:'Lope de Vega', initial:'L',
+    dates:'1562–1635', nation:'🇪🇸 Madrid, España',
+    movement:'Barroco español · Siglo de Oro',
+    obra:'Fuenteovejuna', obraIcon:'🔥',
+    color:'#A03030', colorDim:'rgba(160,48,48,.12)',
+    bio:[
+      {k:'Nombre completo',v:'Félix Lope de Vega y Carpio'},
+      {k:'Nacimiento',v:'25 de noviembre de 1562, Madrid'},
+      {k:'Fallecimiento',v:'27 de agosto de 1635, Madrid'},
+      {k:'Nacionalidad',v:'Española'},
+      {k:'Profesiones',v:'Dramaturgo, poeta, sacerdote (en su vejez)'},
+      {k:'Contexto histórico',v:'Apogeo del Siglo de Oro español; consolidación del teatro comercial en los corrales de comedias; contexto de la Contrarreforma',w:true},
+      {k:'Formación',v:'Estudios con los jesuitas; posible paso por la Universidad de Alcalá de Henares',w:true},
+      {k:'Principales acontecimientos',v:'Vida amorosa intensa y polémica; participación en la expedición de la Armada Invencible (1588); varios matrimonios y relaciones; ordenación sacerdotal en 1614; enorme producción dramática (cerca de 1500 obras teatrales atribuidas); creación del modelo de la "comedia nueva" española',w:true},
+      {k:'Legado',v:'Creador del teatro nacional español, conocido como el "Fénix de los ingenios"',w:true},
+    ],
+    movs:[
+      {name:'Barroco español — Siglo de Oro',type:'Movimiento principal',body:'Rompe deliberadamente con las reglas clásicas (unidad de tiempo, lugar y acción) para crear un teatro popular, dinámico y de identidad nacional, característico del Barroco español.'},
+      {name:'Creador de la "comedia nueva" española',type:'Movimiento relacionado',body:'Formuló un nuevo modelo dramático que mezclaba géneros, registros y personajes tipo, adaptado al gusto del público popular.'},
+    ],
+    carac:['<strong>Ruptura de las unidades clásicas</strong> de tiempo, lugar y acción.','<strong>Mezcla de elementos trágicos y cómicos</strong> en una misma obra.','Estructura en <strong>tres actos llamados jornadas</strong>.','<strong>Variedad métrica (polimetría)</strong> adaptada a cada situación dramática.','Personajes tipo: <strong>el gracioso, el galán, la dama, el rey</strong>.','Temática recurrente del <strong>honor y la defensa de la monarquía</strong>.','Lenguaje <strong>ágil y vivo</strong>, cercano al gusto del público popular.','Decoro poético: el habla de cada personaje se adapta a su <strong>condición social</strong>.'],
+    temas:['<strong>El honor</strong> y su defensa como valor social central.','<strong>El amor</strong> en sus formas cortesana y popular.','<strong>La monarquía</strong> como garante del orden social.','<strong>La justicia y el castigo</strong>, frecuentemente vinculados al poder real.','<strong>La religión y la fe</strong>, presentes especialmente en sus autos sacramentales.','<strong>La libertad frente a la tiranía</strong>, conflicto recurrente en sus dramas históricos.'],
+    generosTbl:[['Teatro','Comedia de capa y espada, drama histórico, comedia de costumbres, auto sacramental','Fuenteovejuna, El caballero de Olmedo, La dama boba'],['Lírico','Soneto, romance','Rimas'],['Narrativo','Novela pastoril','La Arcadia'],['Ensayístico','Tratado dramático','Arte nuevo de hacer comedias en este tiempo']],
+    obrasTbl:[['La Arcadia','1598','Novela pastoril','Narración idealizada de amores entre pastores.'],['El Arte nuevo de hacer comedias en este tiempo','1609','Tratado dramático','Exposición teórica de los principios de la comedia nueva.'],['La dama boba','1613','Comedia de costumbres','Comedia sobre la inteligencia disimulada y el amor.'],['Fuenteovejuna','c. 1612–1614','Drama histórico','Rebelión popular contra un comendador tiránico.'],['Peribáñez y el comendador de Ocaña','c. 1614','Comedia','Conflicto de honor entre un labrador y un comendador.'],['El caballero de Olmedo','c. 1620–1625','Tragicomedia','Historia de amor y muerte marcada por el destino.']],
+    obraPrincipal:{
+      titulo:'Fuenteovejuna', fecha:'Escrita c. 1612–1614 · Publicada 1619', genero:'Drama histórico',
+      fields:[
+        {k:'Género',v:'Drama histórico (comedia nueva)'},
+        {k:'Estructura',v:'Tres actos (jornadas).'},
+        {k:'Contexto de creación',v:'Basada en un hecho histórico ocurrido en el siglo XV; refleja la defensa de la autoridad de los Reyes Católicos frente al abuso del poder señorial.',w:true},
+        {k:'Resumen',v:'Los habitantes del pueblo de Fuenteovejuna se rebelan y dan muerte al comendador Fernán Gómez de Guzmán debido a sus abusos y tiranía, especialmente contra Laurencia; los Reyes Católicos, tras investigar lo ocurrido, perdonan al pueblo al reconocer la justicia de su acción colectiva.',w:true},
+        {k:'Tema principal',v:'La justicia popular frente a la tiranía señorial.'},
+        {k:'Temas secundarios',v:'El honor, la monarquía como garante del orden, la dignidad colectiva.'},
+        {k:'Mensaje o enseñanza',v:'El pueblo unido puede restaurar la justicia cuando el poder se ejerce tiránicamente, siempre bajo la legitimidad última del rey.',w:true},
+        {k:'Aporte o innovación literaria',v:'Consolidación del drama histórico-social como subgénero de la comedia nueva; protagonismo colectivo, con el pueblo como personaje central.',w:true},
+      ],
+      personajes:[{n:'Fernán Gómez',d:'Comendador tiránico y abusivo.'},{n:'Laurencia',d:'Joven agraviada, símbolo de la dignidad popular.'},{n:'Frondoso',d:'Prometido de Laurencia, enfrentado al comendador.'},{n:'Los Reyes Católicos',d:'Representan la justicia real y el orden legítimo.'}],
+    },
+    imp:[
+      {k:'Para la literatura',v:'Obra cumbre del teatro español, junto con las de Calderón de la Barca.'},
+      {k:'Influencia en autores posteriores',v:'Modelo del teatro nacional y popular español, con influencia en el teatro europeo posterior.'},
+      {k:'Aportes al movimiento',v:'Creó y consolidó la "comedia nueva", modelo dramático dominante del Siglo de Oro.'},
+      {k:'Vigencia actual',v:'Se estudia por su valor histórico, social y dramático, y por representar el ideal de justicia y monarquía propio del Siglo de Oro.'},
+    ],
+  },
+  {
+    id:'calderon', name:'Pedro Calderón de la Barca', initial:'P',
+    dates:'1600–1681', nation:'🇪🇸 Madrid, España',
+    movement:'Barroco español tardío · Siglo de Oro',
+    obra:'La vida es sueño', obraIcon:'🌙',
+    color:'#6B5090', colorDim:'rgba(107,80,144,.12)',
+    bio:[
+      {k:'Nombre completo',v:'Pedro Calderón de la Barca Henao de la Barreda y Riaño'},
+      {k:'Nacimiento',v:'17 de enero de 1600, Madrid'},
+      {k:'Fallecimiento',v:'25 de mayo de 1681, Madrid'},
+      {k:'Nacionalidad',v:'Española'},
+      {k:'Profesiones',v:'Dramaturgo, poeta, sacerdote'},
+      {k:'Contexto histórico',v:'Barroco español tardío; decadencia política del Imperio español; profundización de la Contrarreforma',w:true},
+      {k:'Formación',v:'Estudios con los jesuitas; estudios universitarios en Alcalá de Henares y Salamanca (derecho y teología)',w:true},
+      {k:'Principales acontecimientos',v:'Breve experiencia militar; dramaturgo oficial de la corte de Felipe IV; ordenación sacerdotal en 1651; nombramiento como capellán de honor del rey; dedicación posterior principalmente a los autos sacramentales',w:true},
+      {k:'Legado',v:'Máximo representante, junto a Lope de Vega, del Barroco teatral español; perfeccionador de la comedia y del auto sacramental',w:true},
+    ],
+    movs:[
+      {name:'Barroco español — Segunda generación del Siglo de Oro',type:'Movimiento principal',body:'Profundiza el conceptismo, la complejidad filosófica y la elaboración formal característicos del Barroco maduro.'},
+      {name:'Continuador y perfeccionador de la "comedia nueva" de Lope de Vega',type:'Movimiento relacionado',body:'Toma el modelo lopesco y lo eleva a una mayor complejidad filosófica, simbólica y formal.'},
+    ],
+    carac:['<strong>Complejidad estructural y simbólica</strong>, con uso intenso de la alegoría.','<strong>Profundidad filosófica y teológica</strong> en el tratamiento de los temas.','Conceptismo: <strong>juegos conceptuales, antítesis y metáforas complejas</strong>.','<strong>Perfeccionamiento técnico</strong> del verso y la versificación.','Temática del <strong>honor llevada a extremos trágicos</strong>.','Uso magistral del <strong>auto sacramental</strong> como género doctrinal.','Personajes con <strong>dilemas morales profundos</strong>.','Simbolismo barroco: <strong>el mundo como teatro, la vida como sueño</strong>.','Tendencia al <strong>pesimismo existencial</strong> y la reflexión metafísica.'],
+    temas:['<strong>El libre albedrío</strong> frente al destino predeterminado.','<strong>La ilusión de la vida</strong> frente a la realidad objetiva.','<strong>El honor y la venganza</strong>, llevados a consecuencias extremas.','<strong>El poder</strong> y la responsabilidad del gobernante.','<strong>La fe y la salvación</strong>, centrales en los autos sacramentales.','<strong>La identidad y el autoconocimiento</strong>, proceso de madurez de los personajes.'],
+    generosTbl:[['Teatro','Comedia, drama filosófico, drama de honor, auto sacramental','La vida es sueño, El alcalde de Zalamea, El gran teatro del mundo'],['Lírico','Poesía menor (sonetos ocasionales)','Obra lírica secundaria frente a su producción teatral']],
+    obrasTbl:[['La vida es sueño','1635','Drama filosófico','Reflexión sobre el libre albedrío y la ilusión de la vida.'],['El médico de su honor','1635','Drama de honor','Tragedia sobre los excesos del código del honor conyugal.'],['El alcalde de Zalamea','1636','Drama de honor / justicia','Conflicto entre el honor popular y el abuso militar.'],['El pintor de su deshonra','1650','Drama de honor','Tragedia centrada en los celos y la honra familiar.'],['El gran teatro del mundo','c. 1655','Auto sacramental','Alegoría de la vida humana como representación teatral ante Dios.']],
+    obraPrincipal:{
+      titulo:'La vida es sueño', fecha:'1635', genero:'Drama filosófico (comedia barroca)',
+      fields:[
+        {k:'Género',v:'Drama filosófico (comedia barroca)'},
+        {k:'Estructura',v:'Tres jornadas (actos).'},
+        {k:'Contexto de creación',v:'Escrita en la madurez del Barroco español, bajo el reinado de Felipe IV, en un contexto de honda reflexión filosófica sobre la libertad y el destino propio de la Contrarreforma.',w:true},
+        {k:'Resumen',v:'Segismundo, príncipe de Polonia, es encerrado desde su nacimiento por su padre, el rey Basilio, debido a una profecía funesta; liberado temporalmente y devuelto luego a prisión, Segismundo confunde la realidad con el sueño, hasta que, finalmente liberado por una rebelión popular, aprende a dominar sus pasiones y gobierna con justicia.',w:true},
+        {k:'Tema principal',v:'El libre albedrío frente al destino predeterminado.'},
+        {k:'Temas secundarios',v:'La ilusión de la vida, el correcto ejercicio del poder, la identidad personal.'},
+        {k:'Mensaje o enseñanza',v:'El ser humano puede dominar su naturaleza pasional mediante la razón y la virtud, independientemente de su destino aparente.',w:true},
+        {k:'Aporte o innovación literaria',v:'Máxima expresión del drama filosófico barroco español; profundización simbólica del tópico "la vida es sueño".',w:true},
+      ],
+      personajes:[{n:'Segismundo',d:'Príncipe encerrado, en conflicto entre el instinto y la razón.'},{n:'Basilio',d:'Rey y padre que encierra a su hijo por temor al destino anunciado.'},{n:'Rosaura',d:'Dama que impulsa el cambio moral de Segismundo.'},{n:'Clotaldo',d:'Preceptor de Segismundo, fiel servidor del rey.'}],
+    },
+    imp:[
+      {k:'Para la literatura',v:'Una de las obras cumbre del teatro universal.'},
+      {k:'Influencia en autores posteriores',v:'Comparada frecuentemente con Hamlet de Shakespeare por su profundidad filosófica; influencia en el teatro filosófico europeo posterior.'},
+      {k:'Aportes al movimiento',v:'Perfeccionó el drama filosófico y el auto sacramental dentro del Barroco español.'},
+      {k:'Vigencia actual',v:'Se estudia por su riqueza simbólica, su tratamiento del libre albedrío y su perfección formal barroca.'},
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════════
+// BUILD UI
+// ═══════════════════════════════════════════════════════════════════
+function sdiv(label){return`<div class="sdiv"><span class="sdiv-line"></span><span class="sdiv-label">${label}</span><span class="sdiv-line"></span></div>`}
+
+function buildEntry(a){
+  // tabs content
+  const bio = `<div class="bio-grid">${a.bio.map(r=>`<div class="bio-cell${r.w?' w2':''}"><span class="bio-k">${r.k}</span><span class="bio-v">${r.v}</span></div>`).join('')}</div>`;
+  const movs = a.movs.map(m=>`<div class="mov-item" style="border-left-color:${a.color}"><div class="mov-item-title">${m.name}<span class="mov-item-type">${m.type}</span></div><div class="mov-item-body">${m.body}</div></div>`).join('');
+  const carac = `<ul class="slist" style="--dot-color:${a.color}">${a.carac.map(c=>`<li style="--before-color:${a.color}">${c}</li>`).join('')}</ul>`;
+  const temas = `<ul class="slist">${a.temas.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+  const generos = `${sdiv('Géneros y especies literarias')}<table class="dtbl"><tr><th>Género</th><th>Especies literarias</th><th>Ejemplos</th></tr>${a.generosTbl.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>${sdiv('Obras principales')}<table class="dtbl"><tr><th>Obra</th><th>Año</th><th>Género</th><th>Descripción</th></tr>${a.obrasTbl.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>${a.obrasTblNota?`<p class="nota">${a.obrasTblNota}</p>`:''}`;
+  const op = a.obraPrincipal;
+  const obraP = `<div class="obra"><div class="obra-top"><div class="obra-icon-wrap">${a.obraIcon}</div><div class="obra-top-info"><h3>${op.titulo}</h3><p>${op.fecha} · ${op.genero}</p></div></div><div class="obra-body">${op.fields.map(f=>`<div class="obra-field${f.w?' w2':''}"><div class="obra-k">${f.k}</div><div class="obra-v">${f.v}</div></div>`).join('')}</div><div style="padding:0 22px 22px">${sdiv(op.pLabel||'Personajes principales')}<ul class="chars">${op.personajes.map(p=>`<li><strong>${p.n}</strong>${p.d}</li>`).join('')}</ul></div></div>`;
+  const imp = `<div class="imp-grid">${a.imp.map(i=>`<div class="imp-cell"><div class="imp-k">${i.k}</div><div class="imp-v">${i.v}</div></div>`).join('')}</div>`;
+
+  const pid = a.id;
+  return `
+<div class="entry" id="${pid}">
+  <div class="entry-hdr" onclick="toggle('${pid}')">
+    <div class="entry-accent" style="background:${a.color}"></div>
+    <div class="entry-hdr-inner">
+      <div class="entry-initial" style="background:${a.colorDim};color:${a.color}">${a.initial}</div>
+      <div class="entry-info">
+        <h2>${a.name}</h2>
+        <div class="entry-meta">
+          <span>${a.dates}</span>
+          <span>${a.nation}</span>
+          <span class="entry-badge" style="background:${a.colorDim};color:${a.color};border:1px solid ${a.color}30">${a.movement}</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry-right">
+      <span class="entry-obra-pill">${a.obraIcon} ${a.obra}</span>
+      <span class="entry-chevron">⌄</span>
+    </div>
+  </div>
+  <div class="entry-body">
+    <div class="tab-bar">
+      <button class="tab-btn on" onclick="tab(this,'${pid}-bio')">Biografía</button>
+      <button class="tab-btn" onclick="tab(this,'${pid}-mov')" style="--c:${a.color}">Movimiento</button>
+      <button class="tab-btn" onclick="tab(this,'${pid}-carac')">Características</button>
+      <button class="tab-btn" onclick="tab(this,'${pid}-temas')">Temas</button>
+      <button class="tab-btn" onclick="tab(this,'${pid}-gen')">Géneros y Obras</button>
+      <button class="tab-btn" onclick="tab(this,'${pid}-obra')">Obra principal</button>
+      <button class="tab-btn" onclick="tab(this,'${pid}-imp')">Importancia</button>
+    </div>
+    <div class="tab-pane on" id="${pid}-bio">${bio}</div>
+    <div class="tab-pane" id="${pid}-mov">${movs}</div>
+    <div class="tab-pane" id="${pid}-carac">${carac}</div>
+    <div class="tab-pane" id="${pid}-temas">${temas}</div>
+    <div class="tab-pane" id="${pid}-gen">${generos}</div>
+    <div class="tab-pane" id="${pid}-obra">${obraP}</div>
+    <div class="tab-pane" id="${pid}-imp">${imp}</div>
+  </div>
+</div>`;
+}
+
+// Topbar nav
+const nav = document.getElementById('tb-nav');
+AUTHORS.forEach((a,i)=>{
+  const b = document.createElement('button');
+  b.className='tb-nav-btn'+(i===0?' active':'');
+  b.textContent = a.name.split(' ')[0]+(a.name.split(' ').length>2?' '+a.name.split(' ').slice(-1)[0]:'');
+  b.onclick = ()=>{ goTo(a.id); document.querySelectorAll('.tb-nav-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); };
+  nav.appendChild(b);
+});
+
+// Timeline
+const tl = document.getElementById('timeline');
+AUTHORS.forEach(a=>{
+  const d = document.createElement('div');
+  d.className='tl-item'; d.id='tl-'+a.id;
+  d.innerHTML=`<div class="tl-dot" style="border-color:${a.color};background:${a.colorDim}"></div><div class="tl-name">${a.name.split(' ')[0]}</div><div class="tl-era">${a.dates}</div>`;
+  d.onclick=()=>goTo(a.id);
+  tl.appendChild(d);
+});
+
+// Entries
+document.getElementById('entries').innerHTML = AUTHORS.map(buildEntry).join('');
+
+// Set active tab color
+document.querySelectorAll('.tab-btn.on').forEach(b=>{
+  const entry = b.closest('.entry');
+  if(entry){
+    const a = AUTHORS.find(x=>x.id===entry.id);
+    if(a) b.style.color=a.color;
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// INTERACTIONS
+// ═══════════════════════════════════════════════════════════════════
+function toggle(id){
+  const e=document.getElementById(id);
+  e.classList.toggle('open');
+}
+function tab(btn,paneId){
+  const bar=btn.closest('.tab-bar');
+  const body=btn.closest('.entry-body');
+  bar.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('on');b.style.color='';});
+  body.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  // color
+  const entry=btn.closest('.entry');
+  const a=AUTHORS.find(x=>x.id===entry.id);
+  if(a) btn.style.color=a.color;
+  document.getElementById(paneId).classList.add('on');
+}
+function goTo(id){
+  const e=document.getElementById(id);
+  if(!e)return;
+  if(!e.classList.contains('open')) e.classList.add('open');
+  setTimeout(()=>e.scrollIntoView({behavior:'smooth',block:'start'}),50);
+  // timeline
+  document.querySelectorAll('.tl-item').forEach(t=>t.classList.remove('active'));
+  const tli=document.getElementById('tl-'+id);
+  if(tli) tli.classList.add('active');
+}
+function expandAll(){document.querySelectorAll('.entry').forEach(e=>e.classList.add('open'))}
+function collapseAll(){document.querySelectorAll('.entry').forEach(e=>e.classList.remove('open'))}
+
+// Search
+document.getElementById('q').addEventListener('input',function(){
+  const q=this.value.toLowerCase().trim();
+  document.querySelectorAll('.entry').forEach(e=>{
+    if(!q){e.style.display='';return;}
+    const match=e.innerText.toLowerCase().includes(q);
+    e.style.display=match?'':'none';
+    if(match&&!e.classList.contains('open')) e.classList.add('open');
+  });
+});
+
+// Intersection for timeline highlight
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.tl-item').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.tb-nav-btn').forEach(t=>t.classList.remove('active'));
+      const tli=document.getElementById('tl-'+id);
+      if(tli) tli.classList.add('active');
+      const nb=[...document.querySelectorAll('.tb-nav-btn')].find(b=>b.onclick.toString().includes(`'${id}'`));
+      if(nb) nb.classList.add('active');
+    }
+  });
+},{threshold:0.15,rootMargin:'-60px 0px 0px 0px'});
+document.querySelectorAll('.entry').forEach(e=>io.observe(e));
+</script>
+</body>
+</html>
