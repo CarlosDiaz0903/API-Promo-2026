@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Estandartes de la Patria — BLESSED 2026</title>
+<title>Memoria, Honor y Porvenir — BLESSED 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -24,134 +24,148 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;letter-spacing:-0.01em;}
 .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
 a{color:inherit;text-decoration:none;}
 
-.nav{position:sticky;top:0;z-index:50;background:rgba(243,236,221,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea);}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;}
-.nav-brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.02rem;color:var(--grana-dark);white-space:nowrap;}
-.nav-brand .seal{width:28px;height:28px;border-radius:50%;background:conic-gradient(var(--grana) 0 33%, var(--oro) 33% 66%, var(--negro-cuartel) 66% 100%);border:2px solid var(--tinta);flex-shrink:0;}
-.nav-links{display:flex;gap:20px;font-size:0.82rem;font-weight:500;overflow-x:auto;}
+.nav{position:sticky;top:0;z-index:50;background:rgba(243,236,221,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea);}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-brand{display:flex;align-items:center;gap:9px;font-family:'Fraunces',serif;font-weight:700;font-size:0.92rem;color:var(--grana-dark);white-space:nowrap;}
+.nav-brand .seal{width:26px;height:26px;border-radius:50%;background:conic-gradient(var(--grana) 0 33%, var(--oro) 33% 66%, var(--negro-cuartel) 66% 100%);border:2px solid var(--tinta);flex-shrink:0;}
+.nav-links{display:flex;gap:16px;font-size:0.78rem;font-weight:500;overflow-x:auto;}
 .nav-links a{color:var(--tinta-soft);padding:6px 2px;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap;}
 .nav-links a:hover{color:var(--grana-dark);border-bottom-color:var(--oro);}
 .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--tinta);}
-@media(max-width:960px){
-  .nav-links{position:fixed;top:66px;left:0;right:0;background:var(--pergamino);flex-direction:column;padding:18px 28px;border-bottom:1px solid var(--linea);gap:14px;display:none;overflow:visible;}
+@media(max-width:1080px){
+  .nav-links{position:fixed;top:64px;left:0;right:0;background:var(--pergamino);flex-direction:column;padding:18px 28px;border-bottom:1px solid var(--linea);gap:14px;display:none;overflow:visible;}
   .nav-links.open{display:flex;} .nav-toggle{display:block;}
 }
 
-.hero{position:relative;padding:70px 0 50px;overflow:hidden;border-bottom:1px solid var(--linea);}
+.hero{position:relative;padding:64px 0 46px;overflow:hidden;border-bottom:1px solid var(--linea);}
 .hero::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(135deg, rgba(143,36,52,0.035) 0 2px, transparent 2px 26px);pointer-events:none;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grana-dark);border:1px solid var(--grana);border-radius:999px;padding:6px 14px;margin-bottom:20px;background:rgba(143,36,52,0.05);}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grana-dark);border:1px solid var(--grana);border-radius:999px;padding:6px 14px;margin-bottom:18px;background:rgba(143,36,52,0.05);}
 .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--oro);}
-.hero h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:900;color:var(--tinta);line-height:1.03;max-width:820px;}
+.hero h1{font-size:clamp(2rem,4.6vw,3.6rem);font-weight:900;color:var(--tinta);line-height:1.05;max-width:820px;}
 .hero h1 em{font-style:normal;color:var(--grana);}
-.hero p.lead{max-width:660px;margin-top:20px;font-size:1.03rem;color:var(--tinta-soft);}
-.hero-meta{display:flex;flex-wrap:wrap;gap:26px;margin-top:32px;padding-top:22px;border-top:1px dashed var(--linea);}
+.hero p.lead{max-width:660px;margin-top:18px;font-size:1rem;color:var(--tinta-soft);}
+.hero-meta{display:flex;flex-wrap:wrap;gap:24px;margin-top:28px;padding-top:20px;border-top:1px dashed var(--linea);}
 .hero-meta div{display:flex;flex-direction:column;gap:2px;}
-.hero-meta .label{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--tinta-soft);}
-.hero-meta .val{font-weight:600;font-size:0.95rem;}
+.hero-meta .label{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--tinta-soft);}
+.hero-meta .val{font-weight:600;font-size:0.92rem;}
 
-.section{padding:56px 0;}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px;}
-.section-head .tag{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--oro);font-weight:700;}
-.section-head h2{font-size:clamp(1.5rem,3vw,2.15rem);margin-top:4px;}
-.section-head p{color:var(--tinta-soft);max-width:520px;font-size:0.92rem;}
+.section{padding:52px 0;}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:26px;}
+.section-head .tag{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--oro);font-weight:700;}
+.section-head h2{font-size:clamp(1.4rem,2.8vw,2.05rem);margin-top:4px;}
+.section-head p{color:var(--tinta-soft);max-width:520px;font-size:0.9rem;}
 
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;}
-.stat-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:13px;}
+.stat-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
 .stat-card::after{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent,var(--grana));}
-.stat-card .num{font-family:'JetBrains Mono',monospace;font-size:1.95rem;font-weight:700;color:var(--tinta);}
-.stat-card .lbl{font-size:0.8rem;color:var(--tinta-soft);margin-top:4px;}
-.stat-card .sub{font-size:0.7rem;color:var(--oro);margin-top:7px;font-family:'JetBrains Mono',monospace;}
+.stat-card .num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--tinta);}
+.stat-card .lbl{font-size:0.78rem;color:var(--tinta-soft);margin-top:4px;}
+.stat-card .sub{font-size:0.68rem;color:var(--oro);margin-top:6px;font-family:'JetBrains Mono',monospace;}
 
-.banner{display:flex;gap:14px;align-items:flex-start;background:rgba(184,145,47,0.09);border:1px solid var(--oro-soft);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px;font-size:0.87rem;color:var(--tinta-soft);}
-.banner b{color:var(--tinta);}
-.banner.warn{background:rgba(143,36,52,0.06);border-color:var(--grana);}
-
-.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
 .search-box{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--card-bg);border:1px solid var(--linea);border-radius:10px;padding:10px 14px;}
-.search-box input{border:none;background:none;outline:none;font-family:inherit;font-size:0.92rem;width:100%;color:var(--tinta);}
-.filter-chip{border:1px solid var(--linea);background:var(--card-bg);border-radius:999px;padding:9px 16px;font-size:0.82rem;font-weight:500;cursor:pointer;transition:.2s;color:var(--tinta-soft);}
+.search-box input{border:none;background:none;outline:none;font-family:inherit;font-size:0.9rem;width:100%;color:var(--tinta);}
+.filter-chip{border:1px solid var(--linea);background:var(--card-bg);border-radius:999px;padding:9px 16px;font-size:0.8rem;font-weight:500;cursor:pointer;transition:.2s;color:var(--tinta-soft);}
 .filter-chip.active{background:var(--grana);border-color:var(--grana);color:#fff;}
 
-.subgroup-title{display:flex;align-items:center;gap:10px;margin:30px 0 16px;}
-.subgroup-title h3{font-size:1.1rem;color:var(--grana-dark);}
+.subgroup-title{display:flex;align-items:center;gap:10px;margin:28px 0 14px;}
+.subgroup-title h3{font-size:1.06rem;color:var(--grana-dark);}
 .subgroup-title .line{flex:1;height:1px;background:var(--linea);}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;}
-.dossier{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:18px 18px 16px;box-shadow:var(--shadow);position:relative;border-top:3px solid var(--accent,var(--grana));transition:transform .18s, box-shadow .18s;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:15px;}
+.dossier{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:17px 17px 15px;box-shadow:var(--shadow);position:relative;border-top:3px solid var(--accent,var(--grana));transition:transform .18s, box-shadow .18s;}
 .dossier:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(36,31,25,0.14);}
-.dossier .legajo{font-family:'JetBrains Mono',monospace;font-size:0.64rem;color:var(--tinta-soft);letter-spacing:0.06em;display:flex;justify-content:space-between;margin-bottom:10px;}
+.dossier .legajo{font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--tinta-soft);letter-spacing:0.06em;display:flex;justify-content:space-between;margin-bottom:9px;}
 .dossier .legajo .salon-tag{background:var(--pergamino-alt);padding:2px 8px;border-radius:5px;font-weight:700;color:var(--tinta);}
-.dossier .personaje{font-family:'Fraunces',serif;font-weight:700;font-size:1.08rem;color:var(--tinta);line-height:1.15;}
-.dossier .estudiante{margin-top:6px;font-size:0.87rem;color:var(--tinta-soft);}
-.dossier .rol{margin-top:10px;font-size:0.7rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent,var(--grana));}
-.dossier .flag{position:absolute;top:14px;right:14px;font-size:0.62rem;font-family:'JetBrains Mono',monospace;background:var(--ambar);color:#fff;padding:2px 7px;border-radius:5px;}
+.dossier .personaje{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;color:var(--tinta);line-height:1.15;}
+.dossier .estudiante{margin-top:6px;font-size:0.85rem;color:var(--tinta-soft);}
+.dossier .rol{margin-top:9px;font-size:0.68rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;color:var(--accent,var(--grana));}
+.dossier .flag{position:absolute;top:13px;right:13px;font-size:0.6rem;font-family:'JetBrains Mono',monospace;background:var(--ambar);color:#fff;padding:2px 7px;border-radius:5px;}
 
-.tabs{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap;}
-.tab-btn{border:1px solid var(--linea);background:var(--card-bg);padding:11px 20px;border-radius:10px;font-weight:600;font-size:0.88rem;cursor:pointer;display:flex;align-items:center;gap:9px;transition:.2s;}
-.tab-btn .swatch{width:12px;height:12px;border-radius:3px;}
+.tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.tab-btn{border:1px solid var(--linea);background:var(--card-bg);padding:10px 18px;border-radius:10px;font-weight:600;font-size:0.85rem;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s;}
+.tab-btn .swatch{width:11px;height:11px;border-radius:3px;}
 .tab-btn.active{color:#fff;}
 .tab-panel{display:none;} .tab-panel.active{display:block;}
-.branch-header{display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:var(--radius);margin-bottom:20px;color:#fff;}
-.branch-header h3{font-size:1.22rem;color:#fff;} .branch-header p{font-size:0.84rem;opacity:0.85;margin-top:2px;}
-.leader-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
-.leader-card{flex:1;min-width:220px;background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:15px 17px;box-shadow:var(--shadow);border-left:4px solid var(--accent,var(--grana));}
-.leader-card .badge{font-family:'JetBrains Mono',monospace;font-size:0.63rem;text-transform:uppercase;color:var(--oro);letter-spacing:.08em;font-weight:700;}
-.leader-card .nm{font-weight:600;margin-top:4px;} .leader-card .nota{font-size:0.78rem;color:var(--tinta-soft);margin-top:2px;}
-.cadet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
-.cadet-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:0.86rem;}
-.cadet-card .salon-tag{font-family:'JetBrains Mono',monospace;font-size:0.66rem;background:var(--pergamino-alt);padding:3px 8px;border-radius:5px;font-weight:700;flex-shrink:0;}
+.branch-header{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:var(--radius);margin-bottom:18px;color:#fff;}
+.branch-header h3{font-size:1.15rem;color:#fff;} .branch-header p{font-size:0.82rem;opacity:0.85;margin-top:2px;}
+.leader-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+.leader-card{flex:1;min-width:210px;background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);border-left:4px solid var(--accent,var(--grana));}
+.leader-card .badge{font-family:'JetBrains Mono',monospace;font-size:0.61rem;text-transform:uppercase;color:var(--oro);letter-spacing:.08em;font-weight:700;}
+.leader-card .nm{font-weight:600;margin-top:4px;font-size:0.92rem;} .leader-card .nota{font-size:0.76rem;color:var(--tinta-soft);margin-top:2px;}
+.cadet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:11px;}
+.cadet-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:10px;padding:11px 13px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:0.83rem;}
+.cadet-card .salon-tag{font-family:'JetBrains Mono',monospace;font-size:0.63rem;background:var(--pergamino-alt);padding:3px 8px;border-radius:5px;font-weight:700;flex-shrink:0;}
+.cadet-card .note{font-size:0.68rem;color:var(--oro);display:block;margin-top:2px;}
 
-.rabona-hero{background:linear-gradient(135deg, var(--verde-rabona), #3a4630);border-radius:var(--radius);padding:26px 26px;color:#f3ecdd;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
-.rabona-hero h3{color:#fff;font-size:1.3rem;} .rabona-hero p{opacity:0.85;font-size:0.88rem;margin-top:6px;max-width:480px;}
-.rabona-note{background:var(--card-bg);border:1px dashed var(--linea);border-radius:var(--radius);padding:16px 18px;font-size:0.85rem;color:var(--tinta-soft);margin-top:18px;}
+.rabona-hero{background:linear-gradient(135deg, var(--verde-rabona), #3a4630);border-radius:var(--radius);padding:24px 24px;color:#f3ecdd;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.rabona-hero h3{color:#fff;font-size:1.22rem;} .rabona-hero p{opacity:0.85;font-size:0.85rem;margin-top:6px;max-width:480px;}
+.rabona-note{background:var(--card-bg);border:1px dashed var(--linea);border-radius:var(--radius);padding:15px 17px;font-size:0.83rem;color:var(--tinta-soft);margin-top:16px;}
 
-.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
-.role-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:20px 20px;box-shadow:var(--shadow);border-top:3px solid var(--accent,var(--ambar));}
-.role-card h4{font-size:1.02rem;margin-bottom:4px;color:var(--tinta);}
-.role-card .desc{font-size:0.8rem;color:var(--tinta-soft);margin-bottom:12px;}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;}
+.role-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:18px 18px;box-shadow:var(--shadow);border-top:3px solid var(--accent,var(--ambar));}
+.role-card h4{font-size:0.98rem;margin-bottom:4px;color:var(--tinta);}
+.role-card .desc{font-size:0.78rem;color:var(--tinta-soft);margin-bottom:11px;}
 .role-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
-.role-card li{font-size:0.87rem;display:flex;justify-content:space-between;border-bottom:1px solid var(--pergamino-alt);padding-bottom:6px;}
+.role-card li{font-size:0.85rem;display:flex;justify-content:space-between;border-bottom:1px solid var(--pergamino-alt);padding-bottom:6px;}
 .role-card li:last-child{border-bottom:none;padding-bottom:0;}
-.role-card .salon-tag{font-family:'JetBrains Mono',monospace;font-size:0.65rem;background:var(--pergamino-alt);padding:2px 7px;border-radius:5px;font-weight:700;}
+.role-card .salon-tag{font-family:'JetBrains Mono',monospace;font-size:0.63rem;background:var(--pergamino-alt);padding:2px 7px;border-radius:5px;font-weight:700;}
 
-.pending-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.pending-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
 @media(max-width:760px){.pending-cols{grid-template-columns:1fr;}}
-.pending-col{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);}
-.pending-col h4{display:flex;justify-content:space-between;align-items:center;font-size:1.02rem;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--linea);}
-.pending-col h4 .count{font-family:'JetBrains Mono',monospace;font-size:0.72rem;background:var(--pergamino-alt);padding:3px 10px;border-radius:999px;}
+.pending-col{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);}
+.pending-col h4{display:flex;justify-content:space-between;align-items:center;font-size:1rem;margin-bottom:12px;padding-bottom:11px;border-bottom:1px solid var(--linea);}
+.pending-col h4 .count{font-family:'JetBrains Mono',monospace;font-size:0.7rem;background:var(--pergamino-alt);padding:3px 10px;border-radius:999px;}
 .pending-list{list-style:none;display:flex;flex-direction:column;gap:2px;}
-.pending-list li{padding:9px 4px;font-size:0.87rem;border-bottom:1px solid var(--pergamino-alt);display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.pending-list li{padding:8px 4px;font-size:0.85rem;border-bottom:1px solid var(--pergamino-alt);display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .pending-list li:last-child{border-bottom:none;}
-.pending-list .idx{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--tinta-soft);}
+.pending-list .idx{font-family:'JetBrains Mono',monospace;font-size:0.66rem;color:var(--tinta-soft);}
 
-.plan-tabs{display:flex;gap:10px;margin-bottom:24px;}
-.plan-btn{flex:1;border:2px solid var(--linea);background:var(--card-bg);padding:16px 18px;border-radius:var(--radius);cursor:pointer;text-align:left;transition:.2s;}
+.plan-tabs{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;}
+.plan-btn{flex:1;min-width:200px;border:2px solid var(--linea);background:var(--card-bg);padding:15px 17px;border-radius:var(--radius);cursor:pointer;text-align:left;transition:.2s;}
 .plan-btn.active{border-color:var(--grana);background:rgba(143,36,52,0.05);}
-.plan-btn .plabel{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--oro);font-weight:700;}
-.plan-btn h4{font-size:1.05rem;margin-top:4px;}
-.plan-btn p{font-size:0.8rem;color:var(--tinta-soft);margin-top:4px;}
+.plan-btn .plabel{font-family:'JetBrains Mono',monospace;font-size:0.63rem;text-transform:uppercase;letter-spacing:.08em;color:var(--oro);font-weight:700;}
+.plan-btn h4{font-size:1.02rem;margin-top:4px;}
+.plan-btn p{font-size:0.78rem;color:var(--tinta-soft);margin-top:4px;}
 .plan-panel{display:none;} .plan-panel.active{display:block;}
-.act-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:16px;border-left:4px solid var(--grana);}
-.act-card h4{font-size:1.08rem;margin-bottom:8px;}
-.act-card ol{padding-left:20px;font-size:0.88rem;color:var(--tinta-soft);display:flex;flex-direction:column;gap:6px;}
+.act-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:19px 21px;box-shadow:var(--shadow);margin-bottom:15px;border-left:4px solid var(--grana);}
+.act-card h4{font-size:1.05rem;margin-bottom:8px;}
+.act-card ol{padding-left:20px;font-size:0.86rem;color:var(--tinta-soft);display:flex;flex-direction:column;gap:6px;}
 .act-card ol li b{color:var(--tinta);}
-.tentative{display:inline-block;font-size:0.65rem;font-family:'JetBrains Mono',monospace;background:var(--ambar);color:#fff;padding:1px 7px;border-radius:5px;margin-left:6px;vertical-align:middle;}
+.tentative{display:inline-block;font-size:0.63rem;font-family:'JetBrains Mono',monospace;background:var(--ambar);color:#fff;padding:1px 7px;border-radius:5px;margin-left:6px;vertical-align:middle;}
 
-.timeline{position:relative;padding-left:34px;}
-.timeline::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:2px;background:var(--linea);}
-.tl-item{position:relative;padding-bottom:26px;}
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--linea);}
+.tl-item{position:relative;padding-bottom:24px;}
 .tl-item:last-child{padding-bottom:0;}
-.tl-item::before{content:attr(data-n);position:absolute;left:-34px;top:0;width:22px;height:22px;border-radius:50%;background:var(--grana);color:#fff;font-family:'JetBrains Mono',monospace;font-size:0.66rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.tl-item h4{font-size:1.02rem;margin-bottom:4px;} .tl-item p{color:var(--tinta-soft);font-size:0.86rem;max-width:600px;}
+.tl-item::before{content:attr(data-n);position:absolute;left:-32px;top:0;width:21px;height:21px;border-radius:50%;background:var(--grana);color:#fff;font-family:'JetBrains Mono',monospace;font-size:0.63rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.tl-item h4{font-size:0.98rem;margin-bottom:4px;} .tl-item p{color:var(--tinta-soft);font-size:0.84rem;max-width:600px;}
 
-footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:var(--tinta-soft);font-size:0.8rem;}
-.no-results{padding:36px 20px;text-align:center;color:var(--tinta-soft);font-size:0.88rem;}
+.crono-table, .org-table{width:100%;border-collapse:collapse;background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.crono-table th, .org-table th{background:var(--grana);color:#fff;text-align:left;padding:11px 14px;font-size:0.78rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.04em;}
+.crono-table td, .org-table td{padding:12px 14px;font-size:0.86rem;border-top:1px solid var(--linea);}
+.crono-table tr:nth-child(even) td, .org-table tr:nth-child(even) td{background:var(--pergamino-alt);}
+
+.org-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px;margin-bottom:24px;}
+.org-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:20px 20px;box-shadow:var(--shadow);border-top:3px solid var(--accent,var(--grana));}
+.org-card .role-tag{font-family:'JetBrains Mono',monospace;font-size:0.63rem;text-transform:uppercase;color:var(--oro);letter-spacing:.08em;font-weight:700;}
+.org-card h4{font-size:1.08rem;margin:5px 0 8px;}
+.org-card p{font-size:0.84rem;color:var(--tinta-soft);}
+
+.logi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px;}
+.logi-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:17px 19px;box-shadow:var(--shadow);}
+.logi-card h4{font-size:0.95rem;margin-bottom:6px;color:var(--grana-dark);}
+.logi-card p{font-size:0.83rem;color:var(--tinta-soft);}
+
+footer{border-top:1px solid var(--linea);padding:28px 0;text-align:center;color:var(--tinta-soft);font-size:0.78rem;}
+.no-results{padding:34px 20px;text-align:center;color:var(--tinta-soft);font-size:0.86rem;}
+.quote-box{border-left:4px solid var(--oro);padding:14px 20px;background:rgba(184,145,47,0.07);border-radius:0 var(--radius) var(--radius) 0;font-family:'Fraunces',serif;font-style:italic;color:var(--grana-dark);font-size:1.05rem;margin:18px 0;}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="wrap">
-    <div class="nav-brand"><span class="seal"></span> Estandartes de la Patria</div>
+    <div class="nav-brand"><span class="seal"></span> Memoria, Honor y Porvenir</div>
     <button class="nav-toggle" id="navToggle">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#inicio">Inicio</a>
@@ -160,21 +174,24 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
       <a href="#femenino">Grupo femenino</a>
       <a href="#roles">Roles especiales</a>
       <a href="#pendientes">Pendientes</a>
-      <a href="#plan">Plan A/B</a>
+      <a href="#actos">Actos</a>
+      <a href="#cronograma">Cronograma</a>
+      <a href="#organizacion">Organización</a>
+      <a href="#logistica">Logística</a>
     </div>
   </div>
 </nav>
 
 <section class="hero" id="inicio">
   <div class="wrap">
-    <div class="hero-eyebrow"><span class="dot"></span> Fiestas Patrias · Promoción BLESSED 2026 · v2 actualizada</div>
-    <h1>Estandartes de <em>la Patria</em></h1>
-    <p class="lead">Sistema de organización para la presentación patriótica de 5° de Secundaria. Ahora con estructura de Ejército, FAP y Marina reorganizada, grupo femenino de marineras, y dos planes de contingencia (con y sin acto en patio) que confluyen en una marcha final con coreografía de marinera.</p>
+    <div class="hero-eyebrow"><span class="dot"></span> Fiestas Patrias · Promoción BLESSED 2026 · v4</div>
+    <h1>Memoria, Honor <em>y Porvenir</em></h1>
+    <p class="lead" style="font-style:italic;color:var(--grana-dark);margin-top:-8px;">Identidad Peruana en Marcha</p>
+    <p class="lead">Proyecto patriótico-cultural que integra la recepción de familias, la formación ceremonial institucional y la marcha final de la promoción, articulando el trabajo de Ciencias Sociales, la disciplina militar y la expresión artística peruana.</p>
     <div class="hero-meta">
       <div><span class="label">Colegio</span><span class="val">Santa Cruz — Callao</span></div>
-      <div><span class="label">Promoción</span><span class="val">BLESSED 2026</span></div>
-      <div><span class="label">Salones</span><span class="val">5° A · 5° B</span></div>
-      <div><span class="label">Canción de cierre</span><span class="val">Coraje Cholo (marinera)</span></div>
+      <div><span class="label">Responsables</span><span class="val">Prof. Giovanna · Prof. Wilfredo (Coord. de Actividades) · Carlos Díaz</span></div>
+      <div><span class="label">Cierre</span><span class="val">Coraje Cholo (marinera)</span></div>
     </div>
   </div>
 </section>
@@ -183,7 +200,7 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
   <div class="wrap">
     <div class="section-head">
       <div><span class="tag">Parte oficial · actualizado</span><h2>Estado general de la formación</h2></div>
-      <p>Reorganización de fuerzas y grupo de marineras confirmada; cifras actualizadas abajo.</p>
+      <p>Solo 8 pendientes, todos en 5°B. Vamos por la secuencia completa: Corredor + Patio + Marcha.</p>
     </div>
     <div class="stat-grid" id="statGrid"></div>
   </div>
@@ -193,7 +210,7 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
   <div class="wrap">
     <div class="section-head">
       <div><span class="tag">Reparto</span><h2>Personajes históricos</h2></div>
-      <p>Héroes de la Guerra del Pacífico y precursores de la Independencia, con el estudiante que los representa.</p>
+      <p>Independencia, Guerra del Pacífico y el cierre cultural con marinera.</p>
     </div>
     <div class="controls">
       <div class="search-box">🔍 <input type="text" id="searchPersonajes" placeholder="Buscar por personaje, estudiante o salón..."></div>
@@ -201,11 +218,11 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
       <button class="filter-chip" data-filter="5°A">5° A</button>
       <button class="filter-chip" data-filter="5°B">5° B</button>
     </div>
-    <div class="subgroup-title"><h3>⚔️ Guerra del Pacífico</h3><div class="line"></div></div>
-    <div class="card-grid" id="gridPacifico"></div>
-    <div class="subgroup-title"><h3>🕊️ Independencia y precursores</h3><div class="line"></div></div>
+    <div class="subgroup-title"><h3>🕊️ Acto I — El nacimiento de la patria</h3><div class="line"></div></div>
     <div class="card-grid" id="gridIndependencia"></div>
-    <div class="subgroup-title"><h3>🎶 Cierre cultural (por confirmar)</h3><div class="line"></div></div>
+    <div class="subgroup-title"><h3>⚔️ Acto II — La defensa de la patria</h3><div class="line"></div></div>
+    <div class="card-grid" id="gridPacifico"></div>
+    <div class="subgroup-title"><h3>🎶 Acto III — Identidad peruana (cierre cultural)</h3><div class="line"></div></div>
     <div class="card-grid" id="gridCultural"></div>
   </div>
 </section>
@@ -213,8 +230,8 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
 <section class="section" id="fuerzas">
   <div class="wrap">
     <div class="section-head">
-      <div><span class="tag">Batallones · reorganizados</span><h2>Fuerzas armadas</h2></div>
-      <p>Ejército, Marina y FAP con la nueva distribución de cadetes.</p>
+      <div><span class="tag">Batallones</span><h2>Fuerzas armadas</h2></div>
+      <p>Ejército, Marina y FAP, cada uno con su héroe líder y sus cadetes.</p>
     </div>
     <div class="tabs" id="branchTabs"></div>
     <div id="branchPanels"></div>
@@ -224,8 +241,8 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
 <section class="section" id="femenino">
   <div class="wrap">
     <div class="section-head">
-      <div><span class="tag">Nueva propuesta</span><h2>Grupo femenino: marineras</h2></div>
-      <p>Ante la resistencia a vestirse de "cholitas", se abrió la opción de bailar marinera, vinculada narrativamente a la etapa post Guerra del Pacífico. Ambos subgrupos siguen bajo el liderazgo de Bartolina Sisa.</p>
+      <div><span class="tag">Identidad cultural</span><h2>Grupo femenino: marineras</h2></div>
+      <p>En el Corredor Histórico se presentan como <b>Montoneras</b> (precisión histórica); en el cierre cultural y la marcha, bailan <b>marinera</b>.</p>
     </div>
     <div id="femContent"></div>
   </div>
@@ -235,7 +252,7 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
   <div class="wrap">
     <div class="section-head">
       <div><span class="tag">Funciones especiales</span><h2>Roles fuera de las divisiones</h2></div>
-      <p>Estudiantes con una función confirmada que no encaja en héroe, fuerza o grupo femenino.</p>
+      <p>Incluye al nuevo narrador histórico y a los estudiantes con función confirmada fuera de héroe, fuerza o grupo femenino.</p>
     </div>
     <div class="role-grid" id="roleGrid"></div>
   </div>
@@ -245,35 +262,65 @@ footer{border-top:1px solid var(--linea);padding:30px 0;text-align:center;color:
   <div class="wrap">
     <div class="section-head">
       <div><span class="tag">Por confirmar</span><h2>Pendientes de asignación</h2></div>
-      <p>Solo 18 estudiantes sin rol — el grupo prioritario para cerrar antes del primer ensayo general.</p>
+      <p>19 estudiantes sin rol — prioridad antes del primer ensayo general.</p>
     </div>
     <div class="pending-cols" id="pendingCols"></div>
   </div>
 </section>
 
-<section class="section" id="plan">
+<section class="section" id="actos">
   <div class="wrap">
     <div class="section-head">
-      <div><span class="tag">Estructura</span><h2>Plan A / Plan B de presentación</h2></div>
-      <p>Aún no se confirma si habrá acto en el patio. Trabajamos ambas rutas para no perder tiempo de ensayo.</p>
+      <div><span class="tag">Estructura</span><h2>Estructura del evento</h2></div>
+      <p><b>Vamos por el patio</b> — la secuencia completa (Corredor + Patio + Marcha) es lo que se solicita en primer lugar. El Corredor Histórico es el mismo en los dos escenarios; el plan de contingencia solo se activa si Dirección no autoriza el patio.</p>
     </div>
     <div class="plan-tabs" id="planTabs"></div>
     <div id="planPanels"></div>
 
-    <div class="subgroup-title"><h3>🎖️ Marcha final (aplica a ambos planes)</h3><div class="line"></div></div>
+    <div class="subgroup-title"><h3>🎖️ Marcha final — detalle (igual en ambos escenarios)</h3><div class="line"></div></div>
+    <div class="quote-box">De la memoria histórica nace nuestra identidad cultural.</div>
     <div class="timeline" id="marchaTimeline"></div>
   </div>
 </section>
 
+<section class="section" id="cronograma">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="tag">Planificación</span><h2>Cronograma propuesto</h2></div>
+      <p>10 días previos al evento, sujeto a confirmación de fecha y permisos de la Dirección.</p>
+    </div>
+    <table class="crono-table" id="cronoTable"></table>
+  </div>
+</section>
 
-<footer>Estandartes de la Patria · Promoción BLESSED 2026 · Colegio Santa Cruz, Callao · v2</footer>
+<section class="section" id="organizacion">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="tag">Responsables</span><h2>Organización del proyecto</h2></div>
+      <p>Tres pilares de respaldo: académico, institucional y estudiantil.</p>
+    </div>
+    <div class="org-cards" id="orgCards"></div>
+    <table class="org-table" id="orgTable"></table>
+  </div>
+</section>
+
+<section class="section" id="logistica">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="tag">Ejecución</span><h2>Logística</h2></div>
+      <p>Sonido, vestuario por fases y elementos que aún dependen de confirmación.</p>
+    </div>
+    <div class="logi-grid" id="logiGrid"></div>
+  </div>
+</section>
+
+<footer>Memoria, Honor y Porvenir · Promoción BLESSED 2026 · Colegio Santa Cruz, Callao · v3</footer>
 
 <script>
-/* ===== DATOS v2 ===== */
 const HEROES_PACIFICO = [
   { personaje:"Alfonso Ugarte", estudiante:"Carlos Antonio Díaz Benavides", salon:"5°A", rol:"Héroe líder · Ejército", accent:"var(--negro-cuartel)" },
   { personaje:"Miguel Grau", estudiante:"Carlos Stephano Cerna Agudelo", salon:"5°A", rol:"Héroe líder · Marina", accent:"var(--azul-fap-soft)" },
-  { personaje:"Leoncio Prado", estudiante:"Julio César Benítez Olórtegui", salon:"5°A", rol:"Héroe líder · FAP", accent:"var(--azul-fap)" },
+  { personaje:"Leoncio Prado", estudiante:"Julio César Benítez Olórtegui", salon:"5°A", rol:"Héroe líder · FAP (representación simbólica)", accent:"var(--azul-fap)" },
   { personaje:"Francisco Bolognesi", estudiante:"Ricardo Cuadros Rojas", salon:"5°B", rol:"Héroe líder · Ejército", accent:"var(--negro-cuartel)" },
   { personaje:"Andrés Avelino Cáceres", estudiante:"Esteban Gabriel Villanueva Aguirre", salon:"5°A", rol:"Dueto · Campaña de la Breña", accent:"var(--grana)" },
   { personaje:"Antonia Moreno de Cáceres", estudiante:"Kathryn Adalis Flores Benites", salon:"5°B", rol:"Dueto · Campaña de la Breña", accent:"var(--grana)" },
@@ -282,17 +329,17 @@ const HEROES_PACIFICO = [
 const INDEPENDENCIA = [
   { personaje:"Túpac Amaru II", estudiante:"Valentino Nicolás Marino García", salon:"5°B", rol:"Dueto inaugural · Precursor" },
   { personaje:"Micaela Bastidas", estudiante:"Ariana Mercedes Ríos Ochoa", salon:"5°A", rol:"Dueto inaugural · Precursora" },
+  { personaje:"José Olaya", estudiante:"Leonardo Adrián Marchand López", salon:"5°B", rol:"Héroe · Abanderado de la promoción", accent:"var(--grana)" },
   { personaje:"Brígida Silva de Ochoa", estudiante:"Daniela Rubí Olascoaga Mozo", salon:"5°A", rol:"Heroína" },
-  { personaje:"Cleofé Ramos de Cortez", estudiante:"Fabiana Carol Robles Rojas", salon:"5°B", rol:"Heroína" },
   { personaje:"María Parado de Bellido", estudiante:"Camila Milagros Tafur Mori", salon:"5°B", rol:"Heroína" },
   { personaje:"Francisca Zubiaga", estudiante:"Ainara Anyeli Rocha Machado", salon:"5°A", rol:"Heroína" },
   { personaje:"Juana de Dios Manrique", estudiante:"Ana Flavia Carrión Obando", salon:"5°A", rol:"Heroína" },
-  { personaje:"Bartolina Sisa", estudiante:"Jeany Cristhina Gómez Mejía", salon:"5°A", rol:"Heroína · Líder grupo femenino" },
+  { personaje:"Bartolina Sisa", estudiante:"Jeany Cristhina Gómez Mejía", salon:"5°A", rol:"Heroína · Líder grupo femenino (Montoneras)" },
 ];
 
 const CULTURAL = [
-  { personaje:"La Flor de la Canela (canto)", estudiante:"Ariana Daniela Qqueshuayllo López", salon:"5°B", rol:"Cierre cultural · por confirmar", accent:"var(--ambar)", flag:"TENTATIVO" },
-  { personaje:"Acompañamiento vocal en la marcha", estudiante:"Alejandro Jaime Bladimir López Caycho", salon:"5°B", rol:"Canto durante Coraje Cholo · por confirmar", accent:"var(--ambar)", flag:"TENTATIVO" },
+  { personaje:"Baile de marinera — cierre Acto III", estudiante:"Leonardo Adrián Marchand López (José Olaya) y Lucía Camila Talledo Mejía", salon:"5°B / 5°A", rol:"Cierre cultural destacado", accent:"var(--verde-rabona)" },
+  { personaje:"Acompañamiento musical (marcha)", estudiante:"Alejandro Jaime Bladimir López Caycho", salon:"5°B", rol:"Canto durante Coraje Cholo · por confirmar", accent:"var(--ambar)", flag:"TENTATIVO" },
 ];
 
 const FUERZAS = {
@@ -306,10 +353,10 @@ const FUERZAS = {
       {estudiante:"Edgar Andrés Popi Rosas", salon:"5°B"},
       {estudiante:"Thiago Stefano Rojas Loayza", salon:"5°B"},
       {estudiante:"Pedro Enrique Rivera Barrionuevo", salon:"5°B"},
-      {estudiante:"Antonio Felipe Alvarado Correa", salon:"5°A"},
+      {estudiante:"Antonio Felipe Alvarado Correa", salon:"5°A", nota:"Portaestandarte — pancarta de 5° de Secundaria"},
       {estudiante:"Luciana Victoria Calderón Álvarez", salon:"5°A"},
       {estudiante:"Alana Adonay Rojas García", salon:"5°A"},
-      {estudiante:"Meylin Sun Gómez In", salon:"5°A"},
+      {estudiante:"Adriano Raúl Fabrizzió Rivera Munives", salon:"5°A"},
     ]},
   fap: { nombre:"FAP", color:"var(--azul-fap)", uniforme:"Uniforme azul",
     lider:[{estudiante:"Julio César Benítez Olórtegui", salon:"5°A", nota:"Leoncio Prado"}],
@@ -335,6 +382,8 @@ const FUERZAS = {
       {estudiante:"Keyli Alexandra La Rosa Boza", salon:"5°B"},
       {estudiante:"Luana Mayte Sánchez García", salon:"5°B"},
       {estudiante:"Piero Vega Dolly", salon:"5°B"},
+      {estudiante:"Fabiana Carol Robles Rojas", salon:"5°B"},
+      {estudiante:"Meylin Sun Gómez In", salon:"5°A"},
     ]},
 };
 
@@ -350,21 +399,34 @@ const GRUPO_FEMENINO = {
     {estudiante:"Valeria Nicole Elías Mayuri", salon:"5°A"},
     {estudiante:"Amelia Yolanda Ortiz Ochoa", salon:"5°A"},
     {estudiante:"Maria Alessandra Pacherres Cornejo", salon:"5°A"},
-    {estudiante:"Lucia Camila Talledo Mejia", salon:"5°A"},
+    {estudiante:"Lucia Camila Talledo Mejia", salon:"5°A", nota:"Baile destacado con José Olaya en el Acto III"},
+    {estudiante:"Valeria Fernanda Valencia Yactayo", salon:"5°A"},
+    {estudiante:"Jennevith Yalico Ramírez", salon:"5°A"},
+    {estudiante:"Gianella Roxana Beretta Curi", salon:"5°B"},
+    {estudiante:"Andrea Sophia Landauro Ortiz", salon:"5°B"},
+    {estudiante:"Luciana Jareth Mottoccanchi Claros", salon:"5°B"},
+    {estudiante:"Mia Valescka Quiroz Montenegro", salon:"5°B"},
+    {estudiante:"Liana Hemy Rebaza Cornejo", salon:"5°B"},
   ],
 };
 
 const ROLES_ESPECIALES = {
+  narrador: {
+    titulo:"Narrador histórico", desc:"Presenta y guía a las familias en el Corredor Histórico, con contexto de cada zona.",
+    accent:"var(--grana)",
+    gente:[{estudiante:"Mathew André Espino Romero", salon:"5°A", nota:"Confirmado como Jorge Basadre"}],
+  },
   uniformeGeneral: {
     titulo:"Uniforme general (sin división)", desc:"Marchan con uniforme militar general, sin batallón específico.",
     accent:"var(--tinta-soft)",
     gente:[
       {estudiante:"Matías Alonso Bravo Aguilar", salon:"5°A", nota:"Confirmado"},
-      {estudiante:"Mathew André Espino Romero", salon:"5°A", nota:"Confirmado"},
       {estudiante:"Aarón Jairo Ballardo Chiroque", salon:"5°B", nota:"Confirmado"},
+      {estudiante:"Valeria Nicole Carrión Obando", salon:"5°A", nota:"Confirmado"},
+      {estudiante:"Rodrigo Alonso Elías Monge", salon:"5°B", nota:"Confirmado"},
     ]},
   banda: {
-    titulo:"Banda de música", desc:"Tocan durante la marcha — no se les asigna división porque estarán ocupados con sus instrumentos.",
+    titulo:"Banda de música", desc:"Tocan durante la marcha — no se les asigna división.",
     accent:"var(--azul-fap)",
     gente:[
       {estudiante:"Jimmy Gabriel Alarcón Guarda", salon:"5°B"},
@@ -373,82 +435,117 @@ const ROLES_ESPECIALES = {
       {estudiante:"Matías Narciso Carbajal Ramos", salon:"5°A"},
     ]},
   noAsiste: {
-    titulo:"No asistirá", desc:"Confirmado que no estará presente ese día.",
+    titulo:"No disponible", desc:"No asistirá al evento.",
     accent:"var(--grana)",
-    gente:[{estudiante:"Bárbara Aléxia Fernández Mansilla", salon:"5°A"}],
+    gente:[
+      {estudiante:"Bárbara Aléxia Fernández Mansilla", salon:"5°A"},
+      {estudiante:"Cusi Naranjo, María Paz Alessandra", salon:"5°A"},
+    ],
   },
 };
 
-const PENDIENTES_5A = ["Carrión Obando, Valeria Nicole","Cusi Naranjo, María Paz Alessandra","Rivera Munives, Adriano Raúl Fabrizzió","Valencia Yactayo, Valeria Fernanda","Yalico Ramírez, Jennevith"];
-const PENDIENTES_5B = ["Beretta Curi, Gianella Roxana","Cabanillas Tuse, Andrea Lucía","Carrasco Landa, Micaela Antuaneth","Elías Monge, Rodrigo Alonso","Inche Cabana, Valentina Guadalupe","Landauro Ortiz, Andrea Sophia","Marchand López, Leonardo Adrián","Mottoccanchi Claros, Luciana Jareth","Pala Labrín, Camila Solange","Pérez Castro, Luciana Rossie","Quiroz Montenegro, Mia Valescka","Rebaza Cornejo, Liana Hemy","Reyes Sevilla, Estrella Angelina","Saldaña Sánchez, Kiara Yamile"];
+const PENDIENTES_5A = [];
+const PENDIENTES_5B = ["Cabanillas Tuse, Andrea Lucía","Carrasco Landa, Micaela Antuaneth","Inche Cabana, Valentina Guadalupe","Pala Labrín, Camila Solange","Pérez Castro, Luciana Rossie","Qqueshuayllo López, Ariana Daniela","Reyes Sevilla, Estrella Angelina","Saldaña Sánchez, Kiara Yamile"];
 
 const PLANES = {
   a: {
-    label:"Plan A", title:"Con acto en patio", desc:"3 actos narrativos completos antes de la marcha.",
+    label:"La apuesta", title:"Secuencia completa: Corredor + Patio + Marcha", desc:"Entrada, representación en el patio y marcha final — la experiencia íntegra por la que se apuesta ante Dirección.",
     actos:[
-      { t:"Acto 1 — Independencia", items:[
-        "<b>Apertura:</b> dueto Túpac Amaru II (Valentino Marino) y Micaela Bastidas (Ariana Ríos).",
-        "Desfile de heroínas: Brígida Silva de Ochoa (Daniela Olascoaga), Cleofé Ramos (Fabiana Robles), María Parado de Bellido (Camila Tafur), Francisca Zubiaga (Ainara Rocha), Juana de Dios Manrique (Ana Flavia Carrión).",
-        "<b>Cierre del acto:</b> entrada del grupo femenino de marineras, liderado por Jeany Gómez (Bartolina Sisa)."
+      { t:"Momento 1 — Corredor Histórico del Perú (entrada)", items:[
+        "<b>Zona 1 — Emancipación:</b> Túpac Amaru II (Marino) y Micaela Bastidas (Ríos), José Olaya (Marchand), heroínas de la independencia y el grupo femenino (Montoneras) liderado por Jeany Gómez.",
+        "<b>Zona 2 — Guerra del Pacífico:</b> Miguel Grau, Alfonso Ugarte, Ricardo Cuadros, Andrés Avelino Cáceres y Leoncio Prado, cada uno con su destacamento.",
+        "Narrador histórico: Mathew Espino, confirmado como Jorge Basadre, presentando y guiando a las familias."
       ]},
-      { t:"Acto 2 — Guerra del Pacífico", items:[
-        "Miguel Grau (Stephano Cerna) sale con su destacamento de Marina.",
-        "Francisco Bolognesi (Ricardo Cuadros) sale con su destacamento de Ejército.",
-        "Alfonso Ugarte (Carlos Díaz) sale con Ejército.",
-        "Leoncio Prado (Julio Benítez) sale con FAP.",
-        "Andrés Avelino Cáceres (Esteban Villanueva) junto a Antonia Moreno de Cáceres (Kathryn Flores), en dueto."
+      { t:"Momento 2 — Representación en el patio", items:[
+        "<b>Acto I — El nacimiento de la patria:</b> apertura con Túpac Amaru II y Micaela Bastidas, José Olaya, heroínas de la independencia, cierre con el grupo femenino.",
+        "<b>Acto II — La defensa de la patria:</b> Miguel Grau (Marina), Alfonso Ugarte y Ricardo Cuadros (Ejército), Leoncio Prado (FAP, representación simbólica), Andrés Avelino Cáceres y Antonia Moreno (dueto).",
+        "<b>Acto III — Identidad peruana:</b> baile de marinera destacado — José Olaya (Marchand) y Lucía Talledo — cierre cultural con todo el grupo femenino."
       ]},
-      { t:"Acto 3 — Cierre cultural", items:[
-        "Ariana Qqueshuayllo canta <i>La Flor de la Canela</i> <span class='tentative'>por confirmar</span>.",
-        "Posible acompañamiento vocal de Alejandro López <span class='tentative'>por confirmar</span>.",
-        "Transición hacia identidad peruana: entra el concepto de marinera que se retoma en la marcha final."
+      { t:"Momento 3 — Marcha final", items:[
+        "Parada militar tradicional, con la pancarta de 5° de Secundaria y los destacamentos.",
+        "Transición cultural: la marcha se detiene, inicia el cajón y la coreografía de marinera \"Coraje Cholo\".",
+        "Reflexión Patriótica de cierre a cargo de Carlos Díaz y Daniela Olascoaga."
       ]},
     ]
   },
   b: {
-    label:"Plan B", title:"Sin acto en patio", desc:"Solo entrada + marcha final; la actuación se comprime en el trayecto de ingreso.",
+    label:"Plan de contingencia", title:"Solo si no se autoriza el patio", desc:"Se activa únicamente si Dirección no aprueba el uso del patio. No es la propuesta preferida, pero garantiza igual una presentación completa.",
     actos:[
-      { t:"Entrada (reemplaza al acto en patio)", items:[
-        "Todas las divisiones se forman en filas cubriendo el trayecto completo de la entrada hasta el patio.",
-        "En puntos fijos, los héroes, heroínas y personajes hacen ademanes y actúan brevemente mientras las divisiones saludan (con espada).",
-        "Se busca que los padres y autoridades se detengan en cada punto/héroe a observar antes de continuar."
+      { t:"Corredor Histórico del Perú (como presentación principal)", items:[
+        "Se mantienen exactamente las mismas Zona 1 y Zona 2 descritas arriba, pero el corredor pasa a ser la presentación histórica central de la jornada, no solo la entrada.",
+        "Mismos personajes, destacamentos, frases representativas y narrador histórico (Mathew Espino)."
       ]},
-      { t:"Transición directa a la marcha final", items:[
-        "No hay acto independiente en el patio; se pasa directo a la parada militar de la marcha final."
+      { t:"Marcha final (sin cambios)", items:[
+        "Se desarrolla exactamente igual que en la secuencia completa: parada militar, transición cultural y Reflexión Patriótica de cierre."
       ]},
     ]
   }
 };
 
 const MARCHA = [
-  {t:"Parada militar", d:"Entrada de las tres divisiones (Ejército, FAP, Marina) en bloques diferenciados por uniforme, con saludos formales frente a las autoridades."},
-  {t:"Formación completa", d:"Todas las divisiones y personajes terminan de pasar y quedan formados frente al público."},
-  {t:"Regreso a posiciones", d:"Reacomodo rápido — se reutiliza la misma vestimenta militar y de marineras sin cambios de ropa."},
-  {t:"Coreografía de marinera — Coraje Cholo", d:"Cierre coreográfico con todo el bloque, integrando a las marineras y, si se confirma, el canto en vivo de Alejandro López."},
+  {t:"Fase 1 — Parada militar", d:"Formación tradicional por destacamentos, ingreso de la pancarta de 5° de Secundaria (Antonio Alvarado) y elementos ceremoniales, manteniendo la marcialidad de años anteriores."},
+  {t:"El público espera lo conocido", d:"La marcha avanza como una parada militar tradicional, similar a la de años anteriores, hasta llegar a la posición final frente al balcón."},
+  {t:"Fase 2 — Silencio y transición", d:"La música se detiene. La promoción se reorganiza. Comienza el cajón."},
+  {t:"Coreografía de marinera — Coraje Cholo", d:"Diseño del Prof. Wilfredo, integrando uniforme militar y marineras en un mismo bloque coreográfico."},
+  {t:"Reflexión Patriótica de cierre", d:"Carlos Díaz y Daniela Olascoaga entregan una breve reflexión: la historia peruana no se mira solo con nostalgia, sino como lo que nos impulsa hacia el futuro."},
 ];
 
-/* ===== STATS ===== */
-const total=78, t5A=39, t5B=39;
-const personajes = HEROES_PACIFICO.length + INDEPENDENCIA.length; // 14
+const CRONOGRAMA = [
+  ["Día 1", "Solicitud de permisos de ensayo y reunión de planificación en el lugar físico", "Carlos Díaz / Prof. Giovanna"],
+  ["Días 2-4", "Ensayo por grupos: héroes, destacamentos y Corredor Histórico", "Comisión Estudiantil"],
+  ["Días 5-7", "Ensayo de la marcha y de la transición hacia la marinera", "Prof. Wilfredo"],
+  ["Día 8", "Ensayo conjunto: actuación + marcha", "Todos los responsables"],
+  ["Día 9", "Ensayo general completo", "Todos los responsables"],
+  ["Día 10", "Presentación oficial", "Promoción BLESSED 2026"],
+];
+
+const ORGANIZACION = [
+  { rol:"Respaldo académico e histórico", nombre:"Prof. Giovanna", desc:"Área de Ciencias Sociales. Narrativa histórica, actuación y Comité de Bienvenida a las familias.", accent:"var(--grana)" },
+  { rol:"Coordinador de Actividades", nombre:"Prof. Wilfredo", desc:"Tutor de 5° A. Diseño de la marcha y de la transición coreográfica hacia la marinera, con experiencia previa en coordinación de actividades institucionales.", accent:"var(--azul-fap)" },
+  { rol:"Coordinación estudiantil", nombre:"Carlos Díaz", desc:"Coordinación general del proyecto y enlace entre docentes y estudiantes.", accent:"var(--oro)" },
+];
+const ORG_TABLE = [
+  ["Prof. Giovanna", "Narrativa histórica, actuación y Comité de Bienvenida", "Recepción de familias y actos históricos"],
+  ["Prof. Wilfredo", "Coordinador de Actividades y Tutor 5° A. Diseño de la marcha y transición coreográfica a marinera", "Marcha final"],
+  ["Carlos Díaz", "Coordinación estudiantil general", "Enlace entre docentes y estudiantes"],
+  ["Daniela Olascoaga", "Coautoría de la Reflexión Patriótica", "Discurso de cierre"],
+  ["Leonardo Adrián Marchand López", "Abanderado de la promoción (José Olaya) y Escolta", "Marcha — Escolta"],
+  ["Antonio Alvarado", "Portaestandarte de la pancarta de 5° de Secundaria", "Marcha — Ejército"],
+  ["Mathew Espino", "Narrador histórico", "Corredor Histórico"],
+];
+
+const LOGISTICA = [
+  { t:"Presentador con micrófono", d:"Necesario en la entrada / Corredor Histórico, tras el incidente del año anterior sin equipo de sonido adecuado." },
+  { t:"Sonido para la marcha final", d:"Equipo necesario para la transición musical hacia el cajón y la marinera." },
+  { t:"Permisos de ensayo", d:"Solicitud para retirar brevemente de clase a los participantes y practicar su ubicación física, como el año anterior con los Húsares de Junín." },
+  { t:"Abanderado caracterizado", d:"Marchand (José Olaya) porta la bandera nacional como abanderado. Gesto nunca visto en el colegio: refuerza, no resta, el civismo del momento." },
+  { t:"Escolta — reubicación interna, no gente nueva", d:"La Escolta tiene 6 integrantes en total. Carlos Díaz y Stephano Cerna no la integran este año por sus batallones; las 3 estudiantes que ya forman parte de la Escolta cubren esa ausencia. No se suman nuevas integrantes." },
+  { t:"Estado Mayor — vestimenta por fases", d:"Se solicita uniforme institucional solo en el acto protocolar de inicio, y caracterización desde ahí para el resto del evento, incluyendo la apertura de la marcha." },
+  { t:"Gigantografía (por confirmar)", d:"2 estudiantes por asignar, idealmente del destacamento de Marina, para mantener la coherencia visual de la parada militar." },
+  { t:"Alfombra del Corredor Histórico", d:"30-40 metros, sujeta a presupuesto o posible donación de un padre de familia." },
+  { t:"Comité de Bienvenida", d:"A cargo de la Prof. Giovanna; reunión de planificación en el lugar físico antes de iniciar los ensayos." },
+];
+
+const total=78;
+const personajes = HEROES_PACIFICO.length + INDEPENDENCIA.length;
 function bTotal(k){ return FUERZAS[k].lider.length + FUERZAS[k].cadetes.length; }
-const cadetesSinLider = (FUERZAS.ejercito.cadetes.length)+(FUERZAS.fap.cadetes.length)+(FUERZAS.marina.cadetes.length); // 25
-const femenino = 1 + GRUPO_FEMENINO.marineras.length; // líder + marineras
-const asignados = personajes + cadetesSinLider + (femenino-1); // líder ya contada en personajes
+const cadetesSinLider = (FUERZAS.ejercito.cadetes.length)+(FUERZAS.fap.cadetes.length)+(FUERZAS.marina.cadetes.length);
+const femenino = 1 + GRUPO_FEMENINO.marineras.length;
+const especialesCount = ROLES_ESPECIALES.narrador.gente.length + ROLES_ESPECIALES.uniformeGeneral.gente.length + ROLES_ESPECIALES.banda.gente.length + ROLES_ESPECIALES.noAsiste.gente.length + 1;
 const pendientes = PENDIENTES_5A.length + PENDIENTES_5B.length;
-const especiales = ROLES_ESPECIALES.uniformeGeneral.gente.length + ROLES_ESPECIALES.banda.gente.length + ROLES_ESPECIALES.noAsiste.gente.length + CULTURAL.length;
+const asignados = total - pendientes - (ROLES_ESPECIALES.banda.gente.length + ROLES_ESPECIALES.noAsiste.gente.length);
 
 const stats = [
   {num:total, lbl:"Total de la promoción", sub:"5°A + 5°B", accent:"var(--grana)"},
   {num:asignados, lbl:"Asignados a rol/división", sub:Math.round(asignados/total*100)+"% de la promoción", accent:"var(--verde-rabona)"},
-  {num:pendientes, lbl:"Pendientes reales", sub:"Bajó de 41 a "+pendientes, accent:"var(--grana-dark)"},
-  {num:especiales, lbl:"Roles especiales", sub:"Banda, uniforme gral., cultural", accent:"var(--ambar)"},
-  {num:personajes, lbl:"Personajes históricos", sub:"Pacífico + Independencia", accent:"var(--oro)"},
+  {num:pendientes, lbl:"Pendientes reales", sub:PENDIENTES_5A.length+" en 5°A · "+PENDIENTES_5B.length+" en 5°B", accent:"var(--grana-dark)"},
+  {num:personajes, lbl:"Personajes históricos", sub:"Independencia + Guerra del Pacífico", accent:"var(--oro)"},
   {num:cadetesSinLider, lbl:"Cadetes en fuerzas", sub:"Sin contar héroes-líder", accent:"var(--negro-cuartel)"},
-  {num:femenino, lbl:"Grupo femenino", sub:"1 líder + marineras", accent:"var(--verde-rabona)"},
+  {num:femenino, lbl:"Grupo femenino", sub:"Montoneras / Marineras", accent:"var(--verde-rabona)"},
+  {num:especialesCount, lbl:"Roles especiales", sub:"Narrador, banda, uniforme gral.", accent:"var(--ambar)"},
 ];
 document.getElementById('statGrid').innerHTML = stats.map(s=>`<div class="stat-card" style="--accent:${s.accent}"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div><div class="sub">${s.sub}</div></div>`).join('');
 
-/* ===== PERSONAJES ===== */
 function dossierCard(item, idx, prefix){
   return `<div class="dossier" style="--accent:${item.accent||'var(--grana)'}" data-salon="${item.salon}" data-search="${(item.personaje+' '+item.estudiante+' '+item.salon).toLowerCase()}">
     ${item.flag?`<span class="flag">${item.flag}</span>`:''}
@@ -462,7 +559,7 @@ function renderPersonajes(){
   const q = document.getElementById('searchPersonajes').value.toLowerCase();
   const active = document.querySelector('.filter-chip.active').dataset.filter;
   [HEROES_PACIFICO, INDEPENDENCIA, CULTURAL].forEach(arr=>arr.forEach(i=>i.__s=(i.personaje+' '+i.estudiante+' '+i.salon).toLowerCase()));
-  function filt(arr){ return arr.filter(i=>(active==='todos'||i.salon===active) && i.__s.includes(q)); }
+  function filt(arr){ return arr.filter(i=>(active==='todos'||i.salon.includes(active)) && i.__s.includes(q)); }
   const p1=filt(HEROES_PACIFICO), p2=filt(INDEPENDENCIA), p3=filt(CULTURAL);
   document.getElementById('gridPacifico').innerHTML = p1.length? p1.map((it,i)=>dossierCard(it,i,'GP')).join('') : '<div class="no-results">Sin resultados.</div>';
   document.getElementById('gridIndependencia').innerHTML = p2.length? p2.map((it,i)=>dossierCard(it,i,'IND')).join('') : '<div class="no-results">Sin resultados.</div>';
@@ -474,7 +571,6 @@ document.querySelectorAll('.filter-chip').forEach(btn=>btn.addEventListener('cli
 }));
 renderPersonajes();
 
-/* ===== FUERZAS ===== */
 const bKeys = Object.keys(FUERZAS);
 document.getElementById('branchTabs').innerHTML = bKeys.map((k,i)=>`<button class="tab-btn ${i===0?'active':''}" data-branch="${k}" style="${i===0?`background:${FUERZAS[k].color};border-color:${FUERZAS[k].color};`:''}"><span class="swatch" style="background:${FUERZAS[k].color}"></span>${FUERZAS[k].nombre} (${bTotal(k)})</button>`).join('');
 document.getElementById('branchPanels').innerHTML = bKeys.map((k,i)=>{
@@ -482,7 +578,7 @@ document.getElementById('branchPanels').innerHTML = bKeys.map((k,i)=>{
   return `<div class="tab-panel ${i===0?'active':''}" id="panel-${k}">
     <div class="branch-header" style="background:${b.color}"><div><h3>${b.nombre}</h3><p>${b.uniforme} · ${b.lider.length} líder(es) + ${b.cadetes.length} cadetes</p></div></div>
     <div class="leader-row">${b.lider.map(l=>`<div class="leader-card" style="--accent:${b.color}"><div class="badge">Héroe líder</div><div class="nm">${l.estudiante}</div><div class="nota">${l.nota} · ${l.salon}</div></div>`).join('')}</div>
-    <div class="cadet-grid">${b.cadetes.map(c=>`<div class="cadet-card"><span>${c.estudiante}</span><span class="salon-tag">${c.salon}</span></div>`).join('')}</div>
+    <div class="cadet-grid">${b.cadetes.map(c=>`<div class="cadet-card"><span>${c.estudiante}${c.nota?`<span class="note">${c.nota}</span>`:''}</span><span class="salon-tag">${c.salon}</span></div>`).join('')}</div>
   </div>`;
 }).join('');
 document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{
@@ -493,35 +589,31 @@ document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',
   document.getElementById('panel-'+k).classList.add('active');
 }));
 
-/* ===== GRUPO FEMENINO ===== */
 document.getElementById('femContent').innerHTML = `
   <div class="rabona-hero">
-    <div><h3>Bartolina Sisa — Líder del grupo femenino</h3><p>Representada por Jeany Cristhina Gómez Mejía (5° A). No habrá bloque de rabonas: todo el grupo femenino se presenta como marineras.</p></div>
+    <div><h3>Bartolina Sisa — Líder del grupo femenino</h3><p>Representada por Jeany Cristhina Gómez Mejía (5° A). En el Corredor Histórico son "Montoneras"; en el cierre cultural y la marcha, bailan marinera.</p></div>
   </div>
-  <div class="subgroup-title"><h3>Marineras (${GRUPO_FEMENINO.marineras.length})</h3><div class="line"></div></div>
-  <div class="cadet-grid">${GRUPO_FEMENINO.marineras.map(c=>`<div class="cadet-card"><span>${c.estudiante}</span><span class="salon-tag">${c.salon}</span></div>`).join('')}</div>
-  <div class="rabona-note">📌 Concepto: la marinera surge narrativamente tras la Guerra del Pacífico, así que este bloque conecta directamente con los héroes del Acto 2 y se reutiliza en la coreografía de cierre "Coraje Cholo" en la marcha final.</div>
+  <div class="subgroup-title"><h3>Marineras / Montoneras (${GRUPO_FEMENINO.marineras.length})</h3><div class="line"></div></div>
+  <div class="cadet-grid">${GRUPO_FEMENINO.marineras.map(c=>`<div class="cadet-card"><span>${c.estudiante}${c.nota?`<span class="note">${c.nota}</span>`:''}</span><span class="salon-tag">${c.salon}</span></div>`).join('')}</div>
+  <div class="rabona-note">📌 Este grupo también cubre el relevo de la Escolta este año, ya que Carlos Díaz y Stephano Cerna no participan de ella al estar a cargo de sus batallones como héroes líderes.</div>
 `;
 
-/* ===== ROLES ESPECIALES ===== */
 document.getElementById('roleGrid').innerHTML = Object.values(ROLES_ESPECIALES).map(r=>`
   <div class="role-card" style="--accent:${r.accent}">
     <h4>${r.titulo}</h4><div class="desc">${r.desc}</div>
-    <ul>${r.gente.map(g=>`<li><span>${g.estudiante}${g.nota?` <span style="color:var(--tinta-soft);font-size:0.78rem;">(${g.nota})</span>`:''}</span><span class="salon-tag">${g.salon}</span></li>`).join('')}</ul>
+    <ul>${r.gente.map(g=>`<li><span>${g.estudiante}${g.nota?` <span style="color:var(--tinta-soft);font-size:0.76rem;">(${g.nota})</span>`:''}</span><span class="salon-tag">${g.salon}</span></li>`).join('')}</ul>
   </div>`).join('') + `
   <div class="role-card" style="--accent:var(--ambar)">
-    <h4>Participación musical/cultural</h4><div class="desc">Roles artísticos tentativos, pendientes de confirmación final.</div>
-    <ul>${CULTURAL.map(c=>`<li><span>${c.estudiante} <span style="color:var(--tinta-soft);font-size:0.78rem;">(${c.personaje})</span></span><span class="salon-tag">${c.salon}</span></li>`).join('')}</ul>
+    <h4>Participación musical (tentativa)</h4><div class="desc">Rol artístico pendiente de confirmación final.</div>
+    <ul>${CULTURAL.filter(c=>c.flag==='TENTATIVO').map(c=>`<li><span>${c.estudiante} <span style="color:var(--tinta-soft);font-size:0.76rem;">(${c.personaje})</span></span><span class="salon-tag">${c.salon}</span></li>`).join('')}</ul>
   </div>`;
 
-/* ===== PENDIENTES ===== */
 function pendingList(arr, salon){ return arr.map((n,i)=>`<li><span>${n}</span><span class="idx">${salon}-${String(i+1).padStart(2,'0')}</span></li>`).join(''); }
 document.getElementById('pendingCols').innerHTML = `
   <div class="pending-col"><h4>5° A <span class="count">${PENDIENTES_5A.length} pendientes</span></h4><ul class="pending-list">${pendingList(PENDIENTES_5A,'A')}</ul></div>
   <div class="pending-col"><h4>5° B <span class="count">${PENDIENTES_5B.length} pendientes</span></h4><ul class="pending-list">${pendingList(PENDIENTES_5B,'B')}</ul></div>
 `;
 
-/* ===== PLAN A/B ===== */
 const planKeys = Object.keys(PLANES);
 document.getElementById('planTabs').innerHTML = planKeys.map((k,i)=>`
   <div class="plan-btn ${i===0?'active':''}" data-plan="${k}">
@@ -539,8 +631,19 @@ document.querySelectorAll('.plan-btn').forEach(btn=>btn.addEventListener('click'
 
 document.getElementById('marchaTimeline').innerHTML = MARCHA.map((m,i)=>`<div class="tl-item" data-n="${i+1}"><h4>${m.t}</h4><p>${m.d}</p></div>`).join('');
 
+document.getElementById('cronoTable').innerHTML = `<tr><th>Día(s)</th><th>Actividad</th><th>Responsable</th></tr>` +
+  CRONOGRAMA.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
 
-/* ===== NAV MOBILE ===== */
+document.getElementById('orgCards').innerHTML = ORGANIZACION.map(o=>`
+  <div class="org-card" style="--accent:${o.accent}">
+    <div class="role-tag">${o.rol}</div><h4>${o.nombre}</h4><p>${o.desc}</p>
+  </div>`).join('');
+document.getElementById('orgTable').innerHTML = `<tr><th>Responsable</th><th>Función</th><th>Ámbito</th></tr>` +
+  ORG_TABLE.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+
+document.getElementById('logiGrid').innerHTML = LOGISTICA.map(l=>`
+  <div class="logi-card"><h4>${l.t}</h4><p>${l.d}</p></div>`).join('');
+
 document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
 </script>
