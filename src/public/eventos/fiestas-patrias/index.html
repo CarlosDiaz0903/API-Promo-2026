@@ -595,7 +595,6 @@ document.getElementById('femContent').innerHTML = `
   </div>
   <div class="subgroup-title"><h3>Marineras / Montoneras (${GRUPO_FEMENINO.marineras.length})</h3><div class="line"></div></div>
   <div class="cadet-grid">${GRUPO_FEMENINO.marineras.map(c=>`<div class="cadet-card"><span>${c.estudiante}${c.nota?`<span class="note">${c.nota}</span>`:''}</span><span class="salon-tag">${c.salon}</span></div>`).join('')}</div>
-  <div class="rabona-note">📌 Este grupo también cubre el relevo de la Escolta este año, ya que Carlos Díaz y Stephano Cerna no participan de ella al estar a cargo de sus batallones como héroes líderes.</div>
 `;
 
 document.getElementById('roleGrid').innerHTML = Object.values(ROLES_ESPECIALES).map(r=>`
