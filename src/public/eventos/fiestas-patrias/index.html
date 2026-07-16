@@ -140,11 +140,6 @@ a{color:inherit;text-decoration:none;}
 .tl-item::before{content:attr(data-n);position:absolute;left:-32px;top:0;width:21px;height:21px;border-radius:50%;background:var(--grana);color:#fff;font-family:'JetBrains Mono',monospace;font-size:0.63rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
 .tl-item h4{font-size:0.98rem;margin-bottom:4px;} .tl-item p{color:var(--tinta-soft);font-size:0.84rem;max-width:600px;}
 
-.crono-table, .org-table{width:100%;border-collapse:collapse;background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
-.crono-table th, .org-table th{background:var(--grana);color:#fff;text-align:left;padding:11px 14px;font-size:0.78rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.04em;}
-.crono-table td, .org-table td{padding:12px 14px;font-size:0.86rem;border-top:1px solid var(--linea);}
-.crono-table tr:nth-child(even) td, .org-table tr:nth-child(even) td{background:var(--pergamino-alt);}
-
 .org-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px;margin-bottom:24px;}
 .org-card{background:var(--card-bg);border:1px solid var(--linea);border-radius:var(--radius);padding:20px 20px;box-shadow:var(--shadow);border-top:3px solid var(--accent,var(--grana));}
 .org-card .role-tag{font-family:'JetBrains Mono',monospace;font-size:0.63rem;text-transform:uppercase;color:var(--oro);letter-spacing:.08em;font-weight:700;}
@@ -159,6 +154,45 @@ a{color:inherit;text-decoration:none;}
 footer{border-top:1px solid var(--linea);padding:28px 0;text-align:center;color:var(--tinta-soft);font-size:0.78rem;}
 .no-results{padding:34px 20px;text-align:center;color:var(--tinta-soft);font-size:0.86rem;}
 .quote-box{border-left:4px solid var(--oro);padding:14px 20px;background:rgba(184,145,47,0.07);border-radius:0 var(--radius) var(--radius) 0;font-family:'Fraunces',serif;font-style:italic;color:var(--grana-dark);font-size:1.05rem;margin:18px 0;}
+
+.formacion-block{margin-bottom:34px;}
+.formacion-block-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;}
+.formacion-block-head h4{font-size:1.05rem;color:var(--grana-dark);}
+.formacion-block-head span.count{font-family:'JetBrains Mono',monospace;font-size:0.68rem;background:var(--pergamino-alt);padding:3px 10px;border-radius:999px;color:var(--tinta-soft);}
+.formacion-row{display:flex;justify-content:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
+.formacion-slot{background:var(--card-bg);border:1px solid var(--linea);border-radius:10px;padding:10px 14px;min-width:150px;max-width:210px;text-align:center;box-shadow:var(--shadow);border-top:3px solid var(--accent,var(--grana));}
+.formacion-slot .nm{font-size:0.83rem;font-weight:600;color:var(--tinta);line-height:1.2;}
+.formacion-slot .rl{font-size:0.68rem;color:var(--tinta-soft);margin-top:3px;}
+.formacion-slot .sl{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--oro);margin-top:3px;}
+.formacion-slot.pending{border-style:dashed;opacity:0.75;}
+.formacion-arrow{text-align:center;color:var(--tinta-soft);font-size:0.72rem;font-family:'JetBrains Mono',monospace;margin:6px 0 18px;letter-spacing:0.1em;}
+.formacion-note{background:rgba(184,145,47,0.09);border:1px solid var(--oro-soft);border-radius:10px;padding:10px 16px;font-size:0.78rem;color:var(--tinta-soft);text-align:center;max-width:520px;margin:0 auto 18px;}
+
+.formacion-toggle{display:flex;justify-content:center;gap:8px;margin-bottom:28px;}
+.formacion-toggle button{border:1px solid var(--linea);background:var(--card-bg);padding:9px 18px;border-radius:999px;font-size:0.82rem;font-weight:600;cursor:pointer;color:var(--tinta-soft);transition:.2s;}
+.formacion-toggle button.active{background:var(--grana);border-color:var(--grana);color:#fff;}
+
+.dot-row{display:flex;justify-content:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;}
+.dot-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.dot{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.35);transition:transform .15s;}
+.dot:hover{transform:scale(1.15);}
+.dot.M{background:var(--azul-fap);}
+.dot.F{background:var(--grana);}
+.dot.pending{background:var(--ambar);border-style:dashed;}
+.dot-tip{position:absolute;bottom:130%;left:50%;transform:translateX(-50%) translateY(4px);background:var(--tinta);color:#fff;padding:7px 11px;border-radius:8px;font-size:0.7rem;line-height:1.35;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s, transform .15s;z-index:30;box-shadow:0 6px 16px rgba(0,0,0,0.3);text-align:center;}
+.dot-tip .tip-role{color:var(--oro-soft);font-size:0.64rem;display:block;margin-top:2px;}
+.dot-tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--tinta);}
+.dot-wrap:hover .dot-tip, .dot-wrap.active .dot-tip{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.dot-legend{display:flex;justify-content:center;gap:22px;margin-bottom:22px;font-size:0.8rem;color:var(--tinta-soft);}
+.dot-legend span{display:inline-flex;align-items:center;gap:7px;}
+.dot-legend .sw{width:13px;height:13px;border-radius:50%;display:inline-block;}
+
+.dot-section{
+    margin-bottom: 40px;
+}
+.dot-section:last-child{
+    margin-bottom: 0;
+}
 </style>
 </head>
 <body>
@@ -175,7 +209,7 @@ footer{border-top:1px solid var(--linea);padding:28px 0;text-align:center;color:
       <a href="#roles">Roles especiales</a>
       <a href="#pendientes">Pendientes</a>
       <a href="#actos">Actos</a>
-      <a href="#cronograma">Cronograma</a>
+      <a href="#formacion">Formación de marcha</a>
       <a href="#organizacion">Organización</a>
       <a href="#logistica">Logística</a>
     </div>
@@ -283,13 +317,23 @@ footer{border-top:1px solid var(--linea);padding:28px 0;text-align:center;color:
   </div>
 </section>
 
-<section class="section" id="cronograma">
+<section class="section" id="formacion">
   <div class="wrap">
     <div class="section-head">
-      <div><span class="tag">Planificación</span><h2>Cronograma propuesto</h2></div>
-      <p>10 días previos al evento, sujeto a confirmación de fecha y permisos de la Dirección.</p>
+      <div><span class="tag">Orden de marcha</span><h2>Formación — Fase 1 (Parada militar)</h2></div>
+      <p>De adelante hacia atrás. Máximo 4 columnas por fila. Vista de arriba hacia abajo = de adelante hacia atrás en la marcha real.</p>
     </div>
-    <table class="crono-table" id="cronoTable"></table>
+    <div class="formacion-toggle">
+      <button id="btnModoCartel" class="active">🪧 Modo cartel</button>
+      <button id="btnModoPuntos">🔴 Modo puntos</button>
+      <button id="btnModoPuntosLimpio">⚪ Puntos (sin etiquetas)</button>
+    </div>
+    <div class="dot-legend" id="dotLegend" style="display:none;">
+      <span><span class="sw" style="background:var(--grana)"></span> Mujeres</span>
+      <span><span class="sw" style="background:var(--azul-fap)"></span> Hombres</span>
+      <span><span class="sw" style="background:var(--ambar)"></span> Por confirmar</span>
+    </div>
+    <div id="formacionContent"></div>
   </div>
 </section>
 
@@ -345,45 +389,51 @@ const CULTURAL = [
 const FUERZAS = {
   ejercito: { nombre:"Ejército", color:"var(--negro-cuartel)", uniforme:"Uniforme negro",
     lider:[
-      {estudiante:"Carlos Antonio Díaz Benavides", salon:"5°A", nota:"Alfonso Ugarte"},
-      {estudiante:"Ricardo Cuadros Rojas", salon:"5°B", nota:"Francisco Bolognesi"},
+      {estudiante:"Carlos Antonio Díaz Benavides", salon:"5°A", nota:"Alfonso Ugarte", g:"M"},
+      {estudiante:"Ricardo Cuadros Rojas", salon:"5°B", nota:"Francisco Bolognesi", g:"M"},
     ],
     cadetes:[
-      {estudiante:"Gabriel Enrique Saldaña Jara", salon:"5°B"},
-      {estudiante:"Edgar Andrés Popi Rosas", salon:"5°B"},
-      {estudiante:"Thiago Stefano Rojas Loayza", salon:"5°B"},
-      {estudiante:"Pedro Enrique Rivera Barrionuevo", salon:"5°B"},
-      {estudiante:"Antonio Felipe Alvarado Correa", salon:"5°A", nota:"Portaestandarte — pancarta de 5° de Secundaria"},
-      {estudiante:"Luciana Victoria Calderón Álvarez", salon:"5°A"},
-      {estudiante:"Alana Adonay Rojas García", salon:"5°A"},
-      {estudiante:"Adriano Raúl Fabrizzió Rivera Munives", salon:"5°A"},
+      {estudiante:"Gabriel Enrique Saldaña Jara", salon:"5°B", g:"M"},
+      {estudiante:"Edgar Andrés Popi Rosas", salon:"5°B", g:"M"},
+      {estudiante:"Thiago Stefano Rojas Loayza", salon:"5°B", g:"M"},
+      {estudiante:"Pedro Enrique Rivera Barrionuevo", salon:"5°B", g:"M"},
+      {estudiante:"Antonio Felipe Alvarado Correa", salon:"5°A", nota:"Portaestandarte — pancarta de 5° de Secundaria", g:"M"},
+      {estudiante:"Luciana Victoria Calderón Álvarez", salon:"5°A", g:"F"},
+      {estudiante:"Alana Adonay Rojas García", salon:"5°A", g:"F"},
+      {estudiante:"Adriano Raúl Fabrizzió Rivera Munives", salon:"5°A", g:"M"},
     ]},
   fap: { nombre:"FAP", color:"var(--azul-fap)", uniforme:"Uniforme azul",
-    lider:[{estudiante:"Julio César Benítez Olórtegui", salon:"5°A", nota:"Leoncio Prado"}],
+    lider:[{estudiante:"Julio César Benítez Olórtegui", salon:"5°A", nota:"Leoncio Prado", g:"M"}],
     cadetes:[
-      {estudiante:"Christopher Adriano Alván Tinedo", salon:"5°A"},
-      {estudiante:"Jordany Javier Yauli Barrera", salon:"5°A"},
-      {estudiante:"Leonardo Faustino Zúñiga Llerena", salon:"5°A"},
-      {estudiante:"Alejandro José Porro Alvarado", salon:"5°A"},
-      {estudiante:"Mateo Paolo Pumapillo Linares", salon:"5°A"},
-      {estudiante:"Stefano André Martínez Ayala", salon:"5°B"},
+      {estudiante:"Christopher Adriano Alván Tinedo", salon:"5°A", g:"M"},
+      {estudiante:"Jordany Javier Yauli Barrera", salon:"5°A", g:"M"},
+      {estudiante:"Leonardo Faustino Zúñiga Llerena", salon:"5°A", g:"M"},
+      {estudiante:"Alejandro José Porro Alvarado", salon:"5°A", g:"M"},
+      {estudiante:"Mateo Paolo Pumapillo Linares", salon:"5°A", g:"M"},
+      {estudiante:"Stefano André Martínez Ayala", salon:"5°B", g:"M"},
+      {estudiante:"Ariana Daniela Qqueshuayllo López", salon:"5°B", nota:"Única mujer del destacamento", g:"F"},
     ]},
   marina: { nombre:"Marina", color:"var(--azul-fap-soft)", uniforme:"Uniforme blanco",
-    lider:[{estudiante:"Carlos Stephano Cerna Agudelo", salon:"5°A", nota:"Miguel Grau"}],
+    lider:[{estudiante:"Carlos Stephano Cerna Agudelo", salon:"5°A", nota:"Miguel Grau", g:"M"}],
     cadetes:[
-      {estudiante:"Juan Diego Mar Arias", salon:"5°B"},
-      {estudiante:"Mihai Simion Lozada", salon:"5°B"},
-      {estudiante:"Kevin Ricardo Elías Ramírez", salon:"5°B"},
-      {estudiante:"Adrián Malpartida Sueldo", salon:"5°A"},
-      {estudiante:"Jhocelyn Ariana Véliz Vílchez", salon:"5°A"},
-      {estudiante:"Adriana Lía Chaupis Fernández", salon:"5°B"},
-      {estudiante:"Lucero Valentina Chaupis Fernández", salon:"5°B"},
-      {estudiante:"Lennon Ayron Carbonell Gutiérrez", salon:"5°B"},
-      {estudiante:"Keyli Alexandra La Rosa Boza", salon:"5°B"},
-      {estudiante:"Luana Mayte Sánchez García", salon:"5°B"},
-      {estudiante:"Piero Vega Dolly", salon:"5°B"},
-      {estudiante:"Fabiana Carol Robles Rojas", salon:"5°B"},
-      {estudiante:"Meylin Sun Gómez In", salon:"5°A"},
+      {estudiante:"Juan Diego Mar Arias", salon:"5°B", g:"M"},
+      {estudiante:"Mihai Simion Lozada", salon:"5°B", g:"M"},
+      {estudiante:"Kevin Ricardo Elías Ramírez", salon:"5°B", g:"M"},
+      {estudiante:"Adrián Malpartida Sueldo", salon:"5°A", g:"M"},
+      {estudiante:"Jhocelyn Ariana Véliz Vílchez", salon:"5°A", g:"F"},
+      {estudiante:"Adriana Lía Chaupis Fernández", salon:"5°B", g:"F"},
+      {estudiante:"Lucero Valentina Chaupis Fernández", salon:"5°B", g:"F"},
+      {estudiante:"Lennon Ayron Carbonell Gutiérrez", salon:"5°B", g:"M"},
+      {estudiante:"Keyli Alexandra La Rosa Boza", salon:"5°B", g:"F"},
+      {estudiante:"Luana Mayte Sánchez García", salon:"5°B", g:"F"},
+      {estudiante:"Piero Vega Dolly", salon:"5°B", g:"M"},
+      {estudiante:"Fabiana Carol Robles Rojas", salon:"5°B", g:"F"},
+      {estudiante:"Meylin Sun Gómez In", salon:"5°A", g:"F"},
+      {estudiante:"Luciana Jareth Mottoccanchi Claros", salon:"5°B", g:"F"},
+      {estudiante:"Micaela Antuaneth Carrasco Landa", salon:"5°B", g:"F"},
+      {estudiante:"Luciana Rossie Pérez Castro", salon:"5°B", g:"F"},
+      {estudiante:"Valentina Guadalupe Inche Cabana", salon:"5°B", g:"F"},
+      {estudiante:"Valeria Fernanda Valencia Yactayo", salon:"5°A", g:"F"},
     ]},
 };
 
@@ -400,13 +450,14 @@ const GRUPO_FEMENINO = {
     {estudiante:"Amelia Yolanda Ortiz Ochoa", salon:"5°A"},
     {estudiante:"Maria Alessandra Pacherres Cornejo", salon:"5°A"},
     {estudiante:"Lucia Camila Talledo Mejia", salon:"5°A", nota:"Baile destacado con José Olaya en el Acto III"},
-    {estudiante:"Valeria Fernanda Valencia Yactayo", salon:"5°A"},
     {estudiante:"Jennevith Yalico Ramírez", salon:"5°A"},
     {estudiante:"Gianella Roxana Beretta Curi", salon:"5°B"},
     {estudiante:"Andrea Sophia Landauro Ortiz", salon:"5°B"},
-    {estudiante:"Luciana Jareth Mottoccanchi Claros", salon:"5°B"},
     {estudiante:"Mia Valescka Quiroz Montenegro", salon:"5°B"},
     {estudiante:"Liana Hemy Rebaza Cornejo", salon:"5°B"},
+    {estudiante:"Andrea Lucía Cabanillas Tuse", salon:"5°B"},
+    {estudiante:"Kiara Yamile Saldaña Sánchez", salon:"5°B"},
+    {estudiante:"Estrella Angelina Reyes Sevilla", salon:"5°B"},
   ],
 };
 
@@ -422,7 +473,6 @@ const ROLES_ESPECIALES = {
     gente:[
       {estudiante:"Matías Alonso Bravo Aguilar", salon:"5°A", nota:"Confirmado"},
       {estudiante:"Aarón Jairo Ballardo Chiroque", salon:"5°B", nota:"Confirmado"},
-      {estudiante:"Valeria Nicole Carrión Obando", salon:"5°A", nota:"Confirmado"},
       {estudiante:"Rodrigo Alonso Elías Monge", salon:"5°B", nota:"Confirmado"},
     ]},
   banda: {
@@ -435,17 +485,19 @@ const ROLES_ESPECIALES = {
       {estudiante:"Matías Narciso Carbajal Ramos", salon:"5°A"},
     ]},
   noAsiste: {
-    titulo:"No disponible", desc:"No asistirá al evento.",
+    titulo:"No disponible", desc:"No participan activamente en el evento.",
     accent:"var(--grana)",
     gente:[
-      {estudiante:"Bárbara Aléxia Fernández Mansilla", salon:"5°A"},
-      {estudiante:"Cusi Naranjo, María Paz Alessandra", salon:"5°A"},
+      {estudiante:"Bárbara Aléxia Fernández Mansilla", salon:"5°A", nota:"No asistirá"},
+      {estudiante:"Cusi Naranjo, María Paz Alessandra", salon:"5°A", nota:"No asistirá"},
+      {estudiante:"Camila Solange Pala Labrín", salon:"5°B", nota:"No asistirá"},
+      {estudiante:"Valeria Nicole Carrión Obando", salon:"5°A", nota:"Asiste con uniforme, no participa ni marcha"},
     ],
   },
 };
 
 const PENDIENTES_5A = [];
-const PENDIENTES_5B = ["Cabanillas Tuse, Andrea Lucía","Carrasco Landa, Micaela Antuaneth","Inche Cabana, Valentina Guadalupe","Pala Labrín, Camila Solange","Pérez Castro, Luciana Rossie","Qqueshuayllo López, Ariana Daniela","Reyes Sevilla, Estrella Angelina","Saldaña Sánchez, Kiara Yamile"];
+const PENDIENTES_5B = [];
 
 const PLANES = {
   a: {
@@ -483,21 +535,67 @@ const PLANES = {
 };
 
 const MARCHA = [
-  {t:"Fase 1 — Parada militar", d:"Formación tradicional por destacamentos, ingreso de la pancarta de 5° de Secundaria (Antonio Alvarado) y elementos ceremoniales, manteniendo la marcialidad de años anteriores."},
-  {t:"El público espera lo conocido", d:"La marcha avanza como una parada militar tradicional, similar a la de años anteriores, hasta llegar a la posición final frente al balcón."},
-  {t:"Fase 2 — Silencio y transición", d:"La música se detiene. La promoción se reorganiza. Comienza el cajón."},
-  {t:"Coreografía de marinera — Coraje Cholo", d:"Diseño del Prof. Wilfredo, integrando uniforme militar y marineras en un mismo bloque coreográfico."},
+  {t:"Fase 1 — Parada militar", d:"Formación tradicional por destacamentos, ingreso de la pancarta de 5° de Secundaria (Antonio Alvarado) y elementos ceremoniales, manteniendo la marcialidad de años anteriores. Detalle completo de posiciones abajo."},
+  {t:"Gigantes del Cenepa — el público espera lo conocido", d:"La marcha avanza como una parada militar tradicional, tal como el año anterior, hasta llegar a la puerta / posición final frente al balcón."},
+  {t:"Fase 2 — Silencio y reorganización", d:"La música se detiene justo en la puerta. Los hombres pasan al frente y las mujeres se acomodan atrás, dejando un espacio central considerable, mientras la promoción regresa a su posición final."},
+  {t:"Comienza el cajón — Coreografía de marinera \"Coraje Cholo\"", d:"Paso de transición lento diseñado por el Prof. Wilfredo, integrando el bloque de hombres y el bloque de mujeres en la coreografía final."},
   {t:"Reflexión Patriótica de cierre", d:"Carlos Díaz y Daniela Olascoaga entregan una breve reflexión: la historia peruana no se mira solo con nostalgia, sino como lo que nos impulsa hacia el futuro."},
 ];
 
-const CRONOGRAMA = [
-  ["Día 1", "Solicitud de permisos de ensayo y reunión de planificación en el lugar físico", "Carlos Díaz / Prof. Giovanna"],
-  ["Días 2-4", "Ensayo por grupos: héroes, destacamentos y Corredor Histórico", "Comisión Estudiantil"],
-  ["Días 5-7", "Ensayo de la marcha y de la transición hacia la marinera", "Prof. Wilfredo"],
-  ["Día 8", "Ensayo conjunto: actuación + marcha", "Todos los responsables"],
-  ["Día 9", "Ensayo general completo", "Todos los responsables"],
-  ["Día 10", "Presentación oficial", "Promoción BLESSED 2026"],
-];
+/* ===== FORMACIÓN DE MARCHA — FASE 1 ===== */
+const FORMACION = {
+  vanguardia: [
+    {estudiante:"Antonio Felipe Alvarado Correa", salon:"5°A", nota:"Pancarta de 5° de Secundaria", accent:"var(--negro-cuartel)", g:"M"},
+  ],
+  gigantografia: [
+    {estudiante:"Por asignar", salon:"—", nota:"Montonera — solo si se confirma la gigantografía", pending:true, g:"F"},
+    {estudiante:"Por asignar", salon:"—", nota:"Montonera — solo si se confirma la gigantografía", pending:true, g:"F"},
+  ],
+  docentes: [
+    {estudiante:"Mathew Espino Romero", salon:"5°A", nota:"Jorge Basadre — narrador histórico", g:"M"},
+    {estudiante:"Miss Giovanna", salon:"Tutora", nota:"Responsable histórica", g:"F"},
+    {estudiante:"Miss Violeta", salon:"Tutora", nota:"", g:"F"},
+    {estudiante:"Prof. Wilfredo", salon:"Tutor", nota:"Coordinador de Actividades", g:"M"},
+  ],
+  uniformeGeneral: [
+    {estudiante:"Matías Alonso Bravo Aguilar", salon:"5°A", g:"M"},
+    {estudiante:"Aarón Jairo Ballardo Chiroque", salon:"5°B", g:"M"},
+    {estudiante:"Rodrigo Alonso Elías Monge", salon:"5°B", g:"M"},
+  ],
+  heroesIndependenciaFilas: [
+    [ {estudiante:"Ainara Rocha Machado", salon:"5°A", nota:"Francisca Zubiaga", g:"F"}, {estudiante:"Ana Flavia Carrión Obando", salon:"5°A", nota:"Juana de Dios Manrique", g:"F"}, {estudiante:"Daniela Olascoaga Mozo", salon:"5°A", nota:"Brígida Silva de Ochoa", g:"F"} ],
+    [ {estudiante:"Camila Tafur Mori", salon:"5°B", nota:"María Parado de Bellido", g:"F"}, {estudiante:"Leonardo Marchand López", salon:"5°B", nota:"José Olaya", g:"M"}, {estudiante:"Jeany Gómez Mejía", salon:"5°A", nota:"Bartolina Sisa — líder", g:"F"} ],
+    [ {estudiante:"Valentino Marino García", salon:"5°B", nota:"Túpac Amaru II", g:"M"}, {estudiante:"Ariana Ríos Ochoa", salon:"5°A", nota:"Micaela Bastidas", g:"F"} ],
+  ],
+  heroesPacificoFilas: [
+    [ {estudiante:"Carlos Stephano Cerna Agudelo", salon:"5°A", nota:"Miguel Grau", g:"M"}, {estudiante:"Ricardo Cuadros Rojas", salon:"5°B", nota:"Francisco Bolognesi", g:"M"}, {estudiante:"Carlos Antonio Díaz Benavides", salon:"5°A", nota:"Alfonso Ugarte", g:"M"}, {estudiante:"Julio Benítez Olórtegui", salon:"5°A", nota:"Leoncio Prado", g:"M"} ],
+    [ {estudiante:"Esteban Villanueva Aguirre", salon:"5°A", nota:"Andrés Avelino Cáceres", g:"M"}, {estudiante:"Kathryn Flores Benites", salon:"5°B", nota:"Antonia Moreno de Cáceres", g:"F"} ],
+  ],
+  ejercitoFilas: [
+    [ {estudiante:"Luciana Calderón Álvarez", salon:"5°A", g:"F"}, {estudiante:"Alana Rojas García", salon:"5°A", g:"F"} ],
+    [ {estudiante:"Gabriel Saldaña Jara", salon:"5°B", g:"M"}, {estudiante:"Pedro Rivera Barrionuevo", salon:"5°B", g:"M"}, {estudiante:"Thiago Rojas Loayza", salon:"5°B", g:"M"} ],
+    [ {estudiante:"Edgar Popi Rosas", salon:"5°B", g:"M"}, {estudiante:"Adriano Rivera Munives", salon:"5°A", g:"M"} ],
+  ],
+  marinaFilas: [
+    [ {estudiante:"Juan Diego Mar Arias", salon:"5°B", g:"M"}, {estudiante:"Mihai Simion Lozada", salon:"5°B", g:"M"}, {estudiante:"Lennon Carbonell Gutiérrez", salon:"5°B", g:"M"} ],
+    [ {estudiante:"Kevin Elías Ramírez", salon:"5°B", g:"M"}, {estudiante:"Adrián Malpartida Sueldo", salon:"5°A", g:"M"}, {estudiante:"Piero Vega Dolly", salon:"5°B", g:"M"} ],
+    [ {estudiante:"Luciana Mottoccanchi Claros", salon:"5°B", g:"F"}, {estudiante:"Fabiana Robles Rojas", salon:"5°B", g:"F"}, {estudiante:"Meylin Gómez In", salon:"5°A", g:"F"}, {estudiante:"Keyli La Rosa Boza", salon:"5°B", g:"F"} ],
+    [ {estudiante:"Luana Sánchez García", salon:"5°B", g:"F"}, {estudiante:"Micaela Carrasco Landa", salon:"5°B", g:"F"}, {estudiante:"Luciana Pérez Castro", salon:"5°B", g:"F"}, {estudiante:"Jhocelyn Véliz Vílchez", salon:"5°A", g:"F"} ],
+    [ {estudiante:"Adriana Chaupis Fernández", salon:"5°B", g:"F"}, {estudiante:"Lucero Chaupis Fernández", salon:"5°B", g:"F"}, {estudiante:"Valentina Inche Cabana", salon:"5°B", g:"F"}, {estudiante:"Valeria Valencia Yactayo", salon:"5°A", g:"F"} ],
+  ],
+  fapFilas: [
+    [ {estudiante:"Ariana Qqueshuayllo López", salon:"5°B", nota:"Única mujer del destacamento", g:"F"} ],
+    [ {estudiante:"Christopher Alván Tinedo", salon:"5°A", g:"M"}, {estudiante:"Alejandro Porro Alvarado", salon:"5°A", g:"M"}, {estudiante:"Leonardo Zúñiga Llerena", salon:"5°A", g:"M"} ],
+    [ {estudiante:"Mateo Pumapillo Linares", salon:"5°A", g:"M"}, {estudiante:"Jordany Yauli Barrera", salon:"5°A", g:"M"}, {estudiante:"Stefano Martínez Ayala", salon:"5°B", g:"M"} ],
+  ],
+  montonerasFilas: [
+    [ {estudiante:"Ayelen Romero Arroyo", salon:"5°A", g:"F"}, {estudiante:"Luana Román Bermeo", salon:"5°A", g:"F"}, {estudiante:"Katiuska Guevara Díaz", salon:"5°A", g:"F"}, {estudiante:"Pierina Bollet Larrea", salon:"5°A", g:"F"} ],
+    [ {estudiante:"Luciana Moreno Yépez", salon:"5°A", g:"F"}, {estudiante:"Dannae Cumpa Olaya", salon:"5°A", g:"F"}, {estudiante:"Valeria Elías Mayuri", salon:"5°A", g:"F"}, {estudiante:"Amelia Ortiz Ochoa", salon:"5°A", g:"F"} ],
+    [ {estudiante:"Maria Pacherres Cornejo", salon:"5°A", g:"F"}, {estudiante:"Lucia Talledo Mejia", salon:"5°A", g:"F"}, {estudiante:"Estrella Reyes Sevilla", salon:"5°B", g:"F"}, {estudiante:"Jennevith Yalico Ramírez", salon:"5°A", g:"F"} ],
+    [ {estudiante:"Gianella Beretta Curi", salon:"5°B", g:"F"}, {estudiante:"Andrea Landauro Ortiz", salon:"5°B", g:"F"}, {estudiante:"Mia Quiroz Montenegro", salon:"5°B", g:"F"}, {estudiante:"Liana Rebaza Cornejo", salon:"5°B", g:"F"} ],
+    [ {estudiante:"Andrea Cabanillas Tuse", salon:"5°B", g:"F"}, {estudiante:"Kiara Saldaña Sánchez", salon:"5°B", g:"F"} ],
+  ],
+};
 
 const ORGANIZACION = [
   { rol:"Respaldo académico e histórico", nombre:"Prof. Giovanna", desc:"Área de Ciencias Sociales. Narrativa histórica, actuación y Comité de Bienvenida a las familias.", accent:"var(--grana)" },
@@ -529,6 +627,7 @@ const LOGISTICA = [
 const total=78;
 const personajes = HEROES_PACIFICO.length + INDEPENDENCIA.length;
 function bTotal(k){ return FUERZAS[k].lider.length + FUERZAS[k].cadetes.length; }
+function bGender(k){ const m=FUERZAS[k].cadetes.filter(c=>c.g==='M').length; const f=FUERZAS[k].cadetes.filter(c=>c.g==='F').length; return {m,f}; }
 const cadetesSinLider = (FUERZAS.ejercito.cadetes.length)+(FUERZAS.fap.cadetes.length)+(FUERZAS.marina.cadetes.length);
 const femenino = 1 + GRUPO_FEMENINO.marineras.length;
 const especialesCount = ROLES_ESPECIALES.narrador.gente.length + ROLES_ESPECIALES.uniformeGeneral.gente.length + ROLES_ESPECIALES.banda.gente.length + ROLES_ESPECIALES.noAsiste.gente.length + 1;
@@ -576,7 +675,7 @@ document.getElementById('branchTabs').innerHTML = bKeys.map((k,i)=>`<button clas
 document.getElementById('branchPanels').innerHTML = bKeys.map((k,i)=>{
   const b=FUERZAS[k];
   return `<div class="tab-panel ${i===0?'active':''}" id="panel-${k}">
-    <div class="branch-header" style="background:${b.color}"><div><h3>${b.nombre}</h3><p>${b.uniforme} · ${b.lider.length} líder(es) + ${b.cadetes.length} cadetes</p></div></div>
+    <div class="branch-header" style="background:${b.color}"><div><h3>${b.nombre}</h3><p>${b.uniforme} · ${b.lider.length} líder(es) + ${b.cadetes.length} cadetes (${bGender(k).m}M · ${bGender(k).f}F)</p></div></div>
     <div class="leader-row">${b.lider.map(l=>`<div class="leader-card" style="--accent:${b.color}"><div class="badge">Héroe líder</div><div class="nm">${l.estudiante}</div><div class="nota">${l.nota} · ${l.salon}</div></div>`).join('')}</div>
     <div class="cadet-grid">${b.cadetes.map(c=>`<div class="cadet-card"><span>${c.estudiante}${c.nota?`<span class="note">${c.nota}</span>`:''}</span><span class="salon-tag">${c.salon}</span></div>`).join('')}</div>
   </div>`;
@@ -630,8 +729,89 @@ document.querySelectorAll('.plan-btn').forEach(btn=>btn.addEventListener('click'
 
 document.getElementById('marchaTimeline').innerHTML = MARCHA.map((m,i)=>`<div class="tl-item" data-n="${i+1}"><h4>${m.t}</h4><p>${m.d}</p></div>`).join('');
 
-document.getElementById('cronoTable').innerHTML = `<tr><th>Día(s)</th><th>Actividad</th><th>Responsable</th></tr>` +
-  CRONOGRAMA.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+/* ===== RENDER FORMACIÓN ===== */
+let formacionMode = 'cartel';
+
+function fSlotCard(p, accent){
+  const cls = p.pending ? "formacion-slot pending" : "formacion-slot";
+  return `<div class="${cls}" style="--accent:${p.accent||accent||'var(--grana)'}">
+    <div class="nm">${p.estudiante}</div>
+    ${p.nota?`<div class="rl">${p.nota}</div>`:''}
+    ${p.salon && p.salon!=='—' ? `<div class="sl">${p.salon}</div>` : (p.salon==='—'?'<div class="sl">por confirmar</div>':'')}
+  </div>`;
+}
+function fSlotDot(p){
+  const cls = "dot " + (p.pending ? "pending" : (p.g||'M'));
+  return `<div class="dot-wrap" onclick="this.classList.toggle('active')">
+    <div class="${cls}"></div>
+    <div class="dot-tip">${p.estudiante}${p.nota?`<span class="tip-role">${p.nota}</span>`:''}${p.salon&&p.salon!=='—'?`<span class="tip-role">${p.salon}</span>`:''}</div>
+  </div>`;
+}
+function fRows(rows, accent){
+  const rowClass = formacionMode === 'cartel' ? 'formacion-row' : 'dot-row';
+  const slotFn = formacionMode === 'cartel' ? (p)=>fSlotCard(p,accent) : fSlotDot;
+  return rows.map(row => `<div class="${rowClass}">${row.map(slotFn).join('')}</div>`).join('');
+}
+function fBlock(titulo, count, rowsHtml, accent){
+  return `<div class="formacion-block">
+    <div class="formacion-block-head"><h4 style="color:${accent||'var(--grana-dark)'}">${titulo}</h4><span class="count">${count} persona${count===1?'':'s'}</span></div>
+    ${rowsHtml}
+  </div><div class="formacion-arrow">▼</div>`;
+}
+
+function renderFormacion(){
+  let h = '';
+  const clean = formacionMode === 'puntosLimpio';
+  const blockWrap = (titulo, count, rowsHtml, accent) => {
+    if(clean){
+      return `<div class="dot-section">${rowsHtml}</div>`;
+    }
+    return fBlock(titulo, count, rowsHtml, accent);
+  };
+  const arrow = clean ? '' : `<div class="formacion-arrow">▼</div>`;
+  const arrowDots = clean ? '' : `<div class="formacion-arrow">· · ·</div>`;
+
+  h += blockWrap("Vanguardia — Portaestandarte", FORMACION.vanguardia.length, fRows([FORMACION.vanguardia], 'var(--negro-cuartel)'), 'var(--negro-cuartel)');
+  if(!clean) h += `<div class="formacion-note">🎯 Gigantografía (por confirmar) — si se aprueba, marcha justo aquí, detrás de Antonio Alvarado</div>`;
+  h += fRows([FORMACION.gigantografia], 'var(--ambar)');
+  h += arrow;
+  h += blockWrap("Plana docente", FORMACION.docentes.length, fRows([FORMACION.docentes], 'var(--oro)'), 'var(--oro)');
+  h += blockWrap("Uniforme general", FORMACION.uniformeGeneral.length, fRows([FORMACION.uniformeGeneral], 'var(--tinta-soft)'), 'var(--tinta-soft)');
+  h += blockWrap("Héroes y heroínas — Independencia", FORMACION.heroesIndependenciaFilas.flat().length, fRows(FORMACION.heroesIndependenciaFilas, 'var(--grana)'), 'var(--grana)');
+  h += arrowDots;
+  h += blockWrap("Héroes — Guerra del Pacífico", FORMACION.heroesPacificoFilas.flat().length, fRows(FORMACION.heroesPacificoFilas, 'var(--negro-cuartel)'), 'var(--negro-cuartel)');
+  h += blockWrap("Destacamento Ejército", FORMACION.ejercitoFilas.flat().length, fRows(FORMACION.ejercitoFilas, 'var(--negro-cuartel)'), 'var(--negro-cuartel)');
+  h += blockWrap("Destacamento Marina", FORMACION.marinaFilas.flat().length, fRows(FORMACION.marinaFilas, 'var(--azul-fap-soft)'), 'var(--azul-fap-soft)');
+  h += blockWrap("Destacamento FAP", FORMACION.fapFilas.flat().length, fRows(FORMACION.fapFilas, 'var(--azul-fap)'), 'var(--azul-fap)');
+  h += blockWrap("Montoneras (grupo femenino)", FORMACION.montonerasFilas.flat().length, fRows(FORMACION.montonerasFilas, 'var(--verde-rabona)'), 'var(--verde-rabona)');
+  document.getElementById('formacionContent').innerHTML = h;
+}
+renderFormacion();
+
+document.getElementById('btnModoCartel').addEventListener('click', ()=>{
+  formacionMode = 'cartel';
+  document.getElementById('btnModoCartel').classList.add('active');
+  document.getElementById('btnModoPuntos').classList.remove('active');
+  document.getElementById('btnModoPuntosLimpio').classList.remove('active');
+  document.getElementById('dotLegend').style.display = 'none';
+  renderFormacion();
+});
+document.getElementById('btnModoPuntos').addEventListener('click', ()=>{
+  formacionMode = 'puntos';
+  document.getElementById('btnModoPuntos').classList.add('active');
+  document.getElementById('btnModoCartel').classList.remove('active');
+  document.getElementById('btnModoPuntosLimpio').classList.remove('active');
+  document.getElementById('dotLegend').style.display = 'flex';
+  renderFormacion();
+});
+document.getElementById('btnModoPuntosLimpio').addEventListener('click', ()=>{
+  formacionMode = 'puntosLimpio';
+  document.getElementById('btnModoPuntosLimpio').classList.add('active');
+  document.getElementById('btnModoCartel').classList.remove('active');
+  document.getElementById('btnModoPuntos').classList.remove('active');
+  document.getElementById('dotLegend').style.display = 'flex';
+  renderFormacion();
+});
 
 document.getElementById('orgCards').innerHTML = ORGANIZACION.map(o=>`
   <div class="org-card" style="--accent:${o.accent}">
