@@ -399,7 +399,7 @@ const FUERZAS = {
       {estudiante:"Pedro Enrique Rivera Barrionuevo", salon:"5°B", g:"M"},
       {estudiante:"Antonio Felipe Alvarado Correa", salon:"5°A", nota:"Portaestandarte — pancarta de 5° de Secundaria", g:"M"},
       {estudiante:"Luciana Victoria Calderón Álvarez", salon:"5°A", g:"F"},
-      {estudiante:"Alana Adonay Rojas García", salon:"5°A", g:"F"},
+      {estudiante:"Luciana Rossie Pérez Castro", salon:"5°B", g:"F"},
       {estudiante:"Adriano Raúl Fabrizzió Rivera Munives", salon:"5°A", g:"M"},
     ]},
   fap: { nombre:"FAP", color:"var(--azul-fap)", uniforme:"Uniforme azul",
@@ -428,10 +428,9 @@ const FUERZAS = {
       {estudiante:"Luana Mayte Sánchez García", salon:"5°B", g:"F"},
       {estudiante:"Piero Vega Dolly", salon:"5°B", g:"M"},
       {estudiante:"Fabiana Carol Robles Rojas", salon:"5°B", g:"F"},
+      {estudiante:"Alana Adonay Rojas García", salon:"5°A", g:"F"},
       {estudiante:"Meylin Sun Gómez In", salon:"5°A", g:"F"},
       {estudiante:"Luciana Jareth Mottoccanchi Claros", salon:"5°B", g:"F"},
-      {estudiante:"Micaela Antuaneth Carrasco Landa", salon:"5°B", g:"F"},
-      {estudiante:"Luciana Rossie Pérez Castro", salon:"5°B", g:"F"},
       {estudiante:"Valentina Guadalupe Inche Cabana", salon:"5°B", g:"F"},
       {estudiante:"Valeria Fernanda Valencia Yactayo", salon:"5°A", g:"F"},
     ]},
@@ -456,6 +455,7 @@ const GRUPO_FEMENINO = {
     {estudiante:"Mia Valescka Quiroz Montenegro", salon:"5°B"},
     {estudiante:"Liana Hemy Rebaza Cornejo", salon:"5°B"},
     {estudiante:"Andrea Lucía Cabanillas Tuse", salon:"5°B"},
+    {estudiante:"Micaela Antuaneth Carrasco Landa", salon:"5°B", g:"F"},
     {estudiante:"Kiara Yamile Saldaña Sánchez", salon:"5°B"},
     {estudiante:"Estrella Angelina Reyes Sevilla", salon:"5°B"},
   ],
@@ -572,16 +572,16 @@ const FORMACION = {
     [ {estudiante:"Esteban Villanueva Aguirre", salon:"5°A", nota:"Andrés Avelino Cáceres", g:"M"}, {estudiante:"Kathryn Flores Benites", salon:"5°B", nota:"Antonia Moreno de Cáceres", g:"F"} ],
   ],
   ejercitoFilas: [
-    [ {estudiante:"Luciana Calderón Álvarez", salon:"5°A", g:"F"}, {estudiante:"Alana Rojas García", salon:"5°A", g:"F"} ],
+    [ {estudiante:"Luciana Calderón Álvarez", salon:"5°A", g:"F"}, {estudiante:"Luciana Pérez Castro", salon:"5°B", g:"F"} ],
     [ {estudiante:"Gabriel Saldaña Jara", salon:"5°B", g:"M"}, {estudiante:"Pedro Rivera Barrionuevo", salon:"5°B", g:"M"}, {estudiante:"Thiago Rojas Loayza", salon:"5°B", g:"M"} ],
     [ {estudiante:"Edgar Popi Rosas", salon:"5°B", g:"M"}, {estudiante:"Adriano Rivera Munives", salon:"5°A", g:"M"} ],
   ],
   marinaFilas: [
     [ {estudiante:"Juan Diego Mar Arias", salon:"5°B", g:"M"}, {estudiante:"Mihai Simion Lozada", salon:"5°B", g:"M"}, {estudiante:"Lennon Carbonell Gutiérrez", salon:"5°B", g:"M"} ],
     [ {estudiante:"Kevin Elías Ramírez", salon:"5°B", g:"M"}, {estudiante:"Adrián Malpartida Sueldo", salon:"5°A", g:"M"}, {estudiante:"Piero Vega Dolly", salon:"5°B", g:"M"} ],
-    [ {estudiante:"Luciana Mottoccanchi Claros", salon:"5°B", g:"F"}, {estudiante:"Fabiana Robles Rojas", salon:"5°B", g:"F"}, {estudiante:"Meylin Gómez In", salon:"5°A", g:"F"}, {estudiante:"Keyli La Rosa Boza", salon:"5°B", g:"F"} ],
-    [ {estudiante:"Luana Sánchez García", salon:"5°B", g:"F"}, {estudiante:"Micaela Carrasco Landa", salon:"5°B", g:"F"}, {estudiante:"Luciana Pérez Castro", salon:"5°B", g:"F"}, {estudiante:"Jhocelyn Véliz Vílchez", salon:"5°A", g:"F"} ],
-    [ {estudiante:"Adriana Chaupis Fernández", salon:"5°B", g:"F"}, {estudiante:"Lucero Chaupis Fernández", salon:"5°B", g:"F"}, {estudiante:"Valentina Inche Cabana", salon:"5°B", g:"F"}, {estudiante:"Valeria Valencia Yactayo", salon:"5°A", g:"F"} ],
+    [ {estudiante:"Luciana Mottoccanchi Claros", salon:"5°B", g:"F"}, {estudiante:"Fabiana Robles Rojas", salon:"5°B", g:"F"}, {estudiante:"Meylin Gómez In", salon:"5°A", g:"F"}, {estudiante:"Alana Rojas García", salon:"5°A", g:"F"}],
+    [ {estudiante:"Luana Sánchez García", salon:"5°B", g:"F"}, {estudiante:"Jhocelyn Véliz Vílchez", salon:"5°A", g:"F"}, {estudiante:"Keyli La Rosa Boza", salon:"5°B", g:"F"}, {estudiante:"Valentina Inche Cabana", salon:"5°B", g:"F"}  ],
+    [ {estudiante:"Adriana Chaupis Fernández", salon:"5°B", g:"F"}, {estudiante:"Lucero Chaupis Fernández", salon:"5°B", g:"F"}, {estudiante:"Valeria Valencia Yactayo", salon:"5°A", g:"F"} ],
   ],
   fapFilas: [
     [ {estudiante:"Ariana Qqueshuayllo López", salon:"5°B", nota:"Única mujer del destacamento", g:"F"} ],
@@ -593,7 +593,7 @@ const FORMACION = {
     [ {estudiante:"Luciana Moreno Yépez", salon:"5°A", g:"F"}, {estudiante:"Dannae Cumpa Olaya", salon:"5°A", g:"F"}, {estudiante:"Valeria Elías Mayuri", salon:"5°A", g:"F"}, {estudiante:"Amelia Ortiz Ochoa", salon:"5°A", g:"F"} ],
     [ {estudiante:"Maria Pacherres Cornejo", salon:"5°A", g:"F"}, {estudiante:"Lucia Talledo Mejia", salon:"5°A", g:"F"}, {estudiante:"Estrella Reyes Sevilla", salon:"5°B", g:"F"}, {estudiante:"Jennevith Yalico Ramírez", salon:"5°A", g:"F"} ],
     [ {estudiante:"Gianella Beretta Curi", salon:"5°B", g:"F"}, {estudiante:"Andrea Landauro Ortiz", salon:"5°B", g:"F"}, {estudiante:"Mia Quiroz Montenegro", salon:"5°B", g:"F"}, {estudiante:"Liana Rebaza Cornejo", salon:"5°B", g:"F"} ],
-    [ {estudiante:"Andrea Cabanillas Tuse", salon:"5°B", g:"F"}, {estudiante:"Kiara Saldaña Sánchez", salon:"5°B", g:"F"} ],
+    [ {estudiante:"Andrea Cabanillas Tuse", salon:"5°B", g:"F"}, {estudiante:"Micaela Carrasco Landa", salon:"5°B", g:"F"}, {estudiante:"Kiara Saldaña Sánchez", salon:"5°B", g:"F"} ],
   ],
 };
 
@@ -601,15 +601,6 @@ const ORGANIZACION = [
   { rol:"Respaldo académico e histórico", nombre:"Prof. Giovanna", desc:"Área de Ciencias Sociales. Narrativa histórica, actuación y Comité de Bienvenida a las familias.", accent:"var(--grana)" },
   { rol:"Coordinador de Actividades", nombre:"Prof. Wilfredo", desc:"Tutor de 5° A. Diseño de la marcha y de la transición coreográfica hacia la marinera, con experiencia previa en coordinación de actividades institucionales.", accent:"var(--azul-fap)" },
   { rol:"Coordinación estudiantil", nombre:"Carlos Díaz", desc:"Coordinación general del proyecto y enlace entre docentes y estudiantes.", accent:"var(--oro)" },
-];
-const ORG_TABLE = [
-  ["Prof. Giovanna", "Narrativa histórica, actuación y Comité de Bienvenida", "Recepción de familias y actos históricos"],
-  ["Prof. Wilfredo", "Coordinador de Actividades y Tutor 5° A. Diseño de la marcha y transición coreográfica a marinera", "Marcha final"],
-  ["Carlos Díaz", "Coordinación estudiantil general", "Enlace entre docentes y estudiantes"],
-  ["Daniela Olascoaga", "Coautoría de la Reflexión Patriótica", "Discurso de cierre"],
-  ["Leonardo Adrián Marchand López", "Abanderado de la promoción (José Olaya) y Escolta", "Marcha — Escolta"],
-  ["Antonio Alvarado", "Portaestandarte de la pancarta de 5° de Secundaria", "Marcha — Ejército"],
-  ["Mathew Espino", "Narrador histórico", "Corredor Histórico"],
 ];
 
 const LOGISTICA = [
@@ -817,8 +808,7 @@ document.getElementById('orgCards').innerHTML = ORGANIZACION.map(o=>`
   <div class="org-card" style="--accent:${o.accent}">
     <div class="role-tag">${o.rol}</div><h4>${o.nombre}</h4><p>${o.desc}</p>
   </div>`).join('');
-document.getElementById('orgTable').innerHTML = `<tr><th>Responsable</th><th>Función</th><th>Ámbito</th></tr>` +
-  ORG_TABLE.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+
 
 document.getElementById('logiGrid').innerHTML = LOGISTICA.map(l=>`
   <div class="logi-card"><h4>${l.t}</h4><p>${l.d}</p></div>`).join('');
