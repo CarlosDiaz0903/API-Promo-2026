@@ -3,212 +3,525 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Eventos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="google" content="notranslate">
+  <meta name="description" content="Panel de gestión de tareas del calendario académico - Promo 2026 Blessed">
+  <meta name="theme-color" content="#02060e">
+
+  <title>Gestión de Tareas | Blessed</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="../../icons/LOGO-P1.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../../icons/LOGO-P1.png">
+
+  <!-- Critical CSS inline (mismo patrón real usado en el resto del sitio) -->
   <style>
+    :root {
+      --bg-primary: #02060e;
+    }
+
     body {
-      background-color: #f8f9fa;
-      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 800px;
-      margin-top: 50px;
-      padding: 30px;
-      background-color: white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: bold;
-      color: #007bff;
-    }
-
-    .form-label {
-      font-weight: bold;
-      color: #495057;
-    }
-
-    .form-control {
-      border-radius: 0.5rem;
-      padding: 12px;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-size: 1.1rem;
-    }
-
-    .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-    }
-
-    .toggle-switch {
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
       display: flex;
       align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
-    .toggle-switch input[type="checkbox"] {
-      appearance: none;
-      width: 40px;
-      height: 20px;
-      background-color: #ccc;
-      border-radius: 15px;
-      position: relative;
-      cursor: pointer;
-      transition: background-color 0.3s;
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
-    .toggle-switch input[type="checkbox"]:checked {
-      background-color: #007bff;
-    }
-
-    .toggle-switch input[type="checkbox"]::before {
-      content: "";
-      width: 18px;
-      height: 18px;
-      background-color: white;
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #fff;
       border-radius: 50%;
-      position: absolute;
-      top: 1px;
-      left: 1px;
-      transition: transform 0.3s;
+      animation: spin 1s linear infinite;
     }
 
-    .toggle-switch input[type="checkbox"]:checked::before {
-      transform: translateX(20px);
-    }
-
-    .toggle-switch label {
-      margin-left: 10px;
-      font-weight: bold;
-      color: #495057;
-    }
-
-    .saveChanges  {
-      display: none;
-      color: aqua;
-      padding: 15px;
-    }
-
-    .hidden-field {
-      display: none;
-    }
-
-    .evento {
-      border: 1px solid #dee2e6;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .evento h2 {
-      margin-top: 0;
-      color: #007bff;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
+
+  <!-- Fuentes -->
+  <link rel="stylesheet" href="../../styles/fonts.css">
+
+  <!-- Sistema de diseño global - REUTILIZADO -->
+  <link rel="stylesheet" href="../../styles/design-system.css">
+  <link rel="stylesheet" href="../../styles/header.css">
+  <link rel="stylesheet" href="../../styles/animations.css">
+
+  <!-- Estilos específicos del formulario -->
+  <link rel="stylesheet" href="./formulario.css">
 </head>
-<body>
+<body data-page="formulario-tareas">
 
-  <div class="container">
-    <h1>Registrar Evento</h1>
-    <form id="eventoForm">
-      <div class="mb-3">
-        <label for="tipo" class="form-label">Tipo de Evento</label>
-        <select id="tipo" class="form-control" required onchange="showFields()">
-          <option value="" disabled selected>Seleccionar tipo de evento</option>
-          <option value="Tarea">Tarea</option>
-          <option value="Examen">Examen</option>
-          <option value="Presentación">Presentación</option>
-          <option value="Actividad">Actividad</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre del Evento</label>
-        <input type="text" id="nombre" class="form-control" placeholder="Ingresa el nombre del evento" required>
-      </div>
-
-      <div class="mb-3 hidden-field" id="curso-field">
-        <label for="curso" class="form-label">Curso</label>
-        <select id="curso" class="form-control">
-          <option value="">Seleccione un curso</option>
-          <option value="Mate">Mate</option>
-          <option value="Comu">Comu</option>
-          <option value="CCSS">CCSS</option>
-          <option value="CTA">CTA</option>
-          <option value="Física">Física</option>
-          <option value="Religión">Religión</option>
-          <option value="Alemán">Alemán</option>
-          <option value="Francés">Francés</option>
-          <option value="Ingles">Ingles</option>
-          <option value="Danza">Danza</option>
-          <option value="Info">Info</option>
-          <option value="Edu. F">Edu. F</option>
-          <option value="Musica">Musica</option>
-          <option value="Manu.">Manu.</option>
-          <option value="Teatro">Teatro</option>
-          <option value="DPCC">DPCC</option>
-          <option value="Cole">Cole</option>
-        </select>
-      </div>
-
-      <div class="mb-3 hidden-field" id="resolucion-toggle-field">
-        <div class="toggle-switch">
-          <input type="checkbox" id="toggleResolucion" onclick="toggleResolucionText()">
-          <label for="toggleResolucion">¿Agregar resolución?</label>
-        </div>
-      </div>
-
-      <div class="mb-3 hidden-field" id="resolucion-field">
-        <label for="resolucion" class="form-label">Resolución</label>
-        <input type="text" id="resolucion" class="form-control" placeholder="Ingresa la resolución" disabled>
-      </div>
-
-      <div class="mb-3 hidden-field" id="lugar-field">
-        <label for="lugar" class="form-label">Lugar</label>
-        <input type="text" id="lugar" class="form-control" placeholder="Ingresa el lugar del evento">
-      </div>
-
-      <div class="mb-3">
-        <label for="fecha" class="form-label">Fecha</label>
-        <input type="date" id="fecha" class="form-control" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="hora" class="form-label">Hora</label>
-        <input type="time" id="hora" class="form-control" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="detalles" class="form-label">Detalles</label>
-        <textarea id="detalles" class="form-control" rows="3" placeholder="Detalles adicionales" required></textarea>
-      </div>
-
-      <div class="mb-3">
-        <label for="imagen" class="form-label">Imagen (URL)</label>
-        <input type="text" id="imagen" class="form-control" placeholder="URL de la imagen">
-      </div>
-
-      <input type="hidden" id="editIndex">
-      <button type="button" class="btn btn-primary" onclick="saveEvent()">Guardar Evento</button>
-      <button id="saveChanges" class="saveChanges">Guardar cambios</button>
-    </form>
-
-    <h2 class="mt-4">Eventos Registrados</h2>
-    <div id="eventos"></div>
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+    </div>
   </div>
 
-  <script src="formulario.js"></script>
+  <!-- Animated Background -->
+  <div class="animated-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <!-- Header - Componente real del sitio (HeaderManager-compatible) -->
+  <header id="mainHeader">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+      <a href="/" class="logo" aria-label="Inicio">
+        <img src="../../icons/BLESSED-LOGO.png" alt="Logo Blessed" width="130" height="auto">
+      </a>
+
+      <button
+        id="hamburger"
+        class="hamburger"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li class="nav-item dropdown" role="none">
+          <button
+            class="dropdown-toggle"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="calendarioMenu"
+          >
+            CALENDARIO
+            <svg class="caret" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <ul id="calendarioMenu" class="dropdown-menu" role="menu">
+            <li role="none">
+              <a role="menuitem" href="../5to-A/index.html">CALENDARIO 5TO A</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="../5to-B/index.html">CALENDARIO 5TO B</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="./index.html" aria-current="page">GESTIÓN DE TAREAS</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" role="none">
+          <a href="/olimpiadas/" class="nav-link" role="menuitem">OLIMPIADAS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/eventos/" class="nav-link" role="menuitem">EVENTOS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/estudiantes/" class="nav-link" role="menuitem">ESTUDIANTES</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Hero Section - mismo componente "Classroom Hero" que el calendario -->
+    <section class="classroom-hero admin-hero">
+      <div class="hero-content">
+        <div class="hero-badge" data-aos="fade-down">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Promo 2026 - Blessed · Panel Admin</span>
+        </div>
+
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+          <span class="title-main">GESTIÓN</span>
+          <span class="title-sub">DE TAREAS · CALENDARIO 5TO A / 5TO B</span>
+        </h1>
+
+        <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+          Crea, edita y elimina tareas, exámenes y actividades. Los cambios se reflejan al instante en el calendario público.
+        </p>
+      </div>
+    </section>
+
+    <!-- Container Principal -->
+    <div class="container">
+      
+      <!-- Sección Formulario -->
+      <section class="form-container" data-aos="fade-up">
+        <div class="section-header">
+          <div class="section-title-group">
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              <span id="form-mode-title">Nueva Tarea</span>
+            </h2>
+            <p class="section-subtitle">Completa los campos para gestionar las tareas del calendario</p>
+          </div>
+        </div>
+
+        <form id="task-form" class="task-form">
+          <input type="hidden" id="edit-task-id">
+          
+          <!-- Título -->
+          <div class="form-field">
+            <label for="title" class="field-label">
+              Título de la tarea
+              <span class="required">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="title" 
+              class="field-input"
+              placeholder="Ej: Examen de Matemática - Capítulo 3"
+              required
+            >
+          </div>
+
+          <!-- Descripción -->
+          <div class="form-field">
+            <label for="description" class="field-label">
+              Descripción
+              <span class="optional">(opcional)</span>
+            </label>
+            <textarea 
+              id="description" 
+              class="field-textarea"
+              placeholder="Detalles adicionales sobre la tarea..."
+              rows="4"
+            ></textarea>
+          </div>
+
+          <!-- Row: Curso y Tipo -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="course" class="field-label">
+                Curso
+                <span class="required">*</span>
+              </label>
+              <select id="course" class="field-select" required>
+                <option value="">Seleccionar curso</option>
+                <option value="Francés">Francés</option>
+                <option value="Inglés">Inglés</option>
+                <option value="Alemán">Alemán</option>
+                <option value="Religión">Religión</option>
+                <option value="Matemática">Matemática</option>
+                <option value="CyT">CyT</option>
+                <option value="Comunicación">Comunicación</option>
+                <option value="CCSS">CCSS</option>
+                <option value="Edu. F">Edu. F</option>
+                <option value="DPCC">DPCC</option>
+                <option value="Danza">Danza</option>
+                <option value="Informática">Informática</option>
+                <option value="Cole">Cole</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="type" class="field-label">
+                Tipo
+                <span class="required">*</span>
+              </label>
+              <select id="type" class="field-select" required>
+                <option value="">Seleccionar tipo</option>
+                <option value="tarea">📝 Tarea</option>
+                <option value="examen">📚 Examen</option>
+                <option value="presentacion">📌 Presentación</option>
+                <option value="actividad">🎉 Actividad</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row: Salón y Fecha -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="class" class="field-label">
+                Salón
+                <span class="required">*</span>
+              </label>
+              <select id="class" class="field-select" required>
+                <option value="">Seleccionar salón</option>
+                <option value="5A">5TO A</option>
+                <option value="5B">5TO B</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="date" class="field-label">
+                Fecha y hora
+                <span class="optional">(opcional si usas display_date)</span>
+              </label>
+              <input 
+                type="datetime-local" 
+                id="date" 
+                class="field-input"
+              >
+            </div>
+          </div>
+
+          <!-- Display Date (campo especial) -->
+          <div class="form-field">
+            <label for="display-date" class="field-label">
+              Fecha para mostrar
+              <span class="optional">(opcional - Ej: "NET MAYO 2026")</span>
+            </label>
+            <input 
+              type="text" 
+              id="display-date" 
+              class="field-input"
+              placeholder="NET MAYO 2026, NET ABRIL 2026, 05 MAYO 2026..."
+            >
+            <small class="field-hint">
+              Usa este campo cuando la tarea no tenga fecha exacta. Ejemplo: "NET MAYO 2026"
+            </small>
+          </div>
+
+          <!-- Imagen (auto o manual) -->
+          <div class="form-field">
+            <label for="image" class="field-label">
+              URL de imagen
+              <span class="optional">(se asigna automáticamente según curso)</span>
+            </label>
+            <input 
+              type="url" 
+              id="image" 
+              class="field-input"
+              placeholder="Solo si deseas sobreescribir la imagen automática"
+            >
+            <div id="image-preview" class="image-preview">
+              <div class="preview-placeholder">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <p>La imagen se asignará automáticamente</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Acciones del formulario -->
+          <div class="form-actions">
+            <button type="button" id="cancel-btn" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span id="submit-text">Crear Tarea</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Sección Panel Admin -->
+      <section class="admin-panel" data-aos="fade-up" data-aos-delay="100">
+        <div class="section-header">
+          <div class="section-title-group">
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 11l3 3L22 4"></path>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+              Tareas Registradas
+            </h2>
+          </div>
+          
+          <!-- Filtros -->
+          <div class="filter-controls">
+            <div class="filter-search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Buscar tareas..."
+                class="search-input"
+              >
+            </div>
+            
+            <div class="filter-group">
+              <select id="filter-class" class="filter-select">
+                <option value="">Todos los salones</option>
+                <option value="5A">5TO A</option>
+                <option value="5B">5TO B</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <select id="filter-course" class="filter-select">
+                <option value="">Todos los cursos</option>
+                <option value="Francés">Francés</option>
+                <option value="Inglés">Inglés</option>
+                <option value="Alemán">Alemán</option>
+                <option value="Religión">Religión</option>
+                <option value="Matemática">Matemática</option>
+                <option value="CyT">CyT</option>
+                <option value="Comunicación">Comunicación</option>
+                <option value="CCSS">CCSS</option>
+                <option value="Edu. F">Edu. F</option>
+                <option value="DPCC">DPCC</option>
+                <option value="Danza">Danza</option>
+                <option value="Informática">Informática</option>
+                <option value="Cole">Cole</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <select id="filter-type" class="filter-select">
+                <option value="">Todos los tipos</option>
+                <option value="tarea">Tareas</option>
+                <option value="examen">Exámenes</option>
+                <option value="presentacion">Presentaciones</option>
+                <option value="actividad">Actividades</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Chips de filtros activos -->
+          <div id="active-filters" class="active-filters" style="display: none;">
+            <div id="filter-chips" class="filter-chips"></div>
+            <button id="clear-filters-btn" class="clear-filters-btn" type="button">Limpiar filtros</button>
+          </div>
+        </div>
+
+        <!-- Column headers (visible solo en desktop, decorativo) -->
+        <div class="tasks-list-header" aria-hidden="true">
+          <span class="col-thumb"></span>
+          <span class="col-details">Tarea · Curso · Tipo · Salón · Fecha</span>
+          <span class="col-actions">Acciones</span>
+        </div>
+
+        <!-- Lista de tareas -->
+        <div id="tasks-container" class="tasks-list">
+          <div class="skeleton-list">
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+          </div>
+        </div>
+
+        <!-- Error state -->
+        <div id="error-state" class="empty-state error-state" style="display: none;">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <h3>No pudimos cargar el calendario</h3>
+          <p id="error-message">Ocurrió un problema al conectar con la base de datos.</p>
+          <button id="retry-btn" class="btn btn-secondary" type="button">Reintentar</button>
+        </div>
+
+        <!-- Empty state (sin registros en absoluto) -->
+        <div id="empty-state" class="empty-state" style="display: none;">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          <h3>Todo tranquilo 🎉</h3>
+          <p>No hay tareas registradas por ahora. Crea la primera usando el formulario.</p>
+        </div>
+
+        <!-- No results state (búsqueda/filtros sin coincidencias) -->
+        <div id="no-results-state" class="empty-state" style="display: none;">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <h3>No encontramos resultados</h3>
+          <p>Prueba cambiando los filtros o la búsqueda.</p>
+          <button id="no-results-clear-btn" class="btn btn-secondary" type="button">Limpiar filtros</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Modal de confirmación -->
+  <div id="delete-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+      </div>
+      <h3 class="modal-title">¿Eliminar tarea?</h3>
+      <p class="modal-text">Esta acción no se puede deshacer. La tarea será eliminada permanentemente.</p>
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn btn-secondary">Cancelar</button>
+        <button id="modal-confirm" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Scripts específicos del formulario (inicializa CRUD + dispara 'formulario:ready') -->
+  <script type="module" src="./formulario.js"></script>
+
+  <!-- Módulos internos reutilizados del sitio -->
+  <script type="module">
+    import { HeaderManager } from '../../scripts/modules/header.js';
+    import { AOSManager, PageLoader } from '../../scripts/modules/utils.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new HeaderManager();
+      new AOSManager();
+
+      const loader = new PageLoader('pageLoader');
+
+      // Oculta el loader en cuanto formulario.js termina su primera carga de datos,
+      // con un tope de seguridad por si algo falla antes de disparar el evento.
+      const safety = setTimeout(() => loader.hide(), 4000);
+      document.addEventListener('formulario:ready', () => {
+        clearTimeout(safety);
+        loader.hide();
+      }, { once: true });
+    });
+  </script>
 
 </body>
 </html>

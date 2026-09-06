@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta name="description" content="Calendario académico 5TO 'A' - Tareas, exámenes y actividades">
+  <meta name="theme-color" content="#02060e">
+
+  <title>Calendario 5TO "A" | Blessed</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="../../icons/LOGO-P1.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../../icons/LOGO-P1.png">
+
+  <!-- Critical CSS inline (mismo patrón que estudiantes/5to-A) -->
+  <style>
+    :root {
+      --bg-primary: #02060e;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Fuentes -->
+  <link rel="stylesheet" href="../../styles/fonts.css">
+
+  <!-- Sistema de diseño global - REUTILIZADO -->
+  <link rel="stylesheet" href="../../styles/design-system.css">
+  <link rel="stylesheet" href="../../styles/header.css">
+  <link rel="stylesheet" href="../../styles/animations.css">
+
+  <!-- Estilos específicos de esta página -->
+  <link rel="stylesheet" href="./calendario.css">
+</head>
+
+<body data-class="5A">
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
+
+  <!-- Animated Background -->
+  <div class="animated-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <!-- Header - Reutilizando componente real del sitio -->
+  <header id="mainHeader">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+      <a href="/" class="logo" aria-label="Inicio">
+        <img src="../../icons/BLESSED-LOGO.png" alt="Logo Blessed" width="130" height="auto">
+      </a>
+
+      <button
+        id="hamburger"
+        class="hamburger"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li class="nav-item dropdown" role="none">
+          <button
+            class="dropdown-toggle"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="calendarioMenu"
+          >
+            CALENDARIO
+            <svg class="caret" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <ul id="calendarioMenu" class="dropdown-menu" role="menu">
+            <li role="none">
+              <a role="menuitem" href="./index.html" aria-current="page">CALENDARIO 5TO A</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="../5to-B/index.html">CALENDARIO 5TO B</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="../formulario/index.html">GESTIÓN DE TAREAS</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" role="none">
+          <a href="/olimpiadas/" class="nav-link" role="menuitem">OLIMPIADAS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/eventos/" class="nav-link" role="menuitem">EVENTOS</a>
+        </li>
+        <li class="nav-item" role="none">
+          <a href="/estudiantes/" class="nav-link" role="menuitem">ESTUDIANTES</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Calendar Hero Section -->
+    <section class="classroom-hero" id="calendarHero">
+      <div class="hero-content">
+        <div class="hero-badge" data-aos="fade-down">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Promo 2026 - Blessed</span>
+        </div>
+
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+          <span class="title-main">CALENDARIO</span>
+          <span class="title-sub">5TO "A" · TAREAS Y EVENTOS</span>
+        </h1>
+
+        <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+          Tareas, exámenes y actividades del salón, actualizados en tiempo real.
+        </p>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="class-stats" id="classStats" aria-label="Estadísticas del calendario">
+      <div class="stats-container">
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">
+              <span class="stat-number" id="statPendingTasks" data-target="0">0</span>
+            </div>
+            <div class="stat-label">Tareas pendientes</div>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">
+              <span class="stat-number" id="statUpcomingExams" data-target="0">0</span>
+            </div>
+            <div class="stat-label">Exámenes próximos</div>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">
+              <span class="stat-number" id="statActivities" data-target="0">0</span>
+            </div>
+            <div class="stat-label">Actividades / Eventos</div>
+          </div>
+        </div>
+
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="stat-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">
+              <span class="stat-number stat-grade" id="statTotal" data-target="0">0</span>
+            </div>
+            <div class="stat-label">Total registrado</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolbar: Search + Filters + Copy Button -->
+    <section class="toolbar-section" id="toolbarSection">
+      <div class="toolbar-container">
+
+        <div class="search-bar" data-aos="fade-up">
+          <div class="search-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Buscar por título, descripción o curso..."
+            autocomplete="off"
+            aria-label="Buscar tarea"
+          >
+          <button class="search-clear" id="searchClear" aria-label="Limpiar búsqueda">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="toolbar-filters" data-aos="fade-up" data-aos-delay="100">
+          <select id="filterCourse" class="filter-select" aria-label="Filtrar por curso">
+            <option value="">Todos los cursos</option>
+            <option value="Francés">Francés</option>
+            <option value="Inglés">Inglés</option>
+            <option value="Alemán">Alemán</option>
+            <option value="Religión">Religión</option>
+            <option value="Matemática">Matemática</option>
+            <option value="CyT">CyT</option>
+            <option value="Comunicación">Comunicación</option>
+            <option value="CCSS">CCSS</option>
+            <option value="Edu. F">Edu. F</option>
+            <option value="DPCC">DPCC</option>
+            <option value="Danza">Danza</option>
+            <option value="Informática">Informática</option>
+            <option value="Cole">Cole</option>
+          </select>
+
+          <select id="filterType" class="filter-select" aria-label="Filtrar por tipo">
+            <option value="">Todos los tipos</option>
+            <option value="tarea">Tarea</option>
+            <option value="examen">Examen</option>
+            <option value="presentacion">Presentación</option>
+            <option value="actividad">Actividad</option>
+          </select>
+
+          <button class="copy-btn" id="copyTasksBtn" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span id="copyBtnText">Copiar tareas</span>
+          </button>
+        </div>
+
+        <!-- Chips de filtros activos -->
+        <div class="active-filters" id="activeFilters" style="display: none;">
+          <div class="filter-chips" id="filterChips"></div>
+          <button class="clear-filters-btn" id="clearFiltersBtn" type="button">Limpiar filtros</button>
+        </div>
+
+        <div class="search-results-info" id="searchResults" aria-live="polite">
+          <span id="resultsCount"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tasks Sections -->
+    <section class="tasks-section" id="tasksSection">
+
+      <!-- Loading State (skeleton) -->
+      <div class="state-panel loading-state skeleton-state" id="loadingState">
+        <div class="skeleton-grid">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div class="state-panel error-state" id="errorState" style="display: none;">
+        <div class="state-icon">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <h3>No pudimos cargar el calendario</h3>
+        <p id="errorMessage">Ocurrió un problema al conectar con la base de datos.</p>
+        <button class="btn-retry" id="retryBtn" type="button">Reintentar</button>
+      </div>
+
+      <!-- Empty State (no records at all) -->
+      <div class="state-panel empty-state" id="emptyState" style="display: none;">
+        <div class="state-icon">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 11l3 3L22 4"></path>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+        </div>
+        <h3>Todo tranquilo 🎉</h3>
+        <p>No hay tareas registradas por ahora.</p>
+      </div>
+
+      <!-- No Results State (filters) -->
+      <div class="state-panel no-results-state" id="noResultsState" style="display: none;">
+        <div class="state-icon">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </div>
+        <h3>No encontramos resultados</h3>
+        <p>Prueba cambiando los filtros o la búsqueda.</p>
+        <button class="btn-retry" id="noResultsClearBtn" type="button">Limpiar filtros</button>
+      </div>
+
+      <!-- Pending Group -->
+      <div class="tasks-group" id="pendingGroup" style="display: none;">
+        <h2 class="group-title">
+          <span class="group-dot pending"></span>
+          Pendientes
+        </h2>
+        <div class="tasks-grid" id="pendingGrid" role="list"></div>
+      </div>
+
+      <!-- Past Group -->
+      <div class="tasks-group past-group" id="pastGroup" style="display: none;">
+        <h2 class="group-title">
+          <span class="group-dot past"></span>
+          Pasadas
+        </h2>
+        <div class="tasks-grid" id="pastGrid" role="list"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2026 Promo Blessed. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Módulos internos reutilizados del sitio -->
+  <script type="module">
+    import { HeaderManager } from '../../scripts/modules/header.js';
+    import { AOSManager, PageLoader } from '../../scripts/modules/utils.js';
+    import { CalendarPage } from './calendario.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new HeaderManager();
+      new AOSManager();
+
+      const loader = new PageLoader('pageLoader');
+      const page = new CalendarPage();
+
+      page.init().finally(() => loader.hide());
+    });
+  </script>
+
+</body>
+</html>
