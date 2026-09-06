@@ -600,7 +600,7 @@
       "quote": "",
       "birthday": "2009-06-20",
       "currentClass": "5A",
-      "approved": false,
+      "approved": true,
       "profileTheme": {
         "background": "",
         "accentColor": ""
