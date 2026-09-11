@@ -35,12 +35,17 @@ const el = {
   retryBtn: document.getElementById('retryBtn'),
   flightContent: document.getElementById('flightContent'),
   boardingPass: document.getElementById('boardingPass'),
+  passengerHint: document.getElementById('passengerHint'),
   seatStats: document.getElementById('seatStats'),
   seatMap: document.getElementById('seatMap'),
   seatModalOverlay: document.getElementById('seatModalOverlay'),
   seatModal: document.getElementById('seatModal'),
   seatModalBody: document.getElementById('seatModalBody'),
   seatModalClose: document.getElementById('seatModalClose'),
+  passengerSearchBar: document.getElementById('passengerSearchBar'),
+  passengerSearchInput: document.getElementById('passengerSearchInput'),
+  passengerSearchClear: document.getElementById('passengerSearchClear'),
+  passengerSuggestions: document.getElementById('passengerSuggestions'),
   toast: document.getElementById('toast')
 };
 
@@ -48,7 +53,9 @@ const state = {
   flights: [],
   activeFlightId: null,
   activeSeat: null, // último asiento asignado seleccionado, para reflejar en el boarding pass
-  travelersCount: 0 // total de viajeros de la promoción (independiente del avión)
+  travelersCount: 0, // total de viajeros de la promoción (independiente del avión)
+  seatsByCode: new Map(), // seatCode -> seatData (del vuelo activo), usado por el buscador
+  selectedSeatCode: null // asiento actualmente resaltado en verde ("Tú")
 };
 
 // ==============================================
@@ -138,6 +145,7 @@ async function selectFlight(flightId) {
   state.activeFlightId = flightId;
   state.activeSeat = null;
   updateActiveTab();
+  resetPassengerSearch();
 
   const flight = state.flights.find(f => String(f.id) === String(flightId));
   if (!flight) return;
@@ -295,6 +303,10 @@ function renderSeatMapSkeleton(flight) {
 }
 
 function renderNoSeatConfig(flight) {
+  // Sin config de asientos: limpiamos el índice para que el buscador
+  // no muestre resultados obsoletos de un vuelo anterior.
+  state.seatsByCode = new Map();
+
   el.seatStats.innerHTML = `
     <div class="seat-stat-block" style="grid-column:1/-1;">
       <span class="seat-stat-value" style="font-size:1rem;">Por confirmar</span>
@@ -313,9 +325,11 @@ function renderSeatMap(flight, seats) {
   const groups = getSeatGroupsForLayout(flight.seat_layout);
   const totalRows = flight.total_rows;
 
-  // Índice rápido: "12A" -> seat row de Supabase
+  // Índice rápido: "12A" -> seat row de Supabase (compartido con el buscador)
   const seatIndex = new Map();
   seats.forEach(s => seatIndex.set(s.seat, s));
+  state.seatsByCode = seatIndex;
+  state.selectedSeatCode = null;
 
   const colHeaders = groups.map(group => `
     <div class="seat-col-group">
@@ -363,6 +377,30 @@ function renderSeatMap(flight, seats) {
 }
 
 // ==============================================
+// SELECCIÓN COMPARTIDA (clic en asiento o buscador)
+// ==============================================
+
+/**
+ * Resalta en verde el asiento indicado en el mapa (quitando el resaltado
+ * anterior) y actualiza el boarding pass. Usada tanto al hacer clic en un
+ * asiento asignado como al elegir un resultado del buscador de pasajeros.
+ */
+function highlightSeat(seatCode, travelerName, flight) {
+  if (state.selectedSeatCode) {
+    const prevBtn = el.seatMap.querySelector(`.seat[data-seat="${state.selectedSeatCode}"]`);
+    prevBtn?.classList.remove('you');
+  }
+
+  state.selectedSeatCode = seatCode;
+
+  const btn = el.seatMap.querySelector(`.seat[data-seat="${seatCode}"]`);
+  btn?.classList.add('you');
+
+  renderBoardingPass(flight, { seatCode, travelerName });
+  el.passengerHint.style.display = 'flex';
+}
+
+// ==============================================
 // MODAL DE ASIENTO
 // ==============================================
 
@@ -377,8 +415,7 @@ function openSeatModal(seatCode, seatData, flight) {
       <span class="seat-modal-tag">Promo 2026 · ${escapeHTML(traveler.class || '')}</span>
     `;
 
-    // Refleja este pasajero en el boarding pass
-    renderBoardingPass(flight, { seatCode, travelerName: traveler.full_name });
+    highlightSeat(seatCode, traveler.full_name, flight);
 
   } else {
     el.seatModalBody.innerHTML = `
@@ -404,6 +441,88 @@ el.seatModalOverlay.addEventListener('click', (e) => {
 });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && el.seatModalOverlay.classList.contains('active')) closeSeatModal();
+});
+
+// ==============================================
+// BUSCADOR DE PASAJERO
+// ==============================================
+
+function resetPassengerSearch() {
+  el.passengerSearchInput.value = '';
+  el.passengerSearchBar.classList.remove('has-value');
+  el.passengerSuggestions.style.display = 'none';
+  el.passengerSuggestions.innerHTML = '';
+  el.passengerHint.style.display = 'none';
+  state.selectedSeatCode = null;
+}
+
+function renderPassengerSuggestions(query) {
+  const matches = [];
+
+  state.seatsByCode.forEach((seatData, seatCode) => {
+    const name = seatData?.traveler?.full_name;
+    if (name && name.toLowerCase().includes(query)) {
+      matches.push({ seatCode, name });
+    }
+  });
+
+  matches.sort((a, b) => a.name.localeCompare(b.name));
+
+  if (matches.length === 0) {
+    el.passengerSuggestions.innerHTML = `<div class="passenger-suggestions-empty">No encontramos a nadie con ese nombre en este vuelo.</div>`;
+    el.passengerSuggestions.style.display = 'flex';
+    return;
+  }
+
+  el.passengerSuggestions.innerHTML = matches.slice(0, 8).map(m => `
+    <button type="button" class="passenger-suggestion" data-seat="${m.seatCode}">
+      <span class="passenger-suggestion-name">${escapeHTML(m.name)}</span>
+      <span class="passenger-suggestion-seat">${escapeHTML(m.seatCode)}</span>
+    </button>
+  `).join('');
+  el.passengerSuggestions.style.display = 'flex';
+
+  el.passengerSuggestions.querySelectorAll('.passenger-suggestion').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const seatCode = btn.dataset.seat;
+      const seatData = state.seatsByCode.get(seatCode);
+      const flight = state.flights.find(f => String(f.id) === String(state.activeFlightId));
+
+      el.passengerSearchInput.value = seatData.traveler.full_name;
+      el.passengerSearchBar.classList.add('has-value');
+      el.passengerSuggestions.style.display = 'none';
+
+      highlightSeat(seatCode, seatData.traveler.full_name, flight);
+    });
+  });
+}
+
+let passengerSearchDebounce;
+el.passengerSearchInput.addEventListener('input', () => {
+  const query = el.passengerSearchInput.value.trim().toLowerCase();
+  el.passengerSearchBar.classList.toggle('has-value', Boolean(query));
+
+  clearTimeout(passengerSearchDebounce);
+
+  if (!query) {
+    el.passengerSuggestions.style.display = 'none';
+    return;
+  }
+
+  passengerSearchDebounce = setTimeout(() => renderPassengerSuggestions(query), 200);
+});
+
+el.passengerSearchClear.addEventListener('click', () => {
+  resetPassengerSearch();
+
+  const flight = state.flights.find(f => String(f.id) === String(state.activeFlightId));
+  if (flight) renderBoardingPass(flight, null);
+});
+
+document.addEventListener('click', (e) => {
+  if (!el.passengerSearchBar.contains(e.target) && !el.passengerSuggestions.contains(e.target)) {
+    el.passengerSuggestions.style.display = 'none';
+  }
 });
 
 // ==============================================

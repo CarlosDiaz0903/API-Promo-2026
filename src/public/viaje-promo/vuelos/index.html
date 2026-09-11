@@ -140,9 +140,27 @@
     <!-- Contenido del vuelo seleccionado -->
     <section class="flight-content" id="flightContent" style="display:none;">
 
+      <!-- Buscador de pasajero -->
+      <div class="passenger-search-wrapper" data-aos="fade-up">
+        <div class="search-bar" id="passengerSearchBar">
+          <div class="search-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+          </div>
+          <input type="text" id="passengerSearchInput" class="search-input" placeholder="Busca tu nombre para ver tu ticket y ubicación..." autocomplete="off" aria-label="Buscar pasajero">
+          <button class="search-clear" id="passengerSearchClear" aria-label="Limpiar búsqueda">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="passenger-suggestions" id="passengerSuggestions" style="display:none;"></div>
+      </div>
+
       <!-- Boarding pass -->
       <div class="boarding-pass-wrapper" data-aos="fade-up">
         <div class="boarding-pass" id="boardingPass"></div>
+        <p class="passenger-hint" id="passengerHint" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          Baja para ver tu ubicación
+        </p>
       </div>
 
       <!-- Estadísticas de asientos -->
