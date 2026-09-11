@@ -92,6 +92,7 @@
 
 .boarding-pass-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
