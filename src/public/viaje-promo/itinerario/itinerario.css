@@ -1,0 +1,177 @@
+/* ==============================================
+   VIAJE PROMO 2026 - Itinerario (timeline)
+   ============================================== */
+
+.timeline-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-24);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* ==============================================
+   DÍA (grupo)
+   ============================================== */
+
+.day-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.day-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.day-number-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-secondary);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.day-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-title {
+  font-family: var(--font-expanded);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.day-subtitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ==============================================
+   EVENTOS DEL DÍA
+   ============================================== */
+
+.day-events {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-left: 56px;
+}
+
+.day-events::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--glass-border), transparent 95%);
+}
+
+.timeline-event {
+  position: relative;
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+}
+
+.event-marker {
+  position: absolute;
+  left: -56px;
+  top: var(--space-4);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1.5px solid var(--glass-border);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.event-marker svg { width: 18px; height: 18px; }
+
+.timeline-event.type-flight .event-marker { background: var(--gradient-secondary); border-color: transparent; color: var(--color-primary); }
+.timeline-event.type-transport .event-marker { color: var(--color-accent); border-color: rgba(74, 144, 226, 0.3); }
+.timeline-event.type-hotel .event-marker { color: #a78bfa; border-color: rgba(167, 139, 250, 0.3); }
+.timeline-event.type-activity .event-marker { color: #22c55e; border-color: rgba(34, 197, 94, 0.3); }
+.timeline-event.type-meal .event-marker { color: #f97316; border-color: rgba(249, 115, 22, 0.3); }
+.timeline-event.type-free_time .event-marker { color: var(--color-text-muted); }
+
+.event-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-time {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+  letter-spacing: 0.5px;
+}
+
+.event-title {
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.event-description {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+.event-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-expanded);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  opacity: 0.8;
+}
+
+.event-location svg { width: 12px; height: 12px; }
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+
+@media (max-width: 600px) {
+  .day-events { padding-left: 44px; }
+  .day-events::before { left: 14px; }
+  .event-marker { left: -44px; width: 32px; height: 32px; }
+  .event-marker svg { width: 15px; height: 15px; }
+  .day-number-badge { width: 34px; height: 34px; font-size: 0.95rem; }
+}

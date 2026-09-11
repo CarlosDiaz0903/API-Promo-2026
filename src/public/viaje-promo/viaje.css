@@ -1,0 +1,424 @@
+/* ==============================================
+   VIAJE PROMO 2026 - Página principal
+   ============================================== */
+
+/* ==============================================
+   HERO
+   ============================================== */
+
+.viaje-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16) var(--space-6) var(--space-20);
+  overflow: hidden;
+}
+
+.viaje-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(74, 144, 226, 0.14) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, rgba(255, 211, 116, 0.10) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(155, 89, 182, 0.10) 0%, transparent 55%);
+}
+
+.viaje-hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.02"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+  opacity: 0.4;
+}
+
+.viaje-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  color: var(--color-secondary);
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--space-8);
+}
+
+.hero-badge svg { width: 18px; height: 18px; }
+
+.viaje-hero-title {
+  font-family: var(--font-expanded);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--space-3) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.title-main {
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  color: var(--color-text-primary);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 211, 116, 0.2);
+}
+
+.title-year {
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 0.9;
+}
+
+.viaje-hero-dates {
+  font-family: var(--font-expanded);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--color-text-secondary);
+  margin: var(--space-4) 0 0 0;
+}
+
+.viaje-hero-quote {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-muted);
+  margin: var(--space-6) 0 0 0;
+}
+
+/* ==============================================
+   RUTA VISUAL (Lima -> Cusco -> Puno -> Arequipa -> Lima)
+   ============================================== */
+
+.route-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-12);
+  padding: var(--space-6);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-3xl);
+  max-width: 100%;
+}
+
+.route-stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.route-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gradient-secondary);
+  box-shadow: 0 0 12px rgba(255, 211, 116, 0.6);
+}
+
+.route-city {
+  font-family: var(--font-expanded);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
+  color: var(--color-text-primary);
+}
+
+.route-leg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 28px;
+  color: var(--color-text-muted);
+}
+
+.route-leg svg {
+  width: 22px;
+  height: 22px;
+}
+
+.route-leg.air {
+  color: var(--color-secondary);
+}
+
+.route-leg.land {
+  color: var(--color-accent);
+}
+
+/* ==============================================
+   STATS DEL VIAJE
+   ============================================== */
+
+.viaje-stats {
+  padding: var(--space-12) var(--space-6) var(--space-16);
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-5);
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.stats-container.stats-loading .stat-number,
+.stats-container.stats-loading .stat-icon {
+  animation: viajeStatsPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes viajeStatsPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.stat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-4);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  transition: all var(--transition-base);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-secondary);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 211, 116, 0.12);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-secondary);
+  border-radius: var(--radius-xl);
+  color: var(--color-primary);
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.stat-number.stat-text {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  letter-spacing: 0.5px;
+}
+
+.stat-label {
+  font-family: var(--font-expanded);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ==============================================
+   ACCESOS RÁPIDOS
+   ============================================== */
+
+.viaje-access {
+  padding: 0 var(--space-6) var(--space-24);
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.access-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+  margin-bottom: var(--space-10);
+}
+
+.access-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-3xl);
+  text-decoration: none;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.access-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 211, 116, 0.08) 0%, rgba(74, 144, 226, 0.08) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.access-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: var(--color-secondary);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 211, 116, 0.12);
+}
+
+.access-card:hover::before { opacity: 1; }
+
+.access-icon {
+  position: relative;
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-primary);
+  transition: all var(--transition-base);
+}
+
+.access-card:hover .access-icon {
+  background: var(--gradient-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-primary);
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.access-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.access-description {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.access-link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  transition: gap var(--transition-base);
+}
+
+.access-card:hover .access-link { gap: var(--space-3); }
+.access-link svg { width: 16px; height: 16px; transition: transform var(--transition-base); }
+.access-card:hover .access-link svg { transform: translateX(3px); }
+
+/* ==============================================
+   PRÓXIMAMENTE (arquitectura preparada)
+   ============================================== */
+
+.access-soon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.access-soon-card {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.access-soon-card svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+}
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+
+@media (max-width: 768px) {
+  .viaje-hero { min-height: 60vh; padding: var(--space-10) var(--space-4) var(--space-14); }
+  .route-map { gap: var(--space-1); padding: var(--space-4); }
+  .route-leg { width: 28px; }
+  .route-city { font-size: 10px; }
+  .stats-container { grid-template-columns: repeat(2, 1fr); }
+  .access-container { grid-template-columns: 1fr; }
+  .access-soon-row { flex-direction: column; align-items: stretch; }
+  .access-soon-card { justify-content: center; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .stat-card:hover, .access-card:hover { transform: none; }
+}

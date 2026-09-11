@@ -1,0 +1,229 @@
+/* ==============================================
+   VIAJE PROMO 2026 - Viajeros (directorio)
+   ============================================== */
+
+.travelers-toolbar {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-8);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.search-bar {
+  flex: 1 1 320px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: rgba(10, 22, 40, 0.6);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-base);
+}
+
+.search-bar:focus-within {
+  background: rgba(10, 22, 40, 0.85);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 30px rgba(74, 144, 226, 0.15);
+  transform: translateY(-2px);
+}
+
+.search-icon { flex-shrink: 0; display: flex; color: var(--color-text-secondary); }
+.search-bar:focus-within .search-icon { color: var(--color-accent); }
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  min-width: 0;
+}
+
+.search-input::placeholder { color: var(--color-text-muted); opacity: 0.7; }
+
+.search-clear {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  opacity: 0; visibility: hidden; transform: scale(0.8);
+  transition: all var(--transition-fast);
+}
+
+.search-bar.has-value .search-clear { opacity: 1; visibility: visible; transform: scale(1); }
+.search-clear:hover { background: rgba(255, 255, 255, 0.15); color: var(--color-text-primary); }
+
+.class-filters {
+  display: flex;
+  gap: var(--space-2);
+  padding: 6px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+}
+
+.class-filter-btn {
+  padding: 10px 22px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.class-filter-btn:hover { color: var(--color-text-primary); background: rgba(255, 255, 255, 0.06); }
+
+.class-filter-btn.active {
+  background: var(--gradient-secondary);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ==============================================
+   GRID DE VIAJEROS
+   ============================================== */
+
+.travelers-section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-24);
+}
+
+.travelers-skeleton-grid,
+.travelers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-5);
+}
+
+.traveler-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-base);
+}
+
+.traveler-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 211, 116, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.traveler-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.traveler-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--gradient-secondary);
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  font-size: 1rem;
+}
+
+.traveler-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.traveler-name {
+  font-family: var(--font-expanded);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.traveler-class {
+  font-family: var(--font-expanded);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.traveler-seats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--glass-border);
+}
+
+.traveler-seat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.traveler-seat-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-expanded);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.traveler-seat-label svg { width: 12px; height: 12px; }
+
+.traveler-seat-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-secondary);
+}
+
+.traveler-seat-value.unassigned {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+
+@media (max-width: 600px) {
+  .travelers-toolbar { flex-direction: column; align-items: stretch; }
+  .class-filters { justify-content: center; }
+}
