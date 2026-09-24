@@ -10,8 +10,8 @@
 // CONFIGURACIÓN SUPABASE
 // ==============================================
 
-const SUPABASE_URL = 'https://ytgdeutmrujjdjqfivpa.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0Z2RldXRtcnVqamRqcWZpdnBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2NjExNTAsImV4cCI6MjEwNDIzNzE1MH0.1evMikwN9iwJP7Z6ycZka18g9-ZKsEwIGHllaxffxYs';
+const SUPABASE_URL = 'TU_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY';
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -150,18 +150,21 @@ function formatDateDisplay(isoDate) {
 }
 
 /**
- * Convierte fecha ISO a formato datetime-local para inputs
- * @param {string} isoDate - Fecha en formato ISO
+ * Convierte fecha almacenada en Supabase a formato datetime-local para inputs
+ * @param {string} isoDate - Fecha tal como la devuelve Supabase (timestamp SIN
+ *                           zona horaria, ej. "2026-05-17T11:00:00")
  * @returns {string} Fecha en formato YYYY-MM-DDTHH:mm
+ *
+ * IMPORTANTE: el valor que llega desde la columna `timestamp` (sin zona
+ * horaria) es una hora "de pared" literal, no un instante UTC. Antes esta
+ * función usaba `new Date(isoDate)` + `getTimezoneOffset()`, lo cual asumía
+ * que había que convertir de UTC a local y volvía a desplazar la hora
+ * (doble desfase). Ahora se toman los primeros 16 caracteres directamente,
+ * sin ninguna conversión de zona horaria.
  */
 function isoToDatetimeLocal(isoDate) {
   if (!isoDate) return '';
-
-  const date = new Date(isoDate);
-  const offset = date.getTimezoneOffset();
-  const localDate = new Date(date.getTime() - offset * 60000);
-
-  return localDate.toISOString().slice(0, 16);
+  return isoDate.slice(0, 16);
 }
 
 // ==============================================
@@ -286,8 +289,15 @@ function collectFormData() {
   const autoImage = getAutoImageForCourse(course);
   const finalImage = manualImage || autoImage || '';
 
+  // IMPORTANTE: la columna `date` en Supabase es `timestamp` SIN zona horaria.
+  // El input datetime-local ya entrega la hora "de pared" tal como la digitó
+  // el admin (ej. "2026-05-17T11:00"). Antes se convertía con
+  // `new Date(...).toISOString()`, lo cual pasa esa hora a UTC y le resta/suma
+  // el offset de Perú (UTC-5) ANTES de guardarla — por eso una tarea marcada
+  // a las 11:00 a.m. terminaba guardada (y mostrada) a las 4:00 p.m.
+  // Solución: guardar el valor tal cual, sin ninguna conversión de zona horaria.
   const dateValue = elements.date.value
-    ? new Date(elements.date.value).toISOString()
+    ? `${elements.date.value}:00`
     : null;
 
   return {
